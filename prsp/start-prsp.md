@@ -13,7 +13,7 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 
 ## 👨‍💻 Vježbe
 
-- [ ] [V1: Uvod](https://hackmd.io/eyYbJ3D2T16fvq5LGlUd3A)
+- [ ] [V1: Uvod](./prsp-uvod)
 - [ ] [V2: Vremenska složenost]()
 - [ ] [V3: Complete search]() 
 - [ ] [V4: Greedy algorithms]()
@@ -38,8 +38,6 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 
 **Teme:**
 - Huffman Data Compression
-
-
 
 
 ## 👨‍🏫 Predavanja
