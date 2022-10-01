@@ -7,12 +7,14 @@ plugins:
 remote_theme: just-the-docs/just-the-docs
 
 callouts:
-  warning:
-    title: Warning
-    color: red
-  note:
- title: Note
- color: Purlple
+    warning:
+      title: Warning
+      color: red
+
+       note:
+      title: Note
+      color: Purlple
+      
   highlight:
       title:
       color: yellow
