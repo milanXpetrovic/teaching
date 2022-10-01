@@ -1,9 +1,9 @@
-# Vjezbe 2: Vremenska složenost
+# Vježbe 2: Vremenska složenost
 
-## [Najveć zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
+## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 
-Zadan je niz od $$$$n$$$$ brojeva, naš zadatak je izračunati najveći zbroj podniza , tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
+Zadan je niz od $$n$$ brojeva, naš zadatak je izračunati najveći zbroj podniza, tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
 
 U zadanom nizu:
 
@@ -19,7 +19,7 @@ Najveći zbroj podniza iznosi **12**.
 
 
 
-**Primjer rješenja u c++**
+**Primjer rješenja u C++**
 ```cpp
 int best = 0;
 for (int a = 0; a < n; a++) {
@@ -36,13 +36,13 @@ cout << best << "\n";
 
 ### Zadatak 1.1
 
-Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $$$$O(n^3)$$$$.
+Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $$O(n^3)$$.
 
 **Input:**
-Lista $$$$l$$$$ koja sadržava $$$$n#$$ cjelih brojeva $$$$k$$$$ $$$$( -\infty < k < \infty)$$$$
+Lista $$l$$ koja sadržava $$n$$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$$
 
 **Output:**
-Iznos maksimalnog zbroja podniza, cjeli broj.
+Iznos maksimalnog zbroja podniza, cijeli broj.
 
 #### Primjer
 
@@ -83,11 +83,11 @@ for (int k = 0; k < n; k++) {
 cout << best << "\n";
 ```
 
-Napišite Python kod koji traži najveć zbroj podniza sa vremenskom složenosti $$O(n^2)$$.
+Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $$O(n^2)$$.
 
 ### Zadatak 2
 
-Kreirajte funkciju koja generira listu $$l$$ čiji su elementi nasumično odabrani cjeli brojevi $$k$$ $$( - 10 < k < 10)$$.
+Kreirajte funkciju koja generira listu $$l$$ čiji su elementi nasumično odabrani cijeli brojevi $$k$$ $$( - 10 < k < 10)$$.
 
 
 
@@ -118,7 +118,7 @@ Za generiranje pseudo-random brojeva možete koristi Python modul [random](https
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
 **Input**
-Duljina liste $$$$n$$$$, određuje broj elemenata u listi.
+Duljina liste $$n$$, određuje broj elemenata u listi.
 
 **Output**
 Vremena $$t_1$$, $$t_2$$ i $$t_3$$ koja označavaju vrijeme izvođenja algoritama.
