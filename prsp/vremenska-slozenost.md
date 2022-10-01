@@ -3,9 +3,47 @@
 ## [Najveć zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 
+{: .note-title }
+> My note title
+>
+> A paragraph with a custom title callout
+
+
+{: .important }
+> {: .warning }
+> A paragraph
+
+
+{: .important }
+> {: .opaque }
+> <div markdown="block">
+> {: .warning }
+> A paragraph
+> </div>
+
+
+{: .highlight }
+A highlight
+
+{: .important }
+A important
+
+{: .new }
+A new
+
+{: .note }
+A note
+
+{: .warning }
+A warning
+
+
+
 $\sqrt{3x-1}+(1+x)^2$
 
-$$\sqrt{2}$$
+$$
+\sqrt{2}
+$$
 
 ```math=
 \sqrt{3x-1}+(1+x)^2
