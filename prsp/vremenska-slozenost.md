@@ -11,14 +11,14 @@
 
 {: .important }
 > {: .warning }
-> A paragraph
+> A warning
 
 
 {: .important }
 > {: .opaque }
 > <div markdown="block">
 > {: .warning }
-> A paragraph
+> A warning
 > </div>
 
 
