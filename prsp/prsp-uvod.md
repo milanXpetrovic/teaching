@@ -1,3 +1,6 @@
+---
+---
+
 # Vjezbe 1: Uvod
 
 ## Uvod u kolegij
@@ -85,3 +88,5 @@ Sastoji se od liste sa vrijednostima $1$ i $0$. Ako je vrijednost u listi $l$ ma
 ```
 1 1 1 1 0 0 1 1 0 0
 ```
+
+---
