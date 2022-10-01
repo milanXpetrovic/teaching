@@ -2,4 +2,5 @@ name: Teaching
 description: Teaching materials
 url: "https://milanxpetrovic.github.io/teaching/"
 markdown: kramdown
+theme: minima
 highlighter: rouge
