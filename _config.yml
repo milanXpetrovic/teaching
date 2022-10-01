@@ -6,6 +6,9 @@ plugins:
 - jekyll-remote-theme
 remote_theme: just-the-docs/just-the-docs
 
+compress_html:
+  blanklines: true
+
 callouts:
   highlight:
     color: yellow
@@ -21,6 +24,4 @@ callouts:
   warning:
     title: Warning
     color: red
-  zadatak:
-    title: Zadatak
-    color: red
+]
