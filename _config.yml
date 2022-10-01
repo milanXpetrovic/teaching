@@ -10,3 +10,9 @@ callouts:
   warning:
     title: Warning
     color: red
+  note:
+ title: Note
+ color: Purlple
+  highlight:
+      title:
+      color: yellow
