@@ -3,14 +3,10 @@
 ## [Najveć zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 
-{: .note-title }
-> My note title
+{: .important }
+> 📘 Zadatak
 >
 > A paragraph with a custom title callout
-
-
-{: .zadatak }
-Zadatak
 
 
 **The Cauchy-Schwarz Inequality**
