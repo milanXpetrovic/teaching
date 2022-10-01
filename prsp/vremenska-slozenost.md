@@ -9,33 +9,9 @@
 > A paragraph with a custom title callout
 
 
-{: .important }
-> {: .warning }
-> A warning
+{: .zadatak }
+Zadarak
 
-
-{: .important }
-> {: .opaque }
-> <div markdown="block">
-> {: .warning }
-> A warning
-> </div>
-
-
-{: .highlight }
-A highlight
-
-{: .important }
-A important
-
-{: .new }
-A new
-
-{: .note }
-A note
-
-{: .warning }
-A warning
 
 
 
