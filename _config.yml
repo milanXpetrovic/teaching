@@ -21,4 +21,6 @@ callouts:
   warning:
     title: Warning
     color: red
-
+  zadatak:
+    title: Zadatak
+    color: blue-000
