@@ -59,6 +59,8 @@ Iznos maksimalnog zbroja podniza, cjeli broj.
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
+$\sqrt{3x-1}+(1+x)^2$
+
 ### Zadatak 1.3
 
 Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
@@ -86,6 +88,8 @@ Napišite Python kod koji traži najveć zbroj podniza sa vremenskom složenosti
 ### Zadatak 2
 
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cjeli brojevi $k$ $( - 10 < k < 10)$.
+
+
 
 **Input**
 Duljina liste $n$, određuje broj elemenata u listi.
