@@ -9,8 +9,7 @@ callouts:
   warning:
     title: ❗️ Warning
     color: red
-    
-    note:
-      title: Note
-      color: purple
+     note:
+    title: Note
+    color: purple
 
