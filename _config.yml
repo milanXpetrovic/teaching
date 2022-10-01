@@ -4,4 +4,4 @@ url: "https://milanxpetrovic.github.io/teaching/"
 markdown: gem
 plugins:
 - jekyll-remote-theme
-remote_theme: pages-themes/minimal@v0.2.0
+theme: no-style-please
