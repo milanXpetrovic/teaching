@@ -25,8 +25,6 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 - [ ] [v10: ]
 
 
-
-
 ## 📚 Literatura
 
 ### Obavezna
