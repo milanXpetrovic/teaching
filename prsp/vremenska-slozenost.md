@@ -38,7 +38,7 @@ cout << best << "\n";
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 
 **Input:**
-Lista $l$ koja sadržava $n$ cjelih brojeva $k$ $( -\infty < k < \infty)$
+Lista $l$ koja sadržava $n$ cjelih brojeva $k$ $$( -\infty < k < \infty)$$
 
 **Output:**
 Iznos maksimalnog zbroja podniza, cjeli broj.
@@ -114,7 +114,7 @@ Za generiranje pseudo-random brojeva možete koristi Python modul [random](https
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
 **Input**
-Duljina liste $n$, određuje broj elemenata u listi.
+Duljina liste $$n$$, određuje broj elemenata u listi.
 
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
