@@ -1,3 +1,9 @@
+---
+layout: default
+title: teaching
+nav_exclude: true
+---
+
 # teaching
 Repo with teaching materials from FIDIT
 
