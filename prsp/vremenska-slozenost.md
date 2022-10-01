@@ -3,7 +3,7 @@
 ## [Najveć zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 
-{: .new }
+{: .new-title }
 > 📘 Zadatak
 >
 > A paragraph with a custom title callout
