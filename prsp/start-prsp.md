@@ -22,7 +22,7 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 - [ ] [V7: Grafovi, stabla]()
 - [ ] [V8: Kolokvij 1]()
 - [ ] [V9: Putovanje kroz graf]()
-- [ ] [v10: ]
+- [ ] [v10: ]()
 
 
 ## 📚 Literatura
