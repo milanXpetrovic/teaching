@@ -15,8 +15,8 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 
 - [ ] [V1: Uvod](./prsp-uvod)
 - [ ] [V2: Vremenska složenost](./vremenska-slozenost)
-- [ ] [V3: Complete search](./potpuna-pretraga)
-- [ ] [V4: Greedy algorithms](./pohlepni-algoritmi)
+- [ ] [V3: Potpuna pretraga](./potpuna-pretraga)
+- [ ] [V4: Pohlepni algoritmi](./pohlepni-algoritmi)
 - [ ] [V5: Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [V6: Bit manipulation](./bit-manipulation)
 - [ ] [V7: Grafovi, stabla](./)
