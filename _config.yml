@@ -2,6 +2,8 @@ name: Teaching
 description: Teaching materials
 url: "https://milanxpetrovic.github.io/teaching/"
 markdown: gem
+compress_html:
+  blanklines: false
 latex: mathjax
 plugins:
 - jekyll-remote-theme
