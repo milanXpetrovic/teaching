@@ -2,6 +2,7 @@ name: Teaching
 description: Teaching materials
 url: "https://milanxpetrovic.github.io/teaching/"
 markdown: gem
+latex: katex
 plugins:
 - jekyll-remote-theme
 remote_theme: just-the-docs/just-the-docs
