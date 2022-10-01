@@ -1,3 +1,7 @@
+---
+---
+
+@import "{{ site.theme }}"
 # Programiranje za rješavanje složenih problema
 
 ###### tags: `PRSP`
@@ -43,4 +47,4 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 
 ## 👨‍🏫 Predavanja
 
-
+---
