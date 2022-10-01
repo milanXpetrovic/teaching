@@ -2,6 +2,7 @@
 ---
 
 @import "{{ site.theme }}"
+
 # Programiranje za rješavanje složenih problema
 
 ###### tags: `PRSP`
