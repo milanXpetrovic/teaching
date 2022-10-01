@@ -7,14 +7,14 @@ The difficulty in designing greedy algorithms is to find a greedy strategy that 
 
 ## Uvod : Problem s kovanicama
 
-Razmatramo problem u kojem nam je dan skup kovanica $\{c_1, c_2, c_3,...,c_k\}$ i naš je zadatak oblikovati svotu novca $n$, pritom svaku kovanicu možemo koristiti koligo kod puta želimo. Koji je minimalan broj potrebnih kovanica?
+Razmatramo problem u kojem nam je dan skup kovanica $\{c_1, c_2, c_3,...,c_k\}$ i naš je zadatak oblikovati svotu novca $n$, pritom svaku kovanicu možemo koristiti koliko kod puta želimo. Koji je minimalan broj potrebnih kovanica?
 
 Na primjer zadane su kovanice : $\{1, 2, 5, 10, 20, 50, 100, 200\}$. Zadatak je pomoću danih kovanica kreirati iznos $n$
 
-Napišite program koji kao ulaz prima cjeli broj $n$ a kao rješenje ispisuje kovanice pomoću koji se može kreirati broj $n$, cilj programa je koristiti najmanji mogući broj kovanica, odnosno pohlepni pristup.
+Napišite program koji kao ulaz prima cijeli broj $n$ a kao rješenje ispisuje kovanice pomoću koji se može kreirati broj $n$, cilj programa je koristiti najmanji mogući broj kovanica, odnosno pohlepni pristup.
 
 **Input:**
-Cjeli broj $n$ $(1 <= n <= 10000)$ koji označava traženu sumu.
+Cijeli broj $n$ $(1 <= n <= 10000)$ koji označava traženu sumu.
 
 **Output:**
 Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.

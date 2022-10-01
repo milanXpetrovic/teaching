@@ -13,7 +13,7 @@ Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva 
 ### Uvod
 
 Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
-Prilikom ispisa ne treba voditi računa o redosljedu ispisa podskupova.
+Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 #### Primjer
 
@@ -38,7 +38,7 @@ Prilikom ispisa ne treba voditi računa o redosljedu ispisa podskupova.
 
 # Uvod 2
 
-Kreirajte program koji pogadja lozinku koja se sastoji od 6 nasumicno odabranih cjelih brojeva.
+Kreirajte program koji pogađa lozinku koja se sastoji od 6 nasumično odabranih cijelih brojeva.
 
 Ispišite vrijeme koje je bilo potrebno za pogoditi lozinku
 
@@ -46,7 +46,7 @@ Ispišite vrijeme koje je bilo potrebno za pogoditi lozinku
 
 Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima samo različite znamenke.
 
-Napišite program koji na za zadanu goidnu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
+Napišite program koji na za zadanu godinu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
 
 
 **Input:**
@@ -81,7 +81,7 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 ``` python
 
 ## https://codeforces.com/problemset/problem/352/A
-## Zadano je n karti na svakoj karti nalayi se broj 0 ili 5. 
+## Zadano je n karti na svakoj karti nalazi se broj 0 ili 5. 
 ## pronadite najveci broj koji mozete generirati od dobivenih karti da je djeljiv sa 90.
 
 from itertools import permutations
@@ -125,6 +125,6 @@ Output
 
 ## Zadatak 3
 
-Meet in the midle
+Meet in the middle
 
 Pronađi ako je moguće iz zadane liste brojeva l, zbrajanjem njenih članova dobiti broj x.
