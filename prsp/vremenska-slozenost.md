@@ -2,6 +2,21 @@
 
 ## [Najveć zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
+
+$\sqrt{3x-1}+(1+x)^2$
+
+$$\sqrt{2}$$
+
+```math
+\sqrt{3x-1}+(1+x)^2
+```
+
+`$\sqrt{3x-1}+(1+x)^2$`
+
+`$$\sqrt{2}$$`
+
+
+
 Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza , tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
 
 U zadanom nizu:
@@ -59,7 +74,6 @@ Iznos maksimalnog zbroja podniza, cjeli broj.
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
-$\sqrt{3x-1}+(1+x)^2$
 
 ### Zadatak 1.3
 
