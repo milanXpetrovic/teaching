@@ -1,4 +1,4 @@
-# V5: Dinamičko programiranje
+# Vježbe 5: Dinamičko programiranje
 
 
 ## Uvod

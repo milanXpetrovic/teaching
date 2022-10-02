@@ -1,7 +1,7 @@
 ---
 ---
 
-# Vjezbe 1: Uvod
+# Vježbe 1: Uvod
 
 ## Uvod u kolegij
 
