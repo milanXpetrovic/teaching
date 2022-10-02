@@ -24,8 +24,10 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 - [ ] [V9: Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [V10: ](./)
 - [ ] [V11: ](./)
-- [ ] [V11: ](./)
-- [ ] [V11: ](./)
+- [ ] [V12: ](./)
+- [ ] [V13: ](./)
+- [ ] [V14: ](./)
+- [ ] [V15: ](./)
 
 
 ## 📚 Literatura

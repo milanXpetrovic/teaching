@@ -1,3 +1,6 @@
+---
+---
+
 # Informacijska sigurnost i blockchain tehnologije 
 
 
@@ -21,11 +24,11 @@ Izvanredni:
 
 ## 👨‍💻 Vježbe
 
-- [ ] [V1: ](./)
-- [ ] [V2: ](./)
-- [ ] [V3: ](./)
-- [ ] [V4: ](./)
-- [ ] [V5: ](./)
+- [ ] [V1: Uvod](./isbit-uvod)
+- [ ] [V2: Solidity 1/3](./solidity)
+- [ ] [V3: Solidity 2/3](./solidity)
+- [ ] [V4: Solidity 3/3](./solidity)
+- [ ] [V5: Implementacija pametnog ugovora na mreži ](./pametni-ugovori)
 - [ ] [V6: ](./)
 - [ ] [V7: ](./)
 - [ ] [V8: ](./)
@@ -61,6 +64,4 @@ https://ethereum.org/en/developers/tutorials/
 
 ## 🚀 [Projektni zadatak](./projektni-isbit)
 
-
-
-
+---
