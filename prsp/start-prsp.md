@@ -7,7 +7,7 @@
 
 Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
 
-## 📅 [Izvedbeni nastavni plan](https://hackmd.io/R7pbZeAaTTe9uc_OcgKbBw)
+## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PRSP_2022_2023.pdf)
 
 **Važni datumi:**
 
@@ -19,10 +19,13 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 - [ ] [V4: Pohlepni algoritmi](./pohlepni-algoritmi)
 - [ ] [V5: Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [V6: Bit manipulation](./bit-manipulation)
-- [ ] [V7: Grafovi, stabla](./)
+- [ ] [V7: Grafovi](./grafovi) i [stabla](./stabla)
 - [ ] [V8: Kolokvij 1](./)
-- [ ] [V9: Putovanje kroz graf](./)
-- [ ] [v10: ](./)
+- [ ] [V9: Putovanje kroz graf](./putovanje-kroz-graf)
+- [ ] [V10: ](./)
+- [ ] [V11: ](./)
+- [ ] [V11: ](./)
+- [ ] [V11: ](./)
 
 
 ## 📚 Literatura
