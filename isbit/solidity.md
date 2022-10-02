@@ -1,6 +1,9 @@
 ---
-
+layout: default
+parent: ISBiT
+nav_order: 2
 ---
+
 
 # Vježbe 2: Remix IDE, upoznavanje sa radom, EVM, MetaMask wallet i test net, Solidity 
 

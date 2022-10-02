@@ -1,3 +1,9 @@
+---
+layout: default
+parent: PRSP
+nav_order: 2
+---
+
 # Vježbe 3: Potpuna pretraga
 
 Potpuna pretraga (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.

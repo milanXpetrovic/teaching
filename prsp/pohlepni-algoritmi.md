@@ -1,3 +1,10 @@
+---
+layout: default
+parent: PRSP
+nav_order: 2
+---
+
+
 # Vježbe 4: Pohlepni algoritmi
 
 A greedy algorithm constructs a solution to the problem by always making a choice that looks the best at the moment. A greedy algorithm never takes back its choices, but directly constructs the final solution. For this reason, greedy algorithms are usually very efficient.

@@ -1,8 +1,7 @@
 ---
 layout: default
-title: UI Components
+parent: ISBiT
 nav_order: 2
-has_children: true
 ---
 
 
