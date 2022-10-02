@@ -4,5 +4,4 @@ parent: PRSP
 nav_order: 2
 ---
 
-
-# Vježbe 6: Bit manipulation
+# Vježbe 13: Geometrija

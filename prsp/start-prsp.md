@@ -24,15 +24,15 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 - [ ] [V4: Pohlepni algoritmi](./pohlepni-algoritmi)
 - [ ] [V5: Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [V6: Bit manipulation](./bit-manipulation)
-- [ ] [V7: Grafovi](./grafovi) i [stabla](./stabla)
-- [ ] [V8: Kolokvij 1](./)
+- [ ] [V7: Grafovi i stabla](./grafovi-i-stabla)
+- [ ] [V8: Kolokvij 1](./priprema-kolokvij-1)
 - [ ] [V9: Putovanje kroz graf](./putovanje-kroz-graf)
-- [ ] [V10: ](./)
-- [ ] [V11: ](./)
-- [ ] [V12: ](./)
-- [ ] [V13: ](./)
-- [ ] [V14: ](./)
-- [ ] [V15: ](./)
+- [ ] [V10: Matrice](./matrice)
+- [ ] [V11: Teorija brojeva](./teorija-brojeva)
+- [ ] [V12: Kombinatorika](./kombinatorika)
+- [ ] [V13: Geometrija](./geometrija)
+- [ ] [V14: Teorija igara](./teorija-igara)
+- [ ] [V15: Kolokvij 2](./priprema-kolokvij-2)
 
 
 ## 📚 Literatura
