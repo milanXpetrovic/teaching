@@ -29,6 +29,8 @@ Izvanredni:
 
 ## 👨‍💻 Vježbe
 
+{:toc}
+
 - [ ] [V1: Uvod](./isbit-uvod)
 - [ ] [V2: Solidity 1/3](./solidity-1)
 - [ ] [V3: Solidity 2/3](./solidity-2)
