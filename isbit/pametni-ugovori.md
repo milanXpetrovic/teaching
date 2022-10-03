@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: PRSP
+parent: ISBiT
 ---
 
 # Vježbe 5: Pametni ugovori

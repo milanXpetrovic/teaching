@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: PRSP
+parent: ISBiT
 ---
 
 # Vježbe 4: Solidity: Složene strukture podataka, Nasljedivanje
