@@ -1,7 +1,6 @@
 ---
 layout: default
 parent: ISBiT
-nav_order: 2
 ---
 
 

@@ -30,9 +30,9 @@ Izvanredni:
 ## 👨‍💻 Vježbe
 
 - [ ] [V1: Uvod](./isbit-uvod)
-- [ ] [V2: Solidity 1/3](./solidity)
-- [ ] [V3: Solidity 2/3](./solidity)
-- [ ] [V4: Solidity 3/3](./solidity)
+- [ ] [V2: Solidity 1/3](./solidity-1)
+- [ ] [V3: Solidity 2/3](./solidity-2)
+- [ ] [V4: Solidity 3/3](./solidity-3)
 - [ ] [V5: Implementacija pametnog ugovora na mreži ](./pametni-ugovori)
 - [ ] [V6: ](./)
 - [ ] [V7: ](./)
