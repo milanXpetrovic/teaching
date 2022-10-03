@@ -3,6 +3,7 @@ layout: default
 title: ISBiT
 nav_order: 2
 has_children: true
+has_toc: false
 ---
 
 
@@ -29,7 +30,6 @@ Izvanredni:
 
 ## 👨‍💻 Vježbe
 
-{:toc}
 
 - [ ] [V1: Uvod](./isbit-uvod)
 - [ ] [V2: Solidity 1/3](./solidity-1)
