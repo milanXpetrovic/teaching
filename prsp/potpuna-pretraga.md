@@ -1,5 +1,6 @@
 ---
 parent: PRSP
+nav_order: 3
 ---
 
 # Vježbe 3: Potpuna pretraga
