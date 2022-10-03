@@ -11,3 +11,4 @@ Repo with teaching materials from FIDIT
 
 ## [Informacijska sigurnost i blcokchain tehnologije](./siks2/start-siks2)
 
+---
