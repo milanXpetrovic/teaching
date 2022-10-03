@@ -2,7 +2,7 @@ title: Teaching
 description: Teaching materials
 baseurl: "teaching/"
 
-url: "https://milanxpetrovic.github.io/blablabla/"
+url: "https://milanxpetrovic.github.io/teaching/"
 
 permalink: pretty
 
@@ -44,8 +44,7 @@ gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
 
 
-logo: "/assets/images/test-logo.png"
-
+# logo: "/assets/images/test-logo.png"
 
 # Aux links for the upper right navigation
 aux_links:
