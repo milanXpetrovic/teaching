@@ -1,6 +1,6 @@
 name: Teaching
 description: Teaching materials
-url: "https://milanxpetrovic.github.io/teaching/"
+url: "https://milanxpetrovic.github.io/teaching/teaching-start"
 markdown: gem
 compress_html:
   blanklines: false
