@@ -1,3 +1,7 @@
+---
+nav_exclude: true
+---
+
 # Nastava_start
 
 | Naziv                  | DINP           | Kad i gdje?           |
