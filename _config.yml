@@ -1,6 +1,10 @@
-name: Teaching
+title: Teaching
 description: Teaching materials
-url: "https://milanxpetrovic.github.io/teaching/1234"
+baseurl: "teaching/"
+url: "https://milanxpetrovic.github.io/teaching/"
+
+permalink: pretty
+
 markdown: gem
 compress_html:
   blanklines: false
@@ -8,6 +12,7 @@ latex: mathjax
 plugins:
 - jekyll-remote-theme
 remote_theme: just-the-docs/just-the-docs
+
 callouts:
   highlight:
     color: yellow
