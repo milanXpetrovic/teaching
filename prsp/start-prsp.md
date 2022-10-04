@@ -13,9 +13,20 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PRSP_2022_2023.pdf)
 
-**Važni datumi:**
 
-## 👨‍💻 Vježbe
+## Datumi aktivnosti
+
+| Datum | Vrsta | Bodovi |
+| ----- | ----- | --------|
+| 7.11. | Teorija 1 | 10 |
+| 24.11. | Vježbe - Kolokvij 1 | 20 (*prag 10*)|
+| 12.12. | Teorija 2 | 10 |
+| 23.1. | Vježbe - Kolokvij 2 |  20 (*prag 10*)|
+|       | Seminar | 10 | 
+| 30.1. | Vježbe - ispravak  |  20  |
+
+
+## 👨‍💻 Vježbe 👨‍🏫
 
 - [ ] [Uvod](./prsp-uvod)
 - [ ] [Vremenska složenost](./vremenska-slozenost)
@@ -27,28 +38,27 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 - [ ] [Grafovi i stabla](./grafovi-i-stabla)
 - [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [Matrice](./matrice)
-
 - [ ] [Teorija brojeva](./teorija-brojeva)
 - [ ] [Kombinatorika](./kombinatorika)
 - [ ] [Geometrija](./geometrija)
 - [ ] [Teorija igara](./teorija-igara)
 
-- [ ] [Prprema za Kolokvij ](./priprema-kolokvij)
+- [ ] [Prprema za Kolokvij](./priprema-kolokvij)
 
 
-## 📚 Resursi 🔗
+##  Resursi 
 
+### 📚 Lietratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
+### 🔗 Linkovi
+
+### 🧰 Softver
 
 
-## 🧰 Softver
+## 🚀 Seminar 
 
-
-**Teme:**
+### Teme
 - Huffman Data Compression
-
-
-## 👨‍🏫 Predavanja
 
 ---
