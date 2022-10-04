@@ -1,3 +1,9 @@
+---
+layout: default
+parent: DOHS
+nav_order: 6
+---
+
 # 🚀 Završni seminar: Distribuirana obrada u heterogenim sustavima
 
 ## 📢 Osnovne informacije

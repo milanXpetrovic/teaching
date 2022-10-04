@@ -1,3 +1,10 @@
+---
+layout: default
+parent: DOHS
+nav_order: 6
+---
+
+
 # 🚀 Projektni zadatak: Distribuirana obrada u heterogenim sustavima
 
 ## 📢 Osnovne informacije

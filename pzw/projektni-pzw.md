@@ -1,3 +1,10 @@
+---
+layout: default
+parent: PZW
+nav_order: 6
+---
+
+
 # 🚀 Projektni zadatak: Programiranje za web
 
 ## 📢 Osnovne informacije
