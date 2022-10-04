@@ -18,12 +18,12 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-| 7.11. | Teorija 1 | 10 |
-| 24.11. | Vježbe - Kolokvij 1 | 20 (*prag 10*)|
-| 12.12. | Teorija 2 | 10 |
-| 23.1. | Vježbe - Kolokvij 2 |  20 (*prag 10*)|
+| 7.11.2022. | Teorija 1 | 10 |
+| 24.11.2022. | Vježbe - Kolokvij 1 | 20 (*prag 10*)|
+| 12.12.2022. | Teorija 2 | 10 |
+| 23.1.2023. | Vježbe - Kolokvij 2 |  20 (*prag 10*)|
 |       | Seminar | 10 | 
-| 30.1. | Vježbe - ispravak  |  20  |
+| 30.1.2023. | Vježbe - ispravak  |  20  |
 
 
 ## 👨‍💻 Vježbe 👨‍🏫
@@ -45,15 +45,10 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 
 - [ ] [Prprema za Kolokvij](./priprema-kolokvij)
 
-
-##  Resursi 
+## 🧰 Resursi 🔗
 
 ### 📚 Lietratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018
-
-### 🔗 Linkovi
-
-### 🧰 Softver
 
 
 ## 🚀 Seminar 

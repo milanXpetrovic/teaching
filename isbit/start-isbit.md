@@ -30,25 +30,14 @@ Izvanredni:
 
 ## 👨‍💻 Vježbe
 
-
-- [ ] [V1: Uvod](./isbit-uvod)
-- [ ] [V2: Solidity 1/3](./solidity-1)
-- [ ] [V3: Solidity 2/3](./solidity-2)
-- [ ] [V4: Solidity 3/3](./solidity-3)
-- [ ] [V5: Implementacija pametnog ugovora na mreži ](./pametni-ugovori)
-- [ ] [V6: ](./)
-- [ ] [V7: ](./)
-- [ ] [V8: ](./)
-- [ ] [V9: ](./)
-- [ ] [V10: ](./)
-- [ ] [V11: ](./)
-- [ ] [V12: ](./)
-- [ ] [V13: ](./)
-- [ ] [V14: ](./)
-- [ ] [V15: ](./)
+- [ ] [Uvod](./isbit-uvod)
+- [ ] [Solidity](./solidity-1)
+- [ ] [Solidity](./solidity-2)
+- [ ] [Solidity](./solidity-3)
+- [ ] [Implementacija pametnog ugovora na mreži ](./pametni-ugovori)
 
 
-## 📚 Korisni linkovi 🔗 
+## 🔗 Korisni linkovi  
 
 - [Solidity documentation](https://docs.soliditylang.org/en/latest/)
 - [Solidity Cheatsheet](https://docs.soliditylang.org/en/latest/cheatsheet.html)
@@ -58,7 +47,7 @@ Izvanredni:
 - [Solidity tutorial 16h](https://www.youtube.com/watch?v=M576WGiDBdQ&t=7843s)
 - [Full Stack Web3 Development](https://www.youtube.com/watch?v=gyMwXuJrbJQ)
 
-https://ethereum.org/en/developers/tutorials/
+- [](https://ethereum.org/en/developers/tutorials/)
 
 - [Awesome-solidity]( https://github.com/bkrem/awesome-solidity)
 

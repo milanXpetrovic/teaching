@@ -19,3 +19,10 @@ nav_exclude: true
 | 1. 12. 2022. | [[projektni-pzw\|PZW]]     |  		|
 |              | [[projektni-prsp\|PRSP]]   |  	|
 |              | [[projektni-dohs-mpi\|DOHS]]   |  	|
+
+
+
+Asistent: Milan Petrović
+E-mail: milan.petrovic@inf.uniri.hr
+Ured: O-522
+Vrijeme konzultacija: Srijedom od 12:00 do 14:00 uz prethodni dogovor e-mailom
