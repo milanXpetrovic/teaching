@@ -32,6 +32,8 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 - [ ] [Vremenska složenost](./vremenska-slozenost)
 - [ ] [Potpuna pretraga](./potpuna-pretraga)
 - [ ] [Pohlepni algoritmi](./pohlepni-algoritmi)
+
+<!--
 - [ ] [Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [Bit manipulation](./bit-manipulation)
 
@@ -44,16 +46,19 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 - [ ] [Teorija igara](./teorija-igara)
 
 - [ ] [Prprema za Kolokvij](./priprema-kolokvij)
+-->
 
-## 🧰 Resursi 🔗
+
+<!-- ## 🧰 Resursi 🔗 -->
 
 ### 📚 Lietratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
 
 ## 🚀 Seminar 
-
+<!--
 ### Teme
 - Huffman Data Compression
+-->
 
 ---
