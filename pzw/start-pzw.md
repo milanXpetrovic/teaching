@@ -17,27 +17,18 @@ Dobrodši na vježbe iz predmeta **Programiranje za web**
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-| 7.11.2022. | Teorija 1 | 10 |
-| 24.11.2022. | Vježbe - Kolokvij 1 | 20 (*prag 10*)|
-| 12.12.2022. | Teorija 2 | 10 |
-| 23.1.2023. | Vježbe - Kolokvij 2 |  20 (*prag 10*)|
-|       | Seminar | 10 | 
-| 30.1.2023. | Vježbe - ispravak  |  20  |
 
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
 - [Django](https://gaseri.org/hr/nastava/materijali/python-modul-django/)
-- [Django REST]https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/
+- [Django REST](https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/)
 
 
 
-## 🚀 [Projektni zadatak]
+## 🚀 [Projektni zadatak](./projektni-pzw)
 
 
-## 📚 Literatura
-## 🔗 Korisni linkovi
-## 🧰 Potreban softver
 
 
 

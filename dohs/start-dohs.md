@@ -10,7 +10,6 @@ has_toc: false
 Dobrodši na vježbe iz predmeta **Distribuirana obrada u heterogenim sustavima**
 
 
-
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
 
 
@@ -74,14 +73,6 @@ Dobrodši na vježbe iz predmeta **Distribuirana obrada u heterogenim sustavima*
 
 ## 🚀 Projektni zadaci
 
-### DOHS redovni i DS ponavljači
+1. [Projektni zadatak MPI]()
+2. [Završni seminar CUDA](zavrsni-seminar-dohs-cuda)
 
-[[projektni-dohs-mpi|Projektni zadatak template]]
-
-1. [Projektni zadatak (MPI)]()
-2. [Završni seminar (CUDA)](zavrsni-seminar-dohs-cuda)
-
-### PPHS ponavljači
-
-1. [Projektni zadatak (CUDA)]()
-2. [Završni seminar (CUDA)]()
