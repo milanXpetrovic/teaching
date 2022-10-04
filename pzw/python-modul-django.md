@@ -928,7 +928,7 @@ Idemo još prikazati ukupan broj studenata u našoj bazi. Ovaj broj ćemo zatim 
 
 **Rješenje zadatka.** U datoteci `views.py`:
 
-``` python
+``` python=
 def detail(request):
     try:
         num_students = Student.objects.all().count()
@@ -941,7 +941,7 @@ def detail(request):
     return render(request, 'detail.html', context=context)
 ```
 
-``` html
+``` html=
 {% block content %}
 <h1>Dobrodosli na UNIRI</h1>
 
@@ -967,7 +967,7 @@ Povežite projekt i aplikaciju:
 
 Datoteka `vj5/main/urls.py` je oblika:
 
-``` python
+``` python=
 from django.urls import path
 
 urlpatterns = [
@@ -978,7 +978,7 @@ Za potrebe ovih vježbi koristit će se gotov model koji je zadan u nastavku.
 
 Datoteka `vj5/main/models.py` je oblika:
 
-``` python
+``` python=
 from django.db import models
 
 ## Create your models here.
@@ -1015,7 +1015,7 @@ class Book(models.Model):
 
 Nakon što je model kreiran unutar `vj5/main/models.py` potrebno je provesti migraciju. Naredbe za migraciju su:
 
-``` shell
+``` shell=
 $ ./manage.py makemigrations
 (...)
 $ ./manage.py migrate
@@ -1040,7 +1040,7 @@ class PublisherList(ListView):
 
 A zatim ga povežite unutar `main/urls.py` na način:
 
-``` python
+``` python=
 from django.urls import path
 from main.views import PublisherList
 
@@ -1057,7 +1057,7 @@ Kreirajte `./templates` direktorij, unutar kojeg kreirate `main` direktorij, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-``` html
+``` html=
 {% block content %}
     <h2>Publishers</h2>
     <ul>
@@ -1087,7 +1087,7 @@ Za početak potrebno je definirati prikaz unutar `./main/views.py` koji će vra�
 
 Datoteka `vj5/main/views.py`:
 
-``` python
+``` python=
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 from main.models import Book, Publisher
@@ -1104,7 +1104,7 @@ Zatim unutar `./main/urls.py` povezujemo s traženim pogledom. U ovom slučaju n
 
 Datoteka `vj5/main/urls.py`:
 
-``` python
+```python
 from django.urls import path
 from main.views import PublisherList, PublisherBookList
 
@@ -1121,7 +1121,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
 
 **Rješenje zadatka.**
 
-``` html
+```html
 {% block content %}
     <h2>Books list: </h2>
     <ul>
@@ -1149,7 +1149,7 @@ Model koji se koristi sadrži dvije klase, `Author` i `Book`.
 
 Sadržaj datoteke `vj6/main/models.py`:
 
-``` python
+```python
 from django.db import models
 
 ## Create your models here.
