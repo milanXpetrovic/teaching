@@ -5,12 +5,11 @@ has_children: true
 has_toc: false
 ---
 
-
 # Programiranje za rješavanje složenih problema
 
 ###### tags: `PRSP`
 
-Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
+Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PRSP_2022_2023.pdf)
 
@@ -18,32 +17,32 @@ Dobrodši na vježbe iz predmeta **Programiranje za rješavanje složenih proble
 
 ## 👨‍💻 Vježbe
 
-- [ ] [V1: Uvod](./prsp-uvod)
-- [ ] [V2: Vremenska složenost](./vremenska-slozenost)
-- [ ] [V3: Potpuna pretraga](./potpuna-pretraga)
-- [ ] [V4: Pohlepni algoritmi](./pohlepni-algoritmi)
-- [ ] [V5: Dinamičko programiranje](./dinamicko-programiranje) 
-- [ ] [V6: Bit manipulation](./bit-manipulation)
-- [ ] [V7: Grafovi i stabla](./grafovi-i-stabla)
-- [ ] [V8: Kolokvij 1](./priprema-kolokvij-1)
-- [ ] [V9: Putovanje kroz graf](./putovanje-kroz-graf)
-- [ ] [V10: Matrice](./matrice)
-- [ ] [V11: Teorija brojeva](./teorija-brojeva)
-- [ ] [V12: Kombinatorika](./kombinatorika)
-- [ ] [V13: Geometrija](./geometrija)
-- [ ] [V14: Teorija igara](./teorija-igara)
-- [ ] [V15: Kolokvij 2](./priprema-kolokvij-2)
+- [ ] [Uvod](./prsp-uvod)
+- [ ] [Vremenska složenost](./vremenska-slozenost)
+- [ ] [Potpuna pretraga](./potpuna-pretraga)
+- [ ] [Pohlepni algoritmi](./pohlepni-algoritmi)
+- [ ] [Dinamičko programiranje](./dinamicko-programiranje) 
+- [ ] [Bit manipulation](./bit-manipulation)
+
+- [ ] [Grafovi i stabla](./grafovi-i-stabla)
+- [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
+- [ ] [Matrice](./matrice)
+
+- [ ] [Teorija brojeva](./teorija-brojeva)
+- [ ] [Kombinatorika](./kombinatorika)
+- [ ] [Geometrija](./geometrija)
+- [ ] [Teorija igara](./teorija-igara)
+
+- [ ] [Prprema za Kolokvij ](./priprema-kolokvij)
 
 
-## 📚 Literatura
+## 📚 Resursi 🔗
 
-### Obavezna
+- Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
-### Izborna
 
-## 🔗 Korisni linkovi
 
-## 🧰 Potreban softver
+## 🧰 Softver
 
 
 **Teme:**
