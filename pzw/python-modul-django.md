@@ -14,10 +14,10 @@ Nakon što preuzimete i instalirate VS Code, pokrenite ga, zatim kraticom ++cont
 
 Specijalno, na [Arch Linuxu](https://archlinux.org/) i derivatima kao što su [Manjaro](https://manjaro.org/) i [Garuda Linux](https://garudalinux.org/) možete instalirati [službeni VS Code binary](https://aur.archlinux.org/packages/visual-studio-code-bin) iz AUR-a:
 
-```
+``` 
 $ paru -S visual-studio-code-bin
 (...)
-```
+``` 
 
 #### Instalacija preduvjeta
 
@@ -26,14 +26,14 @@ Preduvjet je instalacija [pip](https://pypi.org/project/pip/)-a i [Pylint](https
 ``` shell
 $ sudo apt install python-is-python3 python3-pip pylint
 (...)
-```
+``` 
 
 Naredbe za Linux distribucije temeljene na Arch Linuxu (npr. Manjaro i Garuda Linux):
 
-```
+``` 
 $ sudo pacman -S python-pip python-pylint
 (...)
-```
+``` 
 
 #### Instalacija Djanga
 
@@ -42,28 +42,28 @@ Instalacija pakirane verzije [Djanga](https://www.djangoproject.com/) na Ubuntu 
 ``` shell
 $ sudo apt install python3-django
 (...)
-```
+``` 
 
 Naredbe za Linux distribucije temeljene na Arch Linuxu (npr. Manjaro i Garuda Linux) (nepreporučeno jer je verzija 3.x):
 
 ``` shell
 $ sudo pacman -S python-django
 (...)
-```
+``` 
 
 Instalacija Djanga korištenjem pip-a (preporučeno jer je verzija 4.x, radi na svim distribucijama, koristimo i u učionici):
 
 ``` shell
 $ pip3 install Django
 (...)
-```
+``` 
 
 ili
 
 ``` shell
 $ python3 -m pip install Django
 (...)
-```
+``` 
 
 Primjer web sjedišta u Djangu:
 
@@ -77,28 +77,28 @@ Stvaranje direktorija gdje ćemo stvoriti naš projekt:
 ``` shell
 $ mkdir moja_prva_stranica
 (...)
-```
+``` 
 
 Zatim idemo u taj direktorij naredbom:
 
 ``` shell
 $ cd moja_prva_stranica
 (...)
-```
+``` 
 
 U njemu stvaramo Django projekt naredbom:
 
 ``` shell
 $ django-admin startproject mysite
 (...)
-```
+``` 
 
 Ostale raspoložive naredbe možemo vidjeti s komandom `django-admin`, a za detaljnije o pojedinim naredbama koristite `django-admin help`, npr. za naredbu `startproject` na način:
 
 ``` shell
 $ django-admin help startproject
 (...)
-```
+``` 
 
 Naredba `startproject` kreira novi direktorij naziva kojega smo proslijedili, u našem slučaju to je `mysite`.
 
@@ -114,7 +114,7 @@ mysite
     ├── settings.py
     ├── urls.py
     └── wsgi.py
-```
+``` 
 
 Direktorij `mysite` je središnji direktorij naše stranice koju ćemo graditi. Ovo je "glavna" tj. središnja aplikacija. Njena uloga je usmjeravanje Djanga na druge aplikacije koje ćemo kreirati. Ono što ćemo tu razvijati je samo usmjeravanje na druge aplikacije koje razvijamo i podešavanje postavki.
 
@@ -159,7 +159,7 @@ U zasebnom terminalu za pokretanje poslužitelja koristi se naredba:
 ``` shell
 $ ./manage.py runserver
 (...) 
-```
+``` 
 
 !!! zadatak
     Provjerite rad poslužitelja posjetom adrese `http://127.0.0.1:8000/` u web pregledniku.
@@ -220,7 +220,7 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
-```
+``` 
 
 Vidimo da imamo samo jedan URL koji se tiče stranice za administraciju koji nam trenutno ne treba. Sljedeće što je potrebno učiniti je usmjeriti view na URL. Razlog tome je što Django web stranice vidi kao kolekciju aplikacija koje 'ispisuje' pomoću danih URLova koji 'pokazuju' Djangu gdje tražiti. Datoteka `urls.py` unutar naše glavne aplikacije obično samo usmjerava na aplikacije.
 
@@ -236,7 +236,7 @@ urlpatterns = [
     path('', include('main.urls')), #dodajemo urls
     path('admin/', admin.site.urls),
 ]
-```
+``` 
 
 Ako pogledamo u direktorij aplikacije `main` vidjet ćemo da datoteka `urls.py` ne postoji. Kreirajmo datoteku `mysite/main/urls.py` i dodajmo sljedeći sadržaj.
 
@@ -249,7 +249,7 @@ app_name = 'main'  # here for namespacing of urls.
 urlpatterns = [
     path('', views.homepage, name='homepage'),
 ]
-```
+``` 
 
 Prođimo ukratko kroz logiku rada našeg programa. Prvo se posjećuje `mysite/url.py`, u URL-u nije prosljeđeno ništa, stoga odgovara `''` iz `path('', include('main.urls'))`. Program ovo tumači tako da uključuje `main.urls`.
 
@@ -266,7 +266,7 @@ from django.http import HttpResponse
 def homepage(request):
     return HttpResponse('Welcome to homepage! <strong>#samoOIRI</strong>')
     # primjetiti korištenje HTML-a
-```
+``` 
 
 Osvježimo stranicu `http://127.0.0.1:8000/` u browseru.
 
@@ -290,7 +290,7 @@ class Predmet(models.Model):
     predmet_naslov = models.CharField(max_length=100)
     predmet_sadrzaj = models.TextField()
     predmet_vrijeme_objave = models.DateTimeField('date published')
-```
+``` 
 
 !!! zadatak
     Definirajte funkciju `__str__()` unutar klase `Predmet` koja vraća naziv predmeta `predmet_naziv`.
@@ -300,7 +300,7 @@ class Predmet(models.Model):
 ``` python
 def __str__(self):
     return self.predmet_naslov
-```
+``` 
 
 Službena [Django dokumentacija](https://docs.djangoproject.com/en/3.2/ref/models/fields/) o svim poljima unutar modela.
 
@@ -316,7 +316,7 @@ Unesite naredbu  da bi pripremili migraciju.
 ``` shell
 $ ./manage.py makemigrations
 No changes detected
-```
+``` 
 
 Razlog tomu je što još nismo povezali `main` aplikaciju. Način na koji ćemo povezati aplikaciju je taj da ju pozovemo unutar `INSTALLED_APPS` unutar `mysite/settings.py`.
 
@@ -338,7 +338,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig' # ovu liniju dodajemo
 ]
-```
+``` 
 
 Unesite ponovo naredbu `./manage.py makemigrations` da biste pripremili migraciju.
 
@@ -347,7 +347,7 @@ $ ./manage.py makemigrations
 Migrations for 'main':
   main\migrations\0001_initial.py
     - Create model Predmet
-```
+``` 
 
 !!! zadatak
     Pročitajte sadržaj unutar datoteke `main\migrations\0001_initial.py`.
@@ -381,7 +381,7 @@ Running migrations:
   Applying auth.0011_update_proxy_permissions... OK
   Applying auth.0012_alter_user_first_name_max_length... OK
   Applying sessions.0001_initial... OK
-```
+``` 
 
 #### Interakcija sa modelom
 
@@ -392,7 +392,7 @@ Za početak uvezimo potrebne modele i pakete naredbama:
 ``` python
 from main.models import Predmet
 from django.utils import timezone
-```
+``` 
 
 Za dohvaćanje svih objekata koristimo `Predmet.objects.all()` što vraća `QuerrySet []` ondosno praznu listu.
 
@@ -403,13 +403,13 @@ novi_predmet = Predmet()
 novi_predmet.predmet_naslov = 'DWA2'
 novi_predmet.predmet_sadrzaj = 'ovo je opis predmeta'
 novi_predmet.predmet_vrijeme_objave = timezone.now()
-```
+``` 
 
 Pohranimo promjene:
 
 ``` python
 novi_predmet.save()
-```
+``` 
 
 Isprobajmo ponovno naredbu `Predmet.objects.all()` i uočimo novi predmet u listi.
 
@@ -418,7 +418,7 @@ Kroz predmete se može i iterirati, primjerice korištenjem petlje `for`:
 ``` python
 for p in Predmet.objects.all():
     print(p.predmet_naslov)
-```
+``` 
 
 ### Kreiranje superusera i povezivanje modela
 
@@ -430,7 +430,7 @@ Username (leave blank to use 'korisnik'):
 Email address: 
 Password: 
 Password (again):
-```
+``` 
 
 Dodjelite proizvoljno ime i lozinku, mail adresu trenutno možemo ostaviti praznu.
 
@@ -447,7 +447,7 @@ from .models import Predmet
 
 ## Register your models here.
 admin.site.register(Predmet)
-```
+``` 
 
 !!! zadatak
     Osvježite stranicu na adresi `http://127.0.0.1:8000/admin/`.
@@ -493,7 +493,7 @@ class Student(models.Model):
     student_prezime = models.CharField(max_length=50)
     student_broj_xice = models.CharField(max_length=10)
     student_predmeti = models.ManyToManyField(Predmet)
-```
+``` 
 
 !!! zadatak
     Definirajte funkciju `__str__()` unutar klase Student koja vraća `student_broj_xice`. Zatim dodajte klasu `Student` unutar `main/admin.py` tako da ona postane vidljiva u admin panelu.
@@ -503,7 +503,7 @@ class Student(models.Model):
 ``` python
 def __str__(self):
     return self.student_broj_xice
-```
+``` 
 
 U datoteci `main/admin.py`:
 
@@ -513,7 +513,7 @@ from .models import *
 
 model_list = [Predmet, Student]
 admin.site.register(model_list)
-```
+``` 
 
 Nakon što ste nadopunili `main/models.py` primjenite pripremu i nakon toga migraciju s naredbama `makemigrations` i `migrate`. Provjerite radi li vam sve tako da posjetite `http://127.0.0.1:8000/admin/`.
 
@@ -536,7 +536,7 @@ class Profesor(models.Model):
 
     def __str__(self):
         return self.prof_email   
-```
+``` 
 
 !!! zadatak
     Izmijenite klasu `Predmet` tako da joj dodate nositelja, vrijednost `nositelj` neka bude tip veze One to many. Za definiranje veze koristite `ForeignKey`.
@@ -554,7 +554,7 @@ class Predmet(models.Model):
 
     def __str__(self):
         return self.predmet_naslov 
-```
+``` 
 
 #### One-to-one
 
@@ -584,7 +584,7 @@ class ZavrsniRad(models.Model):
     rad_naslov = models.CharField(max_length=50)
     rad_zadatak = models.CharField(max_length=50)
     rad_prvi_upis = models.BooleanField(default=True)
-```
+``` 
 
 !!! zadatak
     Definirajte funkciju `__str__()` unutar klase `ZavrsniRad` koja vraća `student_broj_xice`. Zatim dodajte klasu `ZavrsniRad` unutar `main/admin.py` tako da ona postane vidljiva u admin panelu.
@@ -594,13 +594,13 @@ class ZavrsniRad(models.Model):
 ``` python
 def __str__(self):
     return 'Završni rad studenta s brojem X-ice {}'.format(self.student.student_broj_xice)
-```
+``` 
 
 U `main/admin.py` samo dopunjavamo `model_list` na način:
 
 ``` python
 model_list = [Predmet, Student, ZavrsniRad]
-```
+``` 
 
 Korištenje naredbe `./manage.py`:
 
@@ -615,69 +615,69 @@ Naredba za pokretanje Pythonove ljuske specifične za Django:
 ``` shell
 $ ./manage.py shell 
 >>>
-```
+``` 
 
 Za definiranje instance klase:
 
 ``` python
 >>> profesor = Profesor()
 >>> predmet = Predmet()
-```
+``` 
 
 Povezivanje instanci `Profesor` i `Predmet` pomoću vanjskog ključa, odnosno dodavanje nositelja na predmet:
 
 ``` python
 >>> predmet.predmet_nositelj = profesor
-```
+``` 
 
 Instanci klase `Student` možemo dodati *n* predmeta:
 
 ``` python
 >>> student.student_predmeti.add(predmet1, predmet2)
-```
+``` 
 
 Kreiranje instance klase `ZavrsniRad`:
 
 ``` python
 >>> zr = ZavrsniRad()
-```
+``` 
 
 Dodavanje veze tipa *one-to-one*, na instancu klase `ZavrsniRad`:
 
 ``` python
 >>> zr.mentor=profesor
 >>> zr.student=student
-```
+``` 
 
 Upit za koji vraća sve instance tražene klase:
 
 ``` python
 profesors = Profesor.objects.all()
-```
+``` 
 
 Pretraga po zadanoj vrijednosti:
 
 ``` python
 email = Profesor.objects.get(prof_email='prof_mail@uniri.hr')
-```
+``` 
 
 Pretraga svih instanci koji imaju traženo ime:
 
 ``` python
 prof_peros = Profesor.objects.filter(prof_ime__contains='Pero')
-```
+``` 
 
 Uzimanje prvih 5 zapisa:
 
 ``` python
 Profesor.objects.all()[:5]
-```
+``` 
 
 Sortiranje i dohvaćanje prvog u listi:
 
 ``` python
 Profesor.objects.order_by('prof_ime')[0]
-```
+``` 
 
 ### Cjelovit kod današnjih vježbi
 
@@ -733,7 +733,7 @@ class ZavrsniRad(models.Model):
 
     def __str__(self):
         return 'Završni rad studenta s brojem X-ice {}'.format(self.student.student_broj_xice)
-```
+``` 
 
 ## Usmjeravanje i URL-i. Stvaranje pogleda kao odgovora na HTTP zahtjeve
 
@@ -748,14 +748,14 @@ Za kreiranje projekta koristi se naredba:
 ``` shell
 $ django-admin startproject <project_name>
 (...)
-```
+``` 
 
 Za kreiranje aplikacije unutar projekta koristi se naredba:
 
 ``` shell
 $ django-admin startapp <app_name>
 (...)
-```
+``` 
 
 Nakon što su projekt i aplikacija unutar njega kreirani, potrebno ih je povezati. Ovo se radi unutar datoteka `urls.py` koja se nalazi u projektnom direktoriju.
 
@@ -774,7 +774,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
 ]
-```
+``` 
 
 !!! warning
     Potrebno je povezati novostvorenu aplikaciju `main` i unutar `setting.py`. Unutar`INSTALLED_APPS` potrebno je dodati `MainConfig` iz `apps.py` koja se nalazi unutar aplikacije `main`.
@@ -796,7 +796,7 @@ app_name = 'main'
 urlpatterns = [
     path('homepage', views.homepage, name='homepage'),
 ]
-```
+``` 
 
 Definirali smo poveznice unutar datoteka `main/urls.py`. Sada je potrebno kreirati funkciju `homepage()` unutar `main/views.py` koju smo pozvali unutar `main/urls.py`.
 
@@ -814,7 +814,7 @@ from django.http import HttpResponse
 
 def homepage(request):
     return HttpResponse('<html><body><strong>Homepage</strong> i još neki tekst na homepage.</body></html>')
-```
+``` 
 
 Pohranite sve promjene i pokrenite server.
 
@@ -833,7 +833,7 @@ def current_datetime(request):
     now = datetime.datetime.now()
     html = '<html><body>Trenutno vrijeme: {}.</body></html>'.format(now)
     return HttpResponse(html)
-```
+``` 
 
 #### Vraćajne grešaka u odgovorima na zahtjeve
 
@@ -847,7 +847,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 def not_found(request):
     return HttpResponseNotFound('<h1>Page not found</h1>')
-```
+``` 
 
 ### Vraćanje zapisa iz baze
 
@@ -866,7 +866,7 @@ class Student(models.Model):
 
     def __str__(self):
         return str(self.broj_xice)
-```
+``` 
 
 U datoteci `admin.py`:
 
@@ -876,7 +876,7 @@ from main.models import *
 
 ## Register your models here.
 admin.site.register(Student)
-```
+``` 
 
 Nakon što je baza pomoću modela kreirana, potrebno je unijeti u nju vrijednosti da se može izvršiti tražene upite.
 
@@ -898,7 +898,7 @@ def all_peros(request):
     context = {'peros': peros}
 
     return render(request, 'students.html', context=context)
-```
+``` 
 
 Za prikaz rješenja prethodnog zadatka, potrebna nam je HTML datoteka, koji će prikazati rezultate upita nad bazom. Kreirajte unutar direktorija `main` datoteku `main/templates`, unutar koje pohranjujete `students.html`.
 
@@ -914,7 +914,7 @@ Datoteka `students.html` ima sadržaj:
         </li>
     {% endfor %}
 </ul>
-```
+``` 
 
 !!! zadatak
     Dodajte unutar datoteke `main/urls.py` putanju koja nas vodi na prethodno kreiranu funkciju i zatim provjerite prikaz rezultata na serveru.
@@ -939,7 +939,7 @@ def detail(request):
         raise Http404('Student does not exist')
 
     return render(request, 'detail.html', context=context)
-```
+``` 
 
 ``` html=
 {% block content %}
@@ -950,7 +950,7 @@ def detail(request):
     <li><strong>Studenata:</strong> {{ num_students }}</li>
 </ul>
 {% endblock %}
-```
+``` 
 
 ## Izrada generičkih pogleda
 
@@ -972,7 +972,7 @@ from django.urls import path
 
 urlpatterns = [
 ]
-```
+``` 
 
 Za potrebe ovih vježbi koristit će se gotov model koji je zadan u nastavku.
 
@@ -1011,7 +1011,7 @@ class Book(models.Model):
     authors = models.ManyToManyField('Author')
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     publication_date = models.DateField()
-```
+``` 
 
 Nakon što je model kreiran unutar `vj5/main/models.py` potrebno je provesti migraciju. Naredbe za migraciju su:
 
@@ -1020,7 +1020,7 @@ $ ./manage.py makemigrations
 (...)
 $ ./manage.py migrate
 (...)
-```
+``` 
 
 Napravite migraciju i zatim pokrenite server.
 
@@ -1036,7 +1036,7 @@ from main.models import Publisher
 
 class PublisherList(ListView):
     model = Publisher
-```
+``` 
 
 A zatim ga povežite unutar `main/urls.py` na način:
 
@@ -1047,7 +1047,7 @@ from main.views import PublisherList
 urlpatterns = [
     path('publishers/', PublisherList.as_view()),
 ]
-```
+``` 
 
 Kada smo kreirali pogled i pozvali ga unutar `urls.py` potreban nam je predložak unutar kojeg će se prikazati odgovor.
 
@@ -1069,7 +1069,7 @@ Datoteka `./templates/main/publisher_list.html` ima sadržaj:
         {% endfor %}
     </ul>
 {% endblock %}
-```
+``` 
 
 Potrebno je još zadati putanju za predloške unutar `settings.py`.
 
@@ -1098,13 +1098,13 @@ class PublisherBookList(ListView):
     def get_queryset(self):
         self.publisher = get_object_or_404(Publisher, name=self.kwargs['publisher'])
         return Book.objects.filter(publisher=self.publisher)
-```
+``` 
 
 Zatim unutar `./main/urls.py` povezujemo s traženim pogledom. U ovom slučaju ne koristi se statično zadani uzorak Umjesto da svakog pojedinog izdavača zadajemo pojedinačno, koristimo `<publisher>`.
 
 Datoteka `vj5/main/urls.py`:
 
-```python
+``` python
 from django.urls import path
 from main.views import PublisherList, PublisherBookList
 
@@ -1112,7 +1112,7 @@ urlpatterns = [
     path('publishers/', PublisherList.as_view()),
     path('<publisher>/', PublisherBookList.as_view()),
 ]
-```
+``` 
 
 I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam prikazivati rezultate pretrage za zadanog izdavača.
 
@@ -1121,7 +1121,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
 
 **Rješenje zadatka.**
 
-```html
+``` html
 {% block content %}
     <h2>Books list: </h2>
     <ul>
@@ -1130,7 +1130,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
         {% endfor %}
     </ul>
 {% endblock %}
-```
+``` 
 
 Pokrenite server i provjerite pretraživanje po izdavaču.
 
@@ -1149,7 +1149,7 @@ Model koji se koristi sadrži dvije klase, `Author` i `Book`.
 
 Sadržaj datoteke `vj6/main/models.py`:
 
-```python
+``` python
 from django.db import models
 
 ## Create your models here.
@@ -1173,7 +1173,7 @@ class Book(models.Model):
     
     def __str__(self):
         return self.title
-```
+``` 
 
 Kreirani model potrebno je popuniti podacima, za to će se koristiti naredba `./manage.py setup_test_data.py`. Prilikom pokretanja naredbe, program vraća grešku jer naredba još nije kreirana.
 
@@ -1182,7 +1182,7 @@ Instalacija potrebnih Python paketa:
 ``` shell
 $ pip3 install factory_boy
 (...)
-```
+``` 
 
 Kada je instaliran [paket factory_boy](https://pypi.org/project/factory-boy/), potrebno je kreirati klase koje će automatski popunjavati bazu sa tzv. *dummy data*, odnostno nasumično generiranim podacima koji će nam pojednostaviti proces popunjavanja baze nad kojom želimo izvršavati upite. Detaljnije o  njegovoj funkcionalnosti možete pronaći u [službenoj dokumentaciji](https://factoryboy.readthedocs.io/).
 
@@ -1219,7 +1219,7 @@ class BookFactory(DjangoModelFactory):
     abstract = factory.Faker("sentence", nb_words=50)
     author = factory.Iterator(Author.objects.all())
     publication_date = factory.Faker("date_time")      
-```
+``` 
 
 !!! zadatak
     Nakon što su klase definirane unutar `factory.py`, isprobajte njihovu funkcionalnost. Prije pokretanja ljuske primjenite migraciju na bazu.
@@ -1227,11 +1227,11 @@ class BookFactory(DjangoModelFactory):
 ``` shell
 $ ./manage.py shell 
 (...)
-```
+``` 
 
 ``` python
 >>> from main.factories import *
-```
+``` 
 
 ``` python
 >>> a = AuthorFactory()
@@ -1239,7 +1239,7 @@ $ ./manage.py shell
 >>> a
 >>> b.title
 >>> b.author
-```
+``` 
 
 !!! zadatak
     Kreirajte administratnora, zatim unutar `admin.py` registrirajte modele `Book` i `Author`. Provjerite ako su podaci generirani sa `factory.py` uneseni u bazu.
@@ -1255,7 +1255,7 @@ models_list = [Author, Book]
 
 ## Register your models here.
 admin.site.register(models_list)
-```
+``` 
 
 #### Kreiranje naredbe u `manage.py`
 
@@ -1266,7 +1266,7 @@ Za početak porenite naredbu:
 ``` shell
 $ ./manage.py
 (...) 
-```
+``` 
 
 Izlistao nam se trenutni popis opcija koje možemo izvršavati.
 
@@ -1276,14 +1276,14 @@ Kreirajte direktorij `commands`, unutar kojeg će se nalaziti skripta. Zatim se 
 $ mkdir main/management/commands
 $ cd main/management/commands
 (...)
-```
+``` 
 
 A zatim, unutar direktorija `commands` kreirajte `setup_test_data.py`.
 
 ``` shell
 $ touch setup_test_data.py
 (...)
-```
+``` 
 
 Otvorite kreirani `setup_test_data.py` unutar kojeg će se kreirati vlastita upravljačka naredba ([detaljnije o upravljačkim naredbama koje su kreirane od strane korisnika](https://simpleisbetterthancomplex.com/tutorial/2018/08/27/how-to-create-custom-django-management-commands.html)).
 
@@ -1321,7 +1321,7 @@ class Command(BaseCommand):
     
         for _ in range(NUM_BOOKS):
             book = BookFactory()
-```
+``` 
 
 Svojstvo funkcije `handle()` je postavljeno na  `transaction.atomic`, što označava da ako je blok koda uspješno izvršen, promjene se pohranjuju u bazu podataka ([detaljnije objašnjenje o modulu transaction korištenom u prethodnom primjeru](https://docs.djangoproject.com/en/3.2/topics/db/transactions/)).
 
@@ -1331,7 +1331,7 @@ Svojstvo funkcije `handle()` je postavljeno na  `transaction.atomic`, što ozna�
 ``` shell
 $ ./manage.py setup_test_data
 (...)
-```
+``` 
 
 ## Predlošci obrazaca. Stvaranje obrazaca iz modela
 
@@ -1349,13 +1349,13 @@ Varijable pišemo unutar vitičastih zagrada `{{ varijabla }}`:
 
 ``` html
 <p>Ime: {{ first_name }}, Prezime: {{ last_name }}.</p>
-```
+``` 
 
 Što će iz konteksta `{'first_name': 'Ivo', 'last_name': 'Ivić'}` biti prikazano kao:
 
 ``` html
 <p>Ime: Ivo, Prezime: Ivić.</p>
-```
+``` 
 
 ##### Oznake
 
@@ -1383,7 +1383,7 @@ Petlje se pišu unutar `{% %}` odnosno definiraju se njihove oznake. Primjer kor
     <li>{{ author.name }}</li>
 {% endfor %}
 </ul>
-```
+``` 
 
 Primjer provjere autentifikacije korisnika naredbom `if`:
 
@@ -1391,7 +1391,7 @@ Primjer provjere autentifikacije korisnika naredbom `if`:
 {% if user.is_authenticated %}
     <p>Hello, {{ user.username }}.</p>
 {% endif %}
-```
+``` 
 
 Primjer naredbi `if` i `else`:
 
@@ -1401,7 +1401,7 @@ Primjer naredbi `if` i `else`:
 {% else %}
     No authors.
 {% endif %}
-```
+``` 
 
 !!! zadatak
     Kreirajte direktorij `./templates` unutar kojeg će biti pohranjeni predlošci koji se koriste, npr. `base_generic.html`. Ne zaboravite definirati putanju unutar `settings.py`.
@@ -1433,7 +1433,7 @@ Primjer naredbi `if` i `else`:
     </div>
 </body>
 </html>
-```
+``` 
 
 #### Nasljeđivanje u predlošcima
 
@@ -1453,13 +1453,13 @@ Datoteka `./template/main/book_list.html`:
     </div>
 {% endfor %}
 {% endblock %}
-```
+``` 
 
 Unutar `main/urls.py` dodajte:
 
 ``` python
 path('books', BookList.as_view())
-```
+``` 
 
 Datoteka `main/views.py`:
 
@@ -1470,7 +1470,7 @@ from main.models import Author, Book
 
 class BookList(ListView):
     model = Book
-```
+``` 
 
 !!! zadatak
     Sukladno prethodnom primjeru kreirajte prikaz za sve autore unutar baze.
@@ -1483,14 +1483,14 @@ Dodavanje CSS-a u HTML predložak.
 
 ``` html
 <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css"> 
-```
+``` 
 
 ``` html
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css"> 
     <title>{% block title %}Knjižnica{% endblock %}</title>
 </head>
-```
+``` 
 
 #### Direktorij za statičke datoteke
 
@@ -1501,7 +1501,7 @@ Referenciranje na `style.css` unutar aplikacije:
 ``` html
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-```
+``` 
 
 Prikaz unutar HTML templatea:
 
@@ -1511,7 +1511,7 @@ Prikaz unutar HTML templatea:
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>{% block title %}Knjiznica{% endblock %}</title>
 </head>
-```
+``` 
 
 Sadržaj datoteke `style.css` možete proizvoljno zadati i prilagođavati vlastitim željama. Primjerice, datoteka `main/static/style.css` može biti oblika:
 
@@ -1533,7 +1533,7 @@ li {
 li a {
     padding: 16px;
 }
-```
+``` 
 
 !!! zadatak
     Dopunite prikaz na autora tako da njegovo ime bude link. Link neka vodi na prikaz svih knjiga od odabranog autora. Za tu svrhu prvo je potrebno kreirati pretraživanje po traženom autoru, a zatim vratiti sve knjige koje su pronađene za traženog autora.
@@ -1551,13 +1551,13 @@ class AuthorBookList(ListView):
     def get_queryset(self):
         self.author = get_object_or_404(Author, name=self.kwargs['author'])
         return Book.objects.filter(author=self.author)
-```
+``` 
 
 Potrebno je dodati putanju unutar `views.py`. Datoteka `main/views.py` je oblika:
 
 ``` python
 path('<author>', AuthorBookList.as_view())
-```
+``` 
 
 Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na autore. Datoteka `author_list.html`:
 
@@ -1573,7 +1573,7 @@ Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na auto
     </div>
 {% endfor %}
 {% endblock %}
-```
+``` 
 
 Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
 
@@ -1590,7 +1590,7 @@ Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
     </div>
 {% endfor %}
 {% endblock %}
-```
+``` 
 
 !!! zadatak
     Dopunite `style.css` tako da dodate obrub na elemente Knjige i Autora.
@@ -1613,7 +1613,7 @@ Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
     padding-right: 20px;
     padding-bottom: 20px;
 }
-```
+``` 
 
 ## Sijanje i migracije
 
@@ -1629,7 +1629,7 @@ Naredbom `dumpdata` izvozimo vrijednosti iz baze ([detaljnije o naredbi dumpdata
 ``` shell
 $ ./manage.py dumpdata main.Student --pk 1 --indent 4 > 0001_student.json
 (...)
-```
+``` 
 
 !!! zadatak
     Izbrišite iz baze zapis studenta kojeg ste prethodno unjeli.
@@ -1638,7 +1638,7 @@ $ ./manage.py dumpdata main.Student --pk 1 --indent 4 > 0001_student.json
 
 ``` python
 >>> Student.objects.filter(pk=1).delete()
-```
+``` 
 
 Za uvoz podataka u bazu koristimo naredbu `loaddata`. Detaljnije o naredbi [loaddata](https://docs.djangoproject.com/en/3.2/ref/django-admin/#loaddata).
 
@@ -1654,7 +1654,7 @@ Fixture je zbirka podataka koje Django uvozi u bazu podataka. Najjednostavniji n
 ``` shell
 $ pip3 install django-seed
 (...)
-```
+``` 
 
 Python modul pomoću kojeg se mogu generirati podaci za bazu podataka. U pozadini koristi biblioteku [faker](https://github.com/joke2k/faker) ([dokumentacija](https://faker.readthedocs.io/)) za generiranje testnih podataka. Detaljnije o django-seed možete pronaći u [dokumentaciji](https://github.com/mstdokumaci/django-seed).
 
@@ -1707,14 +1707,14 @@ for fixture in fixtures:
             except:
                 msg += 'not deleted\n'
     print(msg)
-```
+``` 
 
 Skriptu pokrenite naredbom:
 
 ``` shell
 $ manage.py shell < revert_seed.py
 (...) 
-```
+``` 
 
 ### Učitavanje podataka sijanja u testiranje
 
@@ -1731,14 +1731,14 @@ class MyTest(TestCase):
     def test_should_create_group(self):
         s = Student.objects.get(pk=1)
         self.assertEqual(s.first_name, 'Ivo')
-```
+``` 
 
 Kreirani test pokrenite u terminalu s naredbom:
 
 ``` shell
 $ ./manage.py test test1
 (...)
-```
+``` 
 
 ``` python
 >>> from django.contrib.auth.models import User, Group
@@ -1747,12 +1747,12 @@ $ ./manage.py test test1
 >>> ivo = User.objects.create_user('Ivo')
 >>> ivo.pk
 >>> ivo.groups.add(usergroup)
-```
+``` 
 
 ``` python
 >>> python manage.py dumpdata auth.User --pk 1 --indent 4
 >>> python manage.py dumpdata auth.User --pk 1 --indent 4 --natural-foreign
-```
+``` 
 
 ## Django vježba 10: Autentifikacija. Autorizacija
 
@@ -1770,7 +1770,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('accounts/', include('django.contrib.auth.urls'))
 ]
-```
+``` 
 
 #### Homepage
 
@@ -1783,14 +1783,14 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 ]
-```
+``` 
 
 Stvaranje pogleda za `index`:
 
 ``` python
 def index(request):
     return render(request, 'main/index.html')
-```
+``` 
 
 Unutar aplikacije `main` stvorite si direktorij `templates`, unutar kojeg kreirate `index.html`. HTML predložak:
 
@@ -1805,7 +1805,7 @@ Unutar aplikacije `main` stvorite si direktorij `templates`, unutar kojeg kreira
 
 </body>
 </html>
-```
+``` 
 
 ### Kreiranje korisnika
 
@@ -1820,7 +1820,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
 {% if form.errors %}
     <h3>Unos nije ispravan.</h3>
 {% endif %}
-```
+``` 
 
 ``` html
 {% if next %}
@@ -1831,7 +1831,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
         <p>Please login to see this page.</p>
     {% endif %}
 {% endif %}
-```
+``` 
 
 ``` html
 <form method="post" action="{% url 'login' %}">
@@ -1849,7 +1849,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
-```
+``` 
 
 Detaljnije o [CSRF tokenu](https://docs.djangoproject.com/en/3.2/ref/csrf/)
 
@@ -1861,7 +1861,7 @@ Za registraciju koristimo gotovu formu sa:
 
 ``` python
 from django.contrib.auth.forms import UserCreationForm
-```
+``` 
 
 I kreiramo funkciju `register()`:
 
@@ -1871,7 +1871,7 @@ def register(request):
     context = {'form': form}
     
     return render(request, 'registration/register.html', context)
-```
+``` 
 
 Kreirajmo `register.html`:
 
@@ -1887,7 +1887,7 @@ Kreirajmo `register.html`:
 
     <input type="submit" value="Register" />
 </form>
-```
+``` 
 
 Izmjenimo funkciju  `register()`:
 
@@ -1913,7 +1913,7 @@ def register(request):
     context = {'form': form}
 
     return render(request, 'registration/register.html', context)
-```
+``` 
 
 Izmjene na `index.html` ako je korisnik ulogiran.
 
@@ -1925,7 +1925,7 @@ Izmjene na `index.html` ako je korisnik ulogiran.
 {% else %}
     <p>Niste prijavljeni.</p>
 {% endif %}
-```
+``` 
 
 ## Django vježba 11: Testiranje
 
@@ -1939,7 +1939,7 @@ def zbroji(prvi, drugi):
 
 def test_zbroji():
     assert zbroji(3, 6) == 9
-```
+``` 
 
 **Test integracije** testira više dijelova zajedno kako bi se osiguralo da međusobno dobro surađuju/rade.
 
@@ -1960,7 +1960,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-```
+``` 
 
 Prije početka pisanja samih testova pokrenite si projekt koji smo radili na vježbama 6. Na Merlinu je dostupna arhiva s projektom ako ju nemate.
 
@@ -1974,7 +1974,7 @@ Naredba koju koristite za pokretanje testova je:
 ``` shell
 $ ./manage.py test main.tests
 (...)
-```
+``` 
 
 !!! zadatak
     Stvorite testne `.py` datoteke unutar `tests`  koje koristite za testiranje rada `urls.py`, `views.py` i `models.py`.
@@ -2009,7 +2009,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('author_q', args=['some-author'])
 
         self.assertEquals(resolve(url).func.view_class, AuthorBookList)
-```
+``` 
 
 ### Testiranje `views.py`
 
@@ -2048,7 +2048,7 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'main/book_list.html')
-```
+``` 
 
 ### Testiranje `models.py`
 
@@ -2069,4 +2069,4 @@ class Testmodels(TestCase):
 
     def test_author(self):
         self.assertEquals(self.author1.name, "some-author")
-```
+``` 
