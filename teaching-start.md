@@ -12,8 +12,7 @@ nav_exclude: true
 | [DOHS](./dohs-start) |SRI 16:00–17:30-359 | [DINP-dohs](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf) | 
 
 
-
-## 🪪 Kontak
+## Kontak
 
 Asistent: Milan Petrović
 E-mail: milan.petrovic@inf.uniri.hr
