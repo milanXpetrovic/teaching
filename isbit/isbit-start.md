@@ -16,25 +16,11 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
 
 
-**Važni datumi:**
-
-
-**Ispitni rokovi**
-Redoviti:
-01.02.2023.
-15.02.2023.
-05.09.2023.
-Izvanredni:
-02.03.2023
-
-
 ## 👨‍💻 Vježbe
 
-- [ ] [Uvod](./isbit-uvod)
-- [ ] [Solidity](./solidity-1)
-- [ ] [Solidity](./solidity-2)
-- [ ] [Solidity](./solidity-3)
-- [ ] [Implementacija pametnog ugovora na mreži ](./pametni-ugovori)
+- [ ] [Uvod](../isbit-uvod)
+- [ ] [Solidity](../solidity)
+- [ ] [Implementacija pametnog ugovora na mreži ](../pametni-ugovori)
 
 
 ## 🔗 Korisni linkovi  
@@ -58,6 +44,6 @@ Izvanredni:
 - https://code.visualstudio.com/
 
 
-## 🚀 [Projektni zadatak](./projektni-isbit)
+## 🚀 [Projektni zadatak](./isbit-projektni)
 
 ---
