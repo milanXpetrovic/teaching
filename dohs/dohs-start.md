@@ -10,7 +10,18 @@ has_toc: false
 Dobrodši na vježbe iz predmeta **Distribuirana obrada u heterogenim sustavima**
 
 
-## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
+## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_DOHS_2022_2023.pdf)
+
+
+| Datum | Vrsta | Bodovi |
+| ----- | ----- | --------|
+| 20.10.2022.      | Objava tema      |         | 
+
+
+## 🚀 Projektni zadaci
+
+1. [Projektni zadatak MPI]()
+2. [Završni seminar CUDA](zavrsni-seminar-dohs-cuda)
 
 
 ## 👨‍💻 Vježbe
@@ -71,8 +82,5 @@ Dobrodši na vježbe iz predmeta **Distribuirana obrada u heterogenim sustavima*
 - [Python modul PyCUDA: mjerenje performansi, profiliranje i optimizacija](https://gaseri.org/hr/nastava/materijali/python-modul-pycuda-profiliranje-optimizacija.md)
 
 
-## 🚀 Projektni zadaci
 
-1. [Projektni zadatak MPI]()
-2. [Završni seminar CUDA](zavrsni-seminar-dohs-cuda)
 
