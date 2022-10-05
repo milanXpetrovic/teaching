@@ -22,6 +22,7 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 |       | Projektnih zadatak i prezentacija | 20      |
 |       | Provjera znanja    | 30    | 
 | 14.12.2022. | Zadavanje tema završnih projekata                    | 30      |
+| 25.1.2023. | Nadoknada | |
 
 
 ## 👨‍💻 Vježbe
