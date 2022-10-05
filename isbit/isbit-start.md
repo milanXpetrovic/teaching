@@ -6,15 +6,20 @@ has_children: true
 has_toc: false
 ---
 
-
 # Informacijska sigurnost i blockchain tehnologije 
-
 
 Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnologije**
 
-
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
 
+## Datumi aktivnosti
+
+| Datum | Vrsta | Bodovi |
+| ----- | ----- | --------|
+|       |       |          | 
+|       | Praktični zadatak i prezentacija | 20 |
+|       | Praktični kolokvij | 20 |    
+|       | Provjera znanja    | 30    | 
 
 ## 👨‍💻 Vježbe
 
