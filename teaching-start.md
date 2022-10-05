@@ -14,7 +14,7 @@ nav_exclude: true
 
 ## Kontak
 
-Asistent: Milan Petrović
-E-mail: milan.petrovic@inf.uniri.hr
-Ured: O-522
-Vrijeme konzultacija: Srijedom od 12:00 do 14:00 uz prethodni dogovor e-mailom
+- Asistent: Milan Petrović
+- E-mail: milan.petrovic@inf.uniri.hr
+- Ured: O-522
+- Vrijeme konzultacija: Srijedom od 12:00 do 14:00 uz prethodni dogovor e-mailom
