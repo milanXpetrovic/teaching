@@ -26,12 +26,13 @@ Popis studenata po grupama:
 - Barem 5 entiteta
 - Jedna one to one, one to many i many to many relacija
 - Generiranje testnih podataka pomoću factory boya
+- Prikaz generiranih podataka za svaki entitet u modelu
+
 
 **Web app mora sadrzavati:**
 - Prethodno definirani model na vježbama
 - Generiranje testnih podataka pomoću factory boya
 - Github repozitorij na kojoj se nalazi aplikacija
-- Generiranje testnih podataka pomoću factory boya
 - Prikaz podataka pomoću List i Detal Viewa
 - Forma za unos podataka
 - Testovi
@@ -46,22 +47,3 @@ Popis studenata po grupama:
 - **Dodatno:**
 - Tema i dizajn, CSS
 - Restfull api
-
-## 🎯 Ciljevi projektnog zadatka
-
-1. 🟢 Ideal
-	1.
-2. 🟠 Acceptable
-	1.
-
-## ✅ Vrednovanje
-
--
-
-## 📂 Resursi
-
--
-
-## 📦 Predaja rezultata
-
--
