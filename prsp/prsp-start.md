@@ -28,10 +28,10 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 
 - [ ] [Uvod](../prsp-uvod)
 - [ ] [Vremenska složenost](../vremenska-slozenost)
-- [ ] [Potpuna pretraga](../potpuna-pretraga)
-- [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
 
 <!--
+- [ ] [Potpuna pretraga](../potpuna-pretraga)
+- [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
 - [ ] [Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [Bit manipulation](./bit-manipulation)
 
