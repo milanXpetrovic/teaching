@@ -10,14 +10,11 @@ nav_exclude: true
 
 ## 📢 Osnovne informacije
 
-Predmet:
-Ak. god:
+- Rok za prijavu teme:10.11.2022.
+- Rok za predaju:22.12.2022.
+- [Popis studenata po grupama]()
 
-Rok za prijavu teme:
-Rok za predaju:
-Popis studenata po grupama:
-
-🏆Bodovi:
+- 🏆Bodovi: 20
 
 ## 🧾 Zadatak
 
