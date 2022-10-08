@@ -6,8 +6,7 @@ nav_order: 2
 
 # Vježbe 2: Vremenska složenost
 
-## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
-
+## Zadatak 1: [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza, tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
 
@@ -18,7 +17,6 @@ $$\{2, -3, 1, 5, -2, 3, 5, -2\}$$
 Najveći zbroj podniza iznosi **12**:
 
 $$\{1, 5, -2, 3, 5\}$$
-
 
 **Primjer rješenja u C++**
 ```cpp
@@ -85,11 +83,9 @@ cout << best << "\n";
 
 Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n^2)$.
 
-## Zadatak 2
+## Zadatak 4
 
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
-
-
 
 **Input**
 Duljina liste $n$, određuje broj elemenata u listi.
@@ -113,7 +109,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
-## Zadatak 3
+## Zadatak 5
 
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
