@@ -118,14 +118,11 @@ Q  –  –  -
 -  Q  -  –
 ```
 
-{: .highlight }
-Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
-
 
 Zadatak je napisati program koji ispisuje ukupan broj mogućnosti za postavljanje kraljica na ploču.
 
 **Input:**
-Broj $n$ označava broj kraljica i dimenzije ploče $n x n$ $(4 \le n \le 8)$. 
+Broj $n$ označava broj kraljica i dimenzije ploče $n \times n$ $(4 \le n \le 8)$. 
 
 **Output:**
 Broj $m$ načina na koje možete postaviti kraljice.
