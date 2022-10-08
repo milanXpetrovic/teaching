@@ -85,6 +85,12 @@ Backtracking algoritam počinje s praznim rješenjem i proširuje rješenje kora
 {: .highlight }
 Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
 
+Zadatak je postaviti osam kraljica na šahovsku ploču tako da dvije kraljice ne napadaju jedna drugu. Svako polje je slobodno ili rezervirano, a dame se mogu postaviti samo na slobodna polja.
+
+Na koliko je načina moguće postaviti kraljice na ploču?
+
+
+**Primjer jednog od ispravnih rješenja:**
 ```
 Q  –  –  –  –  –  –  –
 –  –  –  –  Q  –  –  –
@@ -95,10 +101,6 @@ Q  –  –  –  –  –  –  –
 –  Q  –  –  –  –  –  –
 –  –  –  Q  –  –  –  –
 ```
-
-Zadatak je postaviti osam kraljica na šahovsku ploču tako da dvije kraljice ne napadaju jedna drugu. Svako polje je slobodno ili rezervirano, a dame se mogu postaviti samo na slobodna polja.
-
-Na koliko je načina moguće postaviti kraljice na ploču?
 
 **Input:**
 
