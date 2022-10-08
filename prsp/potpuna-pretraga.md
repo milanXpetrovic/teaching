@@ -156,7 +156,7 @@ Broj $m$ načina na koje možete postaviti kraljice.
 
 **Output:**
 ```
-2
+92
 ```
 
 
