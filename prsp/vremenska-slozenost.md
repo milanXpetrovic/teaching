@@ -13,16 +13,10 @@ Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza,
 
 U zadanom nizu:
 
-|  0   | 1    |2     |3     |4     |     |     |     |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 2   | -3  | 1   | 5   | -2  | 3   | 5   | -2  |
+${2, -3, 1, 5, -2, 3, 5, -2}$ 
 
-Najveći zbroj podniza iznosi **12**.
-
-|     |     |       |       |        |       |       |     |
-| --- | --- | ----- | ----- | ------ | ----- | ----- | --- |
-| 2   | -3  | **1** | **5** | **-2** | **3** | **5** | -2  |
-
+Najveći zbroj podniza iznosi **12**:
+${1, 5, -2, 3, 5}$
 
 
 **Primjer rješenja u C++**
