@@ -13,10 +13,10 @@ Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza,
 
 U zadanom nizu:
 
-${2, -3, 1, 5, -2, 3, 5, -2}$ 
+$\{2, -3, 1, 5, -2, 3, 5, -2\}$ 
 
 Najveći zbroj podniza iznosi **12**:
-${1, 5, -2, 3, 5}$
+$\{1, 5, -2, 3, 5\}$
 
 
 **Primjer rješenja u C++**
