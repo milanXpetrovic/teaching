@@ -64,7 +64,8 @@ Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
 Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n)$.
 
-Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
+{: .highlight }
+Ovaj problem moguće je riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
 Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. 
 
@@ -108,8 +109,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 [-1, 4, -9, -2, -1, 3, -6, 5, 8, 0, 3, -8, 6, 7, 3]
 ```
 
-**Dodatak:**
-
+{: .highlight }
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
 ## Zadatak 6
@@ -134,5 +134,5 @@ Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 0.0010
 ```
 
-**Dodatak**
+{: .highlight }
 Za mjerenje vremena izvođenja programa možete koristiti Python modul [time](https://docs.python.org/3/library/time.html).
