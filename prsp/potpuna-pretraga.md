@@ -85,7 +85,8 @@ Backtracking algoritam počinje s praznim rješenjem i proširuje rješenje kora
 
 Problem $n$ kraljica je problem postavljanja $n$ kraljica na šahovsku ploču dimenzija $n \times n$ tako da se kraljice međusobno ne napadaju. Cilj je odrediti ukupan broj načina postavljanja kraljica na ploču.
 
-{: .highlight }
+{: .highlight-title}
+> Kako kraljica napada?
 > Prikaz ploče dimenzija 8 x 8 i polja koja kraljica (Q) napda (\*).
 >
 > ```
