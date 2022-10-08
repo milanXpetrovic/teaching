@@ -7,7 +7,7 @@ has_toc: false
 
 # Programiranje za rješavanje složenih problema
 
-Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
+Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PRSP_2022_2023.pdf)
 
@@ -49,7 +49,7 @@ Dobrodšli na vježbe iz predmeta **Programiranje za rješavanje složenih probl
 
 <!-- ## 🧰 Resursi 🔗 -->
 
-### 📚 Lietratura
+### 📚 Lieteratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
 
