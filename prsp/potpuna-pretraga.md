@@ -87,6 +87,7 @@ Problem $n$ kraljica je problem postavljanja $n$ kraljica na šahovsku ploču di
 
 {: .highlight-title}
 > Kako kraljica napada?
+>
 > Prikaz ploče dimenzija 8 x 8 i polja koja kraljica (Q) napda (\*).
 >
 > ```
