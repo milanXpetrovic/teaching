@@ -80,17 +80,32 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 
 Backtracking algoritam počinje s praznim rješenjem i proširuje rješenje korak po korak. Pretraživanje rekurzivno prolazi kroz sve različite načine na koje se rješenje može konstruirati.
 
+
 ## Zadatak 2: Problem $n$ kraljica 
 
-{: .highlight }
-Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
+Zadatak je postaviti $n$ kraljica na šahovsku ploču dimenzija $n x n$ tako da se kraljice međusobno ne napadaju.
 
-Zadatak je postaviti osam kraljica na šahovsku ploču tako da dvije kraljice ne napadaju jedna drugu. Svako polje je slobodno ili rezervirano, a dame se mogu postaviti samo na slobodna polja.
+Na koliko je načina moguće postaviti kraljice na zadanu ploču?
 
-Na koliko je načina moguće postaviti kraljice na ploču?
+U primjeru gdje je $n = 4$, postoje 2 načina za rasporediti krlajice.
+
+```
+-  Q  –  –
+-  –  –  Q
+Q  –  –  –
+-  –  Q  –
+```
+
+```
+-  -  Q  –
+Q  –  –  -
+-  –  –  Q
+-  Q  -  –
+```
 
 
-**Primjer jednog od ispravnih rješenja:**
+**Primjer jednog od ispravnih načina postavljanja kraljica:**
+
 ```
 Q  –  –  –  –  –  –  –
 –  –  –  –  Q  –  –  –
@@ -101,6 +116,7 @@ Q  –  –  –  –  –  –  –
 –  Q  –  –  –  –  –  –
 –  –  –  Q  –  –  –  –
 ```
+
 
 **Input:**
 
@@ -124,9 +140,6 @@ Input:
 
 Output:
 65
-
-
-
 
 
 https://www.techiedelight.com/print-possible-solutions-n-queens-problem/
