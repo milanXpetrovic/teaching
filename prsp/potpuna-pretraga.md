@@ -126,12 +126,9 @@ Zadatak je napisati program koji ispisuje ukupan broj mogućnosti za postavljanj
 
 
 **Input:**
-
-Broj $n$ $(4 \le n \le 8)$ kraljica koje se trebaju postaviti na ploču $n x n$. 
-
+Broj $n$ označava broj kraljica i dimenzije ploče $n x n$ $(4 \le n \le 8)$. 
 
 **Output:**
-
 Broj $m$ načina na koje možete postaviti kraljice.
 
 
@@ -140,7 +137,6 @@ Broj $m$ načina na koje možete postaviti kraljice.
 **Input:**
 ```
 4
-
 ```
 
 **Output:**
@@ -151,29 +147,11 @@ Broj $m$ načina na koje možete postaviti kraljice.
 **Input:**
 ```
 8
-
 ```
 
 **Output:**
 ```
 92
-```
-
-
-
-
-**Input:**
-
-**Output:**
-
-### Primjer
-
-**Input:**
-```
-```
-
-**Output:**
-```
 ```
 
 
