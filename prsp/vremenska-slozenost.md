@@ -16,6 +16,7 @@ U zadanom nizu:
 $$\{2, -3, 1, 5, -2, 3, 5, -2\}$$
 
 Najveći zbroj podniza iznosi **12**:
+
 $$\{1, 5, -2, 3, 5\}$$
 
 
