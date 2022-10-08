@@ -46,7 +46,7 @@ cout << best << "\n";
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $$O(n^3)$$.
 
 **Input:**
-Lista $$l$$ koja sadržava $$n$$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$$
+Lista $$l$$ koja sadržava $$$n$$$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$$
 
 **Output:**
 Iznos maksimalnog zbroja podniza, cijeli broj.

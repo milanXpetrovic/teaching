@@ -23,7 +23,7 @@ Mladom asistentu Petroviću potreban je program pomoću kojeg provjerava ako je 
 Student ima pravo pristupa završnom ako je prikupiuo 50% ili više bodova na kolokviju i ako je prikupio 35 ili više bodova tijekom semestra.
 
 **Input**
-Unos u program se sastoji od imena studenta, broja bodova na kolokviju $k$ $(0 <= k <= 30)$ i broj bodova prikupljenih tokom semestra $s$
+Unos u program se sastoji od imena studenta, broja bodova na kolokviju $$k$$ $(0 <= k <= 30)$ i broj bodova prikupljenih tokom semestra $s$
 
 **Output**
 Ispišite "Student `<ime studenta>` je ostvario pravo izlaska na završni ispit."
