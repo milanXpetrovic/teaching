@@ -35,18 +35,17 @@ for (int a = 0; a < n; a++) {
 cout << best << "\n";
 ```
 
-### Zadatak 1.1
+## Zadatak 2
 
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 
 **Input:**
 Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 
-
 **Output:**
 Iznos maksimalnog zbroja podniza, cijeli broj.
 
-#### Primjer
+### Primjer
 
 **Input:**
 ```
@@ -58,16 +57,16 @@ Iznos maksimalnog zbroja podniza, cijeli broj.
 10
 ```
 
-### Zadatak 1.2
+## Zadatak 3
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
 
-### Zadatak 1.3
-
 Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
-Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. Postoje dvije mogućnosti:
+Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. 
+
+Postoje dvije mogućnosti:
 1. Podniz sadrži samo element na poziciji $k$.
 2. Podniz se sastoji od podniza koji završava na poziciji $k-1$, nakon čega slijedi
 element na poziciji $k$.
@@ -87,7 +86,7 @@ cout << best << "\n";
 
 Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n^2)$.
 
-### Zadatak 2
+## Zadatak 2
 
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
@@ -99,7 +98,7 @@ Duljina liste $n$, određuje broj elemenata u listi.
 **Output**
 Lista $l$ koja sadržava $n$ elemenata.
 
-#### Primjer
+### Primjer
 
 **Input:**
 ```
@@ -115,7 +114,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
-### Zadatak 3
+## Zadatak 3
 
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
