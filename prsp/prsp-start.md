@@ -26,11 +26,10 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [ ] [Uvod](../prsp-uvod)
+- [x] [Uvod](../prsp-uvod)
 - [ ] [Vremenska složenost](../vremenska-slozenost)
-
-<!--
 - [ ] [Potpuna pretraga](../potpuna-pretraga)
+<!--
 - [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
 - [ ] [Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [Bit manipulation](./bit-manipulation)

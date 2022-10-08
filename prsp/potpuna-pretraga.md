@@ -7,21 +7,14 @@ nav_exclude: true
 # Vježbe 3: Potpuna pretraga
 
 Potpuna pretraga (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
-Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje točan odgovor. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
+Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje rješenje. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
 
-- [ ] Uvod 1: rekurzija, generiranje podskupova
-- [ ] Uvod 2: brute force
-- [ ] Uvod 3: complete search
-- [ ] Zadatak 1: Generiranje permutacija
-- [ ] Zadatak 2: Backtracking
-- [ ] Bonus: Meet in the middle
-
-### Uvod
+## Uvod 1
 
 Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
-#### Primjer
+### Primjer
 
 **Input:**
 ```
@@ -42,18 +35,17 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 **Napomena: ** `[]` označava prazan skup $\emptyset$.
 
-# Uvod 2
+## Uvod 2
 
-Kreirajte program koji pogađa lozinku koja se sastoji od 6 nasumično odabranih cijelih brojeva.
+Kreirajte program koji pogađa lozinku koja se sastoji od 6, 7 i 8 nasumično zadanih cijelih brojeva.
 
-Ispišite vrijeme koje je bilo potrebno za pogoditi lozinku
+Ispišite vrijeme koje je bilo potrebno za pogoditi lozinke.
 
-# Uvod 3
+## Uvod 3
 
-Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima samo različite znamenke.
+Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
 
 Napišite program koji na za zadanu godinu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
-
 
 **Input:**
 Cijeli broj $y$ $(1000 ≤ y ≤ 9000)$ koji označava broj godine.

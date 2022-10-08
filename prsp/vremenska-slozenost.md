@@ -114,10 +114,10 @@ Za generiranje pseudo-random brojeva možete koristi Python modul [random](https
 
 ## Zadatak 6
 
-Usporedite brzine izvođenja prethodno definiranih algoritama.
+Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
 **Input**
-Duljina liste $n$, određuje broj elemenata u listi.
+Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskoristite funckiju iz prethodnog zadatka.
 
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
