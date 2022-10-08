@@ -1,7 +1,6 @@
 ---
 parent: PRSP
 nav_order: 3
-nav_exclude: true
 ---
 
 # Vježbe 3: Potpuna pretraga
@@ -35,11 +34,13 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 **Napomena: ** `[]` označava prazan skup $\emptyset$.
 
+
 ## Uvod 2
 
 Kreirajte program koji pogađa lozinku koja se sastoji od 6, 7 i 8 nasumično zadanih cijelih brojeva.
 
 Ispišite vrijeme koje je bilo potrebno za pogoditi lozinke.
+
 
 ## Uvod 3
 
@@ -74,7 +75,7 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 2014
 ```
 
-# Zadatak 1
+## Zadatak 1
 
 ``` python
 
