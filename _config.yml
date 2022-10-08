@@ -63,3 +63,16 @@ back_to_top_text: "Back to top"
 # e.g, UA-1234567-89
 # ga_tracking: UA-2709176-10
 # ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)
+
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+markdown_extensions:
+  - admonition
+  - attr_list
+  - meta
+  - pymdownx.arithmatex:
+      generic: true
+
