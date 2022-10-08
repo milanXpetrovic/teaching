@@ -88,7 +88,7 @@ Zadatak je postaviti $n$ kraljica na šahovsku ploču dimenzija $n x n$ tako da 
 Na koliko je načina moguće postaviti kraljice na zadanu ploču?
 
 {: .highlight }
-> Primjer polja koja kraljica napda na ploči dimenzija 8 x 8
+> Primjer polja koja kraljica (Q) napda (\*) na ploči dimenzija 8 x 8
 >
 > ```
 > -  –  *  –  –  –  *  –
