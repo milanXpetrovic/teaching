@@ -10,7 +10,7 @@ nav_order: 2
 ## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 
-Zadan je niz od $$n$$ brojeva, naš zadatak je izračunati najveći zbroj podniza, tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
+Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza, tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
 
 U zadanom nizu:
 
@@ -43,10 +43,10 @@ cout << best << "\n";
 
 ### Zadatak 1.1
 
-Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $$O(n^3)$$.
+Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 
 **Input:**
-Lista $$l$$ koja sadržava $n$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$$
+Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 
 
 **Output:**
@@ -66,19 +66,19 @@ Iznos maksimalnog zbroja podniza, cijeli broj.
 
 ### Zadatak 1.2
 
-Optimizirajte prethodni algoritam tako da njegova složenost iznosi $$O(n^2)$$.
+Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
 
 ### Zadatak 1.3
 
-Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $$O(n)$$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
+Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
-Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $$k$$. Postoje dvije mogućnosti:
-1. Podniz sadrži samo element na poziciji $$k$$.
-2. Podniz se sastoji od podniza koji završava na poziciji $$k-1$$, nakon čega slijedi
-element na poziciji $$k$$.
+Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. Postoje dvije mogućnosti:
+1. Podniz sadrži samo element na poziciji $k$.
+2. Podniz se sastoji od podniza koji završava na poziciji $k-1$, nakon čega slijedi
+element na poziciji $k$.
 
-U drugom slučaju, budući da želimo pronaći podniz s maksimalnim zbrojem, podniz koji završava na poziciji $$k-1$$ također treba imati maksimalni zbroj. Tako, problem možemo učinkovito riješiti izračunavanjem maksimalnog zbroja podniza za svaku krajnju poziciju s lijeva na desno.
+U drugom slučaju, budući da želimo pronaći podniz s maksimalnim zbrojem, podniz koji završava na poziciji $k-1$ također treba imati maksimalni zbroj. Tako, problem možemo učinkovito riješiti izračunavanjem maksimalnog zbroja podniza za svaku krajnju poziciju s lijeva na desno.
 
 **Implementacije navedenog algoritma:**
 
@@ -91,19 +91,19 @@ for (int k = 0; k < n; k++) {
 cout << best << "\n";
 ```
 
-Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $$O(n^2)$$.
+Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n^2)$.
 
 ### Zadatak 2
 
-Kreirajte funkciju koja generira listu $$l$$ čiji su elementi nasumično odabrani cijeli brojevi $$k$$ $$( - 10 < k < 10)$$.
+Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
 
 
 **Input**
-Duljina liste $$n$$, određuje broj elemenata u listi.
+Duljina liste $n$, određuje broj elemenata u listi.
 
 **Output**
-Lista $$l$$ koja sadržava $$n$$ elemenata.
+Lista $l$ koja sadržava $n$ elemenata.
 
 #### Primjer
 
@@ -126,10 +126,10 @@ Za generiranje pseudo-random brojeva možete koristi Python modul [random](https
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
 **Input**
-Duljina liste $$n$$, određuje broj elemenata u listi.
+Duljina liste $n$, određuje broj elemenata u listi.
 
 **Output**
-Vremena $$t_1$$, $$t_2$$ i $$t_3$$ koja označavaju vrijeme izvođenja algoritama.
+Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 
 **Input:**
 ```
