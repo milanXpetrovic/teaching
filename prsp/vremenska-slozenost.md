@@ -61,7 +61,6 @@ Iznos maksimalnog zbroja podniza, cijeli broj.
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
-
 Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
 Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. 
