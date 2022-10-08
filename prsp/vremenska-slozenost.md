@@ -48,6 +48,9 @@ Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijedn
 **Input:**
 Lista $$l$$ koja sadržava $n$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$$
 
+<img src="https://render.githubusercontent.com/render/math?math=\large ( -\infty < k < \infty)">
+
+
 **Output:**
 Iznos maksimalnog zbroja podniza, cijeli broj.
 
