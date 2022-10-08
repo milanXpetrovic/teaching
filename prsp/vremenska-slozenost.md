@@ -41,7 +41,7 @@ Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijedn
 Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 
 **Output:**
-Iznos maksimalnog zbroja podniza, cijeli broj.
+Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
 ### Primjer
 
@@ -58,6 +58,11 @@ Iznos maksimalnog zbroja podniza, cijeli broj.
 ## Zadatak 3
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
+
+
+## Zadatak 4 
+
+Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n)$.
 
 Ovaj problem moguće je i riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
@@ -81,9 +86,7 @@ for (int k = 0; k < n; k++) {
 cout << best << "\n";
 ```
 
-Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n^2)$.
-
-## Zadatak 4
+## Zadatak 5
 
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
@@ -109,7 +112,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
-## Zadatak 5
+## Zadatak 6
 
 Usporedite brzine izvođenja prethodno definiranih algoritama.
 
