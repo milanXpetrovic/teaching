@@ -55,7 +55,6 @@ Lista $$l$$ koja sadržava $n$ cijelih brojeva $$k$$, $$( -\infty < k < \infty)$
 
 <img src="https://render.githubusercontent.com/render/math?math=\quad (-\infty < k < \infty)">
 
-
 <img src="https://render.githubusercontent.com/render/math?math=\large n! = n*(n-1)! \quad if \quad n>0">
 
 
