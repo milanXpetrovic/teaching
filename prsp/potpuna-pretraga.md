@@ -87,6 +87,23 @@ Zadatak je postaviti $n$ kraljica na šahovsku ploču dimenzija $n x n$ tako da 
 
 Na koliko je načina moguće postaviti kraljice na zadanu ploču?
 
+{: .highlight }
+Primjer polja koja kraljica napda na ploči dimenzija 8 x 8
+
+```
+-  –  *  –  –  –  *  –
+–  –  *  –  -  *  –  –
+*  –  *  –  *  –  –  -
+–  *  *  *  –  -  –  –
+*  *  Q  *  *  *  *  *
+–  *  *  *  –  –  -  –
+*  -  *  –  *  –  –  –
+–  –  *  -  –  *  –  –
+```
+
+
+
+
 U primjeru gdje je $n = 4$, postoje 2 načina za rasporediti krlajice.
 
 ```
@@ -103,19 +120,13 @@ Q  –  –  -
 -  Q  -  –
 ```
 
+{: .highlight }
+Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
 
-**Primjer jednog od ispravnih načina postavljanja kraljica:**
 
-```
-Q  –  –  –  –  –  –  –
-–  –  –  –  Q  –  –  –
-–  –  –  –  –  –  –  Q
-–  –  –  –  –  Q  –  –
-–  –  Q  –  –  –  –  –
-–  –  –  –  –  –  Q  –
-–  Q  –  –  –  –  –  –
-–  –  –  Q  –  –  –  –
-```
+
+
+
 
 
 **Input:**
