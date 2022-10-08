@@ -155,19 +155,44 @@ Broj $m$ načina na koje možete postaviti kraljice.
 
 https://www.techiedelight.com/print-all-combination-numbers-from-1-to-n/
 
+Za dan pozitivan cijeli broj $n$ $(2 \le n \le 1000)$, ispišite sve kombinacije brojeva između 1 i $n$, gdje njihov zbroj iznosi $n$.
 
 **Input:**
 
+
 **Output:**
+
 
 ### Primjer
 
 **Input:**
 ```
+4
 ```
 
 **Output:**
 ```
+4
+1 3
+2 2
+1 1 2
+1 1 1 1
+```
+
+**Input:**
+```
+5
+```
+
+**Output:**
+```
+5
+1 4
+2 3
+1 1 3
+1 2 2
+1 1 1 2
+1 1 1 1 1
 ```
 
 
