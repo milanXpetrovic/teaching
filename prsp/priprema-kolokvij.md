@@ -65,3 +65,8 @@ Output
 Meet in the middle
 
 Pronađi ako je moguće iz zadane liste brojeva l, zbrajanjem njenih članova dobiti broj x.
+
+
+## Zadatak 4
+
+https://www.techiedelight.com/find-all-paths-from-source-to-destination-in-matrix/

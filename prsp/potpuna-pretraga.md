@@ -8,7 +8,7 @@ nav_order: 3
 Potpuna pretraga (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
 Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje rješenje. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
 
-## Uvod 1
+## Uvod 1: Generiranje permutacija
 
 Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
@@ -32,7 +32,8 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 [0, 1, 2]
 ```
 
-**Napomena: ** `[]` označava prazan skup $\emptyset$.
+{: .highlight }
+`[]` označava prazan skup $\emptyset$.
 
 
 ## Uvod 2
@@ -42,7 +43,7 @@ Kreirajte program koji pogađa lozinku koja se sastoji od 6, 7 i 8 nasumično za
 Ispišite vrijeme koje je bilo potrebno za pogoditi lozinke.
 
 
-## Uvod 3
+## Zadatak 1
 
 Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
 
@@ -55,7 +56,7 @@ Cijeli broj $y$ $(1000 ≤ y ≤ 9000)$ koji označava broj godine.
 
 Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve znamenke su različite.
 
-#### Primjer
+### Primjer
 
 **Input:**
 ```
@@ -75,55 +76,93 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 2014
 ```
 
-## Zadatak 1
+## Backtracking 
 
-``` python
+Backtracking algoritam počinje s praznim rješenjem i proširuje rješenje korak po korak. Pretraživanje rekurzivno prolazi kroz sve različite načine na koje se rješenje može konstruirati.
 
-## https://codeforces.com/problemset/problem/352/A
-## Zadano je n karti na svakoj karti nalazi se broj 0 ili 5. 
-## pronadite najveci broj koji mozete generirati od dobivenih karti da je djeljiv sa 90.
+## Zadatak 2: Problem $n$ kraljica 
 
-from itertools import permutations
+{: .highlight }
+Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
 
-l = [x for x in input().split(" ")]
-len_l = len(l)
-
-max_n = -1
-
-p = list(set(list(permutations(l, len_l))))
-p = [int(n) for n in p]
-
-for n in p:
-
-    if len_l > len(n):
-        continue
-
-    if int(n) % 90 == 0:
-        max_n = max(max_n, n)
-
-print(max_n)
+```
+Q  –  –  –  –  –  –  –
+–  –  –  –  Q  –  –  –
+–  –  –  –  –  –  –  Q
+–  –  –  –  –  Q  –  –
+–  –  Q  –  –  –  –  –
+–  –  –  –  –  –  Q  –
+–  Q  –  –  –  –  –  –
+–  –  –  Q  –  –  –  –
 ```
 
-## Zadatak 2
+Zadatak je postaviti osam kraljica na šahovsku ploču tako da dvije kraljice ne napadaju jedna drugu. Svako polje je slobodno ili rezervirano, a dame se mogu postaviti samo na slobodna polja.
 
-U prostoriji dimenzija a x b potrebno je smjestiti n učenika. Oko svakog učenika potrebno je ostaviti jedno polje razmaka.
+Na koliko je načina moguće postaviti kraljice na ploču?
 
 **Input:**
-a b, dimenzije prostorije
-n broj studenata
+
+The input has eight lines, and each of them has eight characters. Each square is either free (.) or reserved (*).
 
 **Output:**
-Ispiši 1 ako je moguće u zadanu prostoriju smjestiti n učenika inače -1.
+
+Print one integer: the number of ways you can place the queens.
+
+Example
+
+Input:
+........
+........
+..*.....
+........
+........
+.....**.
+...*....
+........
+
+Output:
+65
 
 
-Input
-4, 4
-3
-Output
-1
 
-## Zadatak 3
 
-Meet in the middle
 
-Pronađi ako je moguće iz zadane liste brojeva l, zbrajanjem njenih članova dobiti broj x.
+https://www.techiedelight.com/print-possible-solutions-n-queens-problem/
+
+
+**Input:**
+
+**Output:**
+
+### Primjer
+
+**Input:**
+```
+```
+
+**Output:**
+```
+```
+
+
+## Zadatak 3: Kombinacije brojeva od 1 do $n$
+
+https://www.techiedelight.com/print-all-combination-numbers-from-1-to-n/
+
+
+**Input:**
+
+**Output:**
+
+### Primjer
+
+**Input:**
+```
+```
+
+**Output:**
+```
+```
+
+
+## Zadatak 4: Pruning the search
