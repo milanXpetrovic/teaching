@@ -153,8 +153,6 @@ Broj $m$ načina na koje možete postaviti kraljice.
 
 ## Zadatak 3: Kombinacije brojeva od 1 do $n$
 
-https://www.techiedelight.com/print-all-combination-numbers-from-1-to-n/
-
 Za dan pozitivan cijeli broj $n$ $(2 \le n \le 1000)$, ispišite sve kombinacije brojeva između 1 i $n$, gdje njihov zbroj iznosi $n$.
 
 **Input:**
@@ -197,3 +195,19 @@ Za dan pozitivan cijeli broj $n$ $(2 \le n \le 1000)$, ispišite sve kombinacije
 
 
 ## Zadatak 4: Pruning the search
+
+
+
+**Input:**
+
+**Output:**
+
+### Primjer
+
+**Input:**
+```
+```
+
+**Output:**
+```
+```
