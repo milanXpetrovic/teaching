@@ -70,3 +70,8 @@ Pronađi ako je moguće iz zadane liste brojeva l, zbrajanjem njenih članova do
 ## Zadatak 4
 
 https://www.techiedelight.com/find-all-paths-from-source-to-destination-in-matrix/
+
+
+## Zadatak 
+https://www.techiedelight.com/print-possible-solutions-n-queens-problem/
+

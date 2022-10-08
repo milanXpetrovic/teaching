@@ -88,7 +88,7 @@ Zadatak je postaviti $n$ kraljica na šahovsku ploču dimenzija $n x n$ tako da 
 Na koliko je načina moguće postaviti kraljice na zadanu ploču?
 
 {: .highlight }
-> Primjer polja koja kraljica (Q) napda (\*) na ploči dimenzija 8 x 8
+> Prikaz ploče dimenzija 8 x 8 i polja koja kraljica (Q) napda (\*).
 >
 > ```
 > -  –  *  –  –  –  *  –
@@ -100,8 +100,6 @@ Na koliko je načina moguće postaviti kraljice na zadanu ploču?
 > *  -  *  –  *  –  –  –
 > –  –  *  -  –  *  –  –
 > ```
-
-
 
 
 U primjeru gdje je $n = 4$, postoje 2 načina za rasporediti krlajice.
@@ -124,36 +122,44 @@ Q  –  –  -
 Detaljnije o problemu mžete pronaći u [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf) u poglavlju Complete search, Backtracking.
 
 
-
-
-
+Zadatak je napisati program koji ispisuje ukupan broj mogućnosti za postavljanje kraljica na ploču.
 
 
 **Input:**
 
-The input has eight lines, and each of them has eight characters. Each square is either free (.) or reserved (*).
+Broj $n$ $(4 \le n \le 8)$ kraljica koje se trebaju postaviti na ploču $n x n$. 
+
 
 **Output:**
 
-Print one integer: the number of ways you can place the queens.
-
-Example
-
-Input:
-........
-........
-..*.....
-........
-........
-.....**.
-...*....
-........
-
-Output:
-65
+Broj $m$ načina na koje možete postaviti kraljice.
 
 
-https://www.techiedelight.com/print-possible-solutions-n-queens-problem/
+### Primjer
+
+**Input:**
+```
+4
+
+```
+
+**Output:**
+```
+2
+```
+
+**Input:**
+```
+8
+
+```
+
+**Output:**
+```
+2
+```
+
+
 
 
 **Input:**
