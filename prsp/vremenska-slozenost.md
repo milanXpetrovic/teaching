@@ -4,7 +4,6 @@ parent: PRSP
 nav_order: 2
 ---
 
-
 # Vježbe 2: Vremenska složenost
 
 ## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
@@ -14,9 +13,9 @@ Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza,
 
 U zadanom nizu:
 
-|     |     |     |     |     |     |     |     |
+|  0   | 1    |2     |3     |4     |     |     |     |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2   | -3  | 1   | 5   | -2  | 3   | 5   | -2   |
+| 2   | -3  | 1   | 5   | -2  | 3   | 5   | -2  |
 
 Najveći zbroj podniza iznosi **12**.
 
