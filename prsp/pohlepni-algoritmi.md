@@ -5,15 +5,11 @@ nav_order: 4
 nav_exclude: true
 ---
 
-
 # Vježbe 4: Pohlepni algoritmi
 
-A greedy algorithm constructs a solution to the problem by always making a choice that looks the best at the moment. A greedy algorithm never takes back its choices, but directly constructs the final solution. For this reason, greedy algorithms are usually very efficient.
-The difficulty in designing greedy algorithms is to find a greedy strategy that always produces an optimal solution to the problem. The locally optimal choices in a greedy algorithm should also be globally optimal. It is often difficult to argue that a greedy algorithm works.
+Pohlepni algoritam (eng. greedy algorithm) konstruira rješenje problema tako da uvijek odabire izbor koji u ovom trenutku izgleda najbolje. Pohlepni algoritam nikada ne povlači svoje odabire, već izravno konstruira konačno rješenje. Zbog toga su pohlepni algoritmi vrlo učinkoviti. Poteškoća u dizajniranju pohlepnih algoritama je pronaći pohlepnu strategiju koja uvijek proizvodi optimalno rješenje problema. Lokalno optimalni izbori u pohlepnom algoritmu također bi trebali biti globalno optimalni. Često je teško tvrditi da pohlepni algoritam radi.
 
-- [ ] Uvod: Problem s kovanicama
-
-## Uvod : Problem s kovanicama
+## Zadatak 1: Problem s kovanicama
 
 Razmatramo problem u kojem nam je dan skup kovanica $\{c_1, c_2, c_3,...,c_k\}$ i naš je zadatak oblikovati svotu novca $n$, pritom svaku kovanicu možemo koristiti koliko kod puta želimo. Koji je minimalan broj potrebnih kovanica?
 
@@ -27,7 +23,6 @@ Cijeli broj $n$ $(1 <= n <= 10000)$ koji označava traženu sumu.
 **Output:**
 Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 
-
 **Input:**
 ```
 530
@@ -38,30 +33,13 @@ Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 200 200 100 20 10
 ```
 
-```python
-n = int(input())
 
-def find_largest_close(n):
-	coins = [1, 2, 5, 10, 20, 50, 100, 200]
-	largest = False
-	for c in coins:
-		if c <= n:
-			largest = c
+## Zadatak 2: Kompresija podataka
 
-	return largest
-
-
-while True:	
-	v = find_largest_close(n)
-	if not v:
-		break
-	else:
-		print(v, end=" ")
-		n-=v 
-
-```
-
-## Uvod 2: Kompresija podataka
+{.highlight-titile}
+> Tema seminara
+>
+> Huffman Data Compression
 
 | character | codeword |
 | --------- | -------- |
@@ -77,44 +55,44 @@ AABACDACA
 000001001011001000
 
 
-## Zadatak 1:
+## Zadatak 3: Zakazivanje aktivnosti
 
 Organiziraj upis predmeta tako da student upiše maksimalan broj predmeta bez preklapanja.
 
+**Input:**
+Prvi red sadrži jedan cijeli broj $c$ $(1 \le c \le 10^3) - broj testnih slučajeva.
+Sljedećih $c$ linija sadržava dva cijela broja $t_start$ i $t_end$ koji označuju vrijeme početka i završetka predmeta.
 
-```python
-def myFoo(e):
-	return e[1]
+**Output:**
+Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 
-cls_l = [[8, 9],
-		 [11, 13],
-		 [9, 10],
-		 [8, 14],
-		 [15, 17],
-		 [10, 12],
-		 [8, 10]
-		]
+### Primjer
 
-# lista.sort(key=myFoo)
-# lista.sort(key = lambda x: x[1])
-
-predmeti.sort(key = lambda x: (x[1], x[0]))
-
-c = 0 # najveci broj mogucih predmeta
-enroll = [] #predmeti
-end = -1 #zadnje vrijeme
-
-for cls in cls_l:
-	if end <= cls[0]:
-		end = cls[1]
-		count+=1
-		enroll.append(cls)
+**Input:**
+```
+7
+8 9
+11 13
+9 10
+8 14
+15 17
+10 12
+8 10
 ```
 
-## Zadatak 2
+**Output:**
+```
+8 9
+9 10
+10 12
+15 17
+```
+
+
+## Zadatak 4
 
 https://codeforces.com/problemset/problem/50/A
 
 
 
-## Zadatak 3
+## Zadatak 5

@@ -36,13 +36,6 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 `[]` označava prazan skup $\emptyset$.
 
 
-## Uvod 2
-
-Kreirajte program koji pogađa lozinku koja se sastoji od 6, 7 i 8 nasumično zadanih cijelih brojeva.
-
-Ispišite vrijeme koje je bilo potrebno za pogoditi lozinke.
-
-
 ## Zadatak 1
 
 Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
