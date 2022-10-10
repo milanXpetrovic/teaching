@@ -117,7 +117,7 @@ Za generiranje pseudo-random brojeva možete koristi Python modul [random](https
 Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
 **Input**
-Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskoristite funckiju iz prethodnog zadatka.
+Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskoristite funkciju iz prethodnog zadatka.
 
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.

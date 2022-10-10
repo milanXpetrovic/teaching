@@ -16,6 +16,11 @@ https://www.techiedelight.com/print-all-combination-numbers-from-1-to-n/
 #### All paths in matrix
 https://www.techiedelight.com/find-all-paths-from-source-to-destination-in-matrix/
 
-
-
 https://cses.fi/problemset/task/1625
+
+
+## Greedy algorithms, Dynamic programing, Tree algorithms, Belman-Ford
+https://www.youtube.com/playlist?list=PLXFMmlk03Dt5EMI2s2WQBsLsZl7A5HEK6
+
+## Number theory, Combinatorics, Geometry
+https://www.youtube.com/playlist?list=PL07B3F10B48592010

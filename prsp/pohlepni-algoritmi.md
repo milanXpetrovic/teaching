@@ -36,7 +36,7 @@ Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 
 ## Zadatak 2: Kompresija podataka
 
-{.highlight-titile}
+{: .highlight-title}
 > Tema seminara
 >
 > Huffman Data Compression

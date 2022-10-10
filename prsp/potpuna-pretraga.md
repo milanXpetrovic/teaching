@@ -149,7 +149,7 @@ Broj $m$ načina na koje možete postaviti kraljice.
 Za dan pozitivan cijeli broj $n$ $(2 \le n \le 1000)$, ispišite sve kombinacije brojeva između 1 i $n$, gdje njihov zbroj iznosi $n$.
 
 **Input:**
-
+Cijeli broj $n$ $(1 <= n <= 1000)$ koji označava traženu sumu.
 
 **Output:**
 
