@@ -1,5 +1,5 @@
 
-## PRoblems from book
+## Problems from book
 https://cses.fi/problemset/
 
 
@@ -24,3 +24,9 @@ https://www.youtube.com/playlist?list=PLXFMmlk03Dt5EMI2s2WQBsLsZl7A5HEK6
 
 ## Number theory, Combinatorics, Geometry
 https://www.youtube.com/playlist?list=PL07B3F10B48592010
+
+
+
+## Vježbe 3:
+
+### Uvod 1: Generiranje permutacija

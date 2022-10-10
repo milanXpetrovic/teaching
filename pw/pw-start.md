@@ -31,7 +31,7 @@ Dobrodošli na vježbe iz predmeta **Programiranje za web**
 - [Django REST](https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/)
 
 
-## 🚀 [Projektni zadatak](../pzw-projektni)
+## 🚀 [Projektni zadatak](../pw-projektni)
 
 
 
