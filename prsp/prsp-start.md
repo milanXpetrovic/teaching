@@ -47,15 +47,24 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 -->
 
 
-<!-- ## 🧰 Resursi 🔗 -->
+## Resursi 
 
 ### 📚 Lieteratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
+### 🧰 Programska podrška
+- [Python](https://www.python.org/)
 
-## 🚀 Seminar 
+### 🔗 Korisni linovi
+
+- [Advent of Code](https://adventofcode.com/)
+- [Codeforces](https://codeforces.com/)
+- [Project Euler](https://projecteuler.net/)
+- [CSES Problem Set](https://cses.fi/problemset/)
+
+
+## 🚀 Teme za Seminar
 <!--
-### Teme
 - Huffman Data Compression
 -->
 
