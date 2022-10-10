@@ -33,7 +33,7 @@ for (int a = 0; a < n; a++) {
 cout << best << "\n";
 ```
 
-## Zadatak 2
+## Zadatak 2: $O(n^3)$
 
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 

@@ -157,6 +157,7 @@ Prvo ispišite cijeli broj $k$: ukupan broj stringova. Zatim u $k$ redaka ispiš
 ```
 aabac
 ```
+
 **Output:**
 ```
 20
@@ -213,7 +214,6 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 ```
 
 ## Zadatak 6: Pruning the search
-
 
 **Input:**
 **Output:**

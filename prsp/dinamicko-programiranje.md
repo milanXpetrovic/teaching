@@ -8,8 +8,68 @@ nav_exclude: true
 
 # Vježbe 5: Dinamičko programiranje
 
-
-## Uvod
-
-
 ## Zadatak 1
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```
+
+## Zadatak 2
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```
+
+## Zadatak 3
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```
+
+## Zadatak 4
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```
+
+## Zadatak 5
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```
+
+## Zadatak 6
+**Input:**
+**Output:**
+### Primjer
+**Input:**
+```
+```
+**Output:**
+```
+```

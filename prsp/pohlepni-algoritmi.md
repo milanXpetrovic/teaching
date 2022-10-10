@@ -6,11 +6,9 @@ nav_exclude: true
 ---
 
 # Vježbe 4: Pohlepni algoritmi
-
 Pohlepni algoritam (eng. greedy algorithm) konstruira rješenje problema tako da uvijek odabire izbor koji u ovom trenutku izgleda najbolje. Pohlepni algoritam nikada ne povlači svoje odabire, već izravno konstruira konačno rješenje. Zbog toga su pohlepni algoritmi vrlo učinkoviti. Poteškoća u dizajniranju pohlepnih algoritama je pronaći pohlepnu strategiju koja uvijek proizvodi optimalno rješenje problema. Lokalno optimalni izbori u pohlepnom algoritmu također bi trebali biti globalno optimalni. Često je teško tvrditi da pohlepni algoritam radi.
 
 ## Zadatak 1: Problem s kovanicama
-
 Razmatramo problem u kojem nam je dan skup kovanica $\{c_1, c_2, c_3,...,c_k\}$ i naš je zadatak oblikovati svotu novca $n$, pritom svaku kovanicu možemo koristiti koliko kod puta želimo. Koji je minimalan broj potrebnih kovanica?
 
 Na primjer zadane su kovanice : $\{1, 2, 5, 10, 20, 50, 100, 200\}$. Zadatak je pomoću danih kovanica kreirati iznos $n$
@@ -35,7 +33,6 @@ Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 
 
 ## Zadatak 2: Kompresija podataka
-
 {: .highlight-title}
 > Tema seminara
 >
@@ -89,8 +86,7 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 ```
 
 
-## Zadatak 4
-
+## Zadatak 4: Domino
 https://codeforces.com/problemset/problem/50/A
 
 
