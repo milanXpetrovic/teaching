@@ -50,7 +50,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 ## 📦 Resursi 
 
 ### 📚 Lieteratura
-- Competitive Programmer’s Handbook, Antti Laaksonen, 2018
+- [Link: ](https://cses.fi/book/book.pdf)Competitive Programmer’s Handbook, Antti Laaksonen, 2018
 
 ### 🧰 Programska podrška
 - [Python](https://www.python.org/)
