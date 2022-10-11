@@ -5,39 +5,42 @@ parent: ISBiT
 
 # Vježbe 1: Blockchain
 ## Blockchain
-Blockchain je distribuirana baza podataka ili registrator (*eng. ledger*) koja se dijeli među čvorovima u mreži. Podaci su pohranjeni u blokove koji se zatim međusobno povezuju. Kako dolaze novi podaci, oni se unose u novi blok. Nakon što se blok ispuni podacima, on se lančano povezuje s prethodnim blokom, što čini podatke lančano povezanim kronološkim redoslijedom. Različite vrste informacija mogu se pohraniti na blockchain.Unos podataka je nepovratan, jednom pohranjeni podaci ne mogu se više izmjeniti. Inovacija s blockchainom je u tome što jamči vjernost i sigurnost zapisa podataka i stvara povjerenje bez potrebe za trećom stranom. Najpoznatiji primjena blockchaina je u sustavima kriptovaluta za održavanje sigurne i decentralizirane evidencije transakcija. Primjerice u Bitcoin mreži to znači da se transakcije trajno bilježe i da ih svatko može vidjeti.
+Blockchain je distribuirana baza podataka ili registrator (*eng. ledger*) koja se dijeli među čvorovima u mreži. Podaci su pohranjeni u blokove koji se zatim međusobno povezuju. Kako dolaze novi podaci, oni se unose u novi blok. Nakon što se blok ispuni podacima, on se lančano povezuje s prethodnim blokom, što čini podatke lančano povezanim kronološkim redoslijedom. Različite vrste informacija mogu se pohraniti na blockchain. Unos podataka je nepovratan, jednom pohranjeni podaci ne mogu se više izmijeniti. Inovacija s blockchainom je u tome što jamči vjernost i sigurnost zapisa podataka i stvara povjerenje bez potrebe za trećom stranom. Najpoznatiji primjena blockchaina je u sustavima kriptovaluta za održavanje sigurne i decentralizirane evidencije transakcija. Primjerice u Bitcoin mreži to znači da se transakcije trajno bilježe i da ih svatko može vidjeti.
 
 ### Blok
-Blok je osnovna jedinica unutar blockchaina gdje su pohranjene kriptirane informacije sa mreže, oni sadržavaju šifrirane podatke o transakcijama iz prethodnih blokova i informacije o novim transakcijama. Da bi se novi blok dodao, on prvo mora biti verificiran od mreže. Također i svaka nova transakcija prije upisa na blok je provjerena i potvrđena od mreže.
+Blok je osnovna jedinica unutar blockchaina gdje su pohranjene kriptirane informacije s mreže. Jedinica podataka pohranjena unutar bloka može biti predstavljena bilo kojom vrijednošću ovisno o vrsti blockchaina. Blok može pohraniti iznos novca, udio u tvrtki, digitalnu potvrdu o vlasništvu, glas tijekom izbora ili bilo koju drugu vrijednost. Blok pohranjuje šifrirane detalje o stranama čija je interakcija rezultirala podacima pohranjenima u bloku. U slučaju kriptovaluta blok također sadrži kriptirane identifikatore pošiljatelja i primatelja. 
 
+<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1078/hash-example.png" width="350">
 
-A unit of data stored inside a block may be represented by any value depending on the type of blockchain. A block can store an amount of money, a share in a company, a digital certificate of ownership, a vote during an election, or any other value.
+Svaki blok također ima hash koji ima ulogu identificirati blok i sadržaj bloka. Ova hash vrijednost je generirana pomoću matematičke funkcije iz sadržaja upisanog na blok. Hash se može usporediti s otiskom prsta jer je svaki hash jedinstven, svaka promjena podataka upisanih na blok uzrokovala bi i promjenu hash vrijednosti.
 
-A block stores encrypted details about the parties whose interaction resulted in the data stored in the block. A cryptocurrency block also contains the sender’s and receiver’s encrypted identifiers. A block for an ecommerce transaction will contain the identifiers of the retailer and consumer, for example.
+<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1080/changes-in-block.png" width="350">
 
-Each block also has a hash. This hash is a value generated from a string of text using a mathematical function. A hash can be compared to a fingerprint, as each hash is unique. Its role is to identify a block and the block’s contents. 
+### Konsenzus u mreži
+Konsenzus je metoda za postizanje dogovora oko zajedničkog stanja. Kako bi blockchain nastavio graditi, svi čvorovi u mreži moraju se složiti i doći do konsenzusa. To je način na koji čvorovi u decentraliziranoj mreži mogu ostati međusobno sinkronizirani. Bez konsenzusa za decentraliziranu mrežu čvorova u blockchainu, ne postoji način da se osigura da će stanje za koje jedan čvor vjeruje da je istinito dijeliti drugi čvorovi. Konsenzus ima za cilj pružiti objektivan pogled na stanje između sudionika od kojih svaki ima svoje subjektivne poglede na mrežu. To je proces kojim čvorovi komuniciraju i postižu dogovaraju te mogu graditi nove blokove.
 
+<figure>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Byzantine_Generals.png/435px-Byzantine_Generals.png" width="350">
+<figcaption>Prikaz konsenzusa u mreži iz Problema bizantskih generala.</figcaption>
+</figure>
 
-
-<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1078/hash-example.png" width="400">
-
-
-
-
-
-### Chain
 ### Kako funkcionira Blockchain?
+[Blockchain Demo](https://andersbrownworth.com/blockchain/blockchain)
+
+<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1082/blockchain-dice-game.png" width="350">
+
+
 ### Whitepaper
 Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utjecalo na trenutne i potencijalne odluke kupaca ili ulagača. On pruža činjenične dokaze da je određen proizvod/metoda bolja u rješavanju određenog problema. Whitepaper je obično dizajniran za marketinške svrhe, odnosno cilj mu je "prodati" određeno rješenje za neki problem.
 - [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf)
 - [Ethereum Whitepaper](https://ethereum.org/en/whitepaper/)
 
-## How Do Blockchains Work? 
-- [Blockchain Demo](https://andersbrownworth.com/blockchain/)
-- [Public / Private Keys](https://andersbrownworth.com/blockchain/public-private-keys/keys)
-- [Layer 2 and Rollups](https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/)
-- [Decentralized Blockchain Oracles](https://blog.chain.link/what-is-the-blockchain-oracle-problem/)
-- [Block Rewards](https://www.investopedia.com/terms/b/block-reward.asp)
+
+
+
+
+
+
 ### Ethereum
 - [What are Smart Contracts?](https://www.investopedia.com/terms/s/smart-contracts.asp)
 - [Hybrid Smart Contracts](https://blog.chain.link/hybrid-smart-contracts-explained/)
@@ -70,6 +73,13 @@ Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utje
 
 
 ## Izvori
-https://www.investopedia.com/terms/b/blockchain.asp
-https://rubygarage.org/blog/how-blockchain-works
-https://www.investopedia.com/terms/b/block-bitcoin-block.asp
+- https://www.investopedia.com/terms/b/blockchain.asp
+- https://rubygarage.org/blog/how-blockchain-works
+- https://www.investopedia.com/terms/b/block-bitcoin-block.asp
+- https://en.wikipedia.org/wiki/Blockchain
+- https://en.wikipedia.org/wiki/Proof_of_work
+- https://en.wikipedia.org/wiki/Proof_of_stake
+- https://blockgeeks.com/guides/blockchain-consensus/
+- https://wiki.polkadot.network/docs/learn-consensus
+- https://en.wikipedia.org/wiki/Byzantine_fault
+- https://ethereum.org/en/developers/docs/
