@@ -8,9 +8,20 @@ parent: ISBiT
 Blockchain je distribuirana baza podataka ili registrator (*eng. ledger*) koja se dijeli među čvorovima u mreži. Podaci su pohranjeni u blokove koji se zatim međusobno povezuju. Kako dolaze novi podaci, oni se unose u novi blok. Nakon što se blok ispuni podacima, on se lančano povezuje s prethodnim blokom, što čini podatke lančano povezanim kronološkim redoslijedom. Različite vrste informacija mogu se pohraniti na blockchain.Unos podataka je nepovratan, jednom pohranjeni podaci ne mogu se više izmjeniti. Inovacija s blockchainom je u tome što jamči vjernost i sigurnost zapisa podataka i stvara povjerenje bez potrebe za trećom stranom. Najpoznatiji primjena blockchaina je u sustavima kriptovaluta za održavanje sigurne i decentralizirane evidencije transakcija. Primjerice u Bitcoin mreži to znači da se transakcije trajno bilježe i da ih svatko može vidjeti.
 
 ### Blok
-Blok je osnovna jedinica unutar blockchaina gdje su pohranjene kriptirane informacije sa mreže, oni sadržavaju šifrirane podatke o transakcijama iz prethodnih blokova i informacije o novim transakcijama. 
+Blok je osnovna jedinica unutar blockchaina gdje su pohranjene kriptirane informacije sa mreže, oni sadržavaju šifrirane podatke o transakcijama iz prethodnih blokova i informacije o novim transakcijama. Da bi se novi blok dodao, on prvo mora biti verificiran od mreže. Također i svaka nova transakcija prije upisa na blok je provjerena i potvrđena od mreže.
+
+
+A unit of data stored inside a block may be represented by any value depending on the type of blockchain. A block can store an amount of money, a share in a company, a digital certificate of ownership, a vote during an election, or any other value.
+
+A block stores encrypted details about the parties whose interaction resulted in the data stored in the block. A cryptocurrency block also contains the sender’s and receiver’s encrypted identifiers. A block for an ecommerce transaction will contain the identifiers of the retailer and consumer, for example.
+
+Each block also has a hash. This hash is a value generated from a string of text using a mathematical function. A hash can be compared to a fingerprint, as each hash is unique. Its role is to identify a block and the block’s contents. 
+
+
 
 <img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1078/hash-example.png" width="400">
+
+
 
 
 
