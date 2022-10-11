@@ -57,7 +57,7 @@ AABACDACA
 Organiziraj upis predmeta tako da student upiše maksimalan broj predmeta bez preklapanja.
 
 **Input:**
-Prvi red sadrži jedan cijeli broj $c$ $(1 \le c \le 10^3) - broj testnih slučajeva.
+Prvi red sadrži jedan cijeli broj $c$ $(1 \le c \le 10^3)$ - broj testnih slučajeva.
 Sljedećih $c$ linija sadržava dva cijela broja $t_start$ i $t_end$ koji označuju vrijeme početka i završetka predmeta.
 
 **Output:**

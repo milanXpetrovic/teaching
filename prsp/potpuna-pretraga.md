@@ -42,7 +42,7 @@ Problem $n$ kraljica je problem postavljanja $n$ kraljica na šahovsku ploču di
 {: .highlight-title}
 > Kako kraljica napada?
 >
-> Prikaz ploče dimenzija 8 x 8 i polja koja kraljica (Q) napda (\*).
+> Prikaz ploče dimenzija 8 x 8 i polja koja kraljica (Q) napada (\*).
 >
 > ```
 > -  –  *  –  –  –  *  –
@@ -55,7 +55,7 @@ Problem $n$ kraljica je problem postavljanja $n$ kraljica na šahovsku ploču di
 > –  –  *  -  –  *  –  –
 > ```
 
-U primjeru gdje je $n = 4$, postoje 2 načina za rasporediti krlajice.
+U primjeru gdje je $n = 4$, postoje 2 načina za rasporediti kraljice.
 
 ```
 -  Q  –  –

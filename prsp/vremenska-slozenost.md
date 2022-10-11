@@ -33,7 +33,7 @@ for (int a = 0; a < n; a++) {
 cout << best << "\n";
 ```
 
-## Zadatak 2: $O(n^3)$
+## Zadatak 2: $O(n^3)$ složenost
 
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 
@@ -55,7 +55,7 @@ Broj $z$ koji je iznos maksimalnog zbroja podniza.
 10
 ```
 
-## Zadatak 3
+## Zadatak 3: $O(n^2)$ složenost
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
@@ -87,7 +87,7 @@ for (int k = 0; k < n; k++) {
 cout << best << "\n";
 ```
 
-## Zadatak 5
+## Zadatak 5: Lista nasumičnih brojeva
 
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
@@ -112,7 +112,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 {: .highlight }
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
-## Zadatak 6
+## Zadatak 6: Mjerenje brzine izvođenja
 
 Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
