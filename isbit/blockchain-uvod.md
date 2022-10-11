@@ -41,12 +41,12 @@ Konsenzus je metoda za postizanje dogovora oko zajedničkog stanja. Kako bi bloc
 </figure>
 
 ### Transakcije
-Da bi razumjeli kako funkcioniraju transakcije prvo je potrebno navesti tko su sudionici u blcokchain mreži: 
+Da bi razumjeli kako funkcioniraju transakcije prvo je potrebno navesti tko su sudionici u blockchain mreži: 
 - Korisnici - to je bilo koji korisnik mehanike blockchaina za obavljanje transakcija.
 
 - Rudari - Omogućuju korisnicima da njihova transakcija bude ispravno poštovana bez središnjeg tijela koje to nadzire. Rudari omogućuju ispravnost transakcija provjerom dolaznih transakcijskih blokova da budu potvrđeni. Ako rudari ispravno rade, ostvaruju nagradu, što je poticaj koji održava sustav u radu.
 
-- Čvorovi - Svaki korisnik u mreži može biti čvor. Čvorovi održavaju cijeli sustav sigurnim i osiguranim potvrđivanjem transakcijskih blokova koje šalju rudari prije nego što se dodaju u blockchain. To čine provjerom dolaznih informacija s poviješću transakcija blockchaina, i osiguravaju da se sve podudara. Čvorovi mreže mogu se nalaziti bilo gdje, bitno je da su povezani sa ostatkom mreže. Oni zatim kolektivno postižu konsenzus da su nove transakcije valjane, prije nego što ih dodaju u blockchain.
+- Čvorovi - Svaki korisnik u mreži može biti čvor. Čvorovi održavaju cijeli sustav sigurnim i osiguranim potvrđivanjem transakcijskih blokova koje šalju rudari prije nego što se dodaju u blockchain. To čine provjerom dolaznih informacija s poviješću transakcija blockchaina, i osiguravaju da se sve podudara. Čvorovi mreže mogu se nalaziti bilo gdje, bitno je da su povezani s ostatkom mreže. Oni zatim kolektivno postižu konsenzus da su nove transakcije valjane, prije nego što ih dodaju u blockchain.
 
 Proces transakcije može se podijeliti u šest koraka:
 
@@ -61,8 +61,6 @@ Proces transakcije može se podijeliti u šest koraka:
 Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utjecalo na trenutne i potencijalne odluke kupaca ili ulagača. On pruža činjenične dokaze da je određen proizvod/metoda bolja u rješavanju određenog problema. Whitepaper je obično dizajniran za marketinške svrhe, odnosno cilj mu je "prodati" određeno rješenje za neki problem.
 - [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf)
 - [Ethereum Whitepaper](https://ethereum.org/en/whitepaper/)
-
-
 
 ## Ethereum
 Ethereum je blockchain s računalom ugrađenim u njega. To je temelj za izgradnju aplikacija i organizacija na decentraliziran način, bez dopuštenja i otporan na cenzuru.
@@ -82,30 +80,6 @@ Programe koji su postavljeni na mrežu i koje ona izvršava nazivamo pametnim ug
 Na vrlo osnovnoj razini, pametni ugovor možete zamisliti kao neku vrstu automata za prodaju. Skripta koja, kada se pozove s određenim parametrima, izvodi neke radnje ili računanje ako su zadovoljeni određeni uvjeti.
 
 Svaki programer može stvoriti pametni ugovor i učiniti ga javnim na mreži, koristeći blockchain kao svoj podatkovni sloj, uz naknadu plaćenu mreži. Svaki korisnik tada može pozvati pametni ugovor da izvrši svoj kod, opet uz naknadu plaćenu mreži. S pametnim ugovorima, programeri mogu izgraditi i implementirati proizvoljno složene aplikacije i usluge okrenute korisniku. 
-
-
-
-- [Hybrid Smart Contracts](https://blog.chain.link/hybrid-smart-contracts-explained/)
-- [Blockchain Oracles](https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd72?source=friends_link&sk=d921a38466df8a9176ed8dd767d8c77d)
-
-## Transakcije
-- [Metamask](https://metamask.io/)
-- [Etherscan](https://etherscan.io/)
-- [Goerli Etherscan](https://goerli.etherscan.io/)
-- [Rinkeby Etherscan](https://rinkeby.etherscan.io/)
-- [Kovan Etherscan](https://kovan.etherscan.io/)
-- [Goerli Faucet](https://faucets.chain.link/goerli)
-- Rinkeby Faucet (Check the [link token contracts page](https://docs.chain.link/docs/link-token-contracts/#rinkeby))
-  - NOTE: You can always find the most up to date faucets at [faucets.chain.link](https://faucets.chain.link/).
-- OR, use the [Kovan ETH Faucet](https://faucets.chain.link/), just be sure to swap your metamask to kovan!
-- [Gas and Gas Fees](https://ethereum.org/en/developers/docs/gas/)
-- [Wei, Gwei, and Ether Converter](https://eth-converter.com/)
-- [ETH Gas Station](https://ethgasstation.info/)
-- [Run Your Own Ethereum Node](https://geth.ethereum.org/docs/getting-started)
-
-
-
-
 
 ## Izvori
 - https://www.investopedia.com/terms/b/blockchain.asp
