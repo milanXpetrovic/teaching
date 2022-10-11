@@ -12,6 +12,7 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
 
 ## Datumi aktivnosti
+
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
 | 26.10.2022.      | Zadavanje tema projektnih zadataka      |          | 
