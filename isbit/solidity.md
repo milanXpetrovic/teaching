@@ -7,6 +7,9 @@ parent: ISBiT
 
 - [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
 - [Remix IDE](https://remix-project.org/)
+- [Struktura ugovora](https://docs.soliditylang.org/en/latest/structure-of-a-contract.html)
+- [Tipovi varijabli](https://docs.soliditylang.org/en/latest/types.html)
+
 
 
 ## Primjer pametnog ugovora
@@ -37,10 +40,7 @@ contract SimpleStorage {
 - `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
 
 ## Zadatak 1: Applikcaija za pohranu podataka
-
-Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor.
-
-
+Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovaora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete najdraži borj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
 
 ## Izvori
 - [Metamask](https://metamask.io/)
