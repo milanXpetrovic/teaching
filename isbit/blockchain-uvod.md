@@ -26,17 +26,17 @@ Blockchain je distribuirana baza podataka ili registrator (*eng. ledger*) koja s
 ### Blok
 Blok je osnovna jedinica unutar blockchaina gdje su pohranjene kriptirane informacije s mreže. Jedinica podataka pohranjena unutar bloka može biti predstavljena bilo kojom vrijednošću ovisno o vrsti blockchaina. Blok može pohraniti iznos novca, udio u tvrtki, digitalnu potvrdu o vlasništvu, glas tijekom izbora ili bilo koju drugu vrijednost. Blok pohranjuje šifrirane detalje o stranama čija je interakcija rezultirala podacima pohranjenima u bloku. U slučaju kriptovaluta blok također sadrži kriptirane identifikatore pošiljatelja i primatelja. 
 
-<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1078/hash-example.png" width="350">
+<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1078/hash-example.png" width="400">
 
 Svaki blok također ima hash koji ima ulogu identificirati blok i sadržaj bloka. Ova hash vrijednost je generirana pomoću matematičke funkcije iz sadržaja upisanog na blok. Hash se može usporediti s otiskom prsta jer je svaki hash jedinstven, svaka promjena podataka upisanih na blok uzrokovala bi i promjenu hash vrijednosti.
 
-<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1080/changes-in-block.png" width="350">
+<img src="https://rubygarage.s3.amazonaws.com/uploads/article_image/file/1080/changes-in-block.png" width="400">
 
 ### Konsenzus u mreži
 Konsenzus je metoda za postizanje dogovora oko zajedničkog stanja. Kako bi blockchain nastavio graditi, svi čvorovi u mreži moraju se složiti i doći do konsenzusa. To je način na koji čvorovi u decentraliziranoj mreži mogu ostati međusobno sinkronizirani. Bez konsenzusa za decentraliziranu mrežu čvorova u blockchainu, ne postoji način da se osigura da će stanje za koje jedan čvor vjeruje da je istinito dijeliti drugi čvorovi. Konsenzus ima za cilj pružiti objektivan pogled na stanje između sudionika od kojih svaki ima svoje subjektivne poglede na mrežu. To je proces kojim čvorovi komuniciraju i postižu dogovaraju te mogu graditi nove blokove.
 
 <figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Byzantine_Generals.png/435px-Byzantine_Generals.png" width="350">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Byzantine_Generals.png/435px-Byzantine_Generals.png" width="400">
 <figcaption>Prikaz konsenzusa u mreži iz Problema bizantskih generala.</figcaption>
 </figure>
 
@@ -81,14 +81,13 @@ Programe koji su postavljeni na mrežu i koje ona izvršava nazivamo pametnim ug
 
 Na vrlo osnovnoj razini, pametni ugovor možete zamisliti kao neku vrstu automata za prodaju. Skripta koja, kada se pozove s određenim parametrima, izvodi neke radnje ili računanje ako su zadovoljeni određeni uvjeti.
 
-Svaki programer može stvoriti pametni ugovor i učiniti ga javnim na mreži, koristeći blockchain kao svoj podatkovni sloj, uz naknadu plaćenu mreži. Svaki korisnik tada može pozvati pametni ugovor da izvrši svoj kod, opet uz naknadu plaćenu mreži.
-
-Stoga, s pametnim ugovorima, programeri mogu izgraditi i implementirati proizvoljno složene aplikacije i usluge okrenute korisniku kao što su: tržišta, financijski instrumenti, igre itd.
+Svaki programer može stvoriti pametni ugovor i učiniti ga javnim na mreži, koristeći blockchain kao svoj podatkovni sloj, uz naknadu plaćenu mreži. Svaki korisnik tada može pozvati pametni ugovor da izvrši svoj kod, opet uz naknadu plaćenu mreži. S pametnim ugovorima, programeri mogu izgraditi i implementirati proizvoljno složene aplikacije i usluge okrenute korisniku. 
 
 
-- [What are Smart Contracts?](https://www.investopedia.com/terms/s/smart-contracts.asp)
+
 - [Hybrid Smart Contracts](https://blog.chain.link/hybrid-smart-contracts-explained/)
 - [Blockchain Oracles](https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd72?source=friends_link&sk=d921a38466df8a9176ed8dd767d8c77d)
+
 ## Transakcije
 - [Metamask](https://metamask.io/)
 - [Etherscan](https://etherscan.io/)
@@ -104,15 +103,7 @@ Stoga, s pametnim ugovorima, programeri mogu izgraditi i implementirati proizvol
 - [ETH Gas Station](https://ethgasstation.info/)
 - [Run Your Own Ethereum Node](https://geth.ethereum.org/docs/getting-started)
 
-### Consensus
-- [Consensus](https://wiki.polkadot.network/docs/learn-consensus)
-- [Proof of Stake](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
-- [Proof of Work](https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/)
-- [Nakamoto Consensus](https://blockonomi.com/nakamoto-consensus/)
-## The Future
-- [Ethereum 2](https://ethereum.org/en/eth2/)
-## Miscellaneous 
-- [DAOs](https://www.investopedia.com/tech/what-dao/)
+
 
 
 
@@ -123,10 +114,13 @@ Stoga, s pametnim ugovorima, programeri mogu izgraditi i implementirati proizvol
 - https://www.investopedia.com/terms/b/block-bitcoin-block.asp
 - https://en.wikipedia.org/wiki/Blockchain
 - https://en.wikipedia.org/wiki/Proof_of_work
+- https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/
 - https://en.wikipedia.org/wiki/Proof_of_stake
+- https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/
 - https://blockgeeks.com/guides/blockchain-consensus/
 - https://wiki.polkadot.network/docs/learn-consensus
 - https://en.wikipedia.org/wiki/Byzantine_fault
 - https://ethereum.org/en/developers/docs/
 - https://www.ledger.com/academy/how-does-a-blockchain-transaction-work
 - https://www.investopedia.com/terms/s/smart-contracts.asp
+- https://101blockchains.com/smart-contracts/
