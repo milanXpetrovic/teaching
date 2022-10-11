@@ -27,7 +27,7 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 
 ## 👨‍💻 Vježbe
 
-- [ ] [Uvod](../isbit-uvod)
+- [ ] [Uvod](../blockchain-uvod)
 - [ ] [Solidity](../solidity)
 - [ ] [Implementacija pametnog ugovora na mreži ](../pametni-ugovori)
 
