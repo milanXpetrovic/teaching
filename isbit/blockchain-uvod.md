@@ -57,10 +57,6 @@ Proces transakcije može se podijeliti u šest koraka:
 5. Novi blok se dodaje postojećem lancu blokova. Ovaj blok postaje dio blockchaina kada druga računala u mreži potvrde je li zaključavanje bloka ispravno.
 6. Transakcija je završena. Sada je transakcija dio blockchaina i ne može se ni na koji način mijenjati.
 
-
-### Proof of Work i Proof of Stake
-
-
 ### Whitepaper
 Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utjecalo na trenutne i potencijalne odluke kupaca ili ulagača. On pruža činjenične dokaze da je određen proizvod/metoda bolja u rješavanju određenog problema. Whitepaper je obično dizajniran za marketinške svrhe, odnosno cilj mu je "prodati" određeno rješenje za neki problem.
 - [Bitcoin Whitepaper](https://bitcoin.org/bitcoin.pdf)
@@ -68,10 +64,27 @@ Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utje
 
 
 
-
 ## Ethereum
+Ethereum je blockchain s računalom ugrađenim u njega. To je temelj za izgradnju aplikacija i organizacija na decentraliziran način, bez dopuštenja i otporan na cenzuru.
 
-###
+U Ethereum svemiru postoji jedno, kanonsko računalo (zvano Ethereum Virtual Machine ili EVM) s čijim se stanjem svi na Ethereum mreži slažu. Svatko tko sudjeluje u Ethereum mreži (svaki Ethereum čvor) čuva kopiju stanja ovog računala. Dodatno, bilo koji sudionik može emitirati zahtjev za ovo računalo da izvrši proizvoljno izračunavanje. Kad god se takav zahtjev emitira, drugi sudionici na mreži provjeravaju, potvrđuju i provode ("izvršavaju") izračun. Ovo izvršenje uzrokuje promjenu stanja u EVM-u, koja se predaje i širi kroz cijelu mrežu.
+
+Zahtjevi za izračun nazivaju se zahtjevi za transakcije. Evidencija svih transakcija i trenutno stanje EVM-a pohranjuju se na blockchain.
+
+Kriptografski mehanizmi osiguravaju da nakon što se transakcije potvrde kao valjane, dodaju u blockchain. Isti mehanizmi također osiguravaju da su sve transakcije potpisane i izvršene s odgovarajućim "dopuštenjima" (nitko ne bi trebao moći slati digitalna sredstva s Aliceina računa, osim same Alice).
+
+### Ether
+Ether (ETH) je izvorna kriptovaluta Ethereuma. Svrha ETH-a je omogućiti tržište za računanje. Takvo tržište pruža ekonomski poticaj za sudionike da verificiraju i izvršavaju zahtjeve za transakcije i daju računalne resurse mreži. Svaki sudionik koji emitira zahtjev za transakciju također mora ponuditi određenu količinu ETH mreži kao nagradu. Mreža će ovu nagradu dodijeliti onome tko na kraju izvrši posao provjere transakcije, izvrši je, obvezuje je na blockchain i emitira je mreži. Plaćeni iznos ETH odgovara vremenu potrebnom za izračun. Ove nagrade također sprječavaju zlonamjerne sudionike da namjerno uspore mrežu tražeći izvršavanje beskonačnog računanja ili drugih skripti koje zahtijevaju velike resurse, budući da ti sudionici moraju platiti vrijeme računanja. 
+
+### Pametni ugovori
+Programe koji su postavljeni na mrežu i koje ona izvršava nazivamo pametnim ugovorima. U praksi, korisnici ne pišu novi programski kod svaki put kada žele zatražiti izračun na EVM-u. Umjesto toga, programeri postavljaju programe u EVM, a korisnici podnose zahtjeve za izvršavanje tih isječaka koda s različitim parametrima. 
+
+Na vrlo osnovnoj razini, pametni ugovor možete zamisliti kao neku vrstu automata za prodaju. Skripta koja, kada se pozove s određenim parametrima, izvodi neke radnje ili računanje ako su zadovoljeni određeni uvjeti.
+
+Svaki programer može stvoriti pametni ugovor i učiniti ga javnim na mreži, koristeći blockchain kao svoj podatkovni sloj, uz naknadu plaćenu mreži. Svaki korisnik tada može pozvati pametni ugovor da izvrši svoj kod, opet uz naknadu plaćenu mreži.
+
+Stoga, s pametnim ugovorima, programeri mogu izgraditi i implementirati proizvoljno složene aplikacije i usluge okrenute korisniku kao što su: tržišta, financijski instrumenti, igre itd.
+
 
 - [What are Smart Contracts?](https://www.investopedia.com/terms/s/smart-contracts.asp)
 - [Hybrid Smart Contracts](https://blog.chain.link/hybrid-smart-contracts-explained/)
@@ -116,3 +129,4 @@ Whitepaper promovira određeni proizvod, uslugu ili metodologiju kako bi se utje
 - https://en.wikipedia.org/wiki/Byzantine_fault
 - https://ethereum.org/en/developers/docs/
 - https://www.ledger.com/academy/how-does-a-blockchain-transaction-work
+- https://www.investopedia.com/terms/s/smart-contracts.asp
