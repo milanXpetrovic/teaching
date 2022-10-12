@@ -64,8 +64,6 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 
 ## 🚀 Teme za Seminar
-<!--
-- Huffman Data Compression
--->
 
----
+- Huffman Data Compression
+
