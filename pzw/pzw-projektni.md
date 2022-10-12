@@ -24,6 +24,7 @@ nav_exclude: true
 - Jedna one to one, one to many i many to many relacija
 - Generiranje testnih podataka pomoću factory boya
 - Prikaz generiranih podataka za svaki entitet u modelu
+- Github repo za web app
 
 
 **Web app mora sadrzavati:**
