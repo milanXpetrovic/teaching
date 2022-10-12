@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: PZW
+parent: PzW
 nav_order: 
 nav_exclude: true
 ---

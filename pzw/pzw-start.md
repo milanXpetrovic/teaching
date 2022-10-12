@@ -1,10 +1,9 @@
 ---
 layout: default
-title: PZW
+title: PzW
 has_children: true
 has_toc: false
 ---
-
 
 # Programiranje za web
 
