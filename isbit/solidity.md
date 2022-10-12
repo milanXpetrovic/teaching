@@ -7,9 +7,9 @@ parent: ISBiT
 
 - [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
 - [Remix IDE](https://remix-project.org/)
-- [Struktura ugovora](https://docs.soliditylang.org/en/latest/structure-of-a-contract.html)
+- [Struktura pametnog ugovora](https://docs.soliditylang.org/en/latest/structure-of-a-contract.html)
 - [Tipovi varijabli](https://docs.soliditylang.org/en/latest/types.html)
-
+- [Vidljivost](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters)
 
 
 ## Primjer pametnog ugovora
@@ -39,8 +39,9 @@ contract SimpleStorage {
 - `pragma solidity >=0.4.16 <0.9.0;` - Navodi da je izvorni kod napisan za Solidity verziju 0.4.16 ili noviju verziju jezika do, ali ne uključujući verziju 0.9.0. Ovo je kako bi se osiguralo da se ugovor ne može kompajlirati s novom (pokvarenom) verzijom prevoditelja, gdje bi se mogao ponašati drugačije.
 - `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
 
-## Zadatak 1: Applikcaija za pohranu podataka
-Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovaora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete najdraži borj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
+## Zadatak 1: Omiljeni broj
+Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete omiljeni broj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
+
 
 ## Izvori
 - [Metamask](https://metamask.io/)
