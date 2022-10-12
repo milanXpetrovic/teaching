@@ -2,7 +2,6 @@
 layout: default
 parent: PRSP
 nav_order: 4
-nav_exclude: true
 ---
 
 # Vježbe 4: Pohlepni algoritmi
@@ -89,6 +88,33 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 ## Zadatak 4: Domino
 https://codeforces.com/problemset/problem/50/A
 
+**Input:**
+
+**Output:**
+
+### Primjer
+
+**Input:**
+```
+```
+
+**Output:**
+```
+```
 
 
-## Zadatak 5
+## Zadatak 5: 
+
+**Input:**
+
+**Output:**
+
+### Primjer
+
+**Input:**
+```
+```
+
+**Output:**
+```
+```
