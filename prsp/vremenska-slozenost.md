@@ -6,7 +6,7 @@ nav_order: 2
 
 # Vježbe 2: Vremenska složenost
 
-## Zadatak 1: [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
+## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 
 Zadan je niz od $n$ brojeva, naš zadatak je izračunati najveći zbroj podniza, tj. najveći mogući zbroj niza uzastopnih vrijednosti u nizu.
 
@@ -33,7 +33,7 @@ for (int a = 0; a < n; a++) {
 cout << best << "\n";
 ```
 
-## Zadatak 2: $O(n^3)$ složenost
+## Zadatak 1: $O(n^3)$ složenost
 
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
 
@@ -55,12 +55,12 @@ Broj $z$ koji je iznos maksimalnog zbroja podniza.
 10
 ```
 
-## Zadatak 3: $O(n^2)$ složenost
+## Zadatak 2: $O(n^2)$ složenost
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
 
 
-## Zadatak 4 
+## Zadatak 3: $O(n)$ složenost
 
 Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti $O(n)$.
 
@@ -88,7 +88,6 @@ cout << best << "\n";
 ```
 
 ## Zadatak 5: Lista nasumičnih brojeva
-
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
 **Input**
@@ -98,12 +97,10 @@ Duljina liste $n$, određuje broj elemenata u listi.
 Lista $l$ koja sadržava $n$ elemenata.
 
 ### Primjer
-
 **Input:**
 ```
 15
 ```
-
 **Output:**
 ```
 [-1, 4, -9, -2, -1, 3, -6, 5, 8, 0, 3, -8, 6, 7, 3]
@@ -113,7 +110,6 @@ Lista $l$ koja sadržava $n$ elemenata.
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
 ## Zadatak 6: Mjerenje brzine izvođenja
-
 Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
 **Input**
