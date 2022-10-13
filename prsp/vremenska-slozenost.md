@@ -87,7 +87,7 @@ for (int k = 0; k < n; k++) {
 cout << best << "\n";
 ```
 
-## Zadatak 5: Lista nasumičnih brojeva
+## Zadatak 4: Lista nasumičnih brojeva
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
 **Input**
@@ -109,7 +109,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 {: .highlight }
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
-## Zadatak 6: Mjerenje brzine izvođenja
+## Zadatak 5: Mjerenje brzine izvođenja
 Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
 **Input**
