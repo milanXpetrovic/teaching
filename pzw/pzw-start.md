@@ -1,10 +1,9 @@
 ---
 layout: default
-title: PZW
+title: PzW
 has_children: true
 has_toc: false
 ---
-
 
 # Programiranje za web
 
@@ -26,21 +25,7 @@ Dobrodošli na vježbe iz predmeta **Programiranje za web**
 
 
 ## 👨‍💻 Vježbe 👨‍🏫
-
 - [Django](https://gaseri.org/hr/nastava/materijali/python-modul-django/)
 - [Django REST](https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/)
 
-
-## 🚀 [Projektni zadatak](../pw-projektni)
-
-
-
-
-
-
-
-
-
-
-
-
+## 🚀 [Projektni zadatak](../pzw-projektni)

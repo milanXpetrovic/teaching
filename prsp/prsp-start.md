@@ -11,7 +11,6 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PRSP_2022_2023.pdf)
 
-
 ## Datumi aktivnosti
 
 | Datum | Vrsta | Bodovi |
@@ -23,18 +22,15 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 |       | Seminar | 10 | 
 | 30.1.2023. | Vježbe - ispravak  |  20  |
 
-
 ## 👨‍💻 Vježbe 👨‍🏫
-
 - [x] [Uvod](../prsp-uvod)
 - [ ] [Vremenska složenost](../vremenska-slozenost)
 - [ ] [Potpuna pretraga](../potpuna-pretraga)
+- [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
 
 <!--
-- [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
 - [ ] [Dinamičko programiranje](./dinamicko-programiranje) 
 - [ ] [Bit manipulation](./bit-manipulation)
-
 - [ ] [Grafovi i stabla](./grafovi-i-stabla)
 - [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [Matrice](./matrice)
@@ -42,13 +38,10 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [ ] [Kombinatorika](./kombinatorika)
 - [ ] [Geometrija](./geometrija)
 - [ ] [Teorija igara](./teorija-igara)
-
 - [ ] [Prprema za Kolokvij](./priprema-kolokvij)
 -->
 
-
 ## 📦 Resursi 
-
 ### 📚 Lieteratura
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018, [Link](https://cses.fi/book/book.pdf)
 
@@ -56,16 +49,11 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [Python](https://www.python.org/)
 
 ### 🔗 Korisni linovi
-
 - [Advent of Code](https://adventofcode.com/)
 - [Codeforces](https://codeforces.com/)
 - [Project Euler](https://projecteuler.net/)
 - [CSES Problem Set](https://cses.fi/problemset/)
 
-
 ## 🚀 Teme za Seminar
-<!--
 - Huffman Data Compression
--->
 
----
