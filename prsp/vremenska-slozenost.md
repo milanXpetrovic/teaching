@@ -4,7 +4,7 @@ parent: PRSP
 nav_order: 2
 ---
 
-# Vježbe 2: Vremenska složenost
+# Vremenska složenost
 
 ## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 

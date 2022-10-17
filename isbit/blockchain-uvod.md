@@ -3,7 +3,7 @@ layout: default
 parent: ISBiT
 ---
 
-# Vježbe 1: Blockchain
+# Blockchain
 
 ## Web3
 Web2 se odnosi na verziju interneta koju većina nas danas poznaje. Internet kojim dominiraju tvrtke koje pružaju usluge u zamjenu za vaše osobne podatke. Web3, u kontekstu Ethereuma, odnosi se na decentralizirane aplikacije koje rade na blockchainu. To su aplikacije koje svakome omogućuju sudjelovanje bez unovčavanja osobnih podataka

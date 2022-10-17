@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 
-# Vježbe 1: Uvod
+# Uvod
 
 ## Uvod u kolegij
 

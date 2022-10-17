@@ -4,7 +4,7 @@ parent: PRSP
 nav_order: 4
 ---
 
-# Vježbe 4: Pohlepni algoritmi
+# Pohlepni algoritmi
 Pohlepni algoritam (eng. greedy algorithm) konstruira rješenje problema tako da uvijek odabire izbor koji u ovom trenutku izgleda najbolje. Pohlepni algoritam nikada ne povlači svoje odabire, već izravno konstruira konačno rješenje. Zbog toga su pohlepni algoritmi vrlo učinkoviti. Poteškoća u dizajniranju pohlepnih algoritama je pronaći pohlepnu strategiju koja uvijek proizvodi optimalno rješenje problema. Lokalno optimalni izbori u pohlepnom algoritmu također bi trebali biti globalno optimalni. Često je teško tvrditi da pohlepni algoritam radi.
 
 ## Zadatak 1: Problem s kovanicama
