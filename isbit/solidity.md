@@ -43,7 +43,11 @@ contract SimpleStorage {
 Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete omiljeni broj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
 
 
-## 
+## Zadatak 2:
+
+
+
+## Zadatak 3: 
 
 
 
