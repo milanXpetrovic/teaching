@@ -1,3 +1,6 @@
+---
+nav_exclude: true
+---
 
 ## Problems from book
 https://cses.fi/problemset/
