@@ -61,8 +61,10 @@ Riješite prethodni zadatak pomoću metode Meet in the middle.
 Zadano je polje dimenzija $n \times m$. Potrebno je odrediti koliko puteva postoji u polju koji počinju u gornjem lijevom kutu i zavšavaju u donjem desnom kutu. Put kroz polje mora posjetiti sva polja točno jednom.
 
 **Input:**
-Input su cjeli brojevi $n$ i $m$, gdje su $3 \le n, m \le 6$
+Input su cjeli brojevi $n$ i $m$, gdje su ograničenja $3 \le n, m \le 6$.
+
 **Output:**
+Cjeli broj $k$ koji označuje broj puteva.ž
 
 ### Primjer
 **Input:**
@@ -73,7 +75,7 @@ Input su cjeli brojevi $n$ i $m$, gdje su $3 \le n, m \le 6$
 ```
 
 
-## Zadatak 4: Stvaranje stringova
+## Zadatak 5: Stvaranje stringova
 Za zadani string $s$, zadatak je generirati sve različite string koji se mogu stvoriti pomoću znakova iz zadanog stringa. $s$.
 
 **Input:**
@@ -113,7 +115,7 @@ cabaa
 cbaaa
 ```
 
-## Zadatak 5: Različite znamenke 
+## Zadatak 6: Različite znamenke 
 Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
 
 Napišite program koji na za zadanu godinu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
