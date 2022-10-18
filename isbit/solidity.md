@@ -23,13 +23,26 @@ Elementarni tipovi podataka:
 - `address payable` - ista kao i `address`, ali s dodatnim članovima `transfer` i `send`. Razlika `address payable` pd `address` je da je `address payable` adresa na koju možete poslati Ether, dok ne biste trebali slati Ether na `address`, običnu adresu, na primjer zato što bi to mogao biti pametni ugovor koji nije izgrađen za prihvaćanje Ethera. [Svi članovi address payable](https://docs.soliditylang.org/en/latest/units-and-global-variables.html#address-related)
 
 Za razliku od elementarnih tipova možemo imati i nizove čija veličina može biti zanada, odnosno fiksna ili dinamična.  
-
-- Nizovi sa fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length ` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
+- Nizovi sa fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
 - Nizovi koji su zadani samo kao `bytes` ili `string` su pak niz koji je dinamičke veličine i sadržava bajtove ili UTF-8 znakove.
 
 
+Tipovi funkcija označeni su na sljedeći način:
+```solidity
+function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+```
 
-Dynamically-sized byte array
+- `internal`
+- `external`
+
+- `pure`
+- `view`
+- `payable`
+
+Za razliku od `<parameter types>`, `<return types>` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns (<return types>)` mora biti izostavljen.
+
+
+
 
 ## Primjer pametnog ugovora
 
