@@ -67,6 +67,10 @@ Ispis brojeva čija suma iznosi $k$.
 ## Zadatak 4: Stvaranje stringova
 Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti pomoću znakova iz zadanog stringa $s$.
 
+
+{: .highlight }
+Za generiranje permutacija može se koristiti funkcija `permutations` koja se poziva pomoću `from itertools import permutations`. 
+
 **Input:**
 Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
 
@@ -136,18 +140,18 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 
 ## Zadatak 6: 
 
-Razmotrimo ynakovni niz koji se sastoji od svih pozitivnih cijelih brojeva u rastućem redoslijedu:
+Razmotrimo znakovni niz koji se sastoji od svih pozitivnih cijelih brojeva u rastućem redoslijedu:
 ```
 12345678910111213141516171819202122232425...
 ```
 
-Zadatak je pronći u $q$ upita koja znamenka se nalazi na poziciji $k$.
+Zadatak je pronaći u $q$ upita koja znamenka se nalazi na poziciji $k$.
 
 Polje kreće od indeksa 1, tako će primjerice upit za broj 6, vratiti broj 6 a ne 7.
 
 **Input:**
 Prva linija sadrži broj $q$ koji nam govori koliko imamo upita.
-Nakon toga sljedi $q$ linija gdje se nalazi $k$, odnosno indeks broja kojeg tražimo.
+Nakon toga slijedi $q$ linija gdje se nalazi $k$, odnosno indeks broja kojeg tražimo.
 
 **Output:**
 Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
