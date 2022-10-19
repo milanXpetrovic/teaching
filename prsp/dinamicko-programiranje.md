@@ -8,7 +8,7 @@ nav_exclude: true
 
 # Vježbe 5: Dinamičko programiranje
 
-## Zadatak 1
+## Zadatak 1: Problem s kovanicama
 **Input:**
 **Output:**
 ### Primjer
@@ -19,7 +19,7 @@ nav_exclude: true
 ```
 ```
 
-## Zadatak 2
+## Zadatak 2: Knapsack
 **Input:**
 **Output:**
 ### Primjer
@@ -30,7 +30,7 @@ nav_exclude: true
 ```
 ```
 
-## Zadatak 3
+## Zadatak 3: Popločavanje
 **Input:**
 **Output:**
 ### Primjer
