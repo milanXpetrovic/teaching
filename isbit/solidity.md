@@ -2,7 +2,6 @@
 layout: default
 parent: ISBiT
 ---
-
 # Solidity 
 
 - [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
@@ -10,7 +9,6 @@ parent: ISBiT
 - [Struktura pametnog ugovora](https://docs.soliditylang.org/en/latest/structure-of-a-contract.html)
 - [Tipovi varijabli](https://docs.soliditylang.org/en/latest/types.html)
 - [Vidljivost](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters)
-
 
 ## Varijable stanja i funkcije
 U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). Solidity pruža nekoliko elementarnih tipova koji se mogu kombinirati u složene tipove. Ovi tipovi također se nazivaju vrijednosnim tipovima jer će se varijable ovih tipova uvijek prosljeđivati po vrijednosti, tj. uvijek se kopiraju kada se dodjeljuju ili koriste kao argumenti funkcije. Tipovi mogu međusobno komunicirati u izrazima koji sadrže operatore. Reference različitih operatora možete pronaći na [Order of Precedence of Operators](https://docs.soliditylang.org/en/latest/types.html#order)
@@ -24,15 +22,14 @@ U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). 
 
 **Nizovi**
 Za razliku od elementarnih tipova možemo imati i nizove čija veličina može biti zanada, odnosno fiksna ili dinamična.  
-- Nizovi sa fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
+- Nizovi s fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
 - Nizovi koji su zadani samo kao `bytes` ili `string` su pak niz koji je dinamičke veličine i sadržava bajtove ili UTF-8 znakove.
-
 
 **Funkcije**
 Tipovi funkcija označeni su na sljedeći način:
 ```solidity
-function (<parameter types>) {internal|external|public|private
-} [pure|view|payable] [returns (<return types>)]
+function () {internal|external|public|private
+} [pure|view|payable] [returns ()]
 ```
 
 - `internal` - Ovim funkcijama može se pristupiti samo interno (tj. unutar trenutnog ugovora ili ugovora koji iz njega proizlaze), bez korištenja `this`. 
@@ -43,13 +40,13 @@ function (<parameter types>) {internal|external|public|private
 - `pure` - Ove funkcije su +su restriktivnije od `view `funkcija  i ne mijenjaju stanje niti čitaju stanje blockchaina. Ove funkcije ne mogu: Čitati iz varijabli stanja, stanja blockchaina. Ovakve funkcije su dobre kao poziv jer nam osiguravaju da se trenutno stanje neće promjeniti.
 - `payable` - Ova funkcija nam omogućuje slanje i primanje Ethera. Stvaranjem ovakve funkcije u ugovoru omogućujemo izvršavanje transakcija.
 
-Za razliku od `<parameter types>`, `<return types>` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns (<return types>)` mora biti izostavljen.
+Za razliku od ``, `` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns ()` mora biti izostavljen.
 
 ## Strukture podataka
 
 **Polja** 
 
-Polja mogu biti zadani da imaju fiksnu ili dinamičku veličinu. Tip polja fiksne veličine `k` i tipa elementa `T` piše se kao `T[k]`, a polje dinamičke veličine kao `T[]`. Sintaksa pisanja polja razlikuje se od nekih drugih jezika, tako ćemo primjerice polje `x` koji sadrži 4 polja dinamičke veličine pisati kao `uint[][5]`, razlog tome je što u Solidity-u `X[3]` znači polje koji sadržava 3 elementa tipa `X`, a samim time i `X` može biti polje. Primjerice u varijabli `uint[][5] memory x` ako želimo pristupiti sedmom `uint` elemetu u drugom dinamičkom polju koristiti ćemo `x[2][6]`
+Polja mogu biti zadani da imaju fiksnu ili dinamičku veličinu. Tip polja fiksne veličine `k` i tipa elementa `T` piše se kao `T[k]`, a polje dinamičke veličine kao `T[]`. Sintaksa pisanja polja razlikuje se od nekih drugih jezika, tako ćemo primjerice polje `x` koji sadrži 4 polja dinamičke veličine pisati kao `uint[][5]`, razlog tome je što u Solidity-u `X[3]` znači polje koji sadržava 3 elementa tipa `X`, a samim time i `X` može biti polje. Primjerice u varijabli `uint[][5] memory x` ako želimo pristupiti sedmom `uint` elemetu u drugom dinamičkom polju koristit ćemo `x[2][6]`
 
 ```solidity
 // primjer polja zadane veličine
@@ -59,7 +56,8 @@ uint balance[10];
 type[] arrayName;
 ```
 
-**Strukture** 
+**Struktura** 
+
 Solidity pruža način za definiranje novih tipova u obliku struktura. U nastavku je prikazan primjer korištenja strukture.
 
 ```solidity
@@ -73,7 +71,8 @@ struct Campaign {
     }
 ```
 
-**Mappiranje**
+**Mapping**
+
 Mapiranja koriste sintaksu `mapping(KeyType => ValueType)`, a tipovi varijabli u mapiranju deklariraju se pomoću sintakse `mapping(KeyType => ValueType) VariableName`. `KeyType` može biti bilo koji ugrađeni tip vrijednosti, npr. bajtovi, string. Drugi korisnički definirani ili složeni tipovi, kao što su mapiranje, strukture ili polja, nisu dopušteni. `ValueType` može biti bilo koji tip, uključujući mapiranja, polja i strukture.
 
 ```solidity
@@ -98,9 +97,7 @@ contract MappingUser {
 }
 ```
 
-
 ## Primjer pametnog ugovora
-
 Ugovor u smislu Solidityja je zbirka koda (njegove funkcije) i podataka (njegovo stanje) koji se nalaze na određenoj adresi na Ethereum blockchainu.
 
 U ovom primjeru, ugovor definira funkcije `set` i `get` koje se mogu koristiti za izmjenu ili dohvaćanje vrijednosti varijable. Ovaj ugovor još ne čini mnogo osim dopuštanja bilo kome da pohrani jedan broj kojem može pristupiti bilo tko. Svatko može ponovno pozvati `set` s drugom vrijednošću i prebrisati vaš broj, ali broj je i dalje pohranjen u povijesti blockchaina. 
@@ -126,16 +123,11 @@ contract SimpleStorage {
 - `pragma solidity >=0.4.16 <0.9.0;` - Navodi da je izvorni kod napisan za Solidity verziju 0.4.16 ili noviju verziju jezika do, ali ne uključujući verziju 0.9.0. Ovo je kako bi se osiguralo da se ugovor ne može kompajlirati s novom (pokvarenom) verzijom prevoditelja, gdje bi se mogao ponašati drugačije.
 - `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
 
-
 ## Zadatak 1: Omiljeni broj
 Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete omiljeni broj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
 
-
 ## Zadatak 2:
 Kreirajte pametni ugovor koji omnogućuje unos imena osobe i broj godina. Za pohranu imena i broja godine koristite strukturu naziva Osoba. Omogućite pohranu proizvoljnog broja osoba u polje i omogućite nalaženje broja godina pomoću imena osobe.
-
-
-
 
 ## Izvori
 - [Metamask](https://metamask.io/)
