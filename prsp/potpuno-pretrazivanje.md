@@ -134,5 +134,40 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 2014
 ```
 
+## Zadatak 6: 
 
+Razmotrimo ynakovni niz koji se sastoji od svih pozitivnih cijelih brojeva u rastućem redoslijedu:
+```
+12345678910111213141516171819202122232425...
+```
 
+Zadatak je pronći u $q$ upita koja znamenka se nalazi na poziciji $k$.
+
+Polje kreće od indeksa 1, tako će primjerice upit za broj 6, vratiti broj 6 a ne 7.
+
+**Input:**
+Prva linija sadrži broj $q$ koji nam govori koliko imamo upita.
+Nakon toga sljedi $q$ linija gdje se nalazi $k$, odnosno indeks broja kojeg tražimo.
+
+**Output:**
+Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
+
+**Input:**
+```
+3
+7
+19
+12
+```
+
+**Output:**
+```
+7
+4
+1
+```
+
+## Dodatni zadaci
+- [Chessboard and Queens](https://cses.fi/problemset/task/1624)
+- [Grid Paths](https://cses.fi/problemset/task/1625)
+- [Sail](https://codeforces.com/problemset/problem/298/B)
