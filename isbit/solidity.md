@@ -127,39 +127,13 @@ contract SimpleStorage {
 - `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
 
 
-
-
-
-
-```solidity
-
-```
-
-
-
-
-
-
 ## Zadatak 1: Omiljeni broj
 Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete omiljeni broj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
 
 
-
-
-
-
-
-
-
 ## Zadatak 2:
+Kreirajte pametni ugovor koji omnogućuje unos imena osobe i broj godina. Za pohranu imena i broja godine koristite strukturu naziva Osoba. Omogućite pohranu proizvoljnog broja osoba u polje i omogućite nalaženje broja godina pomoću imena osobe.
 
-
-
-
-
-
-
-## Zadatak 3: 
 
 
 
