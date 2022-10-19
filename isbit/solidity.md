@@ -59,10 +59,8 @@ uint balance[10];
 type[] arrayName;
 ```
 
-
 **Strukture** 
 Solidity pruža način za definiranje novih tipova u obliku struktura. U nastavku je prikazan primjer korištenja strukture.
-
 
 ```solidity
 // Primjer strukture
@@ -99,7 +97,6 @@ contract MappingUser {
     }
 }
 ```
-
 
 
 ## Primjer pametnog ugovora
