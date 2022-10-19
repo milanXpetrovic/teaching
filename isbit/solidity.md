@@ -12,35 +12,93 @@ parent: ISBiT
 - [Vidljivost](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters)
 
 
-## Jednostavni tipovi podataka
+## Varijable stanja i funkcije
 U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). Solidity pruža nekoliko elementarnih tipova koji se mogu kombinirati u složene tipove. Ovi tipovi također se nazivaju vrijednosnim tipovima jer će se varijable ovih tipova uvijek prosljeđivati po vrijednosti, tj. uvijek se kopiraju kada se dodjeljuju ili koriste kao argumenti funkcije. Tipovi mogu međusobno komunicirati u izrazima koji sadrže operatore. Reference različitih operatora možete pronaći na [Order of Precedence of Operators](https://docs.soliditylang.org/en/latest/types.html#order)
 
-Elementarni tipovi podataka: 
+**Elementarni tipovi podataka**
 - `bool` - Moguće vrijednosti su konstante `true` i `false`.
 - `int` / `uint` - Cijeli brojevi s predznakom i bez predznaka različitih veličina. Veličina im varira ovisno o ključnoj riječi od `uint8` do `uint256`. `uint` i `int` su aliasi za `uint256` odnosno `int256`.
 - `fixed` / `ufixed` - Broj s fiksnom točkom, s predznakom i bez predznaka različitih veličina. Ključne riječi `ufixedMxN` i `fixedMxN`, gdje `M` predstavlja broj bitova koje uzima tip, a `N` predstavlja koliko je decimalnih točaka dostupno. `M` mora biti djeljiv s 8 i ide od 8 do 256 bita. `N` mora biti između 0 i 80, uključivo. `ufixed` i `fixed` su aliasi za `ufixed128x18` odnosno `fixed128x18`.
 - `address` - sadrži vrijednost od 20 bajtova (veličina Ethereum adrese).
 - `address payable` - ista kao i `address`, ali s dodatnim članovima `transfer` i `send`. Razlika `address payable` pd `address` je da je `address payable` adresa na koju možete poslati Ether, dok ne biste trebali slati Ether na `address`, običnu adresu, na primjer zato što bi to mogao biti pametni ugovor koji nije izgrađen za prihvaćanje Ethera. [Svi članovi address payable](https://docs.soliditylang.org/en/latest/units-and-global-variables.html#address-related)
 
+**Nizovi**
 Za razliku od elementarnih tipova možemo imati i nizove čija veličina može biti zanada, odnosno fiksna ili dinamična.  
 - Nizovi sa fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
 - Nizovi koji su zadani samo kao `bytes` ili `string` su pak niz koji je dinamičke veličine i sadržava bajtove ili UTF-8 znakove.
 
 
+**Funkcije**
 Tipovi funkcija označeni su na sljedeći način:
 ```solidity
-function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+function (<parameter types>) {internal|external|public|private
+} [pure|view|payable] [returns (<return types>)]
 ```
 
-- `internal`
-- `external`
-
-- `pure`
-- `view`
-- `payable`
+- `internal` - Ovim funkcijama može se pristupiti samo interno (tj. unutar trenutnog ugovora ili ugovora koji iz njega proizlaze), bez korištenja `this`. 
+- `external` - Vanjske funkcije dio su sučelja ugovora, što znači da se mogu pozvati iz drugih ugovora i putem transakcija. Za interni poziv funkcije `f()` koristimo `this.f()`.
+- `public` - Javne funkcije dio su sučelja ugovora i mogu se pozivati interno ili putem poruka. Za javne varijable stanja generira se funkcija `get`
+- `private` - Privatne funkcije i varijable stanja vidljive su samo za ugovor u kojem su definirane, dok u izvedenim ugovorima nisu.
+- `view` - Ove funkcije koriste se samo za čitanje i ne mijenjaju stanje. Drugim riječima, ako želite čitati podatke iz blockchaina, možete koristiti `view`. Getter metode su zadane kao funkcije prikaza, odnosno `view`. Ove funkcije ne mogu: ažurirati blockchain, stvarati ugovore, poslati Ether
+- `pure` - Ove funkcije su +su restriktivnije od `view `funkcija  i ne mijenjaju stanje niti čitaju stanje blockchaina. Ove funkcije ne mogu: Čitati iz varijabli stanja, stanja blockchaina. Ovakve funkcije su dobre kao poziv jer nam osiguravaju da se trenutno stanje neće promjeniti.
+- `payable` - Ova funkcija nam omogućuje slanje i primanje Ethera. Stvaranjem ovakve funkcije u ugovoru omogućujemo izvršavanje transakcija.
 
 Za razliku od `<parameter types>`, `<return types>` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns (<return types>)` mora biti izostavljen.
 
+## Strukture podataka
+
+**Polja** 
+
+Polja mogu biti zadani da imaju fiksnu ili dinamičku veličinu. Tip polja fiksne veličine `k` i tipa elementa `T` piše se kao `T[k]`, a polje dinamičke veličine kao `T[]`. Sintaksa pisanja polja razlikuje se od nekih drugih jezika, tako ćemo primjerice polje `x` koji sadrži 4 polja dinamičke veličine pisati kao `uint[][5]`, razlog tome je što u Solidity-u `X[3]` znači polje koji sadržava 3 elementa tipa `X`, a samim time i `X` može biti polje. Primjerice u varijabli `uint[][5] memory x` ako želimo pristupiti sedmom `uint` elemetu u drugom dinamičkom polju koristiti ćemo `x[2][6]`
+
+```solidity
+// primjer polja zadane veličine
+uint balance[10];
+
+// primjer polja dinamičke veličine
+type[] arrayName;
+```
+
+
+**Strukture** 
+Solidity pruža način za definiranje novih tipova u obliku struktura. U nastavku je prikazan primjer korištenja strukture.
+
+
+```solidity
+// Primjer strukture
+struct Campaign {
+        address payable beneficiary;
+        uint fundingGoal;
+        uint numFunders;
+        uint amount;
+        mapping (uint => Funder) funders;
+    }
+```
+
+**Mappiranje**
+Mapiranja koriste sintaksu `mapping(KeyType => ValueType)`, a tipovi varijabli u mapiranju deklariraju se pomoću sintakse `mapping(KeyType => ValueType) VariableName`. `KeyType` može biti bilo koji ugrađeni tip vrijednosti, npr. bajtovi, string. Drugi korisnički definirani ili složeni tipovi, kao što su mapiranje, strukture ili polja, nisu dopušteni. `ValueType` može biti bilo koji tip, uključujući mapiranja, polja i strukture.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.0 <0.9.0;
+
+// Primjer korištenja mappinga
+contract MappingExample {
+    mapping(address => uint) public balances;
+
+    function update(uint newBalance) public {
+        balances[msg.sender] = newBalance;
+    }
+}
+
+contract MappingUser {
+    function f() public returns (uint) {
+        MappingExample m = new MappingExample();
+        m.update(100);
+        return m.balances(address(this));
+    }
+}
+```
 
 
 
