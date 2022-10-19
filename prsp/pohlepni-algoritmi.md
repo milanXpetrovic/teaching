@@ -85,36 +85,7 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 ```
 
 
-## Zadatak 4: Domino
-https://codeforces.com/problemset/problem/50/A
-
-**Input:**
-
-**Output:**
-
-### Primjer
-
-**Input:**
-```
-```
-
-**Output:**
-```
-```
-
-
-## Zadatak 5: 
-
-**Input:**
-
-**Output:**
-
-### Primjer
-
-**Input:**
-```
-```
-
-**Output:**
-```
-```
+## Dodatni zadaci
+- [Domino piling](https://codeforces.com/problemset/problem/50/A)
+- [Chat room](https://codeforces.com/problemset/problem/58/A)
+- [String Transformation](https://codeforces.com/problemset/problem/946/C)
