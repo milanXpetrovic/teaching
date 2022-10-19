@@ -38,26 +38,34 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 ## Zadatak 2: Binarna reprezentacija
 
-Riješite prethodni zadatak pomoću reprezentacije brojeva u bianrnom zapisu.
+Riješite prethodni zadatak pomoću reprezentacije brojeva u binarnom zapisu.
+
+{: .highlight }
+> Da bi `x` pretvorili u binarni zapis možete koristiti `format(x, 'b')`.
+>
+> Funkcija `zfill(n)`, popunjava string sa `0` dok on nema duljinu `n`.
 
 
 ## Zadatak 3: K-sum binarno
-
-U zadanoj listi $l$ postoji li podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
+Pomoću binarne reprezentacije provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 **Input:**
-U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cjelih brojeva $l$.
+U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 
 **Output:**
 Ispis brojeva čija suma iznosi $k$.
 
+## Zadatak 4: K-sum Meet in the middle
+Pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
-## Zadatak 3: K-sum Meet in the middle
-Riješite prethodni zadatak pomoću metode Meet in the middle.
+**Input:**
+U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 
+**Output:**
+Ispis brojeva čija suma iznosi $k$.
 
 ## Zadatak 4: Stvaranje stringova
-Za zadani string $s$, zadatak je generirati sve različite string koji se mogu stvoriti pomoću znakova iz zadanog stringa. $s$.
+Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti pomoću znakova iz zadanog stringa $s$.
 
 **Input:**
 Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
@@ -125,5 +133,6 @@ Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve zn
 ```
 2014
 ```
+
 
 
