@@ -25,7 +25,7 @@ Lista cjelih brojeva $l$.
 **Output:**
 Cjeli broj $k$ koji se ne ponavlja u zadanoj listi $l$.
 
-### Primjer
+### Primjeri
 **Input:**
 ```
 2 2 1
@@ -43,3 +43,54 @@ Cjeli broj $k$ koji se ne ponavlja u zadanoj listi $l$.
 5
 ```
 
+## Zadatak 2: Hammingova težina
+
+Napišite program koji prima kao input cijeli broj u binarnom formatu i vraća broj bitova '1' koje ima (poznato i kao Hammingova težina).
+
+{: .highlight-title}
+> Unos binarnih brojeva
+>
+> U Pythonu binarne brojeve možete unositi kao string i pretvarati ih > u int pomoću `int(s,2)`, gdje je `s` uneseni string.
+
+**Input:**
+String $s$ koji reprezentira zadani binarni broj.
+
+**Output:**
+Broj $k$ koji označava ukupan broj `1` u zadanom stringu.
+
+### Primjer
+**Input:**
+```
+0001011
+```
+**Output:**
+```
+3
+```
+
+## Zadatak 3: Nedostaje broj
+U program se unosi lista $l$ koja sadrži $n$ cjelobrojnih vrijednosti koje su u rasponu od $0$ do $n$, u unesenoj listi nedostaje jedan broj iz intervala od $0$ do $n$. Program zatim ispisuje broj koji nedostaje u unesenoj listi.
+
+**Input:**
+Lista cjelih brojeva $l$.
+
+**Output:**
+Broj $k$ koji nedostaje u listi $l$.
+
+### Primjeri
+**Input:**
+```
+0 1 3
+```
+**Output:**
+```
+2
+```
+**Input:**
+```
+9 0 1 5 3 2 4 6 8 
+```
+**Output:**
+```
+7
+```
