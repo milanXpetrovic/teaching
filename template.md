@@ -2,21 +2,18 @@
 nav_exclude: true
 ---
 
-## Zadatak
-
+## Zadatak:
 **Input:**
-
 **Output:**
-
 ### Primjer
-
 **Input:**
 ```
 ```
-
 **Output:**
 ```
 ```
+
+
 
 ## Math
 
