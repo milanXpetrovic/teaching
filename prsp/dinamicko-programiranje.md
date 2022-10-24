@@ -4,7 +4,7 @@ parent: PRSP
 nav_order: 5
 ---
 
-# Vježbe 5: Dinamičko programiranje
+# Dinamičko programiranje
 Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće podprobleme koji mogu biti samostalno riješeni.
 
 Postoje dvije upotrebe za dinamičko programiranje:
@@ -30,7 +30,7 @@ SRTBOT - Paradigma za dizajniranje rekurzivnih algoritama:
 
 
 ## Zadatak 2: Problem s kovanicama
-Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](../../pohlepni-algoritmi#zadatak-1-problem-s-kovanicama)
+Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](../pohlepni-algoritmi#zadatak-1-problem-s-kovanicama)
 
 
 **Input:**
