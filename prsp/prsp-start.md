@@ -27,10 +27,9 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [x] [Vremenska složenost](../vremenska-slozenost)
 - [ ] [Potpuno pretraživanje](../potpuno-pretrazivanje)
 - [ ] [Pohlepni algoritmi](../pohlepni-algoritmi)
-
-<!--
 - [ ] [Dinamičko programiranje](../dinamicko-programiranje) 
-- [ ] [Bit manipulation](./bit-manipulation)
+- [ ] [Bit manipulation](../bit-manipulation)
+<!--
 - [ ] [Grafovi i stabla](./grafovi-i-stabla)
 - [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [Matrice](./matrice)

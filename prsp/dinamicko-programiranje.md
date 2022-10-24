@@ -5,9 +5,12 @@ nav_order: 5
 nav_exclude: true
 ---
 
-
 # Vježbe 5: Dinamičko programiranje
+Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće podprobleme koji mogu biti samostalno riješeni.
 
+Postoje dvije upotrebe za dinamičko programiranje:
+• Pronalaženje optimalnog rješenja: Želimo pronaći rješenje koje je što je moguće veće ili što manje.
+• Prebrojavanje broja rješenja: Želimo izračunati ukupan broj mogućih rješenja.
 
 ## SRTBOT
 SRTBOT - Paradigma za dizajniranje rekurzivnih algoritama:
@@ -20,22 +23,17 @@ SRTBOT - Paradigma za dizajniranje rekurzivnih algoritama:
 - Time analysis - Analiza vremena izvodđenja.
 
 
-**Primjer: Merge sort**
-
-Želimo sortirati polje $A$, tako da sortiramo neka podpolja $A[i:j]$. Time će podproblem biti definiran kao $S(i,j)$ u orginalanom problemu $S(0, n)$ gdje je $n$ veličina polja $A$. Povezanost podproblema s rekurzivnom strukturom nam je definirana kao $S(i,j) = \textrm{merge}(S(i,m), S(m,j))$. Gdje spajamo (*merge*) dva sortirana podpolja $S(i,m)$ i $S(m,j)$ gdje je $m$ središnji element koji se dobije pomoću $m= \lfloor \frac{i+j}{2} \rfloor$. Iz ovoga proizlazi da ako damo riješenja za dva manja podproblema konstruirati ćemo rješenje za podproblem  $S(i,j)$, pritom si moramo osigurati da je podproblem  $S(i,j)$ veći od podproblema $S(i,m)$ i $S(m,j)$ da izbjegnemo beskonačno izvođenje algoritma, ovo si osiguravamo povećanjem veličine podpolja kojeg sortiramo pomoću $j-i$.
-
-- Subproblems: $S(i,j)$ = sorted array on $A[i:j]$
-- Relate: $S(i,j) = merge(S(i,m), S(m,j))$ where is $m= \lfloor \frac{i+j}{2} \rfloor$
-- Topological order: increasing $j-i$
-- Base case: $S(i,j)=\left[\;\;\right]$
-- Original problem: $S(0, n)$
-- Time analysis: $T(n) = 2T(\frac{n}{2})+O(n)=O(n \log n)$
-
 
 ## Zadatak 1: Fibonacci
 
 
-## Zadatak 1: Problem s kovanicama
+
+
+
+## Zadatak 2: Problem s kovanicama
+Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](./pohlepni-algoritmi#zadatak-1-problem-s-kovanicama)
+
+
 **Input:**
 **Output:**
 ### Primjer
