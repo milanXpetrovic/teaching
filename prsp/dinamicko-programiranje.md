@@ -2,7 +2,6 @@
 layout: default
 parent: PRSP
 nav_order: 5
-nav_exclude: true
 ---
 
 # Vježbe 5: Dinamičko programiranje
@@ -31,7 +30,7 @@ SRTBOT - Paradigma za dizajniranje rekurzivnih algoritama:
 
 
 ## Zadatak 2: Problem s kovanicama
-Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](./pohlepni-algoritmi#zadatak-1-problem-s-kovanicama)
+Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](../pohlepni-algoritmi#zadatak-1-problem-s-kovanicama)
 
 
 **Input:**
