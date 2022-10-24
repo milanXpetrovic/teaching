@@ -183,3 +183,36 @@ Cijeli broj $n$ $(1 <= n <= 1000)$ koji označava traženu sumu.
 1 1 1 2
 1 1 1 1 1
 ```
+
+
+
+
+Različite znamenke 
+Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
+
+Napišite program koji na za zadanu godinu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
+
+**Input:**
+Cijeli broj $y$ $(1000 ≤ y ≤ 9000)$ koji označava broj godine.
+
+**Output:**
+Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve znamenke su različite.
+
+### Primjer
+**Input:**
+```
+1987
+```
+**Output:**
+```
+2013
+```
+
+**Input:**
+```
+2013
+```
+**Output:**
+```
+2014
+```

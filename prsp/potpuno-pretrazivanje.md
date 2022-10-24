@@ -8,7 +8,7 @@ nav_order: 3
 Potpuno pretraživanje (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
 Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje rješenje. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
 
-## Zadatak 1: Generiranje podskupova
+## Zadatak 1: Generiranje podskupova 
 
 Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
@@ -55,18 +55,43 @@ U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 **Output:**
 Ispis brojeva čija suma iznosi $k$.
 
+
 ## Zadatak 4: K-sum Meet in the middle
-Pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
+Pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
+
+Razmotrimo problem gdje nam je dana lista $l$ koja sadržava $n$ brojeva i broj $k$, te želimo saznati ako je moguće odabrati brojeve s liste $l$ tako da njihov zbroj bude $k$. 
+
 
 **Input:**
 U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 
 **Output:**
-Ispis brojeva čija suma iznosi $k$.
+Ispis "YES" ako je moguće generirati sumu, u protivnom se ispisuje -1.
 
-## Zadatak 4: Stvaranje stringova
+**Input:**
+```
+15
+2,4,5,9
+```
+
+**Output:**
+```
+YES
+```
+
+**Input:**
+```
+15
+7,11,5,9
+```
+
+**Output:**
+```
+-1
+```
+
+## Zadatak 5: Stvaranje stringova
 Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti pomoću znakova iz zadanog stringa $s$.
-
 
 {: .highlight }
 Za generiranje permutacija može se koristiti funkcija `permutations` koja se poziva pomoću `from itertools import permutations`. 
@@ -106,36 +131,6 @@ caaab
 caaba
 cabaa
 cbaaa
-```
-
-## Zadatak 5: Različite znamenke 
-Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
-
-Napišite program koji na za zadanu godinu traži prvu sljedeću godinu koja sadrži sve različite znamenke.
-
-**Input:**
-Cijeli broj $y$ $(1000 ≤ y ≤ 9000)$ koji označava broj godine.
-
-**Output:**
-Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve znamenke su različite.
-
-### Primjer
-**Input:**
-```
-1987
-```
-**Output:**
-```
-2013
-```
-
-**Input:**
-```
-2013
-```
-**Output:**
-```
-2014
 ```
 
 ## Zadatak 6: 

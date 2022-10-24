@@ -53,7 +53,7 @@ AABACDACA
 
 ## Zadatak 3: Zakazivanje aktivnosti
 
-Organiziraj upis predmeta tako da student upiše maksimalan broj predmeta bez preklapanja.
+Organiziraj upis predmeta tako da student upiše maksimalan broj predmeta. Predmeti se ne smiju preklapati.
 
 **Input:**
 Prvi red sadrži jedan cijeli broj $c$ $(1 \le c \le 10^3)$ - broj testnih slučajeva.
