@@ -97,6 +97,78 @@ contract MappingUser {
 }
 ```
 
+
+## If/Else
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity <0.8.13;
+
+contract IfElse {
+    function foo(uint x) public pure returns (uint) {
+        if (x < 10) {
+            return 0;
+        } else if (x < 20) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    function ternary(uint _x) public pure returns (uint) {
+        // if (_x < 10) {
+        //     return 1;
+        // }
+        // return 2;
+
+        // shorthand way to write if / else statement
+        // the "?" operator is called the ternary operator
+        return _x < 10 ? 1 : 2;
+    }
+}
+```
+
+
+## For i While petlje
+
+Solidity podržava `for`, `while` i `do while` petlje.
+
+Nemojte pisati petlje koje nemaju ograničenja jer može doseći `gas limit`, uzrokujući neuspjeh vaše transakcije. Iz ovog razloga, `while` i `do while` petlje se rijetko koriste.
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract Loop {
+    function loop() public {
+        // for loop
+        for (uint i = 0; i < 10; i++) {
+            if (i == 3) {
+                // Skip to next iteration with continue
+                continue;
+            }
+            if (i == 5) {
+                // Exit loop with break
+                break;
+            }
+        }
+
+        // while loop
+        uint j;
+        while (j < 10) {
+            j++;
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+
 ## Primjer pametnog ugovora
 Ugovor u smislu Solidityja je zbirka koda (njegove funkcije) i podataka (njegovo stanje) koji se nalaze na određenoj adresi na Ethereum blockchainu.
 
@@ -123,11 +195,8 @@ contract SimpleStorage {
 - `pragma solidity >=0.4.16 <0.9.0;` - Navodi da je izvorni kod napisan za Solidity verziju 0.4.16 ili noviju verziju jezika do, ali ne uključujući verziju 0.9.0. Ovo je kako bi se osiguralo da se ugovor ne može kompajlirati s novom (pokvarenom) verzijom prevoditelja, gdje bi se mogao ponašati drugačije.
 - `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
 
-## Zadatak 1: Omiljeni broj
-Stvorite novi file `SimpleStorage.sol` u kojem ćete napisati vaš ugovor. Cilj vašeg ugovora je omogućiti unos i ispis omiljenog broja. Stvorite varijablu `favNum` u koju pohranjujete omiljeni broj, za pohranu kreirajte funkciju `store`, a za dohvaćanje vrijednosti kreirajte funkciju `retrieve`. 
 
-## Zadatak 2:
-Kreirajte pametni ugovor koji omnogućuje unos imena osobe i broj godina. Za pohranu imena i broja godine koristite strukturu naziva Osoba. Omogućite pohranu proizvoljnog broja osoba u polje i omogućite nalaženje broja godina pomoću imena osobe.
+
 
 ## Izvori
 - [Metamask](https://metamask.io/)
