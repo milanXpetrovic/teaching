@@ -21,7 +21,6 @@ contract EtherUnits {
 }
 ```
 
-
 ## Naknada
 
 Prilikom transakcije potrebno je odraditi određenu količinu računanja. Količina računanja izražena je u jedinicama koje se nazivaju `Gas`. Sukladno tome trošak transakcije biti će određen količinom potrošenih `Gas` jedinica i njihovoj cijeni. 
