@@ -1,3 +1,6 @@
+---
+nav_exclude: true
+---
 # Predložak: Projektni zadatak
 
 **Autor:** Milan Petrović
