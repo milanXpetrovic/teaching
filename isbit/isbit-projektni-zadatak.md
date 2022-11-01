@@ -14,7 +14,7 @@ parent: ISBiT
 
 ## 🎯 Zadatak
 
-[Link za prijavu tema na Melinu](merlin)
+[Link za prijavu tema na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2940359)
 
 Potrebno je izraditi seminar (do 20 strana) i prezentaciju (u trajanju od 15 min) o odabranoj temi. Seminari se izrađuju samostalno ili u timu od 2 osobe. Seminar je potrebno predati u .md i .pdf formatu. Predložak za pisanje dostupan je na [linku](../isbit-projektni-template).
 
@@ -90,4 +90,4 @@ U temi Zaštita  korisnika u informacijskim sustavima potrebno je opisati mjere 
 
 ## 📦 Predaja rezultata
 
-Seminar predajete u .md i .pdf formatu na [linku](merlin)
+Seminar predajete u .md i .pdf formatu na [linku](https://moodle.srce.hr/2022-2023/mod/assign/view.php?id=2940362&forceview=1)
