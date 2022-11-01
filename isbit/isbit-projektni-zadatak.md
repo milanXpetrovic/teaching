@@ -2,7 +2,7 @@
 layout: default
 parent: ISBiT
 ---
-# 🚀 Projektni zadatak: Informacijska sigurnost
+# Projektni zadatak
 
 ## 📢 Osnovne informacije
 
@@ -10,14 +10,13 @@ parent: ISBiT
 - Ak. god: 2022./2023.
 - Rok za prijavu teme: 23.11.2022.
 - Rok za predaju: 14.12.2022.
-
-[Link za prijavu tema na Melinu](merlin)
-
-🏆Bodovi: 20
+- Bodovi: 20
 
 ## 🎯 Zadatak
 
-Potrebno je izraditi seminar (do 20 strana) i prezentaciju (u trajanju od 15 min) o odabranoj temi. Seminari se izrađuju samostalno ili u timu od 2 studenta. Seminar predajete u .md i .pdf formatu. Predložak za pisanje dostupan je na [linku](../seminar-md-template.md).
+[Link za prijavu tema na Melinu](merlin)
+
+Potrebno je izraditi seminar (do 20 strana) i prezentaciju (u trajanju od 15 min) o odabranoj temi. Seminari se izrađuju samostalno ili u timu od 2 studenta. Seminar predajete u .md i .pdf formatu. Predložak za pisanje dostupan je na [linku](../isbit-projektni-template.md).
 
 ## 🧾 Teme
 

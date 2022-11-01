@@ -2,7 +2,7 @@
 layout: default
 parent: ISBiT
 ---
-# Solidity 
+# Solidity
 
 - [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
 - [Remix IDE](https://remix-project.org/)
@@ -11,9 +11,11 @@ parent: ISBiT
 - [Vidljivost](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters)
 
 ## Varijable stanja i funkcije
+
 U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). Solidity pruža nekoliko elementarnih tipova koji se mogu kombinirati u složene tipove. Ovi tipovi također se nazivaju vrijednosnim tipovima jer će se varijable ovih tipova uvijek prosljeđivati po vrijednosti, tj. uvijek se kopiraju kada se dodjeljuju ili koriste kao argumenti funkcije. Tipovi mogu međusobno komunicirati u izrazima koji sadrže operatore. Reference različitih operatora možete pronaći na [Order of Precedence of Operators](https://docs.soliditylang.org/en/latest/types.html#order)
 
-**Elementarni tipovi podataka**
+**Elementarni tipovi podataka:**
+
 - `bool` - Moguće vrijednosti su konstante `true` i `false`.
 - `int` / `uint` - Cijeli brojevi s predznakom i bez predznaka različitih veličina. Veličina im varira ovisno o ključnoj riječi od `uint8` do `uint256`. `uint` i `int` su aliasi za `uint256` odnosno `int256`.
 - `fixed` / `ufixed` - Broj s fiksnom točkom, s predznakom i bez predznaka različitih veličina. Ključne riječi `ufixedMxN` i `fixedMxN`, gdje `M` predstavlja broj bitova koje uzima tip, a `N` predstavlja koliko je decimalnih točaka dostupno. `M` mora biti djeljiv s 8 i ide od 8 do 256 bita. `N` mora biti između 0 i 80, uključivo. `ufixed` i `fixed` su aliasi za `ufixed128x18` odnosno `fixed128x18`.
@@ -22,29 +24,31 @@ U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). 
 
 **Nizovi**
 Za razliku od elementarnih tipova možemo imati i nizove čija veličina može biti zanada, odnosno fiksna ili dinamična.  
+
 - Nizovi s fiksno zadanom veličinom su primjerice `bytes1`, `bytes2`, `bytes3`, …, `bytes32` koji sadrže niz bajtova od jedan do 32. S članom `.length` koji daje fiksnu duljinu niza bajtova (samo za čitanje).
 - Nizovi koji su zadani samo kao `bytes` ili `string` su pak niz koji je dinamičke veličine i sadržava bajtove ili UTF-8 znakove.
 
 **Funkcije**
 Tipovi funkcija označeni su na sljedeći način:
+
 ```solidity
 function () {internal|external|public|private
 } [pure|view|payable] [returns ()]
 ```
 
-- `internal` - Ovim funkcijama može se pristupiti samo interno (tj. unutar trenutnog ugovora ili ugovora koji iz njega proizlaze), bez korištenja `this`. 
+- `internal` - Ovim funkcijama može se pristupiti samo interno (tj. unutar trenutnog ugovora ili ugovora koji iz njega proizlaze), bez korištenja `this`.
 - `external` - Vanjske funkcije dio su sučelja ugovora, što znači da se mogu pozvati iz drugih ugovora i putem transakcija. Za interni poziv funkcije `f()` koristimo `this.f()`.
 - `public` - Javne funkcije dio su sučelja ugovora i mogu se pozivati interno ili putem poruka. Za javne varijable stanja generira se funkcija `get`
 - `private` - Privatne funkcije i varijable stanja vidljive su samo za ugovor u kojem su definirane, dok u izvedenim ugovorima nisu.
 - `view` - Ove funkcije koriste se samo za čitanje i ne mijenjaju stanje. Drugim riječima, ako želite čitati podatke iz blockchaina, možete koristiti `view`. Getter metode su zadane kao funkcije prikaza, odnosno `view`. Ove funkcije ne mogu: ažurirati blockchain, stvarati ugovore, poslati Ether
-- `pure` - Ove funkcije su +su restriktivnije od `view `funkcija  i ne mijenjaju stanje niti čitaju stanje blockchaina. Ove funkcije ne mogu: Čitati iz varijabli stanja, stanja blockchaina. Ovakve funkcije su dobre kao poziv jer nam osiguravaju da se trenutno stanje neće promjeniti.
+- `pure` - Ove funkcije su +su restriktivnije od `view` funkcija  i ne mijenjaju stanje niti čitaju stanje blockchaina. Ove funkcije ne mogu: Čitati iz varijabli stanja, stanja blockchaina. Ovakve funkcije su dobre kao poziv jer nam osiguravaju da se trenutno stanje neće promjeniti.
 - `payable` - Ova funkcija nam omogućuje slanje i primanje Ethera. Stvaranjem ovakve funkcije u ugovoru omogućujemo izvršavanje transakcija.
 
-Za razliku od ``, `` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns ()` mora biti izostavljen.
+Za razliku od `<parameter types>`, `<return types>` ne mogu biti prazni - ako tip funkcije ne bi trebao vratiti ništa, `returns (<return types>)` mora biti izostavljen.
 
 ## Strukture podataka
 
-**Polja** 
+### Polja
 
 Polja mogu biti zadani da imaju fiksnu ili dinamičku veličinu. Tip polja fiksne veličine `k` i tipa elementa `T` piše se kao `T[k]`, a polje dinamičke veličine kao `T[]`. Sintaksa pisanja polja razlikuje se od nekih drugih jezika, tako ćemo primjerice polje `x` koji sadrži 4 polja dinamičke veličine pisati kao `uint[][5]`, razlog tome je što u Solidity-u `X[3]` znači polje koji sadržava 3 elementa tipa `X`, a samim time i `X` može biti polje. Primjerice u varijabli `uint[][5] memory x` ako želimo pristupiti sedmom `uint` elemetu u drugom dinamičkom polju koristit ćemo `x[2][6]`
 
@@ -56,7 +60,7 @@ uint balance[10];
 type[] arrayName;
 ```
 
-**Struktura** 
+### Struktura
 
 Solidity pruža način za definiranje novih tipova u obliku struktura. U nastavku je prikazan primjer korištenja strukture.
 
@@ -71,7 +75,7 @@ struct Campaign {
     }
 ```
 
-**Mapping**
+### Mapping
 
 Mapiranja koriste sintaksu `mapping(KeyType => ValueType)`, a tipovi varijabli u mapiranju deklariraju se pomoću sintakse `mapping(KeyType => ValueType) VariableName`. `KeyType` može biti bilo koji ugrađeni tip vrijednosti, npr. bajtovi, string. Drugi korisnički definirani ili složeni tipovi, kao što su mapiranje, strukture ili polja, nisu dopušteni. `ValueType` može biti bilo koji tip, uključujući mapiranja, polja i strukture.
 
@@ -99,8 +103,6 @@ contract MappingUser {
 
 **Enum**
  //TODO
-
-
 
 ## If/Else
 
@@ -131,7 +133,6 @@ contract IfElse {
     }
 }
 ```
-
 
 ## For i While petlje
 
@@ -166,11 +167,10 @@ contract Loop {
 }
 ```
 
-
 ## Events
 
 Eventi nam evidentiranje aktivnosti unutar Ehereum blockchaina.
-Oni su nasljedni članovi ugovora. Kada ih pozovete, uzrokuju pohranjivanje argumenata u dnevnik transakcije - posebnu podatkovnu strukturu u blockchainu. Ti su zapisnici povezani s adresom ugovora, ugrađeni su u blockchain i ostaju tamo sve dok je blok dostupan. Dnevnik i njegovi podaci o događajima nisu dostupni unutar ugovora (čak ni iz ugovora koji ih je stvorio). 
+Oni su nasljedni članovi ugovora. Kada ih pozovete, uzrokuju pohranjivanje argumenata u dnevnik transakcije - posebnu podatkovnu strukturu u blockchainu. Ti su zapisnici povezani s adresom ugovora, ugrađeni su u blockchain i ostaju tamo sve dok je blok dostupan. Dnevnik i njegovi podaci o događajima nisu dostupni unutar ugovora (čak ni iz ugovora koji ih je stvorio).
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -231,11 +231,13 @@ contract MyContract {
 Postoje dva načina za inicijalizaciju nadređenog ugovora s parametrima.
 
 Prosljeđivanje parametara u listi nasljeđivanja.
+
 ```solidity
 contract B is X("Input to X"), Y("Input to Y") { }
 ```
 
 Prosljeđivanje parametara u konstruktoru, slično modifikatorima funkcija
+
 ```solidity
 contract C is X, Y {
     constructor(string memory _name, string memory _text) X(_name) Y(_text) {}
@@ -243,10 +245,11 @@ contract C is X, Y {
 ```
 
 ## Nasljeđivanje
+
 Solidity podržava višestruko nasljeđivanje. Ugovori mogu naslijediti druge ugovore korištenjem ključne riječi `is`. Funkcija koja će biti nadjačana podređenim ugovorom mora biti deklarirana kao virtualna. Funkcija koja će nadjačati nadređenu funkciju mora koristiti ključnu riječ `override`. Red nasljeđivanja je važan. Nasljeđivanje se navodi redoslijedom od "najsličniji osnovi" do "najviše izvedeni".
 
-```
-Redosljed naslje]ivanja
+```solidity
+Redosljed nasljedivanja
     A
    / \
   B   C
@@ -254,7 +257,6 @@ Redosljed naslje]ivanja
 F  D,E
 
 ```
-
 
 ```solidity
 
@@ -305,9 +307,10 @@ contract F is A, B {
 ```
 
 ## Primjer pametnog ugovora
+
 Ugovor u smislu Solidityja je zbirka koda (njegove funkcije) i podataka (njegovo stanje) koji se nalaze na određenoj adresi na Ethereum blockchainu.
 
-U ovom primjeru, ugovor definira funkcije `set` i `get` koje se mogu koristiti za izmjenu ili dohvaćanje vrijednosti varijable. Ovaj ugovor još ne čini mnogo osim dopuštanja bilo kome da pohrani jedan broj kojem može pristupiti bilo tko. Svatko može ponovno pozvati `set` s drugom vrijednošću i prebrisati vaš broj, ali broj je i dalje pohranjen u povijesti blockchaina. 
+U ovom primjeru, ugovor definira funkcije `set` i `get` koje se mogu koristiti za izmjenu ili dohvaćanje vrijednosti varijable. Ovaj ugovor još ne čini mnogo osim dopuštanja bilo kome da pohrani jedan broj kojem može pristupiti bilo tko. Svatko može ponovno pozvati `set` s drugom vrijednošću i prebrisati vaš broj, ali broj je i dalje pohranjen u povijesti blockchaina.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -328,12 +331,10 @@ contract SimpleStorage {
 
 - `// SPDX-License-Identifier: GPL-3.0` - Izvorni kod licenciran pod GPL verzijom 3.0. Strojno čitljivi specifikatori licence važni su u postavkama u kojima je objavljivanje izvornog koda zadano.
 - `pragma solidity >=0.4.16 <0.9.0;` - Navodi da je izvorni kod napisan za Solidity verziju 0.4.16 ili noviju verziju jezika do, ali ne uključujući verziju 0.9.0. Ovo je kako bi se osiguralo da se ugovor ne može kompajlirati s novom (pokvarenom) verzijom prevoditelja, gdje bi se mogao ponašati drugačije.
-- `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita). 
-
-
-
+- `uint storedData;` - Deklarira varijablu stanja pod nazivom `storedData` tipa `uint` (cijeli broj od 256 bita).
 
 ## Izvori
+
 - [Metamask](https://metamask.io/)
 - [Etherscan](https://etherscan.io/)
 - [Goerli Etherscan](https://goerli.etherscan.io/)
