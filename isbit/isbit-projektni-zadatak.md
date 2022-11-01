@@ -30,6 +30,7 @@ U temi Analiza informacijskih sustava odabirete jedan od navedenih sustava:
 - Medicinski sustavi
 - Internet stvari (IoT)
 - Energetski sektor
+- Državni i vojni sustavi
 
 Za odabrani sustav potrebno je:
 
@@ -64,22 +65,16 @@ Sustavi nad kojima su se dogodili napadi su:
 - Facebook
 - MongoDB
 - Instagram
+- Zloupotreba ukradenih podataka
 
 Za navedene napade na sustave, potrebno je opisati:
 
-- Opisati što je događaj krađe podataka
-- Opistani način (sigurnosni propust) koji je doveo do krađe
-- Opistani način (sigurnosni propust) koji je doveo do krađe
+- Što je događaj krađe podataka
+- Sigurnosni propust koji je doveo do krađe
+- Posljedice na sustav i korisnike
+- Mjere koje su poduzete nakon napda
 
-- [Krađa/Curenje podataka](https://en.wikipedia.org/wiki/List_of_data_breaches)
-
-### Ostale teme
-
-- [**Cyberratovanje**](https://en.wikipedia.org/wiki/Cyberwarfare)
-
-- **Zloupotreba ukradenih podataka**
-
-- **Mjere zaštite u informacijskim sustavima**
+### Zaštita  korisnika u informacijskim sustavima
 
 ## 📂 Resursi
 
@@ -88,4 +83,4 @@ Za navedene napade na sustave, potrebno je opisati:
 
 ## 📦 Predaja rezultata
 
-- Seminar predajete u .md i .pdf formatu
+Seminar predajete u .md i .pdf formatu na [linku](merlin)
