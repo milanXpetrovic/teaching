@@ -8,7 +8,7 @@ parent: ISBiT
 
 - Predmet: Informacijska sigurnost i blockchain tehnologije
 - Ak. god: 2022./2023.
-- Rok za prijavu teme: 23.11.2022.
+- Rok za odabir teme: 23.11.2022.
 - Rok za predaju: 14.12.2022.
 - Bodovi: 20
 
@@ -88,6 +88,6 @@ U temi Zaštita  korisnika u informacijskim sustavima potrebno je opisati mjere 
 - [Markdown sintaksa](https://www.markdownguide.org/basic-syntax/)
 - [VS Code Markdown](https://code.visualstudio.com/docs/languages/markdown)
 
-## 📦 Predaja rezultata
+## 📦 Predaja projektnog zadatka
 
 Seminar predajete u .md i .pdf formatu na [linku](https://moodle.srce.hr/2022-2023/mod/assign/view.php?id=2940362&forceview=1)
