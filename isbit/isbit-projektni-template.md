@@ -1,8 +1,3 @@
----
-nav_exclude: true
-parent: ISBiT
----
-
 # Predložak: Projektni zadatak
 
 **Autor:** Milan Petrović
