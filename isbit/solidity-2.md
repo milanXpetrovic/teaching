@@ -1,3 +1,9 @@
+---
+layout: default
+parent: ISBiT
+nav_exclude: true
+---
+
 # Solitdity 2
 
 ## Ether i Wei

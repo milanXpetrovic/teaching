@@ -16,7 +16,7 @@ parent: ISBiT
 
 [Link za prijavu tema na Melinu](merlin)
 
-Potrebno je izraditi seminar (do 20 strana) i prezentaciju (u trajanju od 15 min) o odabranoj temi. Seminari se izrađuju samostalno ili u timu od 2 studenta. Seminar predajete u .md i .pdf formatu. Predložak za pisanje dostupan je na [linku](../isbit-projektni-template.md).
+Potrebno je izraditi seminar (do 20 strana) i prezentaciju (u trajanju od 15 min) o odabranoj temi. Seminari se izrađuju samostalno ili u timu od 2 osobe. Seminar je potrebno predati u .md i .pdf formatu. Predložak za pisanje dostupan je na [linku](../isbit-projektni-template.md).
 
 ## 🧾 Teme
 
@@ -75,6 +75,13 @@ Za navedene napade na sustave, potrebno je opisati:
 - Mjere koje su poduzete nakon napda
 
 ### Zaštita  korisnika u informacijskim sustavima
+
+U temi Zaštita  korisnika u informacijskim sustavima potrebno je opisati mjere zaštite od strane korisnika sustava putem pametnih telefona. Potrebno je navesit i opisati:
+
+- Što je informacijska sigurnost
+- Načine na koje je ugrožena korisnička sigurnost
+- Što je praćenje podataka i kako ono ugrožava korisnike
+- Koje mjere korisnici trebaju poduzeti da bi bili sigurniji
 
 ## 📂 Resursi
 

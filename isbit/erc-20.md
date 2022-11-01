@@ -1,3 +1,10 @@
+---
+layout: default
+parent: ISBiT
+nav_exclude: true
+---
+
+# ERC20 Token
 
 ## Ethereum Improvement Proposals (EIPs)
 
