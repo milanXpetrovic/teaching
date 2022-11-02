@@ -4,7 +4,7 @@ nav_order:
 nav_exclude: true
 ---
 
-# Izrada modela i predložaka za web app
+# Izrada modela i predložaka za web aplikaciju
 
 ## 📢 Osnovne informacije
 
@@ -18,11 +18,12 @@ nav_exclude: true
 
 Zadatak je izrada modela i predložaka (pogleda) za web aplikaciju ili uslugu ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama po dvoje. Potrebno je započeti izradu web aplikacije ili usluge i u danom roku predati aplikaciju ili uslugu koja ima izrađene modele i predloške (poglede). Ovisno o točnosti i potpunosti izrađenih modela i predložaka (pogleda), može se ostvariti do 20 bodova.
 
-[Link za prijavu teme na Melinu]()
+[Link za prijavu teme na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2942733)
 
 Projekt treba sadržavati:
 
 - Github repozitorij za projekt
+  - Github repozitorij treba sadržavati i README file u kojem je naveden zadatak i imena studenata.
 - Django projekt i aplikaciju
 - Model koji sadrži barem 3 entiteta (unutar modela voditi računa različitim tipovima podataka)
 - Barem jednu one to one, one to many i many to many relaciju.
@@ -32,7 +33,7 @@ Projekt treba sadržavati:
 ## 🧾 Teme
 
 - Knjižnica
-- To do
+- To do lista
 - Blog
 - Forum
 - Kviz
@@ -45,17 +46,17 @@ Projekt treba sadržavati:
 - Evidencija prakse
 - Organizacija događaja
 - Vozni red
-- Kalednar aktivnosti
+- Kaledar aktivnosti
 - Igra
 - Aplikacija za glasovanje
 - Sustav upravljanja bolnicom
 - Sustav upravljanja bankom krvi
 - Sustav upravljanja osiguranjem
-- Susatav za organizaciju natjecanja
+- Sustav za organizaciju natjecanja
 - ispravi.me dodatak za Visual Studio Code
 
 ## 📦 Predaja zadatka
 
-Zadatak predajete kao link na vaš github repozitorij
+Zadatak predajete kao .zip arhivu vašeg projekta i poveznicu na vaš Github repozitorij.
 
-[Link za prijavu teme na Melinu]()
+[Link za predaju rješenja na Melinu](https://moodle.srce.hr/2022-2023/mod/assign/view.php?id=2942812)
