@@ -14,27 +14,22 @@ nav_exclude: true
 - Rok za predaju: 22.12.2022.
 - Bodovi: 20
 
-## 🧾 Zadatak
+## 🎯 Zadatak
 
 Zadatak je izrada modela i predložaka (pogleda) za web aplikaciju ili uslugu ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama po dvoje. Potrebno je započeti izradu web aplikacije ili usluge i u danom roku predati aplikaciju ili uslugu koja ima izrađene modele i predloške (poglede). Ovisno o točnosti i potpunosti izrađenih modela i predložaka (pogleda), može se ostvariti do 20 bodova.
 
-## 🎯 Zadatak
-
 [Link za prijavu teme na Melinu]()
 
-Zadatak je:
+Projekt treba sadržavati:
 
-- Stvoriti Django projekt i aplikaciju
-- Model mora sadržavati barem 5 entiteta
-- Mora sadržavati barem jednu one to one, one to many i many to many relaciju.
-- Generiranje testnih podataka pomoću factory boya
+- Github repozitorij za projekt
+- Django projekt i aplikaciju
+- Model koji sadrži barem 3 entiteta (unutar modela voditi računa različitim tipovima podataka)
+- Barem jednu one to one, one to many i many to many relaciju.
+- Generirane testne podatke
 - Prikaz generiranih podataka za svaki entitet u modelu pomoću generičkih pogleda
-- Github repozitorij za web app
-
 
 ## 🧾 Teme
-
-
 
 - Knjižnica
 - To do
@@ -50,9 +45,17 @@ Zadatak je:
 - Evidencija prakse
 - Organizacija događaja
 - Vozni red
+- Kalednar aktivnosti
+- Igra
+- Aplikacija za glasovanje
 - Sustav upravljanja bolnicom
 - Sustav upravljanja bankom krvi
 - Sustav upravljanja osiguranjem
 - Susatav za organizaciju natjecanja
+- ispravi.me dodatak za Visual Studio Code
 
 ## 📦 Predaja zadatka
+
+Zadatak predajete kao link na vaš github repozitorij
+
+[Link za prijavu teme na Melinu]()
