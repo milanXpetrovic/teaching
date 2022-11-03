@@ -58,7 +58,7 @@ Organiziraj upis predmeta tako da student upiše maksimalan broj predmeta. Predm
 
 **Input:**
 Prvi red sadrži jedan cijeli broj $c$ $(1 \le c \le 10^3)$ - broj testnih slučajeva.
-Sljedećih $c$ linija sadržava dva cijela broja $t_start$ i $t_end$ koji označuju vrijeme početka i završetka predmeta.
+Sljedećih $c$ linija sadržava dva cijela broja $t\_start$ i $t\_end$ koji označuju vrijeme početka i završetka predmeta.
 
 **Output:**
 Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
