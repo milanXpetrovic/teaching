@@ -30,12 +30,13 @@ Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 200 200 100 20 10
 ```
 
-
 ## Zadatak 2: Kompresija podataka
 {: .highlight-title}
 > Tema seminara
 >
 > Huffman Data Compression
+
+Kreirajte program koji pretvara uneseni zapis slova u šifrirani zapis 0 i 1.
 
 | character | codeword |
 | --------- | -------- |

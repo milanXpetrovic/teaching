@@ -50,7 +50,7 @@ Napišite program koji prima kao input cijeli broj u binarnom formatu i vraća b
 {: .highlight-title}
 > Unos binarnih brojeva
 >
-> U Pythonu binarne brojeve možete unositi kao string i pretvarati ih > u int pomoću `int(s,2)`, gdje je `s` uneseni string.
+> U Pythonu binarne brojeve možete unositi kao string i pretvarati ih u int pomoću `int(s,2)`, gdje je `s` uneseni string.
 
 **Input:**
 String $s$ koji reprezentira zadani binarni broj.
