@@ -11,18 +11,6 @@ Postoje dvije upotrebe za dinamičko programiranje:
 • Pronalaženje optimalnog rješenja: Želimo pronaći rješenje koje je što je moguće veće ili što manje.
 • Prebrojavanje broja rješenja: Želimo izračunati ukupan broj mogućih rješenja.
 
-## SRTBOT
-SRTBOT - Paradigma za dizajniranje rekurzivnih algoritama:
-
-- Subproblem definition - problem koji rješavamo rastavljamo na jednostavnije podprobleme (Subproblem definition). 
-- Relate - Povezanost različitih rješenja podproblema s nekom rekurzivnom strukturom (Recurrence relation).
-- Topological order- Prikažemo li rješavanje problema kao graf, onda će podproblemi biti čvorovi u tom grafu, a veze su ovisnosti među njima. Ono što želimo postići je da je naš graf Usmjeren ackilički graf (DAG).
-- Base case - Zadan osnovni slučaj u rekurzivnoj strukturi.
-- Original problem - Želimo riješiti orginalni problem pomoću rastavljanja na podprobleme.
-- Time analysis - Analiza vremena izvodđenja.
-
-
-
 ## Zadatak 1: Fibonacci
 Napišite funkcije `fib_1(n)`, `fib_2(n)` i `fib_3(n)` koja za zadani broj $n$ izračunava n-ti Fibbonaccijev broj.
 
@@ -31,10 +19,12 @@ Zadatak rješite na tri načina:
 - Dinamičkim programiranjem, $O(n)$ vremenska i memorijska složenost.
 - Dinamičkim programiranjem, $O(n)$ vremenska i $O(1)$ memorijska složenost.
 
-Usporedite vremena izvođenja triju rješenja za 
+Usporedite vremena izvođenja triju funkcija za $n$ 50.
 
 ### Primjer
+
 **Input:**
+
 ```
 9
 ```
@@ -77,58 +67,80 @@ Ako je moguće kreirati svotu ispisuje se broj $n$ koji označuje broj kovanica 
 ```
 
 
+## Zadatak 3
 
-## Zadatak 2: Knapsack
+Penjete se stubištem. Do vrha je potrebno $n$ stuba. Svaki put se možete popeti 1 ili 2 stube. Na koliko se različitih načina možete popeti do vrha?
+
+### Primjer 1
 **Input:**
+```
+2
+```
 **Output:**
-### Primjer
+```
+2
+```
+1. 1  + 1 
+2. 2 
+
+### Primjer 2
 **Input:**
 ```
+3
 ```
 **Output:**
 ```
+3
 ```
 
-## Zadatak 3: Popločavanje
-**Input:**
-**Output:**
-### Primjer
-**Input:**
-```
-```
-**Output:**
-```
-```
+1. 1  + 1  + 1 
+2. 1  + 2 
+3. 2  + 1 
+
 
 ## Zadatak 4
+
+Zadan je cjelobrojni niz troškova gdje je `cijena[i]` cijena `i` koraka na stubištu. Nakon što platite troškove, možete se popeti za jednu ili dvije stepenice.
+
+Možete započeti od koraka s indeksom $0$ ili od koraka s indeksom $1$.
+
+Pronađite minimalnu cijenu da biste došli do vrha stubišta.
+
+### Primjer 1
+
 **Input:**
+```
+10 15 20
+```
 **Output:**
-### Primjer
+```
+15
+```
+Počet ćete od indeksa 1.
+- Platite 15 i popnite se dvije stepenice do vrha.
+Ukupna cijena je 15.
+
+### Primjer 2
+
 **Input:**
 ```
+1 100 1 1 1 100 1 1 100 1
 ```
 **Output:**
 ```
+6
 ```
 
-## Zadatak 5
-**Input:**
-**Output:**
-### Primjer
-**Input:**
-```
-```
-**Output:**
-```
-```
+Počenje se od indeksa 0.
+- Platite 1 i popnite se dvije stepenice do indeksa 2.
+- Platite 1 i popnite se dvije stepenice do indeksa 4.
+- Platite 1 i popnite se dvije stepenice do indeksa 6.
+- Platite 1 i popnite se jednu stepenicu do indeksa 7.
+- Platite 1 i popnite se dvije stepenice do indeksa 9.
+- Platite 1 i popnite se jednu stepenicu do vrha.
+Ukupni trošak je 6.
 
-## Zadatak 6
-**Input:**
-**Output:**
-### Primjer
-**Input:**
-```
-```
-**Output:**
-```
-```
+
+## Codeforces zadaci
+- [Hit the Lottery](https://codeforces.com/problemset/problem/996/A)
+- [Maximum Increase](https://codeforces.com/problemset/problem/702/A)
