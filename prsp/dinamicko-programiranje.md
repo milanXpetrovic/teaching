@@ -12,25 +12,25 @@ Postoje dvije upotrebe za dinamičko programiranje:
 • Prebrojavanje broja rješenja: Želimo izračunati ukupan broj mogućih rješenja.
 
 ## Zadatak 1: Fibonacci
-Napišite funkcije `fib_1(n)`, `fib_2(n)` i `fib_3(n)` koja za zadani broj $n$ izračunava n-ti Fibbonaccijev broj.
+Napišite funkcije `fib_1(n)`, `fib_2(n)` i `fib_3(n)` koja za zadani broj $n$ izračunava n-ti Fibonaccijev broj.
 
-Zadatak rješite na tri načina:
+Zadatak riješite na tri načina:
 - Rekurzivno, $O(n)$ vremenska i memorijska složenost.
 - Dinamičkim programiranjem, $O(n)$ vremenska i memorijska složenost.
 - Dinamičkim programiranjem, $O(n)$ vremenska i $O(1)$ memorijska složenost.
 
-Usporedite vremena izvođenja triju funkcija za $n$ 50.
+Usporedite vremena izvođenja triju funkcija za $n$ 40.
 
 ### Primjer
 
 **Input:**
 
 ```
-9
+40
 ```
 **Output:**
 ```
-34
+102334155
 ```
 
 ## Zadatak 2: Problem s kovanicama
@@ -39,7 +39,7 @@ Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](../pohlepni-algorit
 Zadatak je za unesenu listu denominacija kovanica $l$, $\{c_1, c_2, c_3,...,c_k\}$ i svotu $k$ pronaći minimalan broj kovanica potreban za stvoriti svotu $k$. Ako svotu nije moguće stvoriti pomoću zadanih kovanica ispisuje se $-1$.
 
 **Input:**
-U prvom redu unosi se cjeli broj $n$ koji označuje traženu svotu. 
+U prvom redu unosi se cijeli broj $n$ koji označuje traženu svotu. 
 U drugom redu unosi se lista $l$ koja sadrži vrijednosti na kovanicama.
 
 **Output:**
@@ -131,7 +131,7 @@ Ukupna cijena je 15.
 6
 ```
 
-Počenje se od indeksa 0.
+Počinje se od indeksa 0.
 - Platite 1 i popnite se dvije stepenice do indeksa 2.
 - Platite 1 i popnite se dvije stepenice do indeksa 4.
 - Platite 1 i popnite se dvije stepenice do indeksa 6.
