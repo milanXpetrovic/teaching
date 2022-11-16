@@ -8,7 +8,7 @@ nav_order: 6
 
 U nastavku su priloženi zadaci sa stranice Codeforces koje možete iskoristiti kao pripremu za prvi kolokvij iz vježbi.
 
-Pripremati se možete tako da rješavate zadatke koji sadrže oznake greedy, complete search, dp i koji su težine 800, 900 i 1000. [Popis zadataka](https://codeforces.com/problemset).
+Pripremati se možete i na samoj stranici tako da rješavate zadatke koji sadrže oznake greedy, complete search, dp i koji su težine 800, 900 i 1000. [Popis zadataka](https://codeforces.com/problemset).
 
 Ako se registrirate na stranici moći ćete i predati vaša rješenja zadatka i provjeriti ako ste ga ispravno riješili. 
 
