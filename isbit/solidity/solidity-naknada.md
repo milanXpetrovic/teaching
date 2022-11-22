@@ -5,7 +5,7 @@ grand_parent: ISBiT
 nav_exclude: true
 ---
 
-# Solitdity 2
+# Plaćanje naknade
 
 ## Ether i Wei
 
@@ -63,6 +63,3 @@ contract Gas {
 }
 ```
 
-## Ethereum Improvement Proposals (EIPs)
-
-Ethereum Improvement Proposals (EIPs) describe standards for the Ethereum platform, including core protocol specifications, client APIs, and contract standards. Network upgrades are discussed separately in the Ethereum Project Management repository.

@@ -4,18 +4,8 @@ parent: ISBiT
 nav_exclude: true
 ---
 
-# ERC20 Token
+# EIP-20: Token Standard
 
-## Ethereum Improvement Proposals (EIPs)
-
-Ethereum Improvement Proposals (EIPs) describe standards for the Ethereum platform, including core protocol specifications, client APIs, and contract standards. Network upgrades are discussed separately in the Ethereum Project Management repository.
-
-<https://eips.ethereum.org/erc>
-
-<https://www.investopedia.com/tech/why-crypto-users-need-know-about-erc20-token-standard/>
-
-<https://docs.openzeppelin.com/>
-<https://github.com/OpenZeppelin/openzeppelin-contracts>
 
 ## Erc20 Tokens
 
