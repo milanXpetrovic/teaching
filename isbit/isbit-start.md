@@ -6,7 +6,8 @@ has_children: true
 has_toc: false
 ---
 
-# Informacijska sigurnost i blockchain tehnologije 
+# Informacijska sigurnost i blockchain tehnologije
+
 Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnologije**
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/DS/1_godina/DINP_ISBT_2022_2023.pdf)
@@ -15,18 +16,20 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-| 26.10.2022.      | Zadavanje tema projektnih zadataka      |          | 
-|       | Praktični kolokvij | 20  prag  |    
+| 26.10.2022.      | Zadavanje tema projektnih zadataka      |          |
+|       | Praktični kolokvij | 20  prag  |
 |       | Projektnih zadatak i prezentacija | 20      |
-|       | Provjera znanja    | 30    | 
+|       | Provjera znanja    | 30    |
 | 14.12.2022. | Zadavanje tema završnih projekata                    | 30      |
 | 25.1.2023. | Nadoknada | |
 
 ## 👨‍💻 Vježbe
+
 - [ ] [Blockchain](../blockchain-uvod)
 - [ ] [Solidity](../solidity)
 
-## 🔗 Korisni linkovi  
+## 🔗 Korisni linkovi
+
 - [Solidity documentation](https://docs.soliditylang.org/en/latest/)
 - [Solidity Cheatsheet](https://docs.soliditylang.org/en/latest/cheatsheet.html)
 - [Solidity in 100 seconds](https://www.youtube.com/watch?v=kdvVwGrV7ec)
@@ -37,6 +40,7 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 - [Awesome-solidity]( https://github.com/bkrem/awesome-solidity)
 
 ## 🧰 Softver
+
 - [Remix](https://remix-project.org/)
 - [VS Code](https://code.visualstudio.com/)
 
