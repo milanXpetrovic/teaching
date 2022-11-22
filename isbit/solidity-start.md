@@ -1,9 +1,10 @@
 ---
 layout: default
+title: Solidity
+has_children: true
+layout: default
 parent: ISBiT
 ---
-
-# Solidity
 
 - [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
 - [Remix IDE](https://remix-project.org/)
