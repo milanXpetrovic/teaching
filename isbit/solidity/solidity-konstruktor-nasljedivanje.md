@@ -1,6 +1,7 @@
 ---
 layout: default
 parent: Solidity
+grand_parent: ISBiT
 ---
 
 # Konstruktori i nasljeđivanje
