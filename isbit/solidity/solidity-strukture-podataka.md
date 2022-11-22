@@ -2,7 +2,7 @@
 layout: default
 parent: Solidity
 grand_parent: ISBiT
-nav_order: 
+nav_order: 4.1
 ---
 
 # Strukture podataka
