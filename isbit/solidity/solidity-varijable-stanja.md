@@ -2,6 +2,7 @@
 layout: default
 parent: Solidity
 grand_parent: ISBiT
+nav_order: 1
 ---
 
 # Varijable stanja i funkcije

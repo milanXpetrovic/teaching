@@ -2,6 +2,7 @@
 layout: default
 parent: Solidity
 grand_parent: ISBiT
+nav_order: 1.1
 ---
 
 # Primjer pametnog ugovora

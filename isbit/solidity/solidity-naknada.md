@@ -3,6 +3,7 @@ layout: default
 parent: Solidity
 grand_parent: ISBiT
 nav_exclude: true
+nav_order: 6
 ---
 
 # Plaćanje naknade
