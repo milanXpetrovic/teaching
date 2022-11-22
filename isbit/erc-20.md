@@ -6,7 +6,6 @@ nav_exclude: true
 
 # EIP-20: Token Standard
 
-
 ## Erc20 Tokens
 
 <https://eips.ethereum.org/EIPS/eip-20>
