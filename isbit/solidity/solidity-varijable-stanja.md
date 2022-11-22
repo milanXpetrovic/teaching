@@ -2,15 +2,8 @@
 layout: default
 parent: ISBiT
 ---
-# Solidity: Uvod
 
-- [Solidity instalacija](https://docs.soliditylang.org/en/latest/installing-solidity.html)
-- [Remix IDE](https://remix-project.org/)
-- [Struktura pametnog ugovora](https://docs.soliditylang.org/en/latest/structure-of-a-contract.html)
-- [Tipovi varijabli](https://docs.soliditylang.org/en/latest/types.html)
-- [Vidljivost](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters)
-
-## Varijable stanja i funkcije
+# Varijable stanja i funkcije
 
 U Solidityu je potrebno specificirati tip svake varijable (globalne i lokalne). Solidity pruža nekoliko elementarnih tipova koji se mogu kombinirati u složene tipove. Ovi tipovi također se nazivaju vrijednosnim tipovima jer će se varijable ovih tipova uvijek prosljeđivati po vrijednosti, tj. uvijek se kopiraju kada se dodjeljuju ili koriste kao argumenti funkcije. Tipovi mogu međusobno komunicirati u izrazima koji sadrže operatore. Reference različitih operatora možete pronaći na [Order of Precedence of Operators](https://docs.soliditylang.org/en/latest/types.html#order)
 

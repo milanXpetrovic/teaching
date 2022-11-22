@@ -1,3 +1,8 @@
+---
+layout: default
+parent: Solidity
+---
+
 # Events
 
 Eventi nam evidentiranje aktivnosti unutar Ehereum blockchaina.

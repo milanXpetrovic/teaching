@@ -1,3 +1,8 @@
+---
+layout: default
+parent: Solidity
+---
+
 # For i While petlje
 
 Solidity podržava `for`, `while` i `do while` petlje.
