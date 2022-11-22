@@ -10,7 +10,7 @@ nav_exclude: true
 
 - Predmet: Programiranje za Web
 - Ak. god: 2022./2023.
-- Rok za odabir teme: 10.11.2022.
+- Rok za odabir teme: 17.11.2022.
 - Rok za predaju: 22.12.2022.
 - Bodovi: 20
 
