@@ -1,3 +1,8 @@
+---
+layout: default
+parent: Solidity
+---
+
 # Primjer pametnog ugovora
 
 Ugovor u smislu Solidityja je zbirka koda (njegove funkcije) i podataka (njegovo stanje) koji se nalaze na određenoj adresi na Ethereum blockchainu.

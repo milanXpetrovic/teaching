@@ -1,6 +1,7 @@
 ---
 layout: default
-parent: ISBiT
+parent: Solidity
+nav_exclude: true
 ---
 
 # Zadaci

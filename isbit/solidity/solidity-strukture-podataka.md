@@ -1,3 +1,8 @@
+---
+layout: default
+parent: Solidity
+---
+
 # Strukture podataka
 
 ## Polja

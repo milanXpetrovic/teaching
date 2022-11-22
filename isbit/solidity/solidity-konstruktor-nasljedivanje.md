@@ -1,3 +1,8 @@
+---
+layout: default
+parent: Solidity
+---
+
 # Konstruktori i nasljeđivanje
 
 ## Konstruktor
