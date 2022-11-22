@@ -1,6 +1,7 @@
 ---
 layout: default
 parent: Solidity
+grand_parent: ISBiT
 ---
 
 # For i While petlje

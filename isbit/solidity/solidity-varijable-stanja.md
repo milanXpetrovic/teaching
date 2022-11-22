@@ -1,6 +1,7 @@
 ---
 layout: default
-parent: ISBiT
+parent: Solidity
+grand_parent: ISBiT
 ---
 
 # Varijable stanja i funkcije
