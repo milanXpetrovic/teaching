@@ -29,6 +29,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [x] [Pohlepni algoritmi](../pohlepni-algoritmi)
 - [x] [Dinamičko programiranje](../dinamicko-programiranje) 
 - [x] [Bit manipulation](../bit-manipulation)
+- [x] [Priprema za prvi kolokvij](../priprema-kol1) 
 
 <!--
 - [ ] [Grafovi i stabla](./grafovi-i-stabla)
