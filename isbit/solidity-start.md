@@ -4,7 +4,7 @@ title: Solidity
 has_children: true
 layout: default
 parent: ISBiT
-has_toc: false
+has_toc: true
 ---
 
 # Solidity
