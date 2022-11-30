@@ -31,9 +31,10 @@ Python moduli:
 > install_solc("0.6.0")
 > ```
 
+**Ostali iyvori:**
+
 - [Web3.py dokumentacija](https://web3py.readthedocs.io/en/v5/)
 - [Smart Contract Developer Bootcamp Setup Instructions: Brownie Track](https://chain.link/bootcamp/brownie-setup-instructions)
-
 - [Install Node.js on WSL](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl)
 - [Ganache testna mreža](https://github.com/trufflesuite/ganache)
 
@@ -73,7 +74,3 @@ contract SimpleStorage {
     
 }
 ```
-
-
-
-
