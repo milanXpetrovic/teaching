@@ -11,12 +11,12 @@ has_toc: false
 
 - [VS Code](https://code.visualstudio.com/download)
 
-Dodaci za VSC:
+**Dodaci za VSC:**
 
 - Python (>= 3.8.0)
 - Solidity
 
-Python moduli:
+**Python moduli:**
 
 - py-solc-x
 - web3
@@ -31,7 +31,7 @@ Python moduli:
 > install_solc("0.6.0")
 > ```
 
-**Ostali iyvori:**
+**Ostali izvori:**
 
 - [Web3.py dokumentacija](https://web3py.readthedocs.io/en/v5/)
 - [Smart Contract Developer Bootcamp Setup Instructions: Brownie Track](https://chain.link/bootcamp/brownie-setup-instructions)
