@@ -12,38 +12,31 @@ has_toc: false
 - [VS Code](https://code.visualstudio.com/download)
 
 Dodaci za VSC:
+
 - Python (>= 3.8.0)
 - Solidity
 
 Python moduli:
+
 - py-solc-x
 - web3
 
-{: .important  }
+{: .important-title}
 > Napomena
-> ```
+>
+> ```console
 > pip3 install cryptography==3.2
 > from solcx import compile_standard, install_solc
 > install_solc("0.6.0")
 > ```
 
-
-
 - [Web3.py dokumentacija](https://web3py.readthedocs.io/en/v5/)
 - [Smart Contract Developer Bootcamp Setup Instructions: Brownie Track](https://chain.link/bootcamp/brownie-setup-instructions)
 
+- [Install Node.js on WSL](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl)
+- [Ganache testna mreža](https://github.com/trufflesuite/ganache)
 
-
-
-
-https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
-
-https://github.com/trufflesuite/ganache
-
-``` pip install web3 ```
-
-
-## Primjer 1
+## Primjer
 
 ```solidity
 // SPDX-License-Identifier: MIT
