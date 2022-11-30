@@ -23,9 +23,9 @@ Python moduli:
 
 {: .important-title}
 > Napomena
->
-> ```console
-> pip3 install cryptography==3.2
+> Prilikom pokretanja programa, poziv `from solcx import compile_standard` može javiti grešku koja javlja da paket `solcx` nije instaliran ili da nedostaju `cryptography` paketi.
+> Ovaj problem može se riješiti instalacijom paketa `cryptography==3.2` i unutar programskog koda na samom po;etku dodaje se 
+> ```python
 > from solcx import compile_standard, install_solc
 > install_solc("0.6.0")
 > ```
