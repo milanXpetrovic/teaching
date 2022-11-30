@@ -19,8 +19,8 @@ Python moduli:
 - py-solc-x
 - web3
 
-{: .Napomena }
-> A paragraph
+{: .important  }
+> Napomena
 > ```
 > pip3 install cryptography==3.2
 > from solcx import compile_standard, install_solc
