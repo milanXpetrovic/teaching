@@ -55,4 +55,6 @@ def dfs(graph, start):
 
 - Provjerite ako je vaš graf potpuno povezan. Graf je potpuno povezan ako iz svakog čvopra možemo posjetiti sve ostale čvorove u grafu.
 
+- Konstruirajte algoritam za bojanje vrhova u vašem grafu, pokušajte odrediti najmanji broj boja potreban za obojati graf.
+
 - Pronađite najdulji put u vašem grfu.
