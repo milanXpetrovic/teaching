@@ -30,9 +30,9 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [x] [Dinamičko programiranje](../dinamicko-programiranje) 
 - [x] [Bit manipulation](../bit-manipulation)
 - [x] [Priprema za prvi kolokvij](../priprema-kol1) 
+- [x] [Grafovi](./grafovi-uvod)
 
 <!--
-- [ ] [Grafovi i stabla](./grafovi-i-stabla)
 - [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [Matrice](./matrice)
 - [ ] [Teorija brojeva](./teorija-brojeva)
