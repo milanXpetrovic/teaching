@@ -47,14 +47,14 @@ def dfs(graph, start):
     return visited
 ```
 
-## Putovnanje kroz kraf
+## Putovanje kroz graf
 
 - Isprobajte BFS i DFS algoritam nad grafom veličine 50.
 
 - Ispišite ako u vašem grafu postoje čvorovi iz kojih možemo posjetiti sve ostale čvorove. Ako ne onda ispišite -1.
 
-- Provjerite ako je vaš graf potpuno povezan. Graf je potpuno povezan ako iz svakog čvopra možemo posjetiti sve ostale čvorove u grafu.
+- Provjerite ako je vaš graf potpuno povezan. Graf je potpuno povezan ako iz svakog čvora možemo posjetiti sve ostale čvorove u grafu.
 
-- Konstruirajte algoritam za bojanje vrhova u vašem grafu, pokušajte odrediti najmanji broj boja potreban za obojati graf.
+- Konstruirajte algoritam za bojanje vrhova u vašem grafu, pokušajte odrediti najmanji broj boja potreban za pobojati graf.
 
-- Pronađite najdulji put u vašem grfu.
+- Pronađite najdulji put u vašem grafu.
