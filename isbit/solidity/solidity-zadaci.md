@@ -37,3 +37,14 @@ Stvorite 2 eventa, prvi bilježi adresu pozivatelja i poruku, a drugi ne prima p
 ## Novčanik
 
 Kreirajte ugovor koji ima ulogu jednostavnog novčanika. Svatko može slati Eth, a samo ga vlasnik može podići.
+
+## FundMe
+
+Stvorite ugovor koji omogućuje vlasniku da prima uplate od bilo koga, dok samo vlasnik ugovora može povući sredstva na svoj novčanik.
+
+Na ugovoru se sve transakcije odvijaju u Etheru no potrebno je pretvoriti ETH -> USD, jer je potrebno imati uvid u stanje u USD.
+
+U ugovoru omogućite ova svojstva:
+
+- evidenciju koja svota novca nam je pristigla s koje adrese.
+- minimalan iznos koji je potreban da bi se uplata ostvarila.
