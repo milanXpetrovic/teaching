@@ -28,13 +28,13 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [x] [Vremenska složenost](../vremenska-slozenost)
 - [x] [Potpuno pretraživanje](../potpuno-pretrazivanje)
 - [x] [Pohlepni algoritmi](../pohlepni-algoritmi)
-- [x] [Dinamičko programiranje](../dinamicko-programiranje) 
+- [x] [Dinamičko programiranje](../dinamicko-programiranje)
 - [x] [Bit manipulation](../bit-manipulation)
-- [x] [Priprema za prvi kolokvij](../priprema-kol1) 
+- [x] [Priprema za prvi kolokvij](../priprema-kol1)
 - [x] [Grafovi](./grafovi-uvod)
+- [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 
 <!--
-- [ ] [Putovanje kroz graf](./putovanje-kroz-graf)
 - [ ] [Matrice](./matrice)
 - [ ] [Teorija brojeva](./teorija-brojeva)
 - [ ] [Kombinatorika](./kombinatorika)
