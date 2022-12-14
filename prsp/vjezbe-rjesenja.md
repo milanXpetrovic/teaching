@@ -2,7 +2,7 @@
 layout: default
 parent: PRSP
 nav_order: 17
-nav_exclude: true
+nav_exclude: false
 ---
 
 # Rješenja zadataka s vježbi
