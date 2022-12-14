@@ -45,6 +45,13 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 📦 Resursi
 
+- [Rješenja zadataka s vježbi](../vjezbe-rjesenja)
+
+- [Advent of Code](https://adventofcode.com/)
+- [Codeforces](https://codeforces.com/)
+- [Project Euler](https://projecteuler.net/)
+- [CSES Problem Set](https://cses.fi/problemset/) 
+
 ### 📚 Lieteratura
 
 - Competitive Programmer’s Handbook, Antti Laaksonen, 2018, [Link](https://cses.fi/book/book.pdf)
@@ -55,7 +62,4 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ### 🔗 Korisni linovi
 
-- [Advent of Code](https://adventofcode.com/)
-- [Codeforces](https://codeforces.com/)
-- [Project Euler](https://projecteuler.net/)
-- [CSES Problem Set](https://cses.fi/problemset/)
+

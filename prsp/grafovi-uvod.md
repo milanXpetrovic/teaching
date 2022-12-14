@@ -2,7 +2,7 @@
 layout: default
 parent: PRSP
 nav_order: 7
-nav_exclude: true
+nav_exclude: false
 ---
 
 # Grafovi: uvod
