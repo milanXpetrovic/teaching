@@ -82,3 +82,57 @@ Broj $n$ koji označava površinu najvećeg otoka.
 ```console
 6
 ```
+
+## Zadatak 3: Okružene regije
+
+S obzirom na $m \times m$ matricu koja sadrži "X" i "O", osvojite sve regije koje su u 4 smjera okružene s "X".
+
+Regija se osvaja pretvaranjem svih 'O' u 'X' u toj okruženoj regiji.
+
+**Input:**
+
+```console
+X X X X
+X O O X
+X X O X
+X O X X
+```
+
+**Output:**
+
+```console
+X X X X
+X X X X
+X X X X
+X O X X
+```
+
+**Objašnjenje**:
+Primijetite da se 'O' ne smije osvojiti jedino ako:
+
+- Nalazi se na rubu matrice
+- Nalazi se uz "O" koji se ne može osvojiti.
+
+**Input:**
+
+```console
+X X X X X X X 
+X O O O X X O 
+X X X X X O O 
+X X O X X O X 
+X X X X X X O 
+X X X X X X X 
+X X X X X X X 
+```
+
+**Output:**
+
+```console
+X X X X X X X 
+X X X X X X O 
+X X X X X O O 
+X X X X X O X 
+X X X X X X O 
+X X X X X X X 
+X X X X X X X 
+```

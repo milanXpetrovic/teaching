@@ -94,7 +94,6 @@ for sel in bins:
 ```python
 ```
 
-
 ## Pohlepni algoritmi
 
 ### Zadatak 1: Problem s kovanicama
@@ -157,7 +156,7 @@ for cls in cls_l:
         enroll.append(cls)
 ```
 
-# Dinamicko programiranje 
+## Dinamičko programiranje
 
 ## Zadatak 1: Fibonacci
 
@@ -262,5 +261,12 @@ print(sum(l2)-sum(l1))
 
 ## Putovanje kroz graf
 
+### Zadatak 1: Broj otoka
 
+```python
+```
 
+### Zadatak 2: Najveći otok
+
+```python
+```
