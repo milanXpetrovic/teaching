@@ -260,6 +260,7 @@ print(sum(l2)-sum(l1))
 
 ## Grafovi
 
-
 ## Putovanje kroz graf
+
+
 
