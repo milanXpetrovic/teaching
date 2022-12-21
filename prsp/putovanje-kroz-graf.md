@@ -158,3 +158,132 @@ Ispis udaljenosti do svih gradova ili $-1$ ako to nije moguće.
 2 0 1 0 3 
 0 7 5 5 0 
 ```
+
+## Zadatak 5: Izgradnja cesta
+
+Zemlja ima $n$ gradova i $m$ cesta između njih. Cilj je izgraditi nove ceste tako da postoji ruta između bilo koja dva grada.
+
+Vaš zadatak je saznati minimalan broj potrebnih cesta, te odrediti koje ceste treba izgraditi.
+
+**Input:**
+U prvom retku za unos nalaze se dva cijela broja $n$ i $m$: broj gradova i cesta. Gradovi su označeni brojevima $1,2,…,n$.
+
+Nakon toga slijedi $m$ redaka koji opisuju ceste. Svaki red ima dva cijela broja $a$ i $b$: ako postoji cesta između tih gradova.
+
+Cesta uvijek povezuje dva različita grada, a između bilo koja dva grada postoji najviše jedna cesta.
+
+**Output:**
+Prvo ispišite cijeli broj $k$: broj potrebnih cesta.
+
+Zatim ispišite $k$ redaka koji opisuju nove ceste. Možete ispisati bilo koje valjano rješenje.
+
+**Input:**
+
+```console
+4 2
+1 2
+3 4
+```
+
+**Output:**
+
+```console
+1
+2 3
+```
+
+## Zadatak 6: Timovi
+
+U razredu ima $n$ učenika i $m$ prijateljstava među njima. Vaš zadatak je podijeliti učenike u dva tima na način da dva učenika u timu nisu prijatelji. Možete slobodno odabrati veličinu timova.
+
+**Input:**
+U prvom retku za unos nalaze se dva cijela broja $n$ i $m$: broj učenika i prijateljstava. Zjenice su označene brojevima $1,2,…,n$.
+
+Zatim sljedi $m$ redaka koji opisuju prijateljstva. Svaki red ima dva cijela broja $a$ i $b$: učenici $a$ i $b$ su prijatelji.
+
+Svako prijateljstvo je između dva različita učenika i postoji najviše jedno prijateljstvo iymeđu ta dva učenika.
+
+**Output:**
+Ispišite primjer kako sastaviti timove. Za svakog učenika ispišite "1" ili "2" ovisno u koju će ekipu učenik biti dodijeljen.
+
+Ako nema rješenja ispisati "NEMA".
+
+**Input:**
+
+```console
+5 3
+1 2
+1 3
+4 5
+```
+
+**Output:**
+
+```console
+1 2 2 1 2
+```
+
+## Zadatak 7: Ciklus
+
+Dobili ste usmjereni graf, a vaš zadatak je otkriti sadrži li negativan ciklus te dati primjer takvog ciklusa.
+
+**Input:**
+Prvi ulazni red ima dva cijela broja $n$ i $m$: broj čvorova i bridova. Čvorovi su označeni brojevima $1,2,…,n$.
+
+Nakon toga, ulaz ima $m$ redaka koji opisuju veze. Svaki redak ima tri cijela broja $a$, $b$ i $c$ koji oynačuju da postoji brid od čvora $a$ do čvora $b$ čija je duljina $c$.
+
+**Output:**
+Ako graf sadrži negativan ciklus, ispišite prvo "YES", a zatim čvorove u ciklusu ispravnim redoslijedom. Ako postoji više negativnih ciklusa, možete ispisati bilo koji od njih. Ako nema negativnih ciklusa, ispišite "NE".
+
+**Input:**
+
+```console
+4 5
+1 2 1
+2 4 1
+3 1 1
+4 1 -3
+4 3 -2
+```
+
+**Output:**
+
+```console
+YES
+1 2 4 1
+```
+
+## Zadatak 8:
+
+Postoji $n$ gradova i $m$ cesta između njih. Nažalost, stanje na cestama je toliko loše da se ne mogu koristiti. Vaš zadatak je popraviti neke od cesta kako bi između bilo koja dva grada postojala ruta.
+
+Za svaku cestu znate njenu cijenu popravka i trebali biste pronaći rješenje gdje je ukupni trošak što je moguće manji.
+
+**Input:**
+U prvom retku za unos nalaze se dva cijela broja $n$ i $m$: broj gradova i cesta. Gradovi su označeni brojevima $1,2,…,n$.
+
+Nakon toga slijedi $m$ redaka koji opisuju ceste. Svaki red ima tri cijela broja a, b i c koji označava da postoji cesta između gradova a i b, a cijena njezine popravke je c. Sve ceste su dvosmjerne.
+
+Sve ceste su između dva različita grada, a između dva grada postoji najviše jedna cesta.
+
+**Output:**
+
+Ispišite jedan cijeli broj: minimalni ukupni trošak popravka. Međutim, ako nema rješenja, ispišite "NEMOGUĆE".
+
+**Input:**
+
+```console
+5 6
+1 2 3
+2 3 5
+2 4 2
+3 4 8
+5 1 7
+5 4 4
+```
+
+**Output:**
+
+```console
+14
+```
