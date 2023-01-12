@@ -253,7 +253,7 @@ YES
 1 2 4 1
 ```
 
-## Zadatak 8:
+## Zadatak 8: Popravak ceste
 
 Postoji $n$ gradova i $m$ cesta između njih. Nažalost, stanje na cestama je toliko loše da se ne mogu koristiti. Vaš zadatak je popraviti neke od cesta kako bi između bilo koja dva grada postojala ruta.
 
@@ -286,4 +286,32 @@ Ispišite jedan cijeli broj: minimalni ukupni trošak popravka. Međutim, ako ne
 
 ```console
 14
+```
+
+## Zadatak 9: Upis predmeta
+
+U zadanom usmjerenom grafu, vrhovi predstavljaju predmete, neki od tih predmeta imaju predmete koji prethodno moraju biti položeni da bi se mogli upisati što je predstavljeno vezama. Odnosno, veza iz vrha A u vrh B nam predstavlja da je predmet A preduvjet za upisati predmet B.
+
+Pomoću topološkog sortiranja ispišite redosljed polaganja predmeta tako da se ne dogodi problem s upisom predmeta a da pritom nije položen predmet koji je preduvjet.
+
+**Input:**
+U prvom retku za unos nalaze se dva cijela broja $n$ i $m$: broj predmeta, nakon toga slijedi $m$ redaka koji navode veze.
+
+**Output:**
+Ispišite topološki sortirani graf.
+
+**Input:**
+
+```console
+A B
+A C
+B D
+B E
+C F
+```
+
+**Output:**
+
+```console
+A C F B E D
 ```
