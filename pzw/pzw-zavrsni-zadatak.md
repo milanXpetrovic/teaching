@@ -17,10 +17,10 @@ Nadopuniti projekt modela i predložaka (pogleda) za web aplikaciju ili uslugu.
 
 Zadatak se radi u grupama po dvoje ili troje studenata.
 
-**Projekt koji je prethodno kreiran na vjebama sadrži:**
+**Projekt koji je prethodno kreiran na vježbama sadrži:**
 
 - Modele
-- Testne podatake koji se generiraju pomoću factory boya
+- Testne podatke koji se generiraju pomoću factory boya
 - Github repozitorij na kojem se nalazi projekt
 - Prikaz podataka pomoću List i/ili Detal Viewsa
 
@@ -33,7 +33,7 @@ Zadatak se radi u grupama po dvoje ili troje studenata.
 **Funkcionalnosti koje app ima:**
 
 - Unos novih vrijednosti u bazu
-- Prikaz i pretraga već postojećih vrijednosti iz baze
+- Prikaz i pretraga postojećih vrijednosti iz baze
 - Ažuriranje postojećih vrijednosti u bazi
 - Brisanje iz baze
 
