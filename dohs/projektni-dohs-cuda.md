@@ -40,3 +40,16 @@ Popis studenata po grupama:
 
 ## 📦 Predaja rezultata
 -
+
+
+Bellman-Fordov algoritam (Popunjeno)	2 / 2	
+Borůvkin algoritam	1 / 2	
+Breadth-first search (Popunjeno)	2 / 2	
+Capital asset pricing model	0 / 2	
+Dijkstrin algoritam (Popunjeno)	2 / 2	
+Floyd-Warshallov algoritam (Popunjeno)	2 / 2	
+Merge sort (Popunjeno)	2 / 2	
+Monte-Carlo option pricing (Popunjeno)	2 / 2	
+Problem N tijela (Popunjeno)	2 / 2	
+Quick sort (Popunjeno)	2 / 2	
+Radix sort

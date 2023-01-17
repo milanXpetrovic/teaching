@@ -33,7 +33,7 @@ Kreirajte slučajeve u kojima se prikazuje ispravno funkcioniranje pametnog ugov
 
 ## 📦 Predaja projektnog zadatka
 
-Svoja rješenja predajete tako da predate vaš kod zajedno s detaljnim izvješćem koje objašnjava kako ste implementirali svaku značajku pametnog ugovora. Također uključite pojedinosti o svim transakcijama izvršenim tijekom testiranja i implementacije pametnog ugovora.
+Svoja rješenja predajete tako da predate vaš kod i detaljno izvješće koje objašnjava kako ste implementirali svaku značajku pametnog ugovora. Također uključite pojedinosti o svim transakcijama izvršenim tijekom testiranja i implementacije pametnog ugovora.
 
 Izvješće je potrebno predati u .md i .pdf formatu. A programski kod kao link na Github repozitorij.
 
