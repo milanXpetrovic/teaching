@@ -1,7 +1,7 @@
 ---
 parent: PzW
 nav_order: 
-nav_exclude: true
+nav_exclude: false
 ---
 
 # Izrada modela i predložaka za web aplikaciju
