@@ -4,7 +4,7 @@ nav_order: 1
 nav_exclude: false
 ---
 
-# Izrada modela i predložaka za web aplikaciju
+# Projektni zadatak
 
 ## 📢 Osnovne informacije
 
