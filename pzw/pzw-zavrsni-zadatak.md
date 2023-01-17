@@ -30,9 +30,9 @@ Zadatak se radi u grupama po dvoje ili troje studenata.
 - Testovi
 - Login i registracija
 
-**Funkcionalnosti koje app sadrži:**
+**Funkcije koje app sadrži:**
 
-Potrebno je omogućiti korisniku vaše aplikacije sljedeće funkcionalnosti. Ove funkcoinalnosti kreirate ovisno o vašoj temi projekta.
+Ove funkcije kreirate ovisno o vašoj temi projekta.
 
 - Unos novih vrijednosti u bazu
 - Prikaz i pretraga postojećih vrijednosti iz baze
