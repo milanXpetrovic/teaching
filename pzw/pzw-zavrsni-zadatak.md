@@ -4,7 +4,7 @@ nav_order: 2
 nav_exclude: false
 ---
 
-# Izrada modela i predložaka za web app
+# Zadatak za završni ispit
 
 ## 📢 Osnovne informacije
 
