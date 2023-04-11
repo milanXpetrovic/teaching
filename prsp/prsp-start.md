@@ -32,7 +32,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [x] [Bit manipulation](../bit-manipulation)
 - [x] [Priprema za prvi kolokvij](../priprema-kol1)
 - [x] [Grafovi](../grafovi-uvod)
-- [ ] [Putovanje kroz graf](../putovanje-kroz-graf)
+- [x] [Putovanje kroz graf](../putovanje-kroz-graf)
 
 <!--
 - [ ] [Matrice](./matrice)
@@ -44,8 +44,6 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 -->
 
 ## 📦 Resursi
-
-- [Rješenja zadataka s vježbi](../vjezbe-rjesenja)
 
 - [Advent of Code](https://adventofcode.com/)
 - [Codeforces](https://codeforces.com/)
