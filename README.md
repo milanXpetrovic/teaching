@@ -1,10 +1,7 @@
 ---
-nav_exclude: true
+nav_exclude: false
 ---
 
 # teaching
 Repo with teaching materials from FIDIT
 
-## [Programiranje za rješavanje složenih problema](./prsp/start-prsp)
-
-## [Informacijska sigurnost i blcokchain tehnologije](./siks2/start-siks2)
