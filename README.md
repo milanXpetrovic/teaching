@@ -16,5 +16,5 @@ Repo with teaching materials from FIDIT
 
 ## Misc
 
-- [Terminal]('./misc/linux')
-- [Docker-uvod]('./misc/docker')
+- [Terminal](./misc/linux)
+- [Docker-uvod](./misc/docker)
