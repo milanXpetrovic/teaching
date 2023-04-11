@@ -25,8 +25,8 @@ nav_exclude: true
 | Naredba |	Kratak Opis |
 |---------|--------|
 | `docker images` |	Prikazuje lokalne Docker slike koje su preuzete ili kreirane na računalu. |
-| `docker pull` |	Preuzima Docker sliku s Docker registra (npr. Docker Hub-a) i sprema je lokalno  |na računalu.
-| `docker build` |	Koristi Dockerfile za kreiranje nove Docker slike. Dockerfile definira sve  |potrebne korake za kreiranje slike.
+| `docker pull` |	Preuzima Docker sliku s Docker registra (npr. Docker Hub-a) i sprema je lokalno na računalu.|
+| `docker build` |	Koristi Dockerfile za kreiranje nove Docker slike. Dockerfile definira sve potrebne korake za kreiranje slike.|
 | `docker tag` |	Omogućava označavanje lokalne slike s drugim imenom i/ili oznakom. |
 | `docker rmi` |	Briše Docker sliku. |
 | `docker save` |	Sprema Docker sliku kao TAR arhivu na lokalno računalo. |
