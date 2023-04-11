@@ -7,5 +7,4 @@ has_toc: false
 
 # Misc
 
-- [Terminal](../misc/linux)
-- [Docker-uvod](../misc/docker)
+- [Docker-osnove](../docker)
