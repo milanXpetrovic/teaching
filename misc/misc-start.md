@@ -5,6 +5,5 @@ has_children: true
 has_toc: false
 ---
 
-# Misc
 
-- [Docker-osnove](../docker)
+## [Docker-osnove](../docker)
