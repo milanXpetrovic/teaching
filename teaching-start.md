@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Nastava 
+# Nastav: zimski semestar
 
 | kolegij  |    Vrijeme | Prostorija    |    DINP        |
 | ------ | -------------- |------- | --------------------- |

@@ -14,7 +14,3 @@ Repo with teaching materials from FIDIT
 - E-mail: milan.petrovic@uniri.hr
 
 
-## Misc
-
-- [Terminal](./misc/linux)
-- [Docker-uvod](./misc/docker)
