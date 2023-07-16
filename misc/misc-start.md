@@ -7,3 +7,6 @@ has_toc: false
 
 
 ## [Docker-osnove](../docker)
+
+## [venv Python](../venv-python)
+

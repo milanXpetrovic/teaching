@@ -8,24 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8273584e2aca7489",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "sna/sna-start.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
             "id": "94cb44cdb14ff284",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "dohs/dohs-start.md",
                 "mode": "source",
                 "source": true
               }
@@ -115,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "sna/sna-start.md",
+                "file": "dohs/dohs-start.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "sna/sna-start.md",
+                "file": "dohs/dohs-start.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "sna/sna-start.md"
+                "file": "dohs/dohs-start.md"
               }
             }
           }
@@ -176,17 +164,41 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8273584e2aca7489",
+  "active": "95c3c74ac20792de",
   "lastOpenFiles": [
-    "pzw/pzw-start.md",
-    "sna/sna-start.md",
-    "README.md",
-    "sna",
+    "dohs/projektni-dohs-cuda.md",
+    "dohs/projektni-dohs-mpi.md",
     "dohs/dohs-start.md",
     "isbit/isbit-start.md",
-    "prsp/prsp-start.md",
+    "misc/misc-start.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-zadaci.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-varijable-stanja.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-strukture-podataka.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-primjer-pametnog-ugovora.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-if-else.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-naknada.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-konstruktor-nasljedivanje.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-for-while.md",
+    "isbit/vjezbe-sadrzaj/solidity/solidity-events.md",
+    "isbit/vjezbe-sadrzaj/solidity/fundme.sol",
+    "isbit/vjezbe-sadrzaj/solidity",
+    "isbit/vjezbe-sadrzaj/web3-python-start.md",
+    "isbit/vjezbe-sadrzaj/solidity-start.md",
+    "isbit/vjezbe-sadrzaj/isbit-zavrsni-zadatak.md",
+    "isbit/vjezbe-sadrzaj/isbit-projektni-zadatak.md",
+    "isbit/vjezbe-sadrzaj/isbit-projektni-template.md",
+    "isbit/vjezbe-sadrzaj/ethereum-improvement-proposals.md",
+    "isbit/vjezbe-sadrzaj/erc-721.md",
+    "isbit/vjezbe-sadrzaj/erc-20.md",
+    "isbit/vjezbe-sadrzaj/chainlink.md",
+    "isbit/vjezbe-sadrzaj/blockchain-uvod.md",
+    "isbit/vjezbe-sadrzaj",
+    "isbit/New folder",
+    "misc/venv-python.md",
+    "misc/docker.md",
+    "prsp/vjezbe-sadrzaj",
+    "sna",
     "assets/images/ice-cream.png",
-    "assets/images/phpCQgsYR.png",
-    "isbit/blockchain-uvod.md"
+    "assets/images/phpCQgsYR.png"
   ]
 }
