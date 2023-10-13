@@ -24,15 +24,15 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [x] [Uvod](../prsp-uvod)
-- [x] [Vremenska složenost](../vremenska-slozenost)
-- [x] [Potpuno pretraživanje](../potpuno-pretrazivanje)
-- [x] [Pohlepni algoritmi](../pohlepni-algoritmi)
-- [x] [Dinamičko programiranje](../dinamicko-programiranje)
-- [x] [Bit manipulation](../bit-manipulation)
-- [x] [Priprema za prvi kolokvij](../priprema-kol1)
-- [x] [Grafovi](../grafovi-uvod)
-- [ ] [Putovanje kroz graf](../putovanje-kroz-graf)
+- [Uvod](../prsp-uvod)
+- [Vremenska složenost](../vremenska-slozenost)
+- [Potpuno pretraživanje](../potpuno-pretrazivanje)
+- [Pohlepni algoritmi](../pohlepni-algoritmi)
+- [Dinamičko programiranje](../dinamicko-programiranje)
+- [Bit manipulation](../bit-manipulation)
+- [Priprema za prvi kolokvij](../priprema-kol1)
+- [Grafovi](../grafovi-uvod)
+- [Putovanje kroz graf](../putovanje-kroz-graf)
 
 <!--
 - [ ] [Matrice](./matrice)

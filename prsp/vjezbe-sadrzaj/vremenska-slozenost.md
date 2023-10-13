@@ -4,7 +4,7 @@ parent: PRSP
 nav_order: 2
 ---
 
-# Vremenska složenost
+# [Vremenska složenost](https://cses.fi/book/book.pdf#chapter.2)
 
 ## [Najveći zbroj podniza](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
 

@@ -9,32 +9,32 @@ nav_exclude: false
 
 ## Vremenska složenost
 
-### Najveći zbroj podniza
+### [Najveći zbroj podniza](./vjezbe-sadrzaj/vremenska-slozenost.md#najveći-zbroj-podniza)
 
 ```python
 ```
 
-### Zadatak 1: $O(n^3)$ složenost
+### [Zadatak 1: $O(n^3)$ složenost](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-1-složenost)
 
 ```python
 ```
 
-### Zadatak 2: $O(n^2)$ složenost
+### [Zadatak 2: $O(n^2)$ složenost](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-2-složenost)
 
 ```python
 ```
 
-### Zadatak 3 $O(n)$ složenost
+### [Zadatak 3 $O(n)$ složenost](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-3-složenost)
 
 ```python
 ```
 
-### Zadatak 4: Lista nasumičnih brojeva
+### [Zadatak 4: Lista nasumičnih brojeva](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-4-lista-nasumičnih-brojeva)
 
 ```python
 ```
 
-### [Zadatak 5: Mjerenje brzine izvođenja](#zadatak-5-mjerenje-brzine-izvođenja)
+### [Zadatak 5: Mjerenje brzine izvođenja](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-5-mjerenje-brzine-izvođenja)
 
 ```python
 ```
