@@ -3,25 +3,27 @@ parent: PRSP
 nav_order: 3
 ---
 
-# Potpuno pretraživanje
+# Potpuna pretraga
 
 Potpuno pretraživanje (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
 Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje rješenje. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
 
-## Zadatak 1: Generiranje podskupova 
+## Zadatak 1: Generiranje podskupova
 
 Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
-### Primjer
+**Primjer**
 
 **Input:**
-```
+
+```text
 0 1 2
 ```
 
 **Output:**
-```
+
+```text
 []
 [2]
 [1]
@@ -35,7 +37,6 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 {: .highlight }
 `[]` označava prazan skup $\emptyset$.
 
-
 ## Zadatak 2: Binarna reprezentacija
 
 Riješite prethodni zadatak pomoću reprezentacije brojeva u binarnom zapisu.
@@ -45,8 +46,8 @@ Riješite prethodni zadatak pomoću reprezentacije brojeva u binarnom zapisu.
 >
 > Funkcija `zfill(n)`, popunjava string sa `0` dok on nema duljinu `n`.
 
-
 ## Zadatak 3: K-sum binarno
+
 Pomoću binarne reprezentacije provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 **Input:**
@@ -55,12 +56,11 @@ U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 **Output:**
 Ispis brojeva čija suma iznosi $k$.
 
-
 ## Zadatak 4: K-sum Meet in the middle
+
 Pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 Razmotrimo problem gdje nam je dana lista $l$ koja sadržava $n$ brojeva i broj $k$, te želimo saznati ako je moguće odabrati brojeve s liste $l$ tako da njihov zbroj bude $k$. 
-
 
 **Input:**
 U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
@@ -69,28 +69,33 @@ U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
 Ispis "YES" ako je moguće generirati sumu, u protivnom se ispisuje -1.
 
 **Input:**
-```
+
+```text
 15
 2,4,5,9
 ```
 
 **Output:**
-```
+
+```text
 YES
 ```
 
 **Input:**
-```
+
+```text
 15
 7,11,5,9
 ```
 
 **Output:**
-```
+
+```text
 -1
 ```
 
 ## Zadatak 5: Stvaranje stringova
+
 Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti pomoću znakova iz zadanog stringa $s$.
 
 {: .highlight }
@@ -102,14 +107,17 @@ Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
 **Output:**
 Prvo ispišite cijeli broj $k$: ukupan broj stringova. Zatim u $k$ redaka ispišite stvorene stringove.
 
-### Primjer
+**Primjer**
+
 **Input:**
-```
+
+```text
 aabac
 ```
 
 **Output:**
-```
+
+```text
 20
 aaabc
 aaacb
@@ -133,10 +141,11 @@ cabaa
 cbaaa
 ```
 
-## Zadatak 6: 
+## Zadatak 6: Niz
 
 Razmotrimo znakovni niz koji se sastoji od svih pozitivnih cijelih brojeva u rastućem redoslijedu:
-```
+
+```text
 12345678910111213141516171819202122232425...
 ```
 
@@ -152,7 +161,8 @@ Nakon toga slijedi $q$ linija gdje se nalazi $k$, odnosno indeks broja kojeg tra
 Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
 
 **Input:**
-```
+
+```text
 3
 7
 19
@@ -160,13 +170,15 @@ Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
 ```
 
 **Output:**
-```
+
+```text
 7
 4
 1
 ```
 
 ## Dodatni zadaci
+
 - [Chessboard and Queens](https://cses.fi/problemset/task/1624)
 - [Grid Paths](https://cses.fi/problemset/task/1625)
 - [Sail](https://codeforces.com/problemset/problem/298/B)

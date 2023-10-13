@@ -13,7 +13,6 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## Datumi aktivnosti
 
-
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
 | 25.10.2023 | Laboratorijske vježbe 1: Potpuna pretraga (Complete search) | 5 |
@@ -24,15 +23,15 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [Uvod](../prsp-uvod)
-- [Vremenska složenost](../vremenska-slozenost)
-- [Potpuno pretraživanje](../potpuno-pretrazivanje)
-- [Pohlepni algoritmi](../pohlepni-algoritmi)
-- [Dinamičko programiranje](../dinamicko-programiranje)
-- [Bit manipulation](../bit-manipulation)
-- [Priprema za prvi kolokvij](../priprema-kol1)
-- [Grafovi](../grafovi-uvod)
-- [Putovanje kroz graf](../putovanje-kroz-graf)
+- [Uvod](./vjezbe-sadrzaj/prsp-uvod.md)
+- [Vremenska složenost](./vjezbe-sadrzaj/vremenska-slozenost)
+- [Potpuno pretraživanje](./vjezbe-sadrzaj/potpuno-pretrazivanje)
+- [Pohlepni algoritmi](./vjezbe-sadrzaj/pohlepni-algoritmi)
+- [Dinamičko programiranje](./vjezbe-sadrzaj/dinamicko-programiranje)
+- [Bit manipulation](./vjezbe-sadrzaj/bit-manipulation)
+- [Priprema za prvi kolokvij](./vjezbe-sadrzaj/priprema-kol1)
+- [Grafovi](./vjezbe-sadrzaj/grafovi-uvod)
+- [Putovanje kroz graf](./vjezbe-sadrzaj/putovanje-kroz-graf)
 
 <!--
 - [ ] [Matrice](./matrice)
@@ -50,7 +49,8 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [Advent of Code](https://adventofcode.com/)
 - [Codeforces](https://codeforces.com/)
 - [Project Euler](https://projecteuler.net/)
-- [CSES Problem Set](https://cses.fi/problemset/) 
+- [CSES Problem Set](https://cses.fi/problemset/)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/)
 
 ### 📚 Lieteratura
 
@@ -58,8 +58,5 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ### 🧰 Programska podrška
 
+- [Visual Studio Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/)
-
-### 🔗 Korisni linovi
-
-
