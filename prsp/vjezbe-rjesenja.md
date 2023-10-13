@@ -39,7 +39,7 @@ nav_exclude: false
 ```python
 ```
 
-## Potpuna pretraga
+## [Potpuna pretraga](./vjezbe-sadrzaj/potpuno-pretrazivanje.md)
 
 ### Zadatak 1: Generiranje podskupova
 
@@ -73,7 +73,7 @@ bins = [format(i, "b").zfill(n) for i in range(2**n)]
 
 for sel in bins:
     total = 0
-
+    
     for i, b in enumerate(sel):
         if b=="1":
             total+=l[i]
@@ -123,6 +123,7 @@ while True:
 ### Zadatak 2: Kompresija podataka
 
 ```python
+
 ```
 
 ### Zadatak 3:Zakazivanje aktivnosti

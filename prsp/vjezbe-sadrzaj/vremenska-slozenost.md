@@ -19,16 +19,17 @@ Najveći zbroj podniza iznosi **12**:
 $$\{1, 5, -2, 3, 5\}$$
 
 **Primjer rješenja u C++**
+
 ```cpp
 int best = 0;
 for (int a = 0; a < n; a++) {
-	for (int b = a; b < n; b++) {
-		int sum = 0;
-		for (int k = a; k <= b; k++) {
-			sum += array[k];
-		}
-	best = max(best,sum);
-	}
+    for (int b = a; b < n; b++) {
+        int sum = 0;
+        for (int k = a; k <= b; k++) {
+            sum += array[k];
+        }
+    best = max(best,sum);
+    }
 }
 cout << best << "\n";
 ```
@@ -43,22 +44,23 @@ Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 **Output:**
 Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
-### Primjer
+**Primjer**
 
 **Input:**
-```
+
+```text
 -1 2 4 -3 5 2 -5 2
 ```
 
 **Output:**
-```
+
+```text
 10
 ```
 
 ## Zadatak 2: $O(n^2)$ složenost
 
 Optimizirajte prethodni algoritam tako da njegova složenost iznosi $O(n^2)$.
-
 
 ## Zadatak 3: $O(n)$ složenost
 
@@ -70,6 +72,7 @@ Ovaj problem moguće je riješiti samo jednom iteracijom kroz listu, odnosno sa 
 Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. 
 
 Postoje dvije mogućnosti:
+
 1. Podniz sadrži samo element na poziciji $k$.
 2. Podniz se sastoji od podniza koji završava na poziciji $k-1$, nakon čega slijedi
 element na poziciji $k$.
@@ -81,13 +84,14 @@ U drugom slučaju, budući da želimo pronaći podniz s maksimalnim zbrojem, pod
 ```cpp
 int best = 0, sum = 0;
 for (int k = 0; k < n; k++) {
-	sum = max(array[k],sum+array[k]);
-	best = max(best,sum);
+    sum = max(array[k],sum+array[k]);
+    best = max(best,sum);
 }
 cout << best << "\n";
 ```
 
 ## Zadatak 4: Lista nasumičnih brojeva
+
 Kreirajte funkciju koja generira listu $l$ čiji su elementi nasumično odabrani cijeli brojevi $k$ $( - 10 < k < 10)$.
 
 **Input**
@@ -96,13 +100,17 @@ Duljina liste $n$, određuje broj elemenata u listi.
 **Output**
 Lista $l$ koja sadržava $n$ elemenata.
 
-### Primjer
+**Primjer**
+
 **Input:**
-```
+
+```text
 15
 ```
+
 **Output:**
-```
+
+```text
 [-1, 4, -9, -2, -1, 3, -6, 5, 8, 0, 3, -8, 6, 7, 3]
 ```
 
@@ -110,6 +118,7 @@ Lista $l$ koja sadržava $n$ elemenata.
 Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
 ## Zadatak 5: Mjerenje brzine izvođenja
+
 Iskoristite prethodno definirane funkcije u prethodnim zadacima i usporedite brzinu izvođenja algoritama.
 
 **Input**
@@ -118,13 +127,17 @@ Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskori
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 
+**Primjer**
+
 **Input:**
-```
+
+```text
 1000
 ```
 
 **Output:**
-```
+
+```text
 9.2702
 0.0670
 0.0010
