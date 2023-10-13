@@ -15,12 +15,8 @@ Dobrodši na vježbe iz predmeta **Programiranje za web**
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-| 20.10.2022.      | Objava tema      |         |
-| 10.11.2022.      | Rok za odabir teme                 |         |
-| 8.12.2022.      | Praktični kolokvij | 20 |
-| 22.12.2022      | Izrada modela i predložaka za web app | 20 |
-| 19.1.2023.      | Test na Merlinu | 30 |
-| 26.1.2023.      | Ispravak praktičnog kolokvija | 20 |
+|		|       |         |
+
 
 ## 👨‍💻 Vježbe 👨‍🏫
 

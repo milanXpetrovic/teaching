@@ -15,18 +15,14 @@ Dobrodošli na vježbe iz predmeta **Informacijska sigurnost i blockchain tehnol
 ## Datumi aktivnosti
 
 | Datum | Vrsta | Bodovi |
-| ----- | ----- | --------|
-| 26.10.2022.      | Zadavanje tema projektnih zadataka      |          |
-|       | Praktični kolokvij | 20  prag  |
-|       | Projektnih zadatak i prezentacija | 20      |
-|       | Provjera znanja    | 30    |
-| 14.12.2022. | Zadavanje tema završnih projekata                    | 30      |
-| 25.1.2023. | Nadoknada | |
+| ----- | ----- | -------|
+|       |       |        |
+
 
 ## 👨‍💻 Vježbe
 
-- [ ] [Blockchain](../blockchain-uvod)
-- [ ] [Solidity](../solidity)
+- [ ] [Blockchain](../vjezbe-sadrzaj/blockchain-uvod)
+- [ ] [Solidity](../vjezbe-sadrzaj/solidity)
 
 ## 🔗 Korisni linkovi
 

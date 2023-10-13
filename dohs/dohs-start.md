@@ -11,7 +11,7 @@ Dobrodši na vježbe iz predmeta **Distribuirana obrada u heterogenim sustavima*
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-| 20.10.2022.      | Objava tema      |         | 
+|       | Objava tema      |         | 
 
 ## 🚀 Projektni zadaci
 1. [Projektni zadatak MPI]()

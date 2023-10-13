@@ -22,8 +22,6 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 | 13.122023. | Laboratorijske vježbe 3: Grafovi | 5 |
 | 10.01.2024. | Laboratorijske vježbe 4:Putevi i šetnje na grafu  | 5 | 
 
-
-
 ## 👨‍💻 Vježbe 👨‍🏫
 
 - [x] [Uvod](../prsp-uvod)
