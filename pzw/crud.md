@@ -7,9 +7,15 @@ title: CRUD
 
 # Operacije nad bazom podataka (CRUD)
 
+U nastavku su prikazani koraci implementacije sustav za upravljanje podacima o različitim vrstama sladoleda koristeći osnovne operacije CRUD (Create, Read, Update, Delete). Ovaj zadatak će zahtijevati da implementirate osnovne funkcije za upravljanje podacima o sladoledu, omogućujući korisnicima dodavanje novih unosa, pregled postojećih, ažuriranje informacija i brisanje unosa koji nisu potrebni. Ovo bi vam omogućilo bolje razumijevanje i primjenu CRUD operacija u konkretnom kontekstu razvoja aplikacija.
+
+- Osigurajte da svaka operacija (stvaranje, čitanje, ažuriranje, brisanje) bude jasno implementirana i testirana.
+- Napravite sučelje koje omogućuje korisnicima lako upravljanje podacima o sladoledu.
+- Uvjerite se da su osnovni podaci o sladoledu dobro strukturirani kako bi omogućili jednostavno upravljanje.
+
 ## Create
 
-Cilj: Implementirati pogled i obrazac kako bi se omogućilo stvaranje novih unosa sladoleda.
+Implementirati pogled i obrazac kako bi se omogućilo stvaranje novih unosa sladoleda.
 
 **models.py**
 
