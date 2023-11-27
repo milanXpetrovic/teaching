@@ -118,6 +118,7 @@ urlpatterns = [
 **add_icecream.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,6 +133,7 @@ urlpatterns = [
     </form>
 </body>
 </html>
+{% endraw %}s
 ```
 
 ## Read
@@ -153,6 +155,7 @@ class IceCreamListView(ListView):
 **list_icecreams.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,7 +175,7 @@ class IceCreamListView(ListView):
     </ul>
 </body>
 </html>
-
+{% endraw %}
 ```
 
 ## Update
@@ -198,6 +201,7 @@ class IceCreamUpdateView(UpdateView):
 **update_icecream.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,12 +216,13 @@ class IceCreamUpdateView(UpdateView):
     </form>
 </body>
 </html>
-
+{% endraw %}
 ```
 
 **landing.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -239,6 +244,7 @@ class IceCreamUpdateView(UpdateView):
     </ul>
 </body>
 </html>
+{% endraw %}
 ```
 
 ## Delete
@@ -263,6 +269,7 @@ class IceCreamDeleteView(DeleteView):
 **delete_icecream.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -277,11 +284,13 @@ class IceCreamDeleteView(DeleteView):
     </form>
 </body>
 </html>
+{% endraw %}
 ```
 
 **landing.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -304,4 +313,5 @@ class IceCreamDeleteView(DeleteView):
     </ul>
 </body>
 </html>
+{% endraw %}
 ```
