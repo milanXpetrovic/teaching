@@ -97,7 +97,7 @@ urlpatterns = [
 
 **landing.html**
 
-```python
+```text
 <!DOCTYPE html>
 <html>
 <head>
