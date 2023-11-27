@@ -97,7 +97,7 @@ urlpatterns = [
 
 **landing.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +115,7 @@ urlpatterns = [
 
 **add_icecream.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,7 +151,7 @@ class IceCreamListView(ListView):
 
 **list_icecreams.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,7 +196,7 @@ class IceCreamUpdateView(UpdateView):
 
 **update_icecream.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,7 +216,7 @@ class IceCreamUpdateView(UpdateView):
 
 **landing.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -261,7 +261,7 @@ class IceCreamDeleteView(DeleteView):
 
 **delete_icecream.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
@@ -280,7 +280,7 @@ class IceCreamDeleteView(DeleteView):
 
 **landing.html**
 
-```html
+```python
 <!DOCTYPE html>
 <html>
 <head>
