@@ -1,3 +1,10 @@
+---
+parent: PZW
+nav_order: 1
+nav_exclude: false
+title: CRUD
+---
+
 # Operacije nad bazom podataka (CRUD)
 
 ## Create
