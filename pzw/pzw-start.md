@@ -9,21 +9,18 @@ has_toc: false
 
 Dobrodši na vježbe iz predmeta **Programiranje za web**
 
-## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2022_2023/PDS/3_godina/DINP_PW_2022_2023.pdf)
+## 📅 [DINP](https://moodle.srce.hr/2023-2024/pluginfile.php/8912464/mod_resource/content/0/DINP_FIDIT_2023_2024_PW.pdf)
 
 ## Datumi aktivnosti
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
-|		|       |         |
-
+| 4.12.2023. | Kolokvij iz vježbi | 20 |
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
 - [Django](https://gaseri.org/hr/nastava/materijali/python-modul-django/)
+- [Django CRUD](../crud)
 - [Django REST](https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/)
 
-## 🚀 Projekt i završni
-
-- [Projektni zadatak](../pzw-projektni)
-- [Zadatak za završni](../pzw-zavrsni-zadatak)
+## 🚀 Završni projekt
