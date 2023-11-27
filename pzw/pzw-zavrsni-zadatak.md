@@ -1,7 +1,7 @@
 ---
 parent: PZW
 nav_order: 2
-nav_exclude: false
+nav_exclude: true
 ---
 
 # Zadatak za završni ispit
