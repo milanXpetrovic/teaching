@@ -98,6 +98,7 @@ urlpatterns = [
 **landing.html**
 
 ```text
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,6 +112,7 @@ urlpatterns = [
     </ul>
 </body>
 </html>
+{% endrawraw %}
 ```
 
 **add_icecream.html**
