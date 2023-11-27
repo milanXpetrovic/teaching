@@ -106,8 +106,8 @@ urlpatterns = [
 <body>
     <h1>Welcome to Ice Cream CRUD Operations</h1>
     <ul>
-        <li><a href="{{ url_for('icecream:add') }}">Add Ice Cream</a></li>
-        <li><a href="{{ url_for('icecream:list') }}">List Ice Creams</a></li> 
+        <li><a href="{% url 'icecream:add' %}">Add Ice Cream</a></li>
+        <li><a href="{% url 'icecream:list' %}">List Ice Creams</a></li>
     </ul>
 </body>
 </html>
@@ -130,7 +130,6 @@ urlpatterns = [
     </form>
 </body>
 </html>
-
 ```
 
 ## Read
