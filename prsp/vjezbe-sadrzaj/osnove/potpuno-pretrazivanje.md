@@ -60,7 +60,7 @@ Ispis brojeva čija suma iznosi $k$.
 
 S pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
-Razmotrimo problem gdje nam je dana lista $l$ koja sadržava $n$ brojeva i broj $k$, te želimo saznati ako je moguće odabrati brojeve s liste $l$ tako da njihov zbroj bude $k$. 
+Razmotrimo problem gdje nam je dana lista $l$ koja sadržava $n$ brojeva i broj $k$, te želimo saznati ako je moguće odabrati brojeve s liste $l$ tako da njihov zbroj bude $k$.
 
 **Input:**
 U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
@@ -96,10 +96,10 @@ YES
 
 ## Zadatak 5: Stvaranje stringova
 
-Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti pomoću znakova iz zadanog stringa $s$.
+Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti s pomoću znakova iz zadanog stringa $s$.
 
 {: .highlight }
-Za generiranje permutacija može se koristiti funkcija `permutations` koja se poziva pomoću `from itertools import permutations`. 
+Za generiranje permutacija može se koristiti funkcija `permutations` koja se poziva s pomoću `from itertools import permutations`.
 
 **Input:**
 Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
@@ -107,7 +107,7 @@ Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
 **Output:**
 Prvo ispišite cijeli broj $k$: ukupan broj stringova. Zatim u $k$ redaka ispišite stvorene stringove.
 
-**Primjer**
+### Primjer
 
 **Input:**
 

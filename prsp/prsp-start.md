@@ -25,14 +25,14 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 ## 👨‍💻 Vježbe 👨‍🏫
 
 - [Uvod](../vjezbe-sadrzaj/prsp-uvod.md)
-- [Vremenska složenost](../vjezbe-sadrzaj/vremenska-slozenost)
-- [Potpuno pretraživanje](../vjezbe-sadrzaj/potpuno-pretrazivanje)
-- [Pohlepni algoritmi](../vjezbe-sadrzaj/pohlepni-algoritmi)
-- [Dinamičko programiranje](../vjezbe-sadrzaj/dinamicko-programiranje)
-- [Bit manipulation](../vjezbe-sadrzaj/bit-manipulation)
+- [Vremenska složenost](../vjezbe-sadrzaj/osnove/vremenska-slozenost)
+- [Potpuno pretraživanje](../vjezbe-sadrzaj/osnove/potpuno-pretrazivanje)
+- [Pohlepni algoritmi](../vjezbe-sadrzaj/osnove/pohlepni-algoritmi)
+- [Dinamičko programiranje](../vjezbe-sadrzaj/osnove/dinamicko-programiranje)
+- [Bit manipulation](../vjezbe-sadrzaj/osnove/bit-manipulation)
 - [Priprema za kolokvij](../vjezbe-sadrzaj/priprema-kol)
-- [Grafovi: uvod](../vjezbe-sadrzaj/grafovi-uvod)
-- [Putovanje kroz graf](../vjezbe-sadrzaj/putovanje-kroz-graf)
+- [Grafovi: uvod](../vjezbe-sadrzaj/grafovi/grafovi-uvod)
+- [Putovanje kroz graf](../vjezbe-sadrzaj/grafovi/putovanje-kroz-graf)
 
 <!--
 - [ ] [Matrice](./matrice)

@@ -21,7 +21,7 @@ Broj $n$ koji označava broj otoka.
 
 **Input:**
 
-```console
+```text
 4 5
 1 1 1 1 0
 1 1 0 1 0
@@ -31,13 +31,13 @@ Broj $n$ koji označava broj otoka.
 
 **Output:**
 
-```console
+```text
 1
 ```
 
 **Input:**
 
-```console
+```text
 4 5
 1 1 0 0 0
 1 1 0 0 0
@@ -47,7 +47,7 @@ Broj $n$ koji označava broj otoka.
 
 **Output:**
 
-```console
+```text
 3
 ```
 
@@ -65,7 +65,7 @@ Broj $n$ koji označava površinu najvećeg otoka.
 
 **Input:**
 
-```console
+```text
 8 13
 0 0 1 0 0 0 0 1 0 0 0 0 0 
 0 0 0 0 0 0 0 1 1 1 0 0 0 
@@ -79,7 +79,7 @@ Broj $n$ koji označava površinu najvećeg otoka.
 
 **Output:**
 
-```console
+```text
 6
 ```
 
@@ -91,7 +91,7 @@ Regija se osvaja pretvaranjem svih 'O' u 'X' u toj okruženoj regiji.
 
 **Input:**
 
-```console
+```text
 X X X X
 X O O X
 X X O X
@@ -100,7 +100,7 @@ X O X X
 
 **Output:**
 
-```console
+```text
 X X X X
 X X X X
 X X X X
@@ -115,7 +115,7 @@ Primijetite da se 'O' ne smije osvojiti jedino ako:
 
 **Input:**
 
-```console
+```text
 X X X X X X X 
 X O O O X X O 
 X X X X X O O 
@@ -127,7 +127,7 @@ X X X X X X X
 
 **Output:**
 
-```console
+```text
 X X X X X X X 
 X X X X X X O 
 X X X X X O O 
@@ -150,7 +150,7 @@ Ispis udaljenosti do svih gradova ili $-1$ ako to nije moguće.
 
 **Input:**
 
-```console
+```text
 3 5
 0 5 3 2 5 
 9 0 4 0 0 
@@ -179,7 +179,7 @@ Zatim ispišite $k$ redaka koji opisuju nove ceste. Možete ispisati bilo koje v
 
 **Input:**
 
-```console
+```text
 4 2
 1 2
 3 4
@@ -187,7 +187,7 @@ Zatim ispišite $k$ redaka koji opisuju nove ceste. Možete ispisati bilo koje v
 
 **Output:**
 
-```console
+```text
 1
 2 3
 ```
@@ -210,7 +210,7 @@ Ako nema rješenja ispisati "NEMA".
 
 **Input:**
 
-```console
+```text
 5 3
 1 2
 1 3
@@ -219,7 +219,7 @@ Ako nema rješenja ispisati "NEMA".
 
 **Output:**
 
-```console
+```text
 1 2 2 1 2
 ```
 
@@ -237,7 +237,7 @@ Ako graf sadrži negativan ciklus, ispišite prvo "YES", a zatim čvorove u cikl
 
 **Input:**
 
-```console
+```text
 4 5
 1 2 1
 2 4 1
@@ -248,7 +248,7 @@ Ako graf sadrži negativan ciklus, ispišite prvo "YES", a zatim čvorove u cikl
 
 **Output:**
 
-```console
+```text
 YES
 1 2 4 1
 ```
@@ -272,7 +272,7 @@ Ispišite jedan cijeli broj: minimalni ukupni trošak popravka. Međutim, ako ne
 
 **Input:**
 
-```console
+```text
 5 6
 1 2 3
 2 3 5
@@ -284,7 +284,7 @@ Ispišite jedan cijeli broj: minimalni ukupni trošak popravka. Međutim, ako ne
 
 **Output:**
 
-```console
+```text
 14
 ```
 
@@ -302,7 +302,7 @@ Ispišite topološki sortirani graf.
 
 **Input:**
 
-```console
+```text
 A B
 A C
 B D
@@ -312,6 +312,6 @@ C F
 
 **Output:**
 
-```console
+```text
 A C F B E D
 ```

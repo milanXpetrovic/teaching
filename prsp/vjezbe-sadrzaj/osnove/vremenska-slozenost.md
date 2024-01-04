@@ -18,7 +18,7 @@ Najveći zbroj podniza iznosi **12**:
 
 $$\{1, 5, -2, 3, 5\}$$
 
-**Primjer rješenja u C++**
+### Primjer rješenja u C++
 
 ```cpp
 int best = 0;
@@ -44,7 +44,7 @@ Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 **Output:**
 Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
-**Primjer**
+### Primjer
 
 **Input:**
 
@@ -69,7 +69,7 @@ Napišite Python kod koji traži najveći zbroj podniza s vremenskom složenosti
 {: .highlight }
 Ovaj problem moguće je riješiti samo jednom iteracijom kroz listu, odnosno sa složenosti $O(n)$ pomoću [Kadane algoritma](https://en.wikipedia.org/wiki/Joseph_Born_Kadane).
 
-Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$. 
+Ideja je izračunati, za svaku poziciju niza, maksimalni zbroj podniza koji završava na toj poziciji. Nakon ovoga potrebno je pronaći maksimalnu vrijednost od tih zbrojeva. Ako razmotrimo podproblem pronalaženja podniza maksimalnog zbroja koji završava na položaju $k$.
 
 Postoje dvije mogućnosti:
 
@@ -100,7 +100,7 @@ Duljina liste $n$, određuje broj elemenata u listi.
 **Output**
 Lista $l$ koja sadržava $n$ elemenata.
 
-**Primjer**
+### Primjer
 
 **Input:**
 
@@ -127,7 +127,7 @@ Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskori
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 
-**Primjer**
+### Primjer
 
 **Input:**
 
