@@ -4,18 +4,20 @@ parent: PRSP
 nav_order: 6
 ---
 
-# Bit manipulation
+# [Bit manipulation](https://cses.fi/book/book.pdf#chapter.10)
+
 Svi podaci u računalnim programima interno su pohranjeni kao bitovi, tj. kao brojevi 0 i 1. Ovo poglavlje raspravlja o bit reprezentaciji cijelih brojeva i pokazuje primjere kako koristiti operacije s bitovima. Ispostavilo se da postoje mnoge upotrebe za manipulaciju bitovima u programiranju algoritama. Operacije koje se korisete u zdacima:
-- and (`&`) - Operacija `x & y` daje broj koji ima jedan bit na mjestima gdje i $x$ i $y$ imaju jedan bit. 
+
+- and (`&`) - Operacija `x & y` daje broj koji ima jedan bit na mjestima gdje i $x$ i $y$ imaju jedan bit.
 - or (`|`) - Operacija or `x | y` daje broj koji ima jedan bit na pozicijama gdje ili $x$ ili $y$ ima jedan bit.
 - xor (`^`) - Operacija `x ^ y` daje broj koji ima jedan bit na mjestima gdje točno jedan od $x$ i $y$ ima jedan bit.
 - not (`~`) - Operacija `~x` daje broj gdje su bili svi bitovi od $x$
 obrnuti.
-- Pomicanje bita - Lijevi pomak bita `x << k `dodaje $k$ nula bitova broju, a desni pomak bita `x >> k` uklanja zadnjih $k$ bitova iz broja. Na primjer, `14 << 2 = 56`, jer 14 i 56 odgovaraju 1110 i 111000. Slično, `49 >> 3 = 6`, jer 49 i 6 odgovaraju 110001 i 110. Imajte na umu da `x << k` odgovara množenju $x$ s $2^k$, a `x >> k` odgovara dijeljenju $x$ s $2^k$ zaokruženo na cijeli broj.
-
+- Pomicanje bita - Lijevi pomak bita `x << k`dodaje $k$ nula bitova broju, a desni pomak bita `x >> k` uklanja zadnjih $k$ bitova iz broja. Na primjer, `14 << 2 = 56`, jer 14 i 56 odgovaraju 1110 i 111000. Slično, `49 >> 3 = 6`, jer 49 i 6 odgovaraju 110001 i 110. Imajte na umu da `x << k` odgovara množenju $x$ s $2^k$, a `x >> k` odgovara dijeljenju $x$ s $2^k$ zaokruženo na cijeli broj.
 
 ## Zadatak 1: Element bez ponavljanja
-U zadanoj listi cjelih brojeva $l$ svi elementi se ponavljaju osim jednog. Potrebno je pronaći taj element. 
+
+U zadanoj listi cjelih brojeva $l$ svi elementi se ponavljaju osim jednog. Potrebno je pronaći taj element.
 
 Rješenje mora biti implementirano s linearnom složenošću vremena izvođenja i konstantnom prostornom složenošću.
 
@@ -26,20 +28,28 @@ Lista cjelih brojeva $l$.
 Cjeli broj $k$ koji se ne ponavlja u zadanoj listi $l$.
 
 ### Primjeri
+
 **Input:**
-```
+
+```text
 2 2 1
 ```
+
 **Output:**
-```
+
+```text
 1
 ```
+
 **Input:**
-```
+
+```text
 2 3 2 1 5 3 1
 ```
+
 **Output:**
-```
+
+```text
 5
 ```
 
@@ -59,16 +69,21 @@ String $s$ koji reprezentira zadani binarni broj.
 Broj $k$ koji označava ukupan broj `1` u zadanom stringu.
 
 ### Primjer
+
 **Input:**
-```
+
+```text
 0001011
 ```
+
 **Output:**
-```
+
+```text
 3
 ```
 
 ## Zadatak 3: Nedostaje broj
+
 U program se unosi lista $l$ koja sadrži $n$ cjelobrojnih vrijednosti koje su u rasponu od $0$ do $n$, u unesenoj listi nedostaje jedan broj iz intervala od $0$ do $n$. Program zatim ispisuje broj koji nedostaje u unesenoj listi.
 
 **Input:**
@@ -78,19 +93,27 @@ Lista cjelih brojeva $l$.
 Broj $k$ koji nedostaje u listi $l$.
 
 ### Primjeri
+
 **Input:**
-```
+
+```text
 0 1 3
 ```
+
 **Output:**
-```
+
+```text
 2
 ```
+
 **Input:**
-```
+
+```text
 9 0 1 5 3 2 4 6 8 
 ```
+
 **Output:**
-```
+
+```text
 7
 ```

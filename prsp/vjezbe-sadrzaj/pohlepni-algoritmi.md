@@ -23,12 +23,14 @@ Cijeli broj $n$ $(1 <= n <= 10000)$ koji označava traženu sumu.
 Lista vrijednosti na kovanicama $\{c_1, c_2, c_3,...,c_k\}$ na kovanicama.
 
 **Input:**
-```
+
+```text
 530
 ```
 
 **Output:**
-```
+
+```text
 200 200 100 20 10
 ```
 
@@ -44,11 +46,16 @@ Kreirajte program koji pretvara uneseni zapis slova u šifrirani zapis 0 i 1.
 | D         | 11       |
 
 **Input:**
+
+```text
 AABACDACA
+```
 
 **Output:**
-000001001011001000
 
+```text
+000001001011001000
+```
 
 ## Zadatak 3: Zakazivanje aktivnosti
 
@@ -64,7 +71,8 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 ### Primjer
 
 **Input:**
-```
+
+```text
 7
 8 9
 11 13
@@ -76,7 +84,8 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 ```
 
 **Output:**
-```
+
+```text
 8 9
 9 10
 10 12

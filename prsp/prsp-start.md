@@ -31,7 +31,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [Dinamičko programiranje](../vjezbe-sadrzaj/dinamicko-programiranje)
 - [Bit manipulation](../vjezbe-sadrzaj/bit-manipulation)
 - [Priprema za prvi kolokvij](../vjezbe-sadrzaj/priprema-kol1)
-- [Grafovi](../vjezbe-sadrzaj/grafovi-uvod)
+- [Grafovi: uvod](../vjezbe-sadrzaj/grafovi-uvod)
 - [Putovanje kroz graf](../vjezbe-sadrzaj/putovanje-kroz-graf)
 
 <!--

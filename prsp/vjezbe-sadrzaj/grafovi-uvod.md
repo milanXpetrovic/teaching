@@ -5,7 +5,7 @@ nav_order: 7
 nav_exclude: false
 ---
 
-# Grafovi: uvod
+# [Grafovi: uvod](https://cses.fi/book/book.pdf#chapter.11)
 
 ## Stvaranje grafa
 
@@ -47,7 +47,7 @@ def dfs(graph, start):
     return visited
 ```
 
-## Putovanje kroz graf
+## Zadaci za vježbu
 
 - Isprobajte BFS i DFS algoritam nad grafom veličine 50.
 
