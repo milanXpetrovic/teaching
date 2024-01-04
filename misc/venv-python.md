@@ -1,3 +1,9 @@
+---
+title: Venv
+layout: default
+parent: Misc
+nav_exclude: false
+---
 
 Install the pip:
 

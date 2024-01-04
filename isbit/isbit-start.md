@@ -2,6 +2,7 @@
 layout: default
 title: ISBiT
 nav_order: 2
+nav_exclude: true
 has_children: true
 has_toc: false
 ---

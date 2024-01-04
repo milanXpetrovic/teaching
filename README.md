@@ -14,11 +14,11 @@ permalink: /
 
 - [Programiranje za Web](./pzw/pzw-start)
 - [Programiranje za rješavanje složenih problema](./prsp/prsp-start)
-- [Analiza društvenih mreža](./sna/sna-start)
+<!-- - [Analiza društvenih mreža](./sna/sna-start) -->
 
 **Diplomski studij:**
 
-- [Informacijska sigurnost i blockchain tehnologije](./isbit/isbit-start)
+<!-- - [Informacijska sigurnost i blockchain tehnologije](./isbit/isbit-start) -->
 - [Distribuirana obrada u heterogenim sustavima](./dohs/dohs-start)
 
 
@@ -26,5 +26,3 @@ permalink: /
 
 - Asistent: Milan Petrović
 - E-mail: milan.petrovic@uniri.hr
-
-

@@ -1,5 +1,8 @@
 ---
-nav_exclude: true
+title: Venv
+layout: default
+parent: Misc
+nav_exclude: false
 ---
 
 # Docker
