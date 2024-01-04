@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Obilazak grafa
 parent: Grafovi
 nav_order: 1
 nav_exclude: false
