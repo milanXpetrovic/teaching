@@ -8,11 +8,11 @@ has_toc: false
 
 # Programiranje za rješavanje složenih problema
 
-Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih problema**
+Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih problema**. Zadaci prate gradivo s predavanja i knjigu [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf).
 
 ## 📅 [DINP](https://www.inf.uniri.hr/images/nastava/izvedbeni/2023_2024/PDS/3/DINP_FIDIT_2023_2024_PRSP.pdf)
 
-## Datumi aktivnosti
+## Datumi aktivnosti za bodove na vježbama
 
 | Datum | Vrsta | Bodovi |
 | ----- | ----- | --------|
@@ -20,7 +20,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 | 15.11.2023. | Laboratorijske vježbe 2: Dinamičko programiranje, Bit manipulation | 5 |
 | 06.12.2023. | Praktični kolokvij | 20 | 
 | 13.12.2023. | Laboratorijske vježbe 3: Grafovi | 5 |
-| 10.01.2024. | Laboratorijske vježbe 4:Putevi i šetnje na grafu  | 5 | 
+| 10.01.2024. | Laboratorijske vježbe 4:Putevi i šetnje na grafu  | 5 |
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
@@ -31,6 +31,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 - [Dinamičko programiranje](../vjezbe-sadrzaj/osnove/dinamicko-programiranje)
 - [Bit manipulation](../vjezbe-sadrzaj/osnove/bit-manipulation)
 - [Priprema za kolokvij](../vjezbe-sadrzaj/priprema-kol)
+
 - [Grafovi: uvod](../vjezbe-sadrzaj/grafovi/grafovi-uvod)
 - [Putovanje kroz graf](../vjezbe-sadrzaj/grafovi/putovanje-kroz-graf)
 
@@ -45,8 +46,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 📦 Resursi
 
-- [Rješenja zadataka s vježbi](../vjezbe-rjesenja)
-
+<!-- - [Rješenja zadataka s vježbi](../vjezbe-sadrzaj/vjezbe-rjesenja) -->
 - [Advent of Code](https://adventofcode.com/)
 - [Codeforces](https://codeforces.com/)
 - [Project Euler](https://projecteuler.net/)

@@ -7,6 +7,18 @@ nav_exclude: false
 
 # [Grafovi: uvod](https://cses.fi/book/book.pdf#chapter.11)
 
+Mnogi programski problemi mogu se riješiti modeliranjem problema kao problema grafa i korištenjem odgovarajućih algoritmova nad tim grafovima.  Često su grafovi idealni za predstavljanje veza i odnosa među elementima u raznim situacijama. Tipičan primjer grafa je mreža cesta i gradova u zemlji. Ponekad, je graf skriven u problemu i teško ga je otkriti. Ovaj dio vježbi govori o algoritmima nad grafovima.
+
+U sklopu tematske cjeline Grafovi proći ćemo kroz nekoliko ključnih područija koja su:
+
+- [Putovanje kroz graf](.../putovanje-kroz-graf)ž
+- [Traženje najkraćeg puta](../najkraci-putovi.md)
+- [Stabla](../stabla.md)
+- [Razapinjujuća stabla](../razapinjujuca-stabla.md)
+- [Usmjereni grafovi](../usmjereni-grafovi.md)
+- [Staze i ciklusi](../staze-i-ciklusi.md)
+- [Dodatne teme](../grafovi-dodatno.md)
+
 ## Stvaranje grafa
 
 ```python
