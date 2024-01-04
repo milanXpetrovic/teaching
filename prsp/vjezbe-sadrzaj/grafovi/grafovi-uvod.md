@@ -13,7 +13,7 @@ Mnogi programski problemi mogu se riješiti modeliranjem problema kao problema g
 
 U sklopu tematske cjeline Grafovi proći ćemo kroz nekoliko ključnih područija koja su:
 
-- [Putovanje kroz graf](.../putovanje-kroz-graf)
+- [Putovanje kroz graf](../putovanje-kroz-graf)
 - [Traženje najkraćeg puta](../najkraci-putovi.md)
 - [Stabla](../stabla.md)
 - [Razapinjujuća stabla](../razapinjujuca-stabla.md)
