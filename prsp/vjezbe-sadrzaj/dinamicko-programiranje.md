@@ -4,7 +4,7 @@ parent: PRSP
 nav_order: 5
 ---
 
-# Dinamičko programiranje
+# [Dinamičko programiranje](https://cses.fi/book/book.pdf#chapter.5)
 
 Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće podprobleme koji mogu biti samostalno riješeni.
 
@@ -30,7 +30,9 @@ Usporedite vremena izvođenja triju funkcija za $n$ 40.
 ```
 40
 ```
+
 **Output:**
+
 ```
 102334155
 ```
@@ -51,21 +53,27 @@ Ako je moguće kreirati svotu ispisuje se broj $n$ koji označuje broj kovanica 
 ### Primjeri
 
 **Input:**
+
 ```
 1 2 5
 11
 ```
+
 **Output:**
+
 ```
 3
 ```
 
 **Input:**
+
 ```
 5 9
 4
 ```
+
 **Output:**
+
 ```
 -1
 ```
@@ -78,23 +86,30 @@ Penjete se stubištem. Do vrha je potrebno $n$ stuba. Svaki put se možete popet
 ### Primjer 1
 
 **Input:**
+
 ```
 2
 ```
+
 **Output:**
+
 ```
 2
 ```
+
 1. 1  + 1 
 2. 2 
 
 ### Primjer 2
 
 **Input:**
+
 ```
 3
 ```
+
 **Output:**
+
 ```
 3
 ```
@@ -115,13 +130,17 @@ Pronađite minimalnu cijenu da biste došli do vrha stubišta.
 ### Primjer 1
 
 **Input:**
+
 ```
 10 15 20
 ```
+
 **Output:**
+
 ```
 15
 ```
+
 Počet ćete od indeksa 1.
 - Platite 15 i popnite se dvije stepenice do vrha.
 Ukupna cijena je 15.
@@ -129,15 +148,19 @@ Ukupna cijena je 15.
 ### Primjer 2
 
 **Input:**
+
 ```
 1 100 1 1 1 100 1 1 100 1
 ```
+
 **Output:**
+
 ```
 6
 ```
 
 Počinje se od indeksa 0.
+
 - Platite 1 i popnite se dvije stepenice do indeksa 2.
 - Platite 1 i popnite se dvije stepenice do indeksa 4.
 - Platite 1 i popnite se dvije stepenice do indeksa 6.

@@ -5,13 +5,10 @@ nav_order: 8
 nav_exclude: true
 ---
 
-# Vježbe 8: Priprema - Kolokvij 1
-
+# Vježbe 8: Priprema - Kolokvij
 
 {: .highlight }
 Bonus zadaci se nalaze ovdje
-
-
 
 ## Zadatak 1
 
@@ -53,7 +50,6 @@ n broj studenata
 **Output:**
 Ispiši 1 ako je moguće u zadanu prostoriju smjestiti n učenika inače -1.
 
-
 Input
 4, 4
 3
@@ -66,16 +62,12 @@ Meet in the middle
 
 Pronađi ako je moguće iz zadane liste brojeva l, zbrajanjem njenih članova dobiti broj x.
 
-
 ## Zadatak 4
 
 https://www.techiedelight.com/find-all-paths-from-source-to-destination-in-matrix/
 
-
 ## Zadatak 
 https://www.techiedelight.com/print-possible-solutions-n-queens-problem/
-
-
 
 ## Zadatak 2: Problem $n$ kraljica 
 Problem $n$ kraljica je problem postavljanja $n$ kraljica na šahovsku ploču dimenzija $n \times n$ tako da se kraljice međusobno ne napadaju. Cilj je odrediti ukupan broj načina postavljanja kraljica na ploču.
@@ -120,31 +112,33 @@ Broj $n$ označava broj kraljica i dimenzije ploče $n \times n$ $(4 \le n \le 8
 **Output:**
 Broj $m$ načina na koje možete postaviti kraljice.
 
-
 ### Primjer
+
 **Input:**
 ```
 4
 ```
 
 **Output:**
+
 ```
 2
 ```
 
 **Input:**
+
 ```
 8
 ```
 
 **Output:**
+
 ```
 92
 ```
 
-
-
 ## Zadatak 3: Kombinacije brojeva od 1 do $n$
+
 Za dan pozitivan cijeli broj $n$ $(2 \le n \le 1000)$, ispišite sve kombinacije brojeva između 1 i $n$, gdje njihov zbroj iznosi $n$.
 
 **Input:**
@@ -184,9 +178,6 @@ Cijeli broj $n$ $(1 <= n <= 1000)$ koji označava traženu sumu.
 1 1 1 1 1
 ```
 
-
-
-
 Različite znamenke 
 Kreirajte program koji za zadani broj godine, pronađite minimalni broj godine koji je strogo veći od zadanog i ima sve različite znamenke.
 
@@ -199,6 +190,7 @@ Cijeli broj $y$ $(1000 ≤ y ≤ 9000)$ koji označava broj godine.
 Cijeli broj - minimalna vrijednost godine koja je striktno veća od $y$ i sve znamenke su različite.
 
 ### Primjer
+
 **Input:**
 ```
 1987

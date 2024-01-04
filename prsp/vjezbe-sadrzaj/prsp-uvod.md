@@ -16,7 +16,7 @@ Potrebno poznavanje osnoba u programskom jeziku [Python](https://www.python.org/
 
 ## Zadatak 1
 
-Mladom asistentu Petroviću potreban je program pomoću kojeg provjerava ako je student ostvario pravo pristupa završnom ispitu. U program unosite ime studenta, broj ostvarenih bodova na kolokviju i ukupan broj bodova koji je prikupio tijekom semestra.
+Mladom asistentu potreban je program pomoću kojeg provjerava ako je student ostvario pravo pristupa završnom ispitu. U program unosite ime studenta, broj ostvarenih bodova na kolokviju i ukupan broj bodova koji je prikupio tijekom semestra.
 
 Student ima pravo pristupa završnom ako je prikupiuo 50% ili više bodova na kolokviju i ako je prikupio 35 ili više bodova tijekom semestra.
 
