@@ -3,7 +3,6 @@ layout: default
 title: Grafovi
 parent: PRSP
 has_children: true
-has_toc: false
 nav_exclude: false
 ---
 
