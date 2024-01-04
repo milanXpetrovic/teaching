@@ -24,15 +24,15 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [Uvod](./vjezbe-sadrzaj/prsp-uvod.md)
-- [Vremenska složenost](./vjezbe-sadrzaj/vremenska-slozenost)
-- [Potpuno pretraživanje](./vjezbe-sadrzaj/potpuno-pretrazivanje)
-- [Pohlepni algoritmi](./vjezbe-sadrzaj/pohlepni-algoritmi)
-- [Dinamičko programiranje](./vjezbe-sadrzaj/dinamicko-programiranje)
-- [Bit manipulation](./vjezbe-sadrzaj/bit-manipulation)
-- [Priprema za prvi kolokvij](./vjezbe-sadrzaj/priprema-kol1)
-- [Grafovi](./vjezbe-sadrzaj/grafovi-uvod)
-- [Putovanje kroz graf](./vjezbe-sadrzaj/putovanje-kroz-graf)
+- [Uvod](../vjezbe-sadrzaj/prsp-uvod.md)
+- [Vremenska složenost](../vjezbe-sadrzaj/vremenska-slozenost)
+- [Potpuno pretraživanje](../vjezbe-sadrzaj/potpuno-pretrazivanje)
+- [Pohlepni algoritmi](../vjezbe-sadrzaj/pohlepni-algoritmi)
+- [Dinamičko programiranje](../vjezbe-sadrzaj/dinamicko-programiranje)
+- [Bit manipulation](../vjezbe-sadrzaj/bit-manipulation)
+- [Priprema za prvi kolokvij](../vjezbe-sadrzaj/priprema-kol1)
+- [Grafovi](../vjezbe-sadrzaj/grafovi-uvod)
+- [Putovanje kroz graf](../vjezbe-sadrzaj/putovanje-kroz-graf)
 
 <!--
 - [ ] [Matrice](./matrice)
