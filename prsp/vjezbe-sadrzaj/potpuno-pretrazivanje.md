@@ -10,7 +10,7 @@ Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva 
 
 ## Zadatak 1: Generiranje podskupova
 
-Zadan je skup $\{0, 1, 2, ..., n\}$, pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
+Zadan je skup $\{0, 1, 2, ..., n\}$, s pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 **Primjer**
@@ -39,16 +39,16 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
 ## Zadatak 2: Binarna reprezentacija
 
-Riješite prethodni zadatak pomoću reprezentacije brojeva u binarnom zapisu.
+Riješite prethodni zadatak s pomoću reprezentacije brojeva u binarnom zapisu.
 
 {: .highlight }
 > Da bi `x` pretvorili u binarni zapis možete koristiti `format(x, 'b')`.
 >
-> Funkcija `zfill(n)`, popunjava string sa `0` dok on nema duljinu `n`.
+> Funkcija `zfill(n)`, popunjava string s `0` dok on nema duljinu `n`.
 
 ## Zadatak 3: K-sum binarno
 
-Pomoću binarne reprezentacije provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
+S pomoću binarne reprezentacije provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 **Input:**
 U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
@@ -58,7 +58,7 @@ Ispis brojeva čija suma iznosi $k$.
 
 ## Zadatak 4: K-sum Meet in the middle
 
-Pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
+S pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 Razmotrimo problem gdje nam je dana lista $l$ koja sadržava $n$ brojeva i broj $k$, te želimo saznati ako je moguće odabrati brojeve s liste $l$ tako da njihov zbroj bude $k$. 
 

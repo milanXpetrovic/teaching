@@ -6,7 +6,7 @@ nav_order: 5
 
 # [Dinamičko programiranje](https://cses.fi/book/book.pdf#chapter.5)
 
-Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće podprobleme koji mogu biti samostalno riješeni.
+Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće potprobleme koji mogu biti samostalno riješeni.
 
 Postoje dvije upotrebe za dinamičko programiranje:
 • Pronalaženje optimalnog rješenja: Želimo pronaći rješenje koje je što je moguće veće ili što manje.
@@ -17,6 +17,7 @@ Postoje dvije upotrebe za dinamičko programiranje:
 Napišite funkcije `fib_1(n)`, `fib_2(n)` i `fib_3(n)` koja za zadani broj $n$ izračunava n-ti Fibonaccijev broj.
 
 Zadatak riješite na tri načina:
+
 - Rekurzivno, $O(n)$ vremenska i memorijska složenost.
 - Dinamičkim programiranjem, $O(n)$ vremenska i memorijska složenost.
 - Dinamičkim programiranjem, $O(n)$ vremenska i $O(1)$ memorijska složenost.
@@ -27,13 +28,13 @@ Usporedite vremena izvođenja triju funkcija za $n$ 40.
 
 **Input:**
 
-```
+```text
 40
 ```
 
 **Output:**
 
-```
+```text
 102334155
 ```
 
@@ -54,30 +55,29 @@ Ako je moguće kreirati svotu ispisuje se broj $n$ koji označuje broj kovanica 
 
 **Input:**
 
-```
+```text
 1 2 5
 11
 ```
 
 **Output:**
 
-```
+```text
 3
 ```
 
 **Input:**
 
-```
+```text
 5 9
 4
 ```
 
 **Output:**
 
-```
+```text
 -1
 ```
-
 
 ## Zadatak 3
 
@@ -87,37 +87,36 @@ Penjete se stubištem. Do vrha je potrebno $n$ stuba. Svaki put se možete popet
 
 **Input:**
 
-```
+```text
 2
 ```
 
 **Output:**
 
-```
+```text
 2
 ```
 
-1. 1  + 1 
-2. 2 
+1. 1  + 1
+2. 2
 
 ### Primjer 2
 
 **Input:**
 
-```
+```text
 3
 ```
 
 **Output:**
 
-```
+```text
 3
 ```
 
-1. 1  + 1  + 1 
-2. 1  + 2 
-3. 2  + 1 
-
+1. 1  + 1  + 1
+2. 1  + 2
+3. 2  + 1
 
 ## Zadatak 4
 
@@ -131,17 +130,18 @@ Pronađite minimalnu cijenu da biste došli do vrha stubišta.
 
 **Input:**
 
-```
+```text
 10 15 20
 ```
 
 **Output:**
 
-```
+```text
 15
 ```
 
 Počet ćete od indeksa 1.
+
 - Platite 15 i popnite se dvije stepenice do vrha.
 Ukupna cijena je 15.
 
@@ -149,13 +149,13 @@ Ukupna cijena je 15.
 
 **Input:**
 
-```
+```text
 1 100 1 1 1 100 1 1 100 1
 ```
 
 **Output:**
 
-```
+```text
 6
 ```
 
@@ -168,7 +168,6 @@ Počinje se od indeksa 0.
 - Platite 1 i popnite se dvije stepenice do indeksa 9.
 - Platite 1 i popnite se jednu stepenicu do vrha.
 Ukupni trošak je 6.
-
 
 ## Codeforces zadaci
 

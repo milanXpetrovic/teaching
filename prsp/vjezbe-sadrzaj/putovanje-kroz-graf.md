@@ -9,7 +9,7 @@ nav_exclude: false
 
 ## Zadatak 1: Broj otoka
 
-Zadana je $m \times n$ 2D matrica koja predstavlja kartu gdje je '1' kopno i '0' voda, pronađte broj otoka.
+Zadana je $m \times n$ 2D matrica koja predstavlja kartu gdje je '1' kopno i '0' voda, pronađite broj otoka.
 
 Otok je okružen vodom i nastaje spajanjem susjednih kopna vodoravno ili okomito. Možete pretpostaviti da su sva četiri ruba mreže okružena vodom.
 

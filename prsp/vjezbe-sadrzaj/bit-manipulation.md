@@ -6,7 +6,7 @@ nav_order: 6
 
 # [Bit manipulation](https://cses.fi/book/book.pdf#chapter.10)
 
-Svi podaci u računalnim programima interno su pohranjeni kao bitovi, tj. kao brojevi 0 i 1. Ovo poglavlje raspravlja o bit reprezentaciji cijelih brojeva i pokazuje primjere kako koristiti operacije s bitovima. Ispostavilo se da postoje mnoge upotrebe za manipulaciju bitovima u programiranju algoritama. Operacije koje se korisete u zdacima:
+Svi podaci u računalnim programima interno su pohranjeni kao bitovi, tj. kao brojevi 0 i 1. Ovo poglavlje raspravlja o bit reprezentaciji cijelih brojeva i pokazuje primjere kako koristiti operacije s bitovima. Ispostavilo se da postoje mnoge upotrebe za manipulaciju bitovima u programiranju algoritama. Operacije koje se koriste u zadcima:
 
 - and (`&`) - Operacija `x & y` daje broj koji ima jedan bit na mjestima gdje i $x$ i $y$ imaju jedan bit.
 - or (`|`) - Operacija or `x | y` daje broj koji ima jedan bit na pozicijama gdje ili $x$ ili $y$ ima jedan bit.
@@ -17,15 +17,15 @@ obrnuti.
 
 ## Zadatak 1: Element bez ponavljanja
 
-U zadanoj listi cjelih brojeva $l$ svi elementi se ponavljaju osim jednog. Potrebno je pronaći taj element.
+U zadanoj listi cijelih brojeva $l$ svi elementi se ponavljaju osim jednog. Potrebno je pronaći taj element.
 
 Rješenje mora biti implementirano s linearnom složenošću vremena izvođenja i konstantnom prostornom složenošću.
 
 **Input:**
-Lista cjelih brojeva $l$.
+Lista cijelih brojeva $l$.
 
 **Output:**
-Cjeli broj $k$ koji se ne ponavlja u zadanoj listi $l$.
+Cijeli broj $k$ koji se ne ponavlja u zadanoj listi $l$.
 
 ### Primjeri
 
@@ -87,7 +87,7 @@ Broj $k$ koji označava ukupan broj `1` u zadanom stringu.
 U program se unosi lista $l$ koja sadrži $n$ cjelobrojnih vrijednosti koje su u rasponu od $0$ do $n$, u unesenoj listi nedostaje jedan broj iz intervala od $0$ do $n$. Program zatim ispisuje broj koji nedostaje u unesenoj listi.
 
 **Input:**
-Lista cjelih brojeva $l$.
+Lista cijelih brojeva $l$.
 
 **Output:**
 Broj $k$ koji nedostaje u listi $l$.
