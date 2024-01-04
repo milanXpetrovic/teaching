@@ -5,6 +5,63 @@ nav_order: 9
 nav_exclude: false
 ---
 
+# Obilazak grafa
+
+DFS (Depth-First Search) je algoritam obilaska grafa koji se temelji na ideji istraživanja u dubinu iz odabranog početnog čvora. Počevši od korijena, ovaj algoritam istražuje što dublje u grafu prije nego se vrati unatrag kako bi istražio druge grane. Često se koristi stog (stack) kao memorijska struktura za praćenje puta i čvorova. DFS je koristan za pronalaženje rješenja problema kao što su topološko sortiranje, pretraga rute u mrežama ili pronalazak putanja u grafu.
+
+## Depth first search (DFS) – pretraživanje u dubinu
+
+```python
+def dfs(graph, start):
+    visited, stack = [], [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.append(vertex)
+            stack.extend([i for i in graph[vertex] if i not in visited])
+    return visited
+```
+
+## Breadth first search (BFS) – pretraživanje u širinu
+
+BFS (Breadth-First Search) je algoritam obilaska grafa, koji radi na principu širenja u dubinu od zadanog početnog čvora. Počevši od korijena, ovaj algoritam istražuje sve čvorove na jednoj razini dubine prije nego što prijeđe na čvorove na sljedećoj razini. Često se korišti reda (queue) kao memorijska struktura za pamćenje čvorova koje treba posjetiti. Ovaj algoritam je koristan kada se traži put s najmanje koraka od početnog do odredišnog čvora i provjeri povezanosti u mrežama.
+
+**Pseudokod za BFS algoritam**
+
+```
+
+```
+
+U nastavku je prikazan kod koji implementira BFS (Breadth-First Search) algoritam za obilazak grafa počevši od odabranog čvora `start`. Funkcija `bfs` koristi skup `visited` za praćenje posjećenih čvorova i red `queue` za provjeru susjednih čvorova. Petlja se izvršava dok god postoji čvor u redu `queue`. Funkcija vraća skup posjećenih čvorova `visited`.
+
+```python
+def bfs(graph, start):
+    visited, queue = set(), [start]
+    while queue:
+        vertex = queue.pop(0)
+        if vertex not in visited:
+            visited.add(vertex)
+            queue.extend([i for i in graph[vertex] if i not in list(visited)])
+
+    return visited
+```
+
+
+
+## Zadaci za vježbu
+
+- Isprobajte BFS i DFS algoritam nad grafom veličine 50.
+
+- Ispišite ako u vašem grafu postoje čvorovi iz kojih možemo posjetiti sve ostale čvorove. Ako ne onda ispišite -1.
+
+- Provjerite ako je vaš graf potpuno povezan. Graf je potpuno povezan ako iz svakog čvora možemo posjetiti sve ostale čvorove u grafu.
+
+- Konstruirajte algoritam za bojanje vrhova u vašem grafu, pokušajte odrediti najmanji broj boja potreban za pobojati graf.
+
+- Pronađite najdulji put u vašem grafu.
+
+
+
 # [Putovanje kroz graf](https://cses.fi/book/book.pdf#chapter.12)
 
 ## Zadatak 1: Broj otoka
