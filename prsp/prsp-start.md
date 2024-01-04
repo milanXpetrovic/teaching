@@ -19,7 +19,7 @@ Dobrodošli  na vježbe iz predmeta **Programiranje za rješavanje složenih pro
 | 25.10.2023 | Laboratorijske vježbe 1: Potpuna pretraga (Complete search) | 5 |
 | 15.11.2023. | Laboratorijske vježbe 2: Dinamičko programiranje, Bit manipulation | 5 |
 | 06.12.2023. | Praktični kolokvij | 20 | 
-| 13.122023. | Laboratorijske vježbe 3: Grafovi | 5 |
+| 13.12.2023. | Laboratorijske vježbe 3: Grafovi | 5 |
 | 10.01.2024. | Laboratorijske vježbe 4:Putevi i šetnje na grafu  | 5 | 
 
 ## 👨‍💻 Vježbe 👨‍🏫

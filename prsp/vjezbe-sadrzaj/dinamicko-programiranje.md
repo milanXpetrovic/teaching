@@ -5,6 +5,7 @@ nav_order: 5
 ---
 
 # Dinamičko programiranje
+
 Dinamičko programiranje je tehnika koja kombinira ispravnost potpune pretrage i učinkovitost pohlepnih algoritama. Dinamičko programiranje može se primijeniti ako se problem može podijeliti na preklapajuće podprobleme koji mogu biti samostalno riješeni.
 
 Postoje dvije upotrebe za dinamičko programiranje:
@@ -12,6 +13,7 @@ Postoje dvije upotrebe za dinamičko programiranje:
 • Prebrojavanje broja rješenja: Želimo izračunati ukupan broj mogućih rješenja.
 
 ## Zadatak 1: Fibonacci
+
 Napišite funkcije `fib_1(n)`, `fib_2(n)` i `fib_3(n)` koja za zadani broj $n$ izračunava n-ti Fibonaccijev broj.
 
 Zadatak riješite na tri načina:
@@ -34,6 +36,7 @@ Usporedite vremena izvođenja triju funkcija za $n$ 40.
 ```
 
 ## Zadatak 2: Problem s kovanicama
+
 Problem koji smo rješavali u poglavlju [Pohlepni algoritmi](../pohlepni-algoritmi#zadatak-1-problem-s-kovanicama). Riješili smo problem pomoću pohlepnog algoritma koji uvijek bira najveći mogući novčić. Pohlepni algoritam radi, na primjer, kada kovanice su kovanice eura, ali u općem slučaju pohlepni algoritam ne daje nužno optimalno rješenje, primjerice ako su zadane kovanice $\{1,3,4}\$.
 
 Zadatak je za unesenu listu denominacija kovanica $l$, $\{c_1, c_2, c_3,...,c_k\}$ i svotu $k$ pronaći minimalan broj kovanica potreban za stvoriti svotu $k$. Ako svotu nije moguće stvoriti pomoću zadanih kovanica ispisuje se $-1$.
@@ -46,6 +49,7 @@ U drugom redu unosi se lista $l$ koja sadrži vrijednosti na kovanicama.
 Ako je moguće kreirati svotu ispisuje se broj $n$ koji označuje broj kovanica potrebnih za svotu $k$. Ako nije moguće kreirati svotu $k$ ispisuje se $-1$.
 
 ### Primjeri
+
 **Input:**
 ```
 1 2 5
@@ -72,6 +76,7 @@ Ako je moguće kreirati svotu ispisuje se broj $n$ koji označuje broj kovanica 
 Penjete se stubištem. Do vrha je potrebno $n$ stuba. Svaki put se možete popeti 1 ili 2 stube. Na koliko se različitih načina možete popeti do vrha?
 
 ### Primjer 1
+
 **Input:**
 ```
 2
@@ -84,6 +89,7 @@ Penjete se stubištem. Do vrha je potrebno $n$ stuba. Svaki put se možete popet
 2. 2 
 
 ### Primjer 2
+
 **Input:**
 ```
 3
@@ -142,5 +148,6 @@ Ukupni trošak je 6.
 
 
 ## Codeforces zadaci
+
 - [Hit the Lottery](https://codeforces.com/problemset/problem/996/A)
 - [Maximum Increase](https://codeforces.com/problemset/problem/702/A)
