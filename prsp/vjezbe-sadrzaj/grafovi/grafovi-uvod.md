@@ -102,4 +102,4 @@ def generate_random_adjacency_matrix(n, self_loops=False, seed=None):
     return g
 ```
 
-
+[Iduća lekcija: Putovanje kroz graf](../putovanje-kroz-graf){: .btn .btn-purple .float-right}
