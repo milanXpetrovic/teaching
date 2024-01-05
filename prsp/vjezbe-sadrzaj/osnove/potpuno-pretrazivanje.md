@@ -183,4 +183,4 @@ Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
 - [Grid Paths](https://cses.fi/problemset/task/1625)
 - [Sail](https://codeforces.com/problemset/problem/298/B)
 
-[Iduća lekcija: Pohlepni algoritmi](../pohlepni-algoritmi){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Pohlepni algoritmi](../pohlepni-algoritmi){: .btn .btn-purple .float-right}

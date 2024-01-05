@@ -98,4 +98,4 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 - [Chat room](https://codeforces.com/problemset/problem/58/A)
 - [String Transformation](https://codeforces.com/problemset/problem/946/C)
 
-[Iduća lekcija: Dinamičko programiranje](../dinamicko-programiranje){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Dinamičko programiranje](../dinamicko-programiranje){: .btn .btn-purple .float-right}

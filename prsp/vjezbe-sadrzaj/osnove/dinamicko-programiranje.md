@@ -174,4 +174,4 @@ Ukupni trošak je 6.
 - [Hit the Lottery](https://codeforces.com/problemset/problem/996/A)
 - [Maximum Increase](https://codeforces.com/problemset/problem/702/A)
 
-[Iduća lekcija: Bit manipulation](../bit-manipulation){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Bit manipulation](../bit-manipulation){: .btn .btn-purple .float-right}

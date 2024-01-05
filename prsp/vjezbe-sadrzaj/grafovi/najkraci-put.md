@@ -30,4 +30,4 @@ Ispis udaljenosti do svih gradova ili $-1$ ako to nije moguće.
 0 7 5 5 0 
 ```
 
-[Iduća lekcija: Najkraći put](../najkraci-put){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Najkraći put](../najkraci-put){: .btn .btn-purple .float-right}

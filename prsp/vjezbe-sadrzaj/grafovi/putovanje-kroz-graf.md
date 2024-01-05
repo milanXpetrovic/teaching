@@ -203,4 +203,4 @@ Ako nema rješenja ispisati "NEMA".
 1 2 2 1 2
 ```
 
-[Iduća lekcija: Najkraći put](../najkraci-put){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Najkraći put](../najkraci-put){: .btn .btn-purple .float-right}

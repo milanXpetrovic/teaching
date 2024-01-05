@@ -146,4 +146,4 @@ Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 {: .highlight }
 Za mjerenje vremena izvođenja programa možete koristiti Python modul [time](https://docs.python.org/3/library/time.html).
 
-[Iduća lekcija: Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-right}

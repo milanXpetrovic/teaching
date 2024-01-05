@@ -88,4 +88,4 @@ Sastoji se od liste s vrijednostima $1$ i $0$. Ako je vrijednost u listi $l$ man
 1 1 1 1 0 0 1 1 0 0
 ```
 
-[Iduća lekcija: Vremenska složenost](../vremenska-slozenost){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Vremenska složenost](../vremenska-slozenost){: .btn .btn-purple .float-right}
