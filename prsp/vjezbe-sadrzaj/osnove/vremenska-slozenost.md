@@ -152,6 +152,4 @@ Za mjerenje vremena izvođenja programa možete koristiti Python modul [time](ht
 
 [Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .flex-justify-end}
 
-[Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-right}
-
-[Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-right}
+[Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-center}
