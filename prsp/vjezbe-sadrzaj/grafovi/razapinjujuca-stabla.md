@@ -2,7 +2,8 @@
 layout: default
 title: Razapinjajuca stabla
 parent: Grafovi
-nav_order: 2
+grand_parent: PRSP
+nav_order: 5
 ---
 
 # Razapinjajuca stabla

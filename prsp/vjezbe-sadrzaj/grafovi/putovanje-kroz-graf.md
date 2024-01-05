@@ -1,9 +1,8 @@
 ---
-layout: default
 title: Obilazak grafa
 parent: Grafovi
+grand_parent: PRSP
 nav_order: 1
-nav_exclude: false
 ---
 
 # Obilazak grafa
