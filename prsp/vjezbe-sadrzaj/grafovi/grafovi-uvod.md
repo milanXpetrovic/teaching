@@ -3,7 +3,7 @@ layout: default
 title: Grafovi
 parent: PRSP
 has_children: true
-nav_order: 6
+nav_order: 5
 ---
 
 # [Grafovi: uvod](https://cses.fi/book/book.pdf#chapter.11)
@@ -13,7 +13,7 @@ Mnogi programski problemi mogu se riješiti modeliranjem problema kao problema g
 U sklopu tematske cjeline Grafovi proći ćemo kroz nekoliko ključnih područija koja su:
 
 - [Putovanje kroz graf](../putovanje-kroz-graf)
-- [Traženje najkraćeg puta](../najkraci-putovi.md)
+- [Traženje najkraćeg puta](../najkraci-put.md)
 - [Stabla](../stabla.md)
 - [Razapinjujuća stabla](../razapinjujuca-stabla.md)
 - [Usmjereni grafovi](../usmjereni-grafovi.md)

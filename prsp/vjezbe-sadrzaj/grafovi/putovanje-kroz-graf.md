@@ -6,7 +6,7 @@ grand_parent: PRSP
 nav_order: 1
 ---
 
-# Obilazak grafa
+# [Obilazak grafa](https://cses.fi/book/book.pdf#chapter.11)
 
 DFS (Depth-First Search) je algoritam obilaska grafa koji se temelji na ideji putovanja u dubinu iz odabranog početnog čvora (granu po granu). Počevši od korijena, ovaj algoritam istražuje što dublje u grafu prije nego se vrati unatrag kako bi istražio druge grane. Često se koristi stog (stack) kao memorijska struktura za praćenje puta i čvorova. DFS je koristan za pronalaženje rješenja problema kao što su topološko sortiranje, pretraga rute u mrežama ili pronalazak putanja u grafu.
 
