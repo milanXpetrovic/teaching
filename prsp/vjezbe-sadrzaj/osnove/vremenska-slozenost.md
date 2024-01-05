@@ -1,5 +1,5 @@
 ---
-layout: minimal
+layout: default
 parent: PRSP
 nav_order: 2
 ---
