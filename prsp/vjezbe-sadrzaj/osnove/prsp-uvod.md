@@ -4,15 +4,7 @@ parent: PRSP
 nav_order: 1
 ---
 
-
 # Uvod
-
-## Uvod u kolegij
-
-Obaveze na vježbama: Kolokvij i završni (praktični dio)
-Prag na kolokviju i završnom: 50%
-
-Potrebno poznavanje osnova u programskom jeziku [Python](https://www.python.org/)
 
 ## Zadatak 1
 

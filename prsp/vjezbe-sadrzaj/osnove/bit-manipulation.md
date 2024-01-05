@@ -117,3 +117,5 @@ Broj $k$ koji nedostaje u listi $l$.
 ```text
 7
 ```
+
+[Iduća lekcija: Bit manipulation](../vjezbe-sadrzaj/osnove/bit-manipulation)
