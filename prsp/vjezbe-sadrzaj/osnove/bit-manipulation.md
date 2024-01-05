@@ -118,4 +118,4 @@ Broj $k$ koji nedostaje u listi $l$.
 7
 ```
 
-[Iduća lekcija: Grafovi](../../grafovi/grafovi-uvod){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Grafovi](../../grafovi/grafovi-uvod){: .btn .btn-purple .float-right}
