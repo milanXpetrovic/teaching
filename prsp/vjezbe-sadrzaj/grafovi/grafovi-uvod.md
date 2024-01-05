@@ -2,9 +2,8 @@
 layout: default
 title: Grafovi
 parent: PRSP
-nav_order: 7
 has_children: true
-has_toc: true
+nav_order: 6
 ---
 
 # [Grafovi: uvod](https://cses.fi/book/book.pdf#chapter.11)

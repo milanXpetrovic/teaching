@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Obilazak grafa
 parent: Grafovi
 grand_parent: PRSP
