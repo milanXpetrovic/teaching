@@ -885,6 +885,7 @@ def detail(request):
 ```
 
 ``` jinja
+{% raw %}
 {% block content %}
 <h1>Dobrodosli na UNIRI</h1>
 
@@ -893,6 +894,7 @@ def detail(request):
     <li><strong>Studenata:</strong> {{ num_students }}</li>
 </ul>
 {% endblock %}
+{% endraw %}
 ```
 
 ## Izrada generičkih pogleda
