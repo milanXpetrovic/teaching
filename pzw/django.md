@@ -849,7 +849,7 @@ Za prikaz rješenja prethodnog zadatka, potrebna nam je HTML datoteka, koji će 
 
 Datoteka `students.html` ima sadržaj:
 
-``` html
+``` text
 <ul>
     {% for p in peros %}
         <li>
@@ -884,7 +884,7 @@ def detail(request):
     return render(request, 'detail.html', context=context)
 ```
 
-``` html
+``` text
 {% block content %}
 <h1>Dobrodosli na UNIRI</h1>
 
@@ -1000,7 +1000,7 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-``` html
+``` text
 {% block content %}
     <h2>Publishers</h2>
     <ul>
@@ -1063,7 +1063,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
 
 **Rješenje zadatka.**
 
-``` html
+``` text
 {% block content %}
     <h2>Books list: </h2>
     <ul>
@@ -1289,13 +1289,13 @@ Pomoću varijabli ispisujemo sadržaj koji je prosljeđen iz konteksta. Objekt j
 
 Varijable pišemo unutar vitičastih zagrada `{{ varijabla }}`:
 
-``` html
+``` text
 <p>Ime: {{ first_name }}, Prezime: {{ last_name }}.</p>
 ```
 
 Što će iz konteksta `{'first_name': 'Ivo', 'last_name': 'Ivić'}` biti prikazano kao:
 
-``` html
+``` text
 <p>Ime: Ivo, Prezime: Ivić.</p>
 ```
 
@@ -1319,7 +1319,7 @@ Za komentiranje dijelova koristimo `#` što unutar predloška izgleda: `{# Ovo n
 
 Petlje se pišu unutar `{% %}` odnosno definiraju se njihove oznake. Primjer korištenja petlje `for`:
 
-``` html
+``` text
 <ul>
 {% for author in author_list %}
     <li>{{ author.name }}</li>
@@ -1329,7 +1329,7 @@ Petlje se pišu unutar `{% %}` odnosno definiraju se njihove oznake. Primjer kor
 
 Primjer provjere autentifikacije korisnika naredbom `if`:
 
-``` html
+``` text
 {% if user.is_authenticated %}
     <p>Hello, {{ user.username }}.</p>
 {% endif %}
@@ -1337,7 +1337,7 @@ Primjer provjere autentifikacije korisnika naredbom `if`:
 
 Primjer naredbi `if` i `else`:
 
-``` html
+``` text
 {% if author_list %}
     Number of athletes: {{ athlete_list|length }}
 {% else %}
@@ -1350,7 +1350,7 @@ Primjer naredbi `if` i `else`:
 
 **Rješenje zadatka.** Datoteka `./templates/base_generic.html`:
 
-``` html
+``` text
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1381,7 +1381,7 @@ Primjer naredbi `if` i `else`:
 
 Datoteka `./template/main/book_list.html`:
 
-``` html
+``` text
 {% extends "base_generic.html" %}
 {% block content %}
 <br>
@@ -1423,11 +1423,11 @@ Dodavanje CSS-a u HTML predložak.
 
 #### Uvoz
 
-``` html
+``` text
 <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css">
 ```
 
-``` html
+``` text
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css">
     <title>{% block title %}Knjižnica{% endblock %}</title>
@@ -1440,14 +1440,14 @@ Unutar aplikacije `main` potrebno je stvoriti direktorij `static` a unutar njega
 
 Referenciranje na `style.css` unutar aplikacije:
 
-``` html
+``` text
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 ```
 
 Prikaz unutar HTML templatea:
 
-``` html
+``` text
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
@@ -1503,7 +1503,7 @@ path('<author>', AuthorBookList.as_view())
 
 Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na autore. Datoteka `author_list.html`:
 
-``` html
+``` text
 {% extends "base_generic.html" %}
 {% block content %}
 <h2>Books</h2>
@@ -1519,7 +1519,7 @@ Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na auto
 
 Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
 
-``` html
+``` text
 {% extends "base_generic.html" %}
 {% block content %}
 <h2>Authors</h2>
@@ -1736,7 +1736,7 @@ def index(request):
 
 Unutar aplikacije `main` stvorite si direktorij `templates`, unutar kojeg kreirate `index.html`. HTML predložak:
 
-``` html
+``` text
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1758,13 +1758,13 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
 
 #### Login
 
-``` html
+``` text
 {% if form.errors %}
     <h3>Unos nije ispravan.</h3>
 {% endif %}
 ```
 
-``` html
+``` text
 {% if next %}
     {% if user.is_authenticated %}
         <p>Your account doesn't have access to this page. To proceed,
@@ -1775,7 +1775,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
 {% endif %}
 ```
 
-``` html
+``` text
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -1817,7 +1817,7 @@ def register(request):
 
 Kreirajmo `register.html`:
 
-``` html
+``` text
 <form method="post" action="{% url 'register' %}">
     {% csrf_token %}
 
@@ -1859,7 +1859,7 @@ def register(request):
 
 Izmjene na `index.html` ako je korisnik ulogiran.
 
-``` html
+``` text
 <h1>This is our homepage</h1>
 
 {% if user.is_authenticated %}
