@@ -1307,13 +1307,11 @@ Varijable pišemo unutar vitičastih zagrada `{{ varijabla }}`:
 
 ##### Oznake
 
-Oznake se pišu unutar `{%` `%}`. Označavaju proizvoljnu logiku unutar prikaza. Oznaka može biti ispis sadržaja, ili logička cjelina ili pak pristup drugim oznakama iz predloška, Primjerice:
+Oznake se pišu unutar {% raw %} `{%` `%}` {% endraw %}. Označavaju proizvoljnu logiku unutar prikaza. Oznaka može biti ispis sadržaja, ili logička cjelina ili pak pristup drugim oznakama iz predloška, Primjerice:
 
 ```text
  `{% tag %} ... sadržaj ... {% endtag %}`
-``` 
-
-.
+```
 
 ##### Filteri
 
