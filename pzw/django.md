@@ -1000,8 +1000,7 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-``` jinja
-{% raw %}
+``` text
 {% block content %}
     <h2>Publishers</h2>
     <ul>
@@ -1013,7 +1012,6 @@ Datoteka `./templates/main/publisher_list.html` ima sadržaj:
         {% endfor %}
     </ul>
 {% endblock %}
-{% endraw %}
 ```
 
 Potrebno je još zadati putanju za predloške unutar `settings.py`.
