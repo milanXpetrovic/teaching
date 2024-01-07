@@ -1000,6 +1000,7 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
+{% raw %}
 ``` text
 {% block content %}
     <h2>Publishers</h2>
@@ -1013,6 +1014,7 @@ Datoteka `./templates/main/publisher_list.html` ima sadržaj:
     </ul>
 {% endblock %}
 ```
+{% raw %}
 
 Potrebno je još zadati putanju za predloške unutar `settings.py`.
 
