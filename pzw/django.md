@@ -1791,6 +1791,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
 ```
 
 ``` text
+{% raw %}
 {% if next %}
     {% if user.is_authenticated %}
         <p>Your account doesn't have access to this page. To proceed,
@@ -1799,9 +1800,11 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
         <p>Please login to see this page.</p>
     {% endif %}
 {% endif %}
+{% endraw %}
 ```
 
 ``` text
+{% raw %}
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -1817,6 +1820,7 @@ Posjetite `http://127.0.0.1:8000/accounts/` i `http://127.0.0.1:8000/accounts/lo
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
+{% endraw %} 
 ```
 
 Detaljnije o [CSRF tokenu](https://docs.djangoproject.com/en/3.2/ref/csrf/)
