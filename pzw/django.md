@@ -7,7 +7,15 @@ has_children: false
 has_toc: true
 ---
 
+
 # Python: Django
+
+
+
+{: .note-title }
+> My note title
+>
+> A paragraph with a custom title callout
 
 Primjeri web sjedišta u Djangu:
 
@@ -2046,3 +2054,4 @@ class Testmodels(TestCase):
     def test_author(self):
         self.assertEquals(self.author1.name, "some-author")
 ```
+
