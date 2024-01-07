@@ -24,4 +24,8 @@ Dobrodši na vježbe iz predmeta **Programiranje za web**
 - [Django CRUD](../crud)
 - [Django REST](https://gaseri.org/hr/nastava/materijali/python-modul-django-rest-framework/)
 
+
+
+
+
 ## 🚀 Završni projekt
