@@ -5,12 +5,11 @@ parent: PZW
 nav_order: 2
 has_children: false
 has_toc: true
+nav_exclude: true
 ---
 
 
 # Python: Django
-
-
 
 {: .note-title }
 > My note title
