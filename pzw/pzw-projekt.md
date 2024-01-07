@@ -6,22 +6,31 @@ nav_exclude: true
 
 # Zadatak za završni ispit
 
+## Projektni zadatak
+
 ## 📢 Osnovne informacije
 
 - Predmet: Programiranje za Web
-- Ak. god: 2023./2024.
+- Ak. god: 2022./2023.
+- Rok za odabir teme: 17.11.2022.
+- Rok za predaju: 22.12.2022.
+- Bodovi: 20
 
-## 🧾 Zadatak
+## 🎯 Zadatak
 
+Zadatak je izrada web aplikacije ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama od dvoje studenata. 
 
-Zadatak se radi u grupama do dvoje studenata.
+[Link za prijavu teme na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2942733)
 
-**Potrebno treba sadržavati:**
+**Projekt treba sadržavati:**
 
-- Github repozitorij na kojem se nalazi projekt
-- Modele
-- Testne podatke koji se generiraju pomoću factory boya
-- Prikaz podataka pomoću List Viewa
+- Github repozitorij za projekt
+  - Github repozitorij treba sadržavati i README file u kojem je naveden zadatak i imena studenata.
+- Django projekt i aplikaciju
+- Model koji sadrži barem 3 entiteta (unutar modela voditi računa različitim tipovima podataka)
+- Barem jednu one to one, one to many i many to many relaciju.
+- Generirane testne podatke
+- Prikaz generiranih podataka za svaki entitet u modelu pomoću generičkih pogleda
 - Forma za unos podataka
 - Testovi
 - Login i registracija
@@ -39,56 +48,28 @@ Ove funkcije kreirate ovisno o vašoj temi projekta.
 
 - Tema i dizajn, CSS
 
-## Projektni zadatak
-
-## 📢 Osnovne informacije
-
-- Predmet: Programiranje za Web
-- Ak. god: 2022./2023.
-- Rok za odabir teme: 17.11.2022.
-- Rok za predaju: 22.12.2022.
-- Bodovi: 20
-
-## 🎯 Zadatak
-
-Zadatak je izrada modela i predložaka (pogleda) za web aplikaciju ili uslugu ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama po dvoje. Potrebno je započeti izradu web aplikacije ili usluge i u danom roku predati aplikaciju ili uslugu koja ima izrađene modele i predloške (poglede). Ovisno o točnosti i potpunosti izrađenih modela i predložaka (pogleda), može se ostvariti do 20 bodova.
-
-[Link za prijavu teme na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2942733)
-
-Projekt treba sadržavati:
-
-- Github repozitorij za projekt
-  - Github repozitorij treba sadržavati i README file u kojem je naveden zadatak i imena studenata.
-- Django projekt i aplikaciju
-- Model koji sadrži barem 3 entiteta (unutar modela voditi računa različitim tipovima podataka)
-- Barem jednu one to one, one to many i many to many relaciju.
-- Generirane testne podatke
-- Prikaz generiranih podataka za svaki entitet u modelu pomoću generičkih pogleda
-
 ## 🧾 Teme
 
-- Knjižnica
-- To do lista
-- Blog
-- Forum
-- Kviz
-- Evidencija prehrane
-- Trgovina odjećom
-- Društvena mreža
-- Novinski portal
-- Vremenska prognoza
-- Prijava završnih i diplomskih radova
-- Evidencija prakse
-- Organizacija događaja
-- Vozni red
-- Kaledar aktivnosti
-- Igra
-- Aplikacija za glasovanje
-- Sustav upravljanja bolnicom
-- Sustav upravljanja bankom krvi
-- Sustav upravljanja osiguranjem
-- Sustav za organizaciju natjecanja
-- ispravi.me dodatak za Visual Studio Code
+- Online tečajevi i edukacijska platforma
+- Aplikacija za upravljanje osobnim financijama
+- Platforma za dijeljenje recepata i kulinarskih savjeta
+- Sportski portal za praćenje rezultata i natjecanja
+- Aplikacija za rezervaciju putovanja i smještaja
+- Sustav za upravljanje inventarom i skladištem
+- Alat za praćenje fitness ciljeva i vježbanje
+- Aplikacija za praćenje ekoloških navika i održivosti
+- Virtualna galerija umjetnosti i kulturoloških događanja
+- Platforma za razmjenu jezika i kulturnu interakciju
+- Aplikacija za upravljanje osobnim rasporedom i produktivnošću
+- Sustav za vođenje online teretane i treninga uživo
+- Platforma za razmjenu i prodaju domaćih proizvoda
+- Aplikacija za praćenje mentalnog zdravlja
+- Sustav za organizaciju volonterskih aktivnosti i projekata
+- Portal za dijeljenje i ocjenjivanje književnih djela
+- Aplikacija za vođenje evidencije o kućnim ljubimcima i veterinarske usluge
+- Sustav za vođenje crowdfunding kampanja i podršku startupima
+- Platforma za dijeljenje ideja
+- Aplikacija za praćenje filmskih preporuka i recenzija
 
 ## 📦 Predaja zadatka
 
