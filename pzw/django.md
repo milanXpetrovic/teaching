@@ -884,7 +884,7 @@ def detail(request):
     return render(request, 'detail.html', context=context)
 ```
 
-``` 
+``` jinja
 {% block content %}
 <h1>Dobrodosli na UNIRI</h1>
 
