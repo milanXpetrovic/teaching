@@ -1363,6 +1363,7 @@ Primjer naredbi `if` i `else`:
 **Rješenje zadatka.** Datoteka `./templates/base_generic.html`:
 
 ``` text
+{% raw %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1387,6 +1388,7 @@ Primjer naredbi `if` i `else`:
     </div>
 </body>
 </html>
+{% endraw %}
 ```
 
 #### Nasljeđivanje u predlošcima
@@ -1394,6 +1396,7 @@ Primjer naredbi `if` i `else`:
 Datoteka `./template/main/book_list.html`:
 
 ``` text
+{% raw %}
 {% extends "base_generic.html" %}
 {% block content %}
 <br>
@@ -1407,6 +1410,7 @@ Datoteka `./template/main/book_list.html`:
     </div>
 {% endfor %}
 {% endblock %}
+{% endraw %}
 ```
 
 Unutar `main/urls.py` dodajte:
@@ -1453,8 +1457,10 @@ Unutar aplikacije `main` potrebno je stvoriti direktorij `static` a unutar njega
 Referenciranje na `style.css` unutar aplikacije:
 
 ``` text
+{% raw %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% endraw %}
 ```
 
 Prikaz unutar HTML templatea:
@@ -1516,6 +1522,7 @@ path('<author>', AuthorBookList.as_view())
 Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na autore. Datoteka `author_list.html`:
 
 ``` text
+{% raw %}
 {% extends "base_generic.html" %}
 {% block content %}
 <h2>Books</h2>
@@ -1527,11 +1534,13 @@ Zatim je potrebno izmjeniti predložak, odnosno dodati linkove koji vode na auto
     </div>
 {% endfor %}
 {% endblock %}
+{% endraw %}
 ```
 
 Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
 
 ``` text
+{% raw %}
 {% extends "base_generic.html" %}
 {% block content %}
 <h2>Authors</h2>
@@ -1544,6 +1553,7 @@ Izmjenimo i predložak za prikaz knjiga. Datoteka `book_list.html`:
     </div>
 {% endfor %}
 {% endblock %}
+{% endraw %}
 ```
 
 !!! zadatak
