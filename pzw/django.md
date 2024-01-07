@@ -1329,7 +1329,7 @@ Za komentiranje dijelova koristimo `#` što unutar predloška izgleda: `{# Ovo n
 
 ##### Petlje
 
-Petlje se pišu unutar `{% %}` odnosno definiraju se njihove oznake. Primjer korištenja petlje `for`:
+Petlje se pišu unutar {% raw %} `{% %}` {% endraw %} odnosno definiraju se njihove oznake. Primjer korištenja petlje `for`:
 
 ``` text
 <ul>
