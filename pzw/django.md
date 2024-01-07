@@ -1848,6 +1848,7 @@ def register(request):
 Kreirajmo `register.html`:
 
 ``` text
+{% raw %}
 <form method="post" action="{% url 'register' %}">
     {% csrf_token %}
 
@@ -1859,6 +1860,7 @@ Kreirajmo `register.html`:
 
     <input type="submit" value="Register" />
 </form>
+{% endraw %}
 ```
 
 Izmjenimo funkciju  `register()`:
@@ -1890,6 +1892,7 @@ def register(request):
 Izmjene na `index.html` ako je korisnik ulogiran.
 
 ``` text
+{% raw %}
 <h1>This is our homepage</h1>
 
 {% if user.is_authenticated %}
@@ -1897,6 +1900,7 @@ Izmjene na `index.html` ako je korisnik ulogiran.
 {% else %}
     <p>Niste prijavljeni.</p>
 {% endif %}
+{% endraw %}
 ```
 
 ## Django vježba 11: Testiranje
