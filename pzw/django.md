@@ -1000,8 +1000,8 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-{% raw %}
 ``` text
+{% raw %}
 {% block content %}
     <h2>Publishers</h2>
     <ul>
@@ -1013,8 +1013,8 @@ Datoteka `./templates/main/publisher_list.html` ima sadržaj:
         {% endfor %}
     </ul>
 {% endblock %}
+{% endraw %}
 ```
-{% raw %}
 
 Potrebno je još zadati putanju za predloške unutar `settings.py`.
 
@@ -1066,6 +1066,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
 **Rješenje zadatka.**
 
 ``` text
+{% raw %}
 {% block content %}
     <h2>Books list: </h2>
     <ul>
@@ -1074,6 +1075,7 @@ I za zadnji dio potrebno je kreirati prikaz unutar `./templates` koji će nam pr
         {% endfor %}
     </ul>
 {% endblock %}
+{% endraw %}
 ```
 
 Pokrenite server i provjerite pretraživanje po izdavaču.
