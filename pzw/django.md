@@ -1000,7 +1000,7 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-``` html
+``` jinja
 {% block content %}
     <h2>Publishers</h2>
     <ul>
