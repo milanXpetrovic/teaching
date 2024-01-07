@@ -1444,10 +1444,12 @@ Dodavanje CSS-a u HTML predložak.
 ```
 
 ``` text
+{% raw %}
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css">
     <title>{% block title %}Knjižnica{% endblock %}</title>
 </head>
+{% endraw %}
 ```
 
 #### Direktorij za statičke datoteke
@@ -1466,11 +1468,13 @@ Referenciranje na `style.css` unutar aplikacije:
 Prikaz unutar HTML templatea:
 
 ``` text
+{% raw %}
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>{% block title %}Knjiznica{% endblock %}</title>
 </head>
+{% endraw %}
 ```
 
 Sadržaj datoteke `style.css` možete proizvoljno zadati i prilagođavati vlastitim željama. Primjerice, datoteka `main/static/style.css` može biti oblika:
