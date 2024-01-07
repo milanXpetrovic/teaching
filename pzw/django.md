@@ -884,7 +884,7 @@ def detail(request):
     return render(request, 'detail.html', context=context)
 ```
 
-``` text
+``` 
 {% block content %}
 <h1>Dobrodosli na UNIRI</h1>
 
@@ -1000,7 +1000,7 @@ Kreirajte direktorij `./templates`, unutar kojeg kreirate direktorij `main`, dak
 
 Datoteka `./templates/main/publisher_list.html` ima sadržaj:
 
-``` text
+``` html
 {% block content %}
     <h2>Publishers</h2>
     <ul>
