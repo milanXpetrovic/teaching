@@ -4,7 +4,7 @@ nav_order: 1
 permalink: /
 ---
 
-# Dobrodošli
+# Početna
 
  Na ovoj stranici možete pronaći korisne informacije i materijale koji će vam pomoći pri pripremi za vježbe, te poboljšati vaše razumijevanje gradiva. Ovdje ćete pronaći detaljne upute za korištenje alata, primjere koda i korisne savjete za rješavanje problema s kojima se možete susresti tijekom vježbi.
 
