@@ -20,7 +20,7 @@ nav_exclude: true
 
 Zadatak je izrada web aplikacije ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama od dvoje studenata. 
 
-[Link za prijavu teme na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2942733)
+[Link za prijavu teme na Melinu](https://moodle.srce.hr/2023-2024/mod/choice/view.php?id=3717174)
 
 **Projekt treba sadržavati:**
 
@@ -75,4 +75,4 @@ Ove funkcije kreirate ovisno o vašoj temi projekta.
 
 Zadatak predajete kao .zip arhivu vašeg projekta i poveznicu na vaš Github repozitorij.
 
-[Link za predaju rješenja na Melinu](https://moodle.srce.hr/2022-2023/mod/assign/view.php?id=2942812)
+[Link za predaju rješenja na Melinu](https://moodle.srce.hr/2023-2024/mod/assign/view.php?id=3717172&forceview=1)
