@@ -18,22 +18,6 @@ Najveći zbroj podniza iznosi **12**:
 
 $$\{1, 5, -2, 3, 5\}$$
 
-### Primjer rješenja u C++
-
-```cpp
-int best = 0;
-for (int a = 0; a < n; a++) {
-    for (int b = a; b < n; b++) {
-        int sum = 0;
-        for (int k = a; k <= b; k++) {
-            sum += array[k];
-        }
-    best = max(best,sum);
-    }
-}
-cout << best << "\n";
-```
-
 ## Zadatak 1: $O(n^3)$ složenost
 
 Pomoću prethodnog primjera danog u C++ napišite Python kod koji traži vrijednost najvećeg zbroja podniza i ima složenost od $O(n^3)$.
@@ -56,6 +40,44 @@ Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
 ```text
 10
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+int main() {
+    int n;
+    
+    cout << "Unesite broj elemenata: ";
+    cin >> n;
+
+    vector<int> nums(n);
+    cout << "Unesite elemente: ";
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    int maxSum = INT_MIN;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            int currentSum = 0;
+            for (int k = i; k <= j; k++) {
+                currentSum += nums[k];
+            }
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+        }
+    }
+
+    cout << maxSum << endl;
+    return 0;
+}
 ```
 
 ## Zadatak 2: $O(n^2)$ složenost
