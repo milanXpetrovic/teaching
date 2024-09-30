@@ -6,33 +6,89 @@ nav_order: 1
 
 # Uvod
 
-## Zadatak 1
+## Registracija na stranicama Codeforces i CSES
 
-Mladom asistentu potreban je program s pomoću kojeg provjerava ako je student ostvario pravo pristupa završnom ispitu. U program unosite ime studenta, broj ostvarenih bodova na kolokviju i ukupan broj bodova koji je prikupio tijekom semestra.
+U ovom kolegiju baviti ćemo se rješavanjem algoritamskih problema koristeći različite online platforme koje omogućuju evaluaciju vaših rješenja. Dvije od najčešće korištenih platformi su **Codeforces** i **CSES**. Prije nego što krenemo s rješavanjem problema, potrebno je kreirati račune na ovim platformama.
 
-Student ima pravo pristupa završnom ako je prikupio 50% ili više bodova na kolokviju i ako je prikupio 35 ili više bodova tijekom semestra.
+## Registracija na Codeforces
 
-**Input**
-Unos u program se sastoji od imena studenta, broja bodova na kolokviju $$k$$ $(0 <= k <= 30)$ i broj bodova prikupljenih tijekom semestra $s$
+**Codeforces** je jedna od najpopularnijih platformi za natjecateljsko programiranje koja nudi široku bazu problema te redovito organizira natjecanja. Pratite sljedeće korake kako biste otvorili svoj račun:
 
-**Output**
-Ispišite "Student `<ime studenta>` je ostvario pravo izlaska na završni ispit."
+1. Otvorite web stranicu [Codeforces](https://codeforces.com/).
+2. U gornjem desnom kutu kliknite na **Register**.
+3. Ispunite tražene podatke (korisničko ime, lozinku, e-mail adresu) i kliknite na **Register**.
+4. Potvrdite registraciju putem e-maila koji ćete dobiti.
 
-### Primjer
+Nakon uspješne registracije, provjerite da se možete prijaviti na svoj račun te istražite različite opcije i zadatke koje platforma nudi.
 
-**Input:**
+## Registracija na CSES
 
-```text
-Marko 20 50
+**CSES** je zbirka algoritamskih problema s naglaskom na klasične algoritamske izazove, a posebno je korisna za učenje osnova. Za pristup zadacima na CSES platformi, slijedite ove korake:
+
+1. Otvorite web stranicu [CSES Problem Set](https://cses.fi/problemset/).
+2. Kliknite na **Login/Register** u gornjem desnom kutu.
+3. Ispunite potrebne informacije (korisničko ime, lozinku, e-mail adresu) i kliknite na **Register**.
+4. Potvrdite svoju registraciju putem e-maila.
+
+## Input i Output u C++
+
+U rješavanju algoritamskih problema, najčešći zadatak je pročitati ulazne podatke, obraditi ih i ispisati rezultat. U C++ jeziku za to koristimo standardne biblioteke za ulaz i izlaz podataka.
+
+### Ulaz
+
+Za čitanje podataka s konzole koristimo **`cin`** (standard input). Na natjecanjima ulazne podatke obično čitamo izravno iz standardnog ulaza, i to na sljedeći način:
+
+```cpp
+int a, b;
+cin >> a >> b;
 ```
 
-**Output:**
+Ovaj kod će čitati dva cijela broja (integers) unesena od strane korisnika.
 
-```text
-Student Marko je ostvario pravo izlaska na završni ispit.
+Ako imate više vrijednosti za čitanje, one su obično razdvojene razmacima ili prelaskom u novi redak. Primjer:
+
+```cpp
+int n;
+cin >> n; // Čitanje jednog broja
+
+for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x; // Čitanje sljedećih n brojeva
+}
 ```
 
-## Zadatak 2
+### Izlaz
+
+Za ispis rezultata na konzolu koristimo `cout` (standard output). Rezultati se ispisuju na sljedeći način:
+
+```cpp
+int sum = a + b;
+cout << sum << endl;
+```
+
+Ovdje cout ispisuje zbroj varijabli `a` i `b`, a `endl` označava prelazak u novi redak.
+
+### Primjer s ulazom i izlazom
+
+Evo primjera jednostavnog zadatka koji čita dva broja i ispisuje njihov zbroj:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+    return 0;
+}
+```
+
+Ovaj kod prima dva cijela broja s ulaza, izračunava njihov zbroj i ispisuje rezultat na izlaz.
+
+Pomoću ovih osnovnih principa za unos i ispis podataka, možete rješavati većinu zadataka s platformi poput Codeforces i CSES.
+
+## Primjer: Zadatak 1
 
 Potrebno je s pomoću for petlji kreirati zadani uzorak:
 
@@ -63,29 +119,11 @@ Potrebno je s pomoću for petlji kreirati zadani uzorak:
 1 2 3 4 5
 ```
 
-## Zadatak 3
+## Zadaci za vježbu
 
-Tijekom ljetnog odmora odlučili ste posjetiti kolegu koji je radio u restoranu. Ožednjeli ste i odlučili ste popiti piće da se osvježite. Sa sobom ste donijeli određenu svotu novca te morate provjeriti što si možete priuštiti.
+- [Codeforces: Watermelon](https://codeforces.com/problemset/problem/4/A)
 
-**Input:**
-Prvi unos u program je svota novca $n$ $(1 <= n <= 15)$. Sljedeći unos je lista $l$ koja sadrži cijene pića.
+- [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
 
-**Output:**
-Sastoji se od liste s vrijednostima $1$ i $0$. Ako je vrijednost u listi $l$ manja ili jednaka vrijednosti $n$ onda iznosi $1$ inače je $0$.
-
-### Primjer
-
-**Input:**
-
-```text
-20
-7 13 11 20 26 29 12 13 22 28 
-```
-
-**Output:**
-
-```text
-1 1 1 1 0 0 1 1 0 0
-```
 
 [Sljedeća lekcija: Vremenska složenost](../vremenska-slozenost){: .btn .btn-purple .float-right}
