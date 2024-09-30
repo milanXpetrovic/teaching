@@ -6,9 +6,20 @@ nav_order: 1
 
 # Uvod
 
-## Registracija na stranicama Codeforces i CSES
+## Registracija na stranicama Codeforces, CSES i GitHub
 
-U ovom kolegiju bavit ćemo se rješavanjem algoritamskih problema koristeći različite online platforme koje omogućuju evaluaciju vaših rješenja. Dvije od najčešće korištenih platformi su **Codeforces** i **CSES**. Prije nego što krenemo s rješavanjem problema, potrebno je kreirati račune na ovim platformama.
+U ovom kolegiju bavit ćemo se rješavanjem algoritamskih problema koristeći različite online platforme koje omogućuju evaluaciju vaših rješenja. Dvije od najčešće korištenih platformi su **Codeforces** i **CSES**. Također, preporučuje se da napravite račun na **GitHubu** kako biste mogli pohranjivati i dijeliti svoja rješenja. Prije nego što krenemo s rješavanjem problema, potrebno je kreirati račune na ovim platformama.
+
+## Registracija na GitHub
+
+**GitHub** je popularna platforma za verzioniranje koda koja omogućuje pohranu vaših projekata, suradnju s drugima i dijeljenje rješenja. Da biste otvorili svoj račun na GitHubu, slijedite ove korake:
+
+1. Otvorite web stranicu [GitHub](https://github.com/).
+2. U gornjem desnom kutu kliknite na **Sign up**.
+3. Ispunite tražene podatke (korisničko ime, e-mail adresu, lozinku) i slijedite upute za dovršetak registracije.
+4. Potvrdite svoju registraciju putem e-maila koji ćete dobiti.
+
+Nakon uspješne registracije, provjerite da se možete prijaviti na svoj račun te istražite razne značajke koje GitHub nudi, uključujući mogućnost izrade repozitorija za pohranu vaših rješenja.
 
 ## Registracija na Codeforces
 
@@ -90,7 +101,7 @@ Pomoću ovih osnovnih principa za unos i ispis podataka, možete rješavati već
 
 ## Primjer: Zadatak 1
 
-Potrebno je s pomoću for petlji kreirati zadani uzorak:
+Potrebno je s pomoću `for` petlji kreirajte zadani uzorak:
 
 ```text
 1 
@@ -122,8 +133,7 @@ Potrebno je s pomoću for petlji kreirati zadani uzorak:
 ## Zadaci za vježbu
 
 - [Codeforces: Watermelon](https://codeforces.com/problemset/problem/4/A)
-
 - [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
-
+- [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
 
 [Sljedeća lekcija: Vremenska složenost](../vremenska-slozenost){: .btn .btn-purple .float-right}

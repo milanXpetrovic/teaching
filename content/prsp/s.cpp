@@ -1,24 +1,21 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 int main() {
-
-    long long n;
-    cin>> n;
-    
-    while (n > 0){
-        if (n == 1){
-            cout << n << " ";
-            break;
+    int n;
+    cin >> n; 
+    for (int i = 0; i < n; ++i) {
+        string word;
+        cin >> word; 
+        
+        if (word.length() > 10) {
+            cout << word[0] << word.length() - 2 << word[word.length() - 1] << endl;
+        } 
+        else {
+            cout << word << endl;
         }
-        if (n % 2 != 0){
-            cout << n << " ";
-            n = (n * 3) + 1;
-            }
-        else{
-            cout << n << " ";
-            n = n / 2;
-            }
-        }
+    }
     return 0;
 }

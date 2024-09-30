@@ -5,6 +5,8 @@ nav_order: 17
 nav_exclude: false
 ---
 
+# OVO NIJE SLUZBENA SKRIPTA
+
 # Rješenja zadataka s vježbi
 
 ## Utils
@@ -30,9 +32,7 @@ int main() {
     }
 ```
 
-## Uvod 
-
-### Watermelon
+## Uvod
 
 - [Codeforces: Watermelon](https://codeforces.com/problemset/problem/4/A)
 
@@ -84,12 +84,35 @@ int main() {
 }
 ```
 
+- [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n; 
+    for (int i = 0; i < n; ++i) {
+        string word;
+        cin >> word; 
+        
+        if (word.length() > 10) {
+            cout << word[0] << word.length() - 2 << word[word.length() - 1] << endl;
+        } 
+        else {
+            cout << word << endl;
+        }
+    }
+    return 0;
+}
+```
+
 ## Vremenska složenost
 
 ### [Najveći zbroj podniza](./vjezbe-sadrzaj/vremenska-slozenost.md#najveći-zbroj-podniza)
-
-```python
-```
 
 ### [Zadatak 1: $O(n^3)$ složenost](./vjezbe-sadrzaj/vremenska-slozenost.md#zadatak-1-složenost)
 
@@ -225,7 +248,6 @@ int main() {
 }
 
 ```
-
 
 ### Zadatak 3: K-sum binarno
 
