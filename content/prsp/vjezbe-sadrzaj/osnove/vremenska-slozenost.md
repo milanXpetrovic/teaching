@@ -32,7 +32,7 @@ Lista $l$ koja sadržava $n$ cijelih brojeva $k$, $( -\infty < k < \infty)$
 **Output:**
 Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
-### Primjer
+### Primjer 1
 
 **Input:**
 
@@ -44,10 +44,6 @@ Broj $z$ koji je iznos maksimalnog zbroja podniza.
 
 ```text
 10
-```
-
-```cpp
-
 ```
 
 ## Zadatak 2: $O(n^2)$ složenost
@@ -92,7 +88,7 @@ Duljina liste $n$, određuje broj elemenata u listi.
 **Output**
 Lista $l$ koja sadržava $n$ elemenata.
 
-### Primjer
+### Primjer 2
 
 **Input:**
 
@@ -119,7 +115,7 @@ Duljina liste $n$, određuje broj elemenata u listi, za generiranje liste iskori
 **Output**
 Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 
-### Primjer
+### Primjer 3
 
 **Input:**
 
