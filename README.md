@@ -10,8 +10,8 @@ permalink: /
 
 **Preddiplomski studij:**
 
-- [Programiranje za Web](./pzw/pzw-start)
-- [Programiranje za rješavanje složenih problema](./prsp/prsp-start)
+- [Programiranje za Web](./content/pzw/pzw-start)
+- [Programiranje za rješavanje složenih problema](./content/prsp/prsp-start)
 <!-- - [Analiza društvenih mreža](./sna/sna-start) -->
 
 <!-- **Diplomski studij:** -->

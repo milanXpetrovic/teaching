@@ -8,28 +8,18 @@ has_toc: false
 
 # Programiranje za rješavanje složenih problema
 
-Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih problema**. Zadaci prate gradivo s predavanja i knjigu [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf).
-
-## 📅 [DINP]()
+Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih problema**. Zadaci prate gradivo s predavanja i knjigu [Competitive Programmer’s Handbook](https://cses.fi/book/book.pdf). Za rješavanje zadataka koristimo [CSES Problem Set](https://cses.fi/problemset/) i [Codeforces](https://codeforces.com/). Dodatni zadaci preuzeti su sa [Project Euler](https://projecteuler.net/) i [Advent of Code](https://adventofcode.com/).
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [Uvod](../prsp-uvod.md)
-
+- [Uvod](../vjezbe-sadrzaj/osnove/prsp-uvod.md)
 - [Vremenska složenost](../vjezbe-sadrzaj/osnove/vremenska-slozenost)
-
 - [Potpuna pretraga](../vjezbe-sadrzaj/osnove/potpuna-pretraga)
-
 - [Pohlepni algoritmi](../vjezbe-sadrzaj/osnove/pohlepni-algoritmi)
-
 - [Dinamičko programiranje](../vjezbe-sadrzaj/osnove/dinamicko-programiranje)
-
 - [Bit manipulation](../vjezbe-sadrzaj/osnove/bit-manipulation)
-
 - [Priprema za kolokvij](../vjezbe-sadrzaj/priprema-kol)
-
 - [Grafovi: uvod](../vjezbe-sadrzaj/grafovi/grafovi-uvod)
-
 - [Putovanje kroz graf](../vjezbe-sadrzaj/grafovi/putovanje-kroz-graf)
 
 <!--
@@ -56,4 +46,3 @@ Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih pr
 ### 🧰 Programska podrška
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Python](https://www.python.org/)
