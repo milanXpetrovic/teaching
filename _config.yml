@@ -10,7 +10,6 @@ markdown: gem
 compress_html:
   blanklines: false
 latex: mathjax
-mathjax: true
 plugins:
 - jekyll-remote-theme
 remote_theme: just-the-docs/just-the-docs

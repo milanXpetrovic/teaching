@@ -110,7 +110,7 @@ Potrebno je s pomoću `for` petlji kreirajte zadani uzorak:
 1 2 3 4 
 ```
 
-**Input:** Visina piramide $n$ $(1 <= n <= 15)$
+**Input:** Visina piramide $n$ $$(1 <= n <= 15)$$
 
 ### Primjer
 
