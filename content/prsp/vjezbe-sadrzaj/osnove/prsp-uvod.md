@@ -8,7 +8,7 @@ nav_order: 1
 
 ## Registracija na stranicama Codeforces i CSES
 
-U ovom kolegiju baviti ćemo se rješavanjem algoritamskih problema koristeći različite online platforme koje omogućuju evaluaciju vaših rješenja. Dvije od najčešće korištenih platformi su **Codeforces** i **CSES**. Prije nego što krenemo s rješavanjem problema, potrebno je kreirati račune na ovim platformama.
+U ovom kolegiju bavit ćemo se rješavanjem algoritamskih problema koristeći različite online platforme koje omogućuju evaluaciju vaših rješenja. Dvije od najčešće korištenih platformi su **Codeforces** i **CSES**. Prije nego što krenemo s rješavanjem problema, potrebno je kreirati račune na ovim platformama.
 
 ## Registracija na Codeforces
 
