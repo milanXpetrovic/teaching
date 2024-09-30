@@ -33,7 +33,7 @@ Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih pr
 
 ## 📦 Resursi
 
-<!-- - [Rješenja zadataka s vježbi](../vjezbe-sadrzaj/vjezbe-rjesenja) -->
+- [Rješenja zadataka s vježbi](https://github.com/milanXpetrovic/prsp-vjezbe)
 - [CSES Problem Set](https://cses.fi/problemset/)
 - [Codeforces](https://codeforces.com/)
 - [Project Euler](https://projecteuler.net/)
@@ -46,3 +46,4 @@ Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih pr
 ### 🧰 Programska podrška
 
 - [Visual Studio Code](https://code.visualstudio.com/)
+- [GitHub](https://github.com/)
