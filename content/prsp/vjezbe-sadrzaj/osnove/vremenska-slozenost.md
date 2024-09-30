@@ -43,41 +43,7 @@ Broj $z$ koji je iznos maksimalnog zbroja podniza.
 ```
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <climits>
 
-using namespace std;
-
-int main() {
-    int n;
-    
-    cout << "Unesite broj elemenata: ";
-    cin >> n;
-
-    vector<int> nums(n);
-    cout << "Unesite elemente: ";
-    for (int i = 0; i < n; i++) {
-        cin >> nums[i];
-    }
-
-    int maxSum = INT_MIN;
-
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            int currentSum = 0;
-            for (int k = i; k <= j; k++) {
-                currentSum += nums[k];
-            }
-            if (currentSum > maxSum) {
-                maxSum = currentSum;
-            }
-        }
-    }
-
-    cout << maxSum << endl;
-    return 0;
-}
 ```
 
 ## Zadatak 2: $O(n^2)$ složenost

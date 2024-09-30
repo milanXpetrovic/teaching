@@ -2,7 +2,7 @@
 layout: default
 title: DOHS
 nav_order: 4
-nav_exclude: false
+nav_exclude: true
 has_children: true
 has_toc: false
 ---

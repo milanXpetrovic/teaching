@@ -3,9 +3,9 @@ parent: PRSP
 nav_order: 3
 ---
 
-# [Potpuno pretraživanje](https://cses.fi/book/book.pdf#chapter.5)
+# [Potpuna pretraga](https://cses.fi/book/book.pdf#chapter.5)
 
-Potpuno pretraživanje (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
+Potpuna pretraga (*eng. Complete search*) opća je metoda koja se može koristiti za rješavanje gotovo svakog algoritamskog problema. Ideja je generirati sva moguća rješenja problema korištenjem grube sile (*eng. brute force*), a zatim odabrati najbolje rješenje ili prebrojati rješenja, ovisno o problemu.
 Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva rješenja, jer je pretragu obično lako provesti i uvijek daje rješenje. Ako je potpuna pretraga prespora, možda će biti potrebne druge tehnike, poput pohlepnih algoritama ili dinamičkog programiranja.
 
 ## Zadatak 1: Generiranje podskupova
@@ -37,24 +37,33 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 {: .highlight }
 `[]` označava prazan skup $\emptyset$.
 
-## Zadatak 2: Binarna reprezentacija
+## Zadatak 3: K-sum
 
-Riješite prethodni zadatak s pomoću reprezentacije brojeva u binarnom zapisu.
-
-{: .highlight }
-> Da bi `x` pretvorili u binarni zapis možete koristiti `format(x, 'b')`.
->
-> Funkcija `zfill(n)`, popunjava string s `0` dok on nema duljinu `n`.
-
-## Zadatak 3: K-sum binarno
-
-S pomoću binarne reprezentacije provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
+Provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
 **Input:**
-U prvoj liniji unosi se tražena suma $k$, a u drugoj lista cijelih brojeva $l$.
+U prvoj liniji unosi se tražena suma $k$, u drugoj broj elemenata u listi $n$,
+a u tre'oj lista cijelih brojeva $l$.
 
 **Output:**
 Ispis brojeva čija suma iznosi $k$.
+
+
+**Primjer**
+
+**Input:**
+
+```text
+6
+3
+1 2 4
+```
+
+**Output:**
+
+```text
+2 4
+```
 
 ## Zadatak 4: K-sum Meet in the middle
 
