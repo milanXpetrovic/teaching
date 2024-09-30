@@ -1,8 +1,8 @@
 title: Teaching
 description: Teaching materials
-baseurl: "teaching/content/"
+baseurl: "teaching/"
 
-url: "https://milanxpetrovic.github.io/teaching/content/"
+url: "https://milanxpetrovic.github.io/teaching/"
 
 permalink: pretty
 
