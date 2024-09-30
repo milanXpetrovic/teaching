@@ -12,7 +12,7 @@ Dobro došli  na vježbe iz predmeta **Programiranje za rješavanje složenih pr
 
 ## 👨‍💻 Vježbe 👨‍🏫
 
-- [Uvod](../vjezbe-sadrzaj/osnove/prsp-uvod.md)
+- [Uvod](../vjezbe-sadrzaj/osnove/prsp-uvod)
 - [Vremenska složenost](../vjezbe-sadrzaj/osnove/vremenska-slozenost)
 - [Potpuna pretraga](../vjezbe-sadrzaj/osnove/potpuna-pretraga)
 - [Pohlepni algoritmi](../vjezbe-sadrzaj/osnove/pohlepni-algoritmi)
