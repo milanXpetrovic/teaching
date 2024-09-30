@@ -9,7 +9,7 @@ permalink: pretty
 markdown: gem
 compress_html:
   blanklines: false
-latex: mathjax
+latex: mathjax2
 math: mathjax2
 plugins:
 - jekyll-remote-theme
