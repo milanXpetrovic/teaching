@@ -72,10 +72,10 @@ U drugom slučaju, budući da želimo pronaći podniz s maksimalnim zbrojem, pod
 ```cpp
 int best = 0, sum = 0;
 for (int k = 0; k < n; k++) {
-    sum = max(array[k],sum+array[k]);
-    best = max(best,sum);
+    sum = max(array[k], sum+array[k]);
+    best = max(best, sum);
 }
-cout << best << "\n";
+cout << best << "endl";
 ```
 
 ## Zadatak 4: Lista nasumičnih brojeva
@@ -99,11 +99,8 @@ Lista $l$ koja sadržava $n$ elemenata.
 **Output:**
 
 ```text
-[-1, 4, -9, -2, -1, 3, -6, 5, 8, 0, 3, -8, 6, 7, 3]
+-1, 4, -9, -2, -1, 3, -6, 5, 8, 0, 3, -8, 6, 7, 3
 ```
-
-{: .highlight }
-Za generiranje pseudo-random brojeva možete koristi Python modul [random](https://docs.python.org/3/library/random.html).
 
 ## Zadatak 5: Mjerenje brzine izvođenja
 
@@ -131,7 +128,8 @@ Vremena $t_1$, $t_2$ i $t_3$ koja označavaju vrijeme izvođenja algoritama.
 0.0010
 ```
 
-{: .highlight }
-Za mjerenje vremena izvođenja programa možete koristiti Python modul [time](https://docs.python.org/3/library/time.html).
+## Zadaci za vježbu
 
-[Sljedeća lekcija: Potpuno pretraživanje](../potpuno-pretrazivanje){: .btn .btn-purple .float-right}
+- [CSES: Repetitions](https://cses.fi/problemset/task/1069)
+
+[Sljedeća lekcija: Potpuno pretraživanje](../potpuna-pretraga){: .btn .btn-purple .float-right}
