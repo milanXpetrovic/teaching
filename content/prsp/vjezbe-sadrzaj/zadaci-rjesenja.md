@@ -2,10 +2,8 @@
 layout: default
 parent: PRSP
 nav_order: 17
-nav_exclude: false
+nav_exclude: true
 ---
-
-# OVO NIJE SLUZBENA SKRIPTA
 
 # Rješenja zadataka s vježbi
 
@@ -230,7 +228,7 @@ int main() {
 }
 ```
 
-## [Potpuna pretraga](./vjezbe-sadrzaj/potpuno-pretrazivanje.md)
+## [Potpuna pretraga](./vjezbe-sadrzaj/potpuna-pretraga.md)
 
 ### Zadatak 1: Generiranje podskupova
 
@@ -281,7 +279,7 @@ int main() {
 
 ```
 
-### Zadatak 3: K-sum binarno
+### Zadatak 2: K-sum binarno
 
 ```cpp
 #include <iostream>

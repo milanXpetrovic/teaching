@@ -92,7 +92,7 @@ Ispis popisa vremena $t_1$ i $t_2$ za predmete koje će student upisati.
 15 17
 ```
 
-## Dodatni zadaci
+## Zadaci za vježbu
 
 - [Domino piling](https://codeforces.com/problemset/problem/50/A)
 - [Chat room](https://codeforces.com/problemset/problem/58/A)

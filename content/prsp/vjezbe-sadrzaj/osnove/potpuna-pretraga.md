@@ -189,7 +189,7 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 10
 ```
 
-## Dodatni zadaci
+## Zadaci za vježbu
 
 - [Chessboard and Queens](https://cses.fi/problemset/task/1624)
 - [Grid Paths](https://cses.fi/problemset/task/1625)
