@@ -13,6 +13,8 @@ Potpuna pretraga dobra je tehnika ako ima dovoljno vremena za prolazak kroz sva 
 Zadan je skup $\{0, 1, 2, ..., n\}$, s pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
+![](./search-tree-all-subsets.png)
+
 **Primjer**
 
 **Input:**
@@ -37,7 +39,7 @@ Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 {: .highlight }
 `[]` označava prazan skup $\emptyset$.
 
-## Zadatak 3: K-sum
+## Zadatak 2: K-sum
 
 Provjerite ako u zadanoj listi $l$ postoji podlista ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
@@ -47,7 +49,6 @@ a u tre'oj lista cijelih brojeva $l$.
 
 **Output:**
 Ispis brojeva čija suma iznosi $k$.
-
 
 **Primjer**
 
@@ -65,7 +66,7 @@ Ispis brojeva čija suma iznosi $k$.
 2 4
 ```
 
-## Zadatak 4: K-sum Meet in the middle
+## Zadatak 3: K-sum Meet in the middle
 
 S pomoću metode Meet in the middle provjerite ako u zadanoj listi $l$ postoji skup ${a_1, ..., a_n}$ takva da je njena suma $k$?
 
@@ -103,12 +104,9 @@ YES
 -1
 ```
 
-## Zadatak 5: Stvaranje stringova
+## Zadatak 4: Stvaranje stringova
 
 Za zadani string $s$, zadatak je generirati sve različite stringove koji se mogu stvoriti s pomoću znakova iz zadanog stringa $s$.
-
-{: .highlight }
-Za generiranje permutacija može se koristiti funkcija `permutations` koja se poziva s pomoću `from itertools import permutations`.
 
 **Input:**
 Ulazni string duljine $n$ ($1 \le n \le 7$), koji se sastoji od slova od a do z.
@@ -150,40 +148,45 @@ cabaa
 cbaaa
 ```
 
-## Zadatak 6: Niz
+## Zadatak 5: Postavljanje N-kraljica
 
-Razmotrimo znakovni niz koji se sastoji od svih pozitivnih cijelih brojeva u rastućem redoslijedu:
+Napišite program koji traži od korisnika da unese broj `n`, što predstavlja veličinu šahovske ploče (n x n). Program treba izračunati i ispisati broj mogućnosti za postavljanje `n` kraljica na šahovskoj ploči tako da nijedna kraljica ne napada drugu. Kraljica može napasti u svim smjerovima: horizontalno, vertikalno i dijagonalno.
 
-```text
-12345678910111213141516171819202122232425...
-```
+![](./queen-chessboard.png)
 
-Zadatak je pronaći u $q$ upita koja znamenka se nalazi na poziciji $k$.
+**Ulaz**
+- Jedan cijeli broj `n` (1 ≤ n ≤ 15), koji predstavlja veličinu šahovske ploče.
 
-Polje kreće od indeksa 1, tako će primjerice upit za broj 6, vratiti broj 6 a ne 7.
+**Izlaz**
 
-**Input:**
-Prva linija sadrži broj $q$ koji nam govori koliko imamo upita.
-Nakon toga slijedi $q$ linija gdje se nalazi $k$, odnosno indeks broja kojeg tražimo.
+- Jedan cijeli broj, koji predstavlja broj mogućnosti za postavljanje `n` kraljica na šahovskoj ploči.
 
-**Output:**
-Za svaki upit ispišite pronađenu znamenku na indeksu $k$.
+### Primjer 1
 
-**Input:**
+**Ulaz:**
 
 ```text
-3
-7
-19
-12
-```
-
-**Output:**
-
-```text
-7
 4
-1
+```
+
+**Izlaz:**
+
+```text
+2
+```
+
+### Primjer 2
+
+**Ulaz:**
+
+```text
+5
+```
+
+**Izlaz:**
+
+```text
+10
 ```
 
 ## Dodatni zadaci
