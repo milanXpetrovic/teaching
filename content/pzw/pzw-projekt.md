@@ -8,14 +8,6 @@ nav_exclude: true
 
 ## Projektni zadatak
 
-## 📢 Osnovne informacije
-
-- Predmet: Programiranje za Web
-- Ak. god: 2022./2023.
-- Rok za odabir teme: 17.11.2022.
-- Rok za predaju: 22.12.2022.
-- Bodovi: 20
-
 ## 🎯 Zadatak
 
 Zadatak je izrada web aplikacije ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama od dvoje studenata.
