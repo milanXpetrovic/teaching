@@ -18,8 +18,6 @@ nav_exclude: true
 
 Zadatak je izrada modela i predložaka (pogleda) za web aplikaciju ili uslugu ovisno o odabranoj temi. Zadatak se radi samostalno ili u grupama po dvoje. Potrebno je započeti izradu web aplikacije ili usluge i u danom roku predati aplikaciju ili uslugu koja ima izrađene modele i predloške (poglede). Ovisno o točnosti i potpunosti izrađenih modela i predložaka (pogleda), može se ostvariti do 20 bodova.
 
-[Link za prijavu teme na Melinu](https://moodle.srce.hr/2022-2023/mod/choice/view.php?id=2942733)
-
 Projekt treba sadržavati:
 
 - Github repozitorij za projekt
@@ -58,5 +56,3 @@ Projekt treba sadržavati:
 ## 📦 Predaja zadatka
 
 Zadatak predajete kao .zip arhivu vašeg projekta i poveznicu na vaš Github repozitorij.
-
-[Link za predaju rješenja na Melinu](https://moodle.srce.hr/2022-2023/mod/assign/view.php?id=2942812)
