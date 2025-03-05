@@ -4,14 +4,7 @@ parent: SIKS
 nav_order: 1
 ---
 
-# Kriptografija u Pythonu: uvod
-
-Kriptografija je znanost o zaštiti informacija korištenjem matematičkih algoritama. Prije nego što se upustimo u složenije algoritme enkripcije i dekripcije, važno je razumjeti osnovne koncepte:
-
-- **Bytes i kodiranje:** Većina kriptografskih operacija radi s binarnim podacima (byteovima). Učenje konverzije između tekstualnih podataka i byteova (koristeći različita kodiranja poput ASCII, UTF-8, Base64 i Hex) ključ je za rad s kriptografijom.
-- **Nasumični brojevi i entropija:** Sigurnost kriptografskih algoritama uvelike ovisi o slučajnosti. Entropija (mjera nepredvidljivosti) igra bitnu ulogu u generiranju ključeva i sličnih elemenata.
-- **Moduli `secrets` i `random`:** Python nudi module za generiranje nasumičnih vrijednosti. Modul `secrets` je namijenjen generiranju kriptografski sigurnih nasumičnih brojeva, dok je modul `random` pogodniji za opće slučajne operacije koje ne zahtijevaju visoku razinu sigurnosti.
-
+# Kriptografija u Pythonu: Uvod
 ---
 
 ## Uvod
