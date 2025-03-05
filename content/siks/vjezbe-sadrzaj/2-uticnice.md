@@ -74,7 +74,7 @@ print("Odgovor servera:", odgovor)
 client_socket.close()
 ```
 
-### 2.2 Sigurna komunikacija putem uti;nice (Integracija s pyca/cryptography)
+### 2.2 Sigurna komunikacija putem utičnica (Integracija s pyca/cryptography)
 
 Ovdje ćemo demonstrirati kako integrirati simetričnu enkripciju pomoću Fernet algoritma u socket komunikaciju. Oba skripta (server i klijent) moraju koristiti isti tajni ključ. Za potrebe primjera, ključ ćemo ručno definirati.
 
@@ -135,17 +135,12 @@ client_socket.close()
 ```
 
 ## 3. Zadaci za Samostalnu Vježbu
+
 {: .important-title }
 > Osnovna Socket Komunikacija:
 >
 > Napišite vlastite verzije server i klijent skripti koje razmjenjuju tekstualne poruke.
 > Proširite funkcionalnost tako da server može obraditi više poruka u jednoj sesiji (petlja za primanje/odgovaranje).
-
-{: .important-title }
-> Sigurna Socket Komunikacija:
->
->Koristeći pyca/cryptography, implementirajte enkripciju poruka u komunikaciji između servera i klijenta.
->Osigurajte da obje strane koriste isti tajni ključ (hardkodiran ili učitan iz datoteke) i da se poruke ispravno enkriptuju i dešifriraju.
 
 {: .important-title }
 > Dodatna Sigurnosna Provjera:
