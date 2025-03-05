@@ -13,30 +13,28 @@ Kriptografija je znanost o zaštiti informacija korištenjem matematičkih algor
 - **Moduli `secrets` i `random`:** Python nudi module za generiranje nasumičnih vrijednosti. Modul `secrets` je namijenjen generiranju kriptografski sigurnih nasumičnih brojeva, dok je modul `random` pogodniji za opće slučajne operacije koje ne zahtijevaju visoku razinu sigurnosti.
 
 ---
-### 2.1 Rad s Bytes i Kodiranjem
+### Kodiranje
 
 - **Bytes:** Osnovna jedinica podataka u računalu. Većina kriptografskih funkcija zahtjeva rad s byteovima.
 - **ASCII i UTF-8:** Standardi za kodiranje znakova. ASCII pokriva osnovne znakove, dok UTF-8 omogućava kodiranje većeg broja znakova.
 - **Base64:** Algoritam za kodiranje binarnih podataka u tekstualni oblik, često korišten za prijenos podataka.
 - **Hexadecimalno kodiranje (Hex):** Predstavlja byteove u obliku heksadecimalnih vrijednosti, što je korisno za ispis binarnih podataka.
 
-### 2.2 Generiranje Nasumičnih Brojeva i Entropija
+### Generiranje nasumičnih brojeva i entropija
 
 - **Nasumični brojevi:** Ključni su u generiranju kriptografskih ključeva i drugih sigurnosnih elemenata.
 - **Entropija:** Mjera nepredvidljivosti podataka. Viša entropija znači veću sigurnost.
 
-### 2.3 Python Moduli: `secrets` i `random`
+### Python moduli: `secrets` i `random`
 
 - **`secrets` modul:** Koristi se za generiranje kriptografski sigurnih nasumičnih vrijednosti (npr. tokeni, ključevi).  
 - **`random` modul:** Koristi se za opće svrhe nasumičnog odabira, ali nije prikladan za sigurnosne primjene jer nije dizajniran za visoku entropiju.
 
 ---
 
-## 3. Praktični Primjeri
+## Praktični primjeri
 
-### 3.1 Rad s Bytes i Kodiranjem
-
-#### Konverzija stringa u byteove i kodiranje u Base64 i Hex
+### Konverzija stringa
 
 ```python
 import base64
@@ -70,7 +68,6 @@ Objašnjenje:
 - Tekst se prvo konvertira u byteove pomoću UTF-8 kodiranja.
 - Zatim se primjenjuju Base64 i heksadecimalno kodiranje, uz demonstraciju povratne konverzije.
 
-
 ### Korištenje modula `random` i `secrets`
 
 ```python
@@ -91,6 +88,7 @@ print("Sigurni token:", sigurni_token)
 ```
 
 Objašnjenje:
+
 - Modul random se koristi za opće svrhe, dok modul secrets generira vrijednosti prikladne za kriptografske primjene.
 - Generiranjem tokena dobivamo jedinstveni identifikator koji se može koristiti kao ključ ili autentikacijski element.
 
@@ -108,7 +106,6 @@ Objašnjenje:
 >
 > Napravite skriptu koja generira 10 kriptografski sigurnih nasumičnih brojeva u rasponu od 0 do 999 koristeći modul secrets.
 > Izračunajte i ispišite prosječnu vrijednost tih brojeva.
-
 
 {: .important-title }
 > Rad s Modulom secrets:
