@@ -4,13 +4,7 @@ parent: SIKS
 nav_order: 1
 ---
 
-## Kriptografija u pythonu: uvod
-Python Fundamentals for Cryptography
-    Working with bytes and encoding (ASCII, UTF-8, Base64, Hex)
-    Random number generation and entropy
-    Working with Python’s secrets and random modules
-
-## Kriptografija u Pythonu: uvod
+# Kriptografija u Pythonu: uvod
 
 Kriptografija je znanost o zaštiti informacija korištenjem matematičkih algoritama. Prije nego što se upustimo u složenije algoritme enkripcije i dekripcije, važno je razumjeti osnovne koncepte:
 
@@ -102,17 +96,21 @@ Objašnjenje:
 
 ## Zadaci za samostalnu vježbu
 
-Bytes i Kodiranje:
+{: .important-title }
+> Bytes i Kodiranje
+>
+> Napišite funkciju koja prima tekstualni ulaz, konvertira ga u byteove (UTF-8), kodira u Base64, te zatim vraća dekodirani originalni tekst.
+>
+> Provjerite ispravnost pomoću `base64.b64encode()` i `base64.b64decode()`.
 
-Napišite funkciju koja prima tekstualni ulaz, konvertira ga u byteove (UTF-8), kodira u Base64, te zatim vraća dekodirani originalni tekst.
+{: .important-title }
+> Nasumični Brojevi:
+>
+> Napravite skriptu koja generira 10 kriptografski sigurnih nasumičnih brojeva u rasponu od 0 do 999 koristeći modul secrets.
+> Izračunajte i ispišite prosječnu vrijednost tih brojeva.
 
-Provjerite ispravnost pomoću base64.b64encode() i base64.b64decode().
 
-Nasumični Brojevi:
-
-Napravite skriptu koja generira 10 kriptografski sigurnih nasumičnih brojeva u rasponu od 0 do 999 koristeći modul secrets.
-Izračunajte i ispišite prosječnu vrijednost tih brojeva.
-
-Rad s Modulom secrets:
-
-Kreirajte funkciju generiraj_token(dužina) koja vraća siguran token u heksadecimalnom obliku duljine definirane argumentom (koristite secrets.token_hex()).
+{: .important-title }
+> Rad s Modulom secrets:
+>
+> Kreirajte funkciju `generiraj_token(dužina)` koja vraća siguran token u heksadecimalnom obliku duljine definirane argumentom (koristite `secrets.token_hex()`).
