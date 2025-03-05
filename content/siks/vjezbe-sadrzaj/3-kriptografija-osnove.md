@@ -2,9 +2,10 @@
 layout: default
 parent: SIKS
 nav_order: 3
+nav_exclude: true
 ---
 
-# Osnovni Kriptografski Algoritmi u Pythonu
+# Osnovni kriptografski algoritmi
 
 Ova skripta pruža pregled klasičnih kriptografskih algoritama implementiranih u Pythonu. Namijenjena je informatičarima koji su upoznati s Pythonom, ali nemaju iskustva u području kriptografije. U ovoj skripti obrađuju se dvije glavne skupine algoritama:
 
@@ -24,31 +25,37 @@ Također ćemo ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput fr
 
 ### 1.1 Substitucijski Algoritmi
 
-**Caesarov algoritam:**  
+**Caesarov algoritam:**
+
 - Svakoj poruci se primjenjuje fiksni pomak (n).  
 - Jednostavan za implementaciju, ali relativno lako razbijljiv brute-force metodom.
 
-**Vigenèreov algoritam:**  
+**Vigenèreov algoritam:**
+
 - Koristi se ključ (riječ ili niz znakova) čiji se znakovi ciklički primjenjuju kao pomaci.  
 - Pruža veću sigurnost od Caesarove šifre, ali je podložan frekvencijskoj analizi.
 
 ### 1.2 Transpozicijski Algoritmi
 
 **Rail Fence šifra:**  
+
 - Poruka se "piše" u obliku cik-cak obrasca preko nekoliko "pruga" (redova).  
 - Čitanjem redaka dobiva se šifrirani tekst.
 
 **Columnar (stupčasta) šifra:**  
+
 - Poruka se zapisuje u matricu širine definirane ključem.  
 - Zatim se stupci čitaju u određenom redoslijedu kako bi se dobio šifrirani tekst.
 
 ### 1.3 Kriptanaliza
 
-**Frekvencijska analiza:**  
+**Frekvencijska analiza:**
+
 - Analiza učestalosti pojavljivanja znakova u šifriranom tekstu.  
 - Kod jezika s poznatom distribucijom znakova, ova metoda može otkriti moguće pomake ili ključeve.
 
-**Brute-force pristup:**  
+**Brute-force pristup:**
+
 - Isprobavanje svih mogućih ključeva (npr. svih 26 pomaka u Caesarovoj šifri).  
 - Jednostavan, ali zahtjevan kod složenijih algoritama.
 
@@ -83,6 +90,7 @@ print("Originalna poruka:", poruka)
 print("Sifrirana poruka (pomak =", shift, "):", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
+
 ---
 
 ### 2.2 Vigenèreov Šifriranje

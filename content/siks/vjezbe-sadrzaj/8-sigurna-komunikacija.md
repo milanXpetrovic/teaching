@@ -2,6 +2,7 @@
 layout: default
 parent: SIKS
 nav_order: 8
+nav_exclude: true
 ---
 
 ##  Secure Communication and Protocols

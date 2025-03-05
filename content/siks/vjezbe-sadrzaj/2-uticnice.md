@@ -6,22 +6,25 @@ nav_order: 2
 
 ## Utičnice
 
-### 1.1 Što su utičnice?
+Programiranje utičnica ključno je za mrežnu komunikaciju, omogućujući razmjenu podataka između različitih uređaja. U Pythonu, utičnice omogućuju međuprocesnu komunikaciju preko mreže.
 
-- **Socket** predstavlja krajnju točku komunikacije između dva procesa.  
-- Omogućuju slanje i primanje podataka putem mreže koristeći standardne protokole poput TCP/IP.  
-- Socket programiranje je temelj za razvoj mrežnih aplikacija, uključujući chat aplikacije, web servere, igre i dr.
+Pythonov `socket` modul pruža sučelje za Berkeley socket API. 
 
-### 1.2 Funkcionalnosti i primjena
+Primarne API funkcije i metode utičnice u ovom modulu su:
 
-- **Server socket:** Čeka dolazne konekcije na određenom portu i prihvaća klijentske zahtjeve.
-- **Client socket:** Povezuje se na server socket kako bi razmijenio podatke.
-- Socketi se mogu koristiti za jednostavnu razmjenu poruka ili za složeniju komunikaciju koja uključuje sigurnosne mehanizme poput enkripcije.
+```python
+socket()
+.bind()
+.listen()
+.accept()
+.connect()
+.connect_ex()
+.send()
+.recv()
+.close()
+```
 
-### 1.3 Sigurna komunikacija uz enkripciju
-
-- Uz korištenje osnovnih socketa, moguće je osigurati sigurnost komunikacije kombiniranjem simetrične enkripcije (npr. Fernet) iz modula [pyca/cryptography](https://cryptography.io).
-- Enkripcija osigurava da samo ovlaštene strane mogu čitati prenesene podatke.
+Python pruža praktičan i dosljedan API koji se preslikava izravno na sistemske pozive. Kao dio svoje standardne biblioteke. Dostupni su i mnogi moduli koji implementiraju internetske protokole više razine kao što su HTTP i SMTP. Za pregled pogledajte [Internetski protokoli i podrška](https://docs.python.org/3/library/internet.html).
 
 ---
 
@@ -34,113 +37,58 @@ nav_order: 2
 ```python
 import socket
 
-# Kreiramo socket i postavljamo adresu i port
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('localhost', 8000))
-server_socket.listen(1)
-print("Server pokrenut na portu 8000, čekam konekciju...")
+HOST = "127.0.0.1"  
+PORT = 65432 
 
-# Prihvaćamo konekciju od klijenta
-client_socket, addr = server_socket.accept()
-print("Povezan s:", addr)
-
-# Primamo poruku (do 1024 bajta)
-poruka = client_socket.recv(1024).decode('utf-8')
-print("Primljena poruka:", poruka)
-
-# Odgovaramo klijentu
-client_socket.send("Poruka primljena!".encode('utf-8'))
-
-client_socket.close()
-server_socket.close()
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print(f"Connected by {addr}")
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
 ```
+
+`socket.socket()` stvara socket objekt koji podržava tip upravitelja konteksta, tako da ga možete koristiti u naredbi `with`. Nema potrebe pozivati `​​s.close()`:
+
+Metoda `.bind()` koristi se za povezivanje utičnice s određenim mrežnim sučeljem i brojem priključka:
+
+U primjeru poslužitelja, `.listen()` omogućuje poslužitelju prihvaćanje veza. To poslužitelj čini utičnicom za slušanje.
+
+Metoda `.accept()` blokira izvršenje i čeka dolaznu vezu. Kada se klijent poveže, vraća novi socket objekt koji predstavlja vezu i tuple koja sadrži adresu klijenta. Tuple će sadržavati `(host, port)` za IPv4 veze ili `(host, port, flowinfo, scopeid)` za IPv6.
+
+Nakon što `.accept()` pruži klijentski socket objekt `conn`, koristi se beskonačna `while` petlja za prelazak preko blokirajućih poziva na `conn.recv()`. Čitaju se svi podaci koje klijent šalje i vraćaju se natrag koristeći `conn.sendall()`.
+
+Ako `conn.recv()` vrati prazan objekt bajtova, `b''`, to signalizira da je klijent zatvorio vezu i da je petlja prekinuta. `with` se koristi s `conn` za automatsko zatvaranje utičnice na kraju bloka.
 
 #### Klijent (client.py)
 
 ```python
 import socket
 
-# Kreiramo socket i povezujemo se na server
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('localhost', 8000))
+HOST = "127.0.0.1" 
+PORT = 65432
 
-# Šaljemo poruku serveru
-client_socket.send("Pozdrav od klijenta!".encode('utf-8'))
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(b"Hello, world")
+    data = s.recv(1024)
 
-# Primamo odgovor od servera
-odgovor = client_socket.recv(1024).decode('utf-8')
-print("Odgovor servera:", odgovor)
-
-client_socket.close()
+print(f"Received {data!r}")
 ```
 
-### 2.2 Sigurna komunikacija putem utičnica (Integracija s pyca/cryptography)
-
-Ovdje ćemo demonstrirati kako integrirati simetričnu enkripciju pomoću Fernet algoritma u socket komunikaciju. Oba skripta (server i klijent) moraju koristiti isti tajni ključ. Za potrebe primjera, ključ ćemo ručno definirati.
-
-#### Sigurni server (secure_server.py)
-
-```python
-import socket
-from cryptography.fernet import Fernet
-
-# Definiramo fiksni ključ (u stvarnom okruženju, ključ treba sigurno distribuirati)
-key = b'XxMGKXnFPNMzq6R44rZMsWmCbU7K3sc_2gW29zQj9RA='  # Primjer ključ; obavezno koristite isti ključ na klijentskoj strani
-fernet = Fernet(key)
-
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('localhost', 9000))
-server_socket.listen(1)
-print("Secure server pokrenut na portu 9000, čekam konekciju...")
-
-client_socket, addr = server_socket.accept()
-print("Povezan s:", addr)
-
-# Primamo enkriptiranu poruku
-encrypted_message = client_socket.recv(1024)
-decrypted_message = fernet.decrypt(encrypted_message)
-print("Dešifrirana poruka:", decrypted_message.decode('utf-8'))
-
-# Šaljemo enkriptirani odgovor
-response = fernet.encrypt(b"Poruka primljena sigurno!")
-client_socket.send(response)
-
-client_socket.close()
-server_socket.close()
-```
-
-#### Sigurni klijent (secure_client.py)
-
-```python
-import socket
-from cryptography.fernet import Fernet
-
-# Koristimo isti ključ kao i server
-key = b'XxMGKXnFPNMzq6R44rZMsWmCbU7K3sc_2gW29zQj9RA='
-fernet = Fernet(key)
-
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('localhost', 9000))
-
-# Enkriptiramo poruku prije slanja
-encrypted_message = fernet.encrypt(b"Pozdrav, sigurna komunikacija!")
-client_socket.send(encrypted_message)
-
-# Primamo enkriptirani odgovor
-encrypted_response = client_socket.recv(1024)
-decrypted_response = fernet.decrypt(encrypted_response)
-print("Odgovor servera:", decrypted_response.decode('utf-8'))
-
-client_socket.close()
-```
+U usporedbi s poslužiteljem, klijent je prilično jednostavan. Stvara socket objekt, koristi `.connect()` za povezivanje s poslužiteljem i poziva `s.sendall()` za slanje svoje poruke. Na kraju, poziva `s.recv()` da pročita odgovor poslužitelja i zatim ga ispisuje.
 
 ## 3. Zadaci za Samostalnu Vježbu
 
 {: .important-title }
 > Osnovna Socket Komunikacija:
 >
-> Napišite vlastite verzije server i klijent skripti koje razmjenjuju tekstualne poruke.
-> Proširite funkcionalnost tako da server može obraditi više poruka u jednoj sesiji (petlja za primanje/odgovaranje).
+> Napišite vlastite verzije server i klijent skripti koje međusobno razmjenjuju tekstualne poruke.
 
 {: .important-title }
 > Dodatna Sigurnosna Provjera:

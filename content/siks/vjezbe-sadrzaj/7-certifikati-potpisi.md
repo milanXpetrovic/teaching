@@ -2,6 +2,7 @@
 layout: default
 parent: SIKS
 nav_order: 7
+nav_exclude: true
 ---
 
 # Digitalni Potpisi i Certifikati

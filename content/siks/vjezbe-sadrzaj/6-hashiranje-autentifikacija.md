@@ -2,6 +2,7 @@
 layout: default
 parent: SIKS
 nav_order: 6
+nav_exclude: true
 ---
 
 # Hashing i Autentikacija Poruka

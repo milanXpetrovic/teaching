@@ -13,6 +13,9 @@ Kriptografija je znanost o zaštiti informacija korištenjem matematičkih algor
 - **Moduli `secrets` i `random`:** Python nudi module za generiranje nasumičnih vrijednosti. Modul `secrets` je namijenjen generiranju kriptografski sigurnih nasumičnih brojeva, dok je modul `random` pogodniji za opće slučajne operacije koje ne zahtijevaju visoku razinu sigurnosti.
 
 ---
+
+## Uvod
+
 ### Kodiranje
 
 - **Bytes:** Osnovna jedinica podataka u računalu. Većina kriptografskih funkcija zahtjeva rad s byteovima.
@@ -105,7 +108,6 @@ Objašnjenje:
 > Nasumični Brojevi:
 >
 > Napravite skriptu koja generira 10 kriptografski sigurnih nasumičnih brojeva u rasponu od 0 do 999 koristeći modul secrets.
-> Izračunajte i ispišite prosječnu vrijednost tih brojeva.
 
 {: .important-title }
 > Rad s Modulom secrets:

@@ -2,6 +2,7 @@
 layout: default
 parent: SIKS
 nav_order: 5
+nav_exclude: true
 ---
 
 # Asimetrična Kriptografija (Javnoključna Kriptografija)
