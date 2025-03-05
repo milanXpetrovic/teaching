@@ -1,6 +1,8 @@
-## Uvod 
-
-
+---
+layout: default
+parent: SIKS
+nav_order: 1
+---
 
 ## Kriptografija u pythonu: uvod
 Python Fundamentals for Cryptography
@@ -8,7 +10,7 @@ Python Fundamentals for Cryptography
     Random number generation and entropy
     Working with Python’s secrets and random modules
 
-## 1. Uvod
+## Kriptografija u Pythonu: uvod
 
 Kriptografija je znanost o zaštiti informacija korištenjem matematičkih algoritama. Prije nego što se upustimo u složenije algoritme enkripcije i dekripcije, važno je razumjeti osnovne koncepte:
 

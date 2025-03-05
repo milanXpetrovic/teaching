@@ -1,10 +1,8 @@
-## Hashing and Message Authentication
-
-    Concept of one-way hashing
-    Hash functions (MD5, SHA-1, SHA-256, SHA-3)
-    HMAC (Hash-based Message Authentication Code)
-    Salting and key-stretching (PBKDF2, bcrypt, Argon2)
-    Implementing hashing and HMAC in Python
+---
+layout: default
+parent: SIKS
+nav_order: 6
+---
 
 # Hashing i Autentikacija Poruka
 

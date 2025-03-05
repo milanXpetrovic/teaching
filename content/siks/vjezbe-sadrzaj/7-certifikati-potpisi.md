@@ -1,10 +1,8 @@
-## Digital Signatures and Certificates
-
-    Concept of digital signatures and integrity verification
-    RSA and ECDSA signatures
-    Implementing digital signatures in Python
-    Understanding SSL/TLS and certificate authorities
-    Generating self-signed certificates with OpenSSL
+---
+layout: default
+parent: SIKS
+nav_order: 7
+---
 
 # Digitalni Potpisi i Certifikati
 
@@ -106,4 +104,3 @@ except Exception as e:
             Pošiljatelj enkriptira i potpisuje poruku (koristeći RSA ili ECDSA) te je šalje putem socketa.
             Primatelj dekriptuje i verificira potpis poruke.
         Analizirajte slučajeve kada potpis nije ispravan i implementirajte odgovarajuće obavijesti.
-        

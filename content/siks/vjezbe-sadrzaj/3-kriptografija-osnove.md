@@ -1,5 +1,10 @@
-# Osnovni Kriptografski Algoritmi u Pythonu
+---
+layout: default
+parent: SIKS
+nav_order: 3
+---
 
+# Osnovni Kriptografski Algoritmi u Pythonu
 
 Ova skripta pruža pregled klasičnih kriptografskih algoritama implementiranih u Pythonu. Namijenjena je informatičarima koji su upoznati s Pythonom, ali nemaju iskustva u području kriptografije. U ovoj skripti obrađuju se dvije glavne skupine algoritama:
 

@@ -1,3 +1,8 @@
+---
+layout: default
+parent: SIKS
+nav_order: 8
+---
 
 ##  Secure Communication and Protocols
 

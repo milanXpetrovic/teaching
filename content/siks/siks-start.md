@@ -1,3 +1,11 @@
+---
+layout: default
+title: SIKS
+nav_order: 3
+has_children: true
+has_toc: false
+---
+
 **Izvori:**
     - Practical Cryptography in Python: Learning Correct Cryptography by Example, Seth James Nielson, Christopher K. Monson
     - Implementing Cryptography Using Python, Shannon W. Bray

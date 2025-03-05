@@ -1,15 +1,10 @@
-## Simetricna kriptografija
+---
+layout: default
+parent: SIKS
+nav_order: 4
+---
 
-Symmetric Cryptography (Private Key Cryptography)
-
-    Concept of symmetric encryption
-    Block ciphers vs. stream ciphers
-    Data Encryption Standard (DES) (with pycryptodome)
-    Advanced Encryption Standard (AES) (ECB, CBC, CTR modes)
-    Padding schemes (PKCS#7, ZeroPadding)
-    Implementation of AES encryption/decryption in Python
-
-## 1. Uvod i Teorijski Pregled
+# Simetrična Enkripcija
 
 ### 1.1 Koncept Simetrične Enkripcije
 

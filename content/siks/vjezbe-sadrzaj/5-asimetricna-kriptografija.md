@@ -1,10 +1,8 @@
-## Asymmetric Cryptography (Public Key Cryptography)
-
-    Concept of key pairs (public and private keys)
-    RSA algorithm (key generation, encryption, decryption)
-    Diffie-Hellman key exchange
-    Elliptic Curve Cryptography (ECC) basics
-    Implementing RSA with Python (pycryptodome, cryptography)
+---
+layout: default
+parent: SIKS
+nav_order: 5
+---
 
 # Asimetrična Kriptografija (Javnoključna Kriptografija)
 
@@ -15,23 +13,28 @@ Ova skripta je dodatak na kolegiju te pruža uvid u osnove asimetrične kriptogr
 ## 1. Uvod i Teorijski Pregled
 
 ### 1.1 Koncept Parova Ključeva
+
 Asimetrična kriptografija temelji se na parovima ključeva:
 - **Javni ključ:** Može se slobodno distribuirati i koristi se za enkripciju podataka.
 - **Privatni ključ:** Drži se u tajnosti i koristi se za dekripciju podataka ili digitalno potpisivanje.
 
 ### 1.2 RSA Algoritam
+
 RSA je jedan od najpoznatijih asimetričnih algoritama. Ključni koraci uključuju:
 - **Generiranje ključeva:** Kreiranje para (javni i privatni) na temelju velikih prostih brojeva.
 - **Enkripcija:** Podaci se enkriptiraju javnim ključem.
 - **Dekripcija:** Samo vlasnik privatnog ključa može dešifrirati podatke.
 
 ### 1.3 Diffie-Hellman Razmjena Ključeva
+
 Diffie-Hellman omogućava dvije strane da preko nesigurne veze zajednički izračunaju tajnu koja se zatim može koristiti za simetričnu enkripciju. Svaka strana generira svoj privatni ključ te razmjenom javnih ključeva dolazi do zajedničke tajne.
 
 ### 1.4 Osnove Eliptične Kriptografije (ECC)
+
 Eliptična kriptografija koristi matematička svojstva eliptičnih krivulja za generiranje sigurnih ključeva s manjom duljinom u usporedbi s RSA-om. ECC se često koristi za digitalne potpise i enkripciju u uređajima s ograničenim resursima.
 
 ### 1.5 Implementacija RSA u Pythonu
+
 Implementacija RSA algoritma može se izvršiti korištenjem različitih biblioteka:
 - **pycryptodome:** Pruža jednostavan API za generiranje ključeva, enkripciju i dekripciju.
 - **cryptography:** Moderniji pristup s naprednijim sigurnosnim značajkama.

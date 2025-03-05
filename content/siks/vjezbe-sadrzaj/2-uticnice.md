@@ -1,3 +1,8 @@
+---
+layout: default
+parent: SIKS
+nav_order: 2
+---
 
 ## Sockets
 https://realpython.com/python-sockets/
