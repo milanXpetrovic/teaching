@@ -10,8 +10,8 @@ nav_exclude: true
 Ova skripta pruža pregled klasičnih kriptografskih algoritama implementiranih u Pythonu. Namijenjena je informatičarima koji su upoznati s Pythonom, ali nemaju iskustva u području kriptografije. U ovoj skripti obrađuju se dvije glavne skupine algoritama:
 
 - **Substitucijski algoritmi:**  
-  - *Caesarov šifriranje:* Svakoj poruci se primjenjuje fiksni pomak abecedom.  
-  - *Vigenèreov šifriranje:* Koristi se ključ koji određuje pomak za svaki znak u poruci.
+  - *Caesarovo šifriranje:* Svakoj poruci se primjenjuje fiksni pomak abecedom.  
+  - *Vigenèreovo šifriranje:* Koristi se ključ koji određuje pomak za svaki znak u poruci.
 
 - **Transpozicijski algoritmi:**  
   - *Rail Fence šifra:* Poruka se zapisuje u obliku cikličnog obrasca (željeznica), a zatim se čitaju redak po redak.  
@@ -28,7 +28,7 @@ Također ćemo ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput fr
 **Caesarov algoritam:**
 
 - Svakoj poruci se primjenjuje fiksni pomak (n).  
-- Jednostavan za implementaciju, ali relativno lako razbijljiv brute-force metodom.
+- Jednostavan za implementaciju, ali relativno lako za dešifrirati brute-force metodom.
 
 **Vigenèreov algoritam:**
 
@@ -123,7 +123,7 @@ def vigenere_decrypt(ciphertext, key):
     return decrypted
 
 # Primjer korištenja:
-poruka = "SkriptaKriptografije"
+poruka = "PozdravSvijete"
 kljuc = "ključ"
 sifrirana = vigenere_encrypt(poruka, kljuc)
 desifrirana = vigenere_decrypt(sifrirana, kljuc)
@@ -137,10 +137,9 @@ print("Desifrirana poruka:", desifrirana)
 
 ```python
 def rail_fence_encrypt(plaintext, num_rails):
-    # Inicijaliziraj pruge kao prazan niz stringova
     rails = [''] * num_rails
     rail = 0
-    direction = 1  # 1 = prema dolje, -1 = prema gore
+    direction = 1
     for char in plaintext:
         rails[rail] += char
         rail += direction
@@ -149,7 +148,6 @@ def rail_fence_encrypt(plaintext, num_rails):
     return ''.join(rails)
 
 def rail_fence_decrypt(ciphertext, num_rails):
-    # Prvo odredimo raspodjelu znakova po prugama
     rail_pattern = [None] * len(ciphertext)
     rail = 0
     direction = 1
@@ -159,7 +157,6 @@ def rail_fence_decrypt(ciphertext, num_rails):
         if rail == 0 or rail == num_rails - 1:
             direction *= -1
 
-    # Prebroji znakove u svakoj pruzi
     rail_counts = [rail_pattern.count(r) for r in range(num_rails)]
     rails = []
     index = 0
@@ -167,13 +164,11 @@ def rail_fence_decrypt(ciphertext, num_rails):
         rails.append(list(ciphertext[index:index+count]))
         index += count
 
-    # Sastavi originalni tekst
     plaintext = ""
     for r in rail_pattern:
         plaintext += rails[r].pop(0)
     return plaintext
 
-# Primjer korištenja:
 poruka = "KlasicanKriptografskiAlgoritam"
 num_rails = 3
 sifrirana = rail_fence_encrypt(poruka, num_rails)
@@ -194,11 +189,10 @@ Napišite skriptu koja:
 
 Zadatak: Komunikacija između Skripti
 Kreirajte dvije odvojene skripte:
-    Prva skripta šifrira poruku koristeći Vigenèreov algoritam i sprema šifrirani tekst u datoteku.
-    Druga skripta učitava tu datoteku, dešifrira poruku koristeći isti ključ i ispisuje originalni tekst.
+    Prva skripta šifrira poruku koristeći Caesarove algoritam i šalje šifrirani tekst drugoj skripti.
+    Druga skripta prima poruku, dešifrira poruku koristeći isti ključ i ispisuje originalni tekst.
 
 Zadatak: Automatska Dešifriranje
 Napravite program koji:
     Prima šifrirani tekst (pretpostavite da je šifriran Caesarovom šifrom).
     Primjenjuje brute-force pristup (ili frekvencijsku analizu kao dodatak) kako bi pronašao ispravan pomak i dešifrirao poruku.
-    Opcionalno, implementirajte jednostavnu funkciju koja računa učestalost znakova u tekstu i pomaže u prepoznavanju ispravnog dešifriranog teksta.
