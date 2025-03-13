@@ -7,8 +7,6 @@ nav_exclude: true
 
 # Osnovni kriptografski algoritmi
 
-Ova skripta pruža pregled klasičnih kriptografskih algoritama implementiranih u Pythonu. Namijenjena je informatičarima koji su upoznati s Pythonom, ali nemaju iskustva u području kriptografije. U ovoj skripti obrađuju se dvije glavne skupine algoritama:
-
 - **Substitucijski algoritmi:**  
   - *Caesarovo šifriranje:* Svakoj poruci se primjenjuje fiksni pomak abecedom.  
   - *Vigenèreovo šifriranje:* Koristi se ključ koji određuje pomak za svaki znak u poruci.
@@ -17,7 +15,7 @@ Ova skripta pruža pregled klasičnih kriptografskih algoritama implementiranih 
   - *Rail Fence šifra:* Poruka se zapisuje u obliku cikličnog obrasca (željeznica), a zatim se čitaju redak po redak.  
   - *Columnar šifra:* Poruka se zapisuje u matricu, a zatim se čitaju stupci prema unaprijed određenom redoslijedu (ključu).
 
-Također ćemo ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput frekvencijske analize i brute-force pristupa, koji su važni alati za dešifriranje bez poznavanja tajnog ključa.
+Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput frekvencijske analize i brute-force pristupa, koji su važni alati za dešifriranje bez poznavanja tajnog ključa.
 
 ---
 
