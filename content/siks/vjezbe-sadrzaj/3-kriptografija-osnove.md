@@ -188,14 +188,14 @@ print("Desifrirana poruka:", desifrirana)
 >    Dešifrira šifriranu poruku i uspoređuje je s originalom.
 
 {: .important-title }
-> Zadatak: Komunikacija između skripti
+> Komunikacija između skripti
 >
 > Kreirajte dvije odvojene skripte:
 >     Prva skripta šifrira poruku koristeći Caesarove algoritam i šalje šifrirani tekst drugoj skripti.
 >     Druga skripta prima poruku, dešifrira poruku koristeći isti ključ i ispisuje originalni tekst.
 
 {: .important-title }
-> Zadatak: Automatsko dešifriranje
+> Automatsko dešifriranje
 >
 > Napravite program koji:
 >     Prima šifrirani tekst (pretpostavite da je šifriran Caesarovom šifrom).
