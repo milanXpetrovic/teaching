@@ -19,9 +19,9 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 
 ---
 
-## 1. Uvod i Teorijski Pregled
+## 1. Uvod i teorijski pregled
 
-### 1.1 Substitucijski Algoritmi
+### 1.1 Substitucijski algoritmi
 
 **Caesarov algoritam:**
 
@@ -33,7 +33,7 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 - Koristi se ključ (riječ ili niz znakova) čiji se znakovi ciklički primjenjuju kao pomaci.  
 - Pruža veću sigurnost od Caesarove šifre, ali je podložan frekvencijskoj analizi.
 
-### 1.2 Transpozicijski Algoritmi
+### 1.2 Transpozicijski algoritmi
 
 **Rail Fence šifra:**  
 
@@ -45,7 +45,7 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 - Poruka se zapisuje u matricu širine definirane ključem.  
 - Zatim se stupci čitaju u određenom redoslijedu kako bi se dobio šifrirani tekst.
 
-### 1.3 Kriptanaliza
+### 1.3 Kripto analiza
 
 **Frekvencijska analiza:**
 
@@ -59,9 +59,9 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 
 ---
 
-## 2. Praktični Primjeri u Pythonu
+## 2. Praktični primjeri u Pythonu
 
-### 2.1 Caesarov Šifriranje
+### 2.1 Caesarov šifriranje
 
 ```python
 def caesar_encrypt(plaintext, shift):
@@ -91,7 +91,7 @@ print("Desifrirana poruka:", desifrirana)
 
 ---
 
-### 2.2 Vigenèreov Šifriranje
+### 2.2 Vigenèreov šifriranje
 
 ```python
 def vigenere_encrypt(plaintext, key):
@@ -131,7 +131,7 @@ print("Sifrirana poruka:", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
 
-### 2.3 Rail Fence Šifra
+### 2.3 Rail Fence šifriranje
 
 ```python
 def rail_fence_encrypt(plaintext, num_rails):
@@ -177,20 +177,26 @@ print("Sifrirana (Rail Fence):", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
 
-## 3. Zadaci za Samostalnu Vježbu
+## 3. Zadaci za samostalnu vježbu
 
-Zadatak: Implementacija Caesarove Šifre
-Napišite skriptu koja:
-    Prima korisnički unos poruke i pomaka (n).
-    Šifrira poruku koristeći Caesarov algoritam.
-    Dešifrira šifriranu poruku i uspoređuje je s originalom.
+{: .important-title }
+> Implementacija Caesarove šifre
+>
+> Napišite skriptu koja:
+>    Prima korisnički unos poruke i pomaka (n).
+>    Šifrira poruku koristeći Caesarov algoritam.
+>    Dešifrira šifriranu poruku i uspoređuje je s originalom.
 
-Zadatak: Komunikacija između Skripti
-Kreirajte dvije odvojene skripte:
-    Prva skripta šifrira poruku koristeći Caesarove algoritam i šalje šifrirani tekst drugoj skripti.
-    Druga skripta prima poruku, dešifrira poruku koristeći isti ključ i ispisuje originalni tekst.
+{: .important-title }
+> Zadatak: Komunikacija između skripti
+>
+> Kreirajte dvije odvojene skripte:
+>     Prva skripta šifrira poruku koristeći Caesarove algoritam i šalje šifrirani tekst drugoj skripti.
+>     Druga skripta prima poruku, dešifrira poruku koristeći isti ključ i ispisuje originalni tekst.
 
-Zadatak: Automatska Dešifriranje
-Napravite program koji:
-    Prima šifrirani tekst (pretpostavite da je šifriran Caesarovom šifrom).
-    Primjenjuje brute-force pristup (ili frekvencijsku analizu kao dodatak) kako bi pronašao ispravan pomak i dešifrirao poruku.
+{: .important-title }
+> Zadatak: Automatsko dešifriranje
+>
+> Napravite program koji:
+>     Prima šifrirani tekst (pretpostavite da je šifriran Caesarovom šifrom).
+>     Primjenjuje brute-force pristup (ili frekvencijsku analizu kao dodatak) kako bi pronašao ispravan pomak i dešifrirao poruku.
