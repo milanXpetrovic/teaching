@@ -14,8 +14,9 @@ has_toc: false
 - [Uvod](./vjezbe-sadrzaj/1-uvodne-vjezbe.md)
 - [Utičnice](./vjezbe-sadrzaj/2-uticnice.md)
 - [Osnove kriptografije](./vjezbe-sadrzaj/3-kriptografija-osnove.md)
+- [Simetrična kriptografija](./vjezbe-sadrzaj/4-simetricna-kriptografija.md)
 
-<!-- - [Simetrična kriptografija](./vjezbe-sadrzaj/4-simetricna-kriptografija.md)
+<!-- 
 - [Asimetrična kriptografija](./vjezbe-sadrzaj/5-asimetricna-kriptografija.md)
 - [Hashiranje i autentifikacija](./vjezbe-sadrzaj/6-hashiranje-autentifikacija.md)
 - [Certifikati i potpisi](./vjezbe-sadrzaj/7-certifikati-potpisi.md)
