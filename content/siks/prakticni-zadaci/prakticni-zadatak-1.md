@@ -1,3 +1,9 @@
+---
+layout: default
+parent: SIKS
+nav_exclude: true
+---
+
 # Praktični zadatak 1: Uvod u kriptografiju
 
 ## Opis zadatka
