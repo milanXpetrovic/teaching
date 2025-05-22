@@ -22,12 +22,13 @@ Dobrodši na vježbe iz predmeta **Sigurnost informacijskih i komunikacijskih su
 2. [Utičnice](./vjezbe-sadrzaj/2-uticnice.md)
 3. [Osnove kriptografije](./vjezbe-sadrzaj/3-kriptografija-osnove.md)
 4. [Simetrična kriptografija](./vjezbe-sadrzaj/4-simetricna-kriptografija.md)
+5. [Asimetrična kriptografija](./vjezbe-sadrzaj/5-asimetricna-kriptografija.md)
 
-<!-- - [Asimetrična kriptografija](./vjezbe-sadrzaj/5-asimetricna-kriptografija.md)
-- [Hashiranje i autentifikacija](./vjezbe-sadrzaj/6-hashiranje-autentifikacija.md)
+<!-- - [Hashiranje i autentifikacija](./vjezbe-sadrzaj/6-hashiranje-autentifikacija.md)
 - [Certifikati i potpisi](./vjezbe-sadrzaj/7-certifikati-potpisi.md)
 - [Sigurna komunikacija](./vjezbe-sadrzaj/8-sigurna-komunikacija.md) -->
 
 ## 🛠️ Praktični zadaci
 
 - [Praktični zadatak 1](./prakticni-zadaci/prakticni-zadatak-1.md)
+- [Praktični zadatak 2](./prakticni-zadaci/prakticni-zadatak-2.md)
