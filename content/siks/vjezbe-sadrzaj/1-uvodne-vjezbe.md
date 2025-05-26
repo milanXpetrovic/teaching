@@ -26,8 +26,6 @@ nav_order: 1
 - **`secrets` modul:** Koristi se za generiranje kriptografski sigurnih nasumičnih vrijednosti (npr. tokeni, ključevi).  
 - **`random` modul:** Koristi se za opće svrhe nasumičnog odabira, ali nije prikladan za sigurnosne primjene jer nije dizajniran za visoku entropiju.
 
----
-
 ## Praktični primjeri
 
 ### Konverzija stringa

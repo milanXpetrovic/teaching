@@ -7,7 +7,7 @@ nav_exclude: false
 
 # Simetrična kriptografija
 
-### 1.1 Koncept simetrične kriptografija
+### Koncept simetrične kriptografija
 
 Simetrična (privatna) kriptografija koristi isti ključ za enkripciju i dekripciju podataka. Ovaj pristup je brz i učinkovit, no zahtijeva sigurno dijeljenje ključa između strana koje komuniciraju.
 
@@ -16,22 +16,21 @@ Simetrična (privatna) kriptografija koristi isti ključ za enkripciju i dekripc
 - **Šifre blokova:** Podaci se dijele u fiksne blokove (npr. 64 ili 128 bita) koji se zatim pojedinačno enkriptiraju. Primjeri su DES i AES.
 - **Šifre toka:** Podaci se enkriptiraju bit po bit ili byte po byte, često koristeći generator pseudonasumičnih brojeva. Idealne su za enkripciju podataka varijabilne duljine.
 
-### 1.3 Data Encryption Standard (DES)
+### Data Encryption Standard (DES)
 
 DES je jedan od prvih široko korištenih algoritama šifre blokova s fiksnom veličinom bloka (64 bita) i ključem od 56 bita. Iako se danas smatra zastarjelim zbog sigurnosnih nedostataka, dobro je upoznati se s njegovim principima.
 
-### 1.4 Advanced Encryption Standard (AES)
+### Advanced Encryption Standard (AES)
 
 AES je suvremeni standard za simetričnu enkripciju. Ključ može biti 128, 192 ili 256 bita, a algoritam radi s blokovima od 128 bita. AES se može koristiti u različitim načinima rada:
+
 - **ECB (Electronic Codebook):** Najjednostavniji način, ali osjetljiv na uzorke u podacima.
 - **CBC (Cipher Block Chaining):** Svaki blok se kombinira s prethodnim, što povećava sigurnost.
 - **CTR (Counter):** Pretvara blokovsku šifru u tok šifru korištenjem brojača.
 
----
+## Praktični primjeri
 
-## 2. Praktični primjeri
-
-### 2.1 DES enkripcija (pycryptodome)
+### DES enkripcija (pycryptodome)
 
 > **Napomena:** Za DES enkripciju koristimo modul `pycryptodome` jer pyca/cryptography ne podržava DES. Modul `pycryptodome` instaliramo naredbom `pip install pycryptodome`
 
@@ -55,7 +54,7 @@ decrypted = unpad(decrypted_padded, DES.block_size)
 print("DES dekriptirana poruka:", decrypted)
 ```
 
-### 2.2 AES enkripcija/dekripcija (pyca/cryptography)
+### AES enkripcija/dekripcija (pyca/cryptography)
 
 Koristit ćemo modul pyca/cryptography za implementaciju AES enkripcije u različitim načinima rada.
 
@@ -166,7 +165,7 @@ print("AES CTR enkriptirano:", ciphertext)
 print("AES CTR dekriptirano:", aes_ctr_decrypt(ciphertext, key))
 ```
 
-## 3. Zadaci za samostalnu vježbu
+## Zadaci za samostalnu vježbu
 
 {: .important-title }
 > Implementacija AES u ECB Načinu

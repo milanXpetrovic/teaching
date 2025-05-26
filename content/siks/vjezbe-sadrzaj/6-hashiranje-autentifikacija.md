@@ -7,11 +7,11 @@ nav_exclude: true
 
 # Hashiranje i autentikacija poruka
 
-### 1.1 Jednosmjerno hashiranje
+### Jednosmjerno hashiranje
 
 Jednosmjerno hashiranje je proces pretvaranja ulaznih podataka u fiksnu duljinu (hash) na način da je gotovo nemoguće rekonstruirati originalne podatke iz hash vrijednosti. Koristi se za provjeru integriteta podataka, pohranu lozinki i druge sigurnosne primjene.
 
-### 1.2 Hash funkcije
+### Hash funkcije
 
 Primjeri hash funkcija:
 
@@ -78,7 +78,7 @@ hmac_hash = generiraj_hmac(tajni_kljuc, poruka)
 print("HMAC (SHA-256):", hmac_hash)
 ```
 
-### 2.3 Salting
+### Salting
 
 Primjer korištenja PBKDF2HMAC iz cryptography.hazmat.primitives.kdf.pbkdf2:
 
@@ -104,7 +104,7 @@ hashed_lozinka = kdf.derive(lozinka)
 print("PBKDF2 hash lozinke:", hashed_lozinka.hex())
 ```
 
-## 3. Zadaci za Samostalnu Vježbu
+## Zadaci za Samostalnu Vježbu
 
 {: .important-title }
 >Hashiranje i Verifikacija Poruke

@@ -5,7 +5,7 @@ nav_order: 8
 nav_exclude: true
 ---
 
-##  Sigurna komunikacija
+## Sigurna komunikacija
 
 ### Sigurna komunikacija (TLS, HTTPS)
 
@@ -69,7 +69,7 @@ conn.close()
 
 Napomena: Za pokretanje primjera potrebno je generirati certifikat i ključ.
 
-###  Secure chat system s simetričnom i asimetričnom enkripcijom
+### Secure chat system s simetričnom i asimetričnom enkripcijom
 
 U ovom primjeru, klijent generira AES ključ za enkripciju poruka, a zatim taj ključ enkriptira koristeći serverov RSA javni ključ. Server dešifrira AES ključ koristeći svoj privatni ključ, a zatim koristi taj AES ključ za dekripciju primljenih poruka.
 
@@ -207,7 +207,7 @@ except Exception as e:
     print("Došlo je do greške u verifikaciji potpisa:", e)
 ```
 
-### 2.4 Osnove steganografije
+### Osnove steganografije
 
 Jednostavan primjer skrivenog upisivanja tekstualne poruke unutar slike pomoću manipulacije najmanje značajnih bitova (LSB). Za ovaj primjer koristit ćemo biblioteku Pillow.
 
@@ -255,7 +255,7 @@ print("Dekodirana poruka:", decode_message("output.png"))
 
 Napomena: Ovaj primjer je pojednostavljen i prikazuje osnovnu tehniku skrivanja podataka unutar slike. Za robusniju implementaciju potrebno je obratiti pozornost na veličinu poruke i manipulaciju većim brojem piksela.
 
-## 3. Zadaci za Samostalnu Vježbu
+## Zadaci za Samostalnu Vježbu
 
 > Secure Chat aplikacija
 >

@@ -7,31 +7,32 @@ nav_exclude: true
 
 # Asimetrična Kriptografija (Javnoključna Kriptografija)
 
-### 1.1 Koncept parova ključeva
+### Koncept parova ključeva
 
 Asimetrična kriptografija temelji se na parovima ključeva:
 
 - **Javni ključ:** Može se slobodno distribuirati i koristi se za enkripciju podataka.
 - **Privatni ključ:** Drži se u tajnosti i koristi se za dekripciju podataka ili digitalno potpisivanje.
 
-### 1.2 RSA algoritam
+### RSA algoritam
 
 RSA je jedan od najpoznatijih asimetričnih algoritama. Ključni koraci uključuju:
+
 - **Generiranje ključeva:** Kreiranje para (javni i privatni) na temelju velikih prostih brojeva.
 - **Enkripcija:** Podaci se enkriptiraju javnim ključem.
 - **Dekripcija:** Samo vlasnik privatnog ključa može dešifrirati podatke.
 
-### 1.3 Diffie-Hellman razmjena ključeva
+### Diffie-Hellman razmjena ključeva
 
 Diffie-Hellman omogućava dvije strane da preko nesigurne veze zajednički izračunaju tajnu koja se zatim može koristiti za simetričnu enkripciju. Svaka strana generira svoj privatni ključ te razmjenom javnih ključeva dolazi do zajedničke tajne.
 
-### 1.4 Osnove eliptične kriptografije (ECC)
+### Osnove eliptične kriptografije (ECC)
 
 Eliptična kriptografija koristi matematička svojstva eliptičnih krivulja za generiranje sigurnih ključeva s manjom duljinom u usporedbi s RSA-om. ECC se često koristi za digitalne potpise i enkripciju u uređajima s ograničenim resursima.
 
-## 2. Praktični primjeri u Pythonu
+## Praktični primjeri u Pythonu
 
-### 2.1 RSA s cryptography
+### RSA s cryptography
 
 ```python
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
@@ -80,7 +81,7 @@ plaintext = priv_key.decrypt(
 print("Desifrirana poruka (cryptography):", plaintext)
 ```
 
-### 2.3 Diffie-Hellman razmjena ključeva
+### Diffie-Hellman razmjena ključeva
 
 ```python
 from cryptography.hazmat.primitives.asymmetric import dh
@@ -101,7 +102,7 @@ print("Zajednička tajna (strana 1):", zajednicka_tajna1.hex())
 print("Zajednička tajna (strana 2):", zajednicka_tajna2.hex())
 ```
 
-### 2.4 Osnove eliptične kriptografije (ECC)
+### Osnove eliptične kriptografije (ECC)
 
 ```python
 from cryptography.hazmat.primitives.asymmetric import ec
@@ -122,7 +123,7 @@ except Exception as e:
 
 ```
 
-## 3. Zadaci za samostalnu vježbu
+## Zadaci za samostalnu vježbu
 
 {: .important-title }
 >Implementacija RSA šifriranja i dešifriranja:

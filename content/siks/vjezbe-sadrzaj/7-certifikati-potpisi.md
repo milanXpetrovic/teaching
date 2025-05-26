@@ -27,7 +27,7 @@ Digitalni potpisi koriste asimetričnu kriptografiju za potvrdu autentičnosti p
 
 Alat **OpenSSL** omogućuje generiranje samopotpisanih certifikata koji se mogu koristiti za razvoj i testiranje sigurnosnih aplikacija.
 
-## 2. Praktični primjeri u Pythonu
+## Praktični primjeri u Pythonu
 
 ### RSA Digitalni potpis s bibliotekom cryptography
 
@@ -68,7 +68,7 @@ except Exception as e:
     print("RSA potpis nije ispravan:", e)
 ```
 
-## 3. Zadaci za samostalnu vježbu
+## Zadaci za samostalnu vježbu
 
 > RSA Digitalni Potpis i Verifikacija:
 >

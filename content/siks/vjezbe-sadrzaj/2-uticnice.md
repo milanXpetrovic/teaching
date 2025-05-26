@@ -28,9 +28,9 @@ Python pruža praktičan i dosljedan API koji se preslikava izravno na sistemske
 
 ---
 
-## 2. Praktični Primjeri
+## Praktični Primjeri
 
-### 2.1 Osnovna komunikacija pomoću utičnica
+### Osnovna komunikacija pomoću utičnica
 
 #### Server (server.py)
 

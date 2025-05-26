@@ -19,9 +19,9 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 
 ---
 
-## 1. Uvod i teorijski pregled
+## Uvod i teorijski pregled
 
-### 1.1 Substitucijski algoritmi
+### Substitucijski algoritmi
 
 **Caesarov algoritam:**
 
@@ -33,7 +33,7 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 - Koristi se ključ (riječ ili niz znakova) čiji se znakovi ciklički primjenjuju kao pomaci.  
 - Pruža veću sigurnost od Caesarove šifre, ali je podložan frekvencijskoj analizi.
 
-### 1.2 Transpozicijski algoritmi
+### Transpozicijski algoritmi
 
 **Rail Fence šifra:**  
 
@@ -45,7 +45,7 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 - Poruka se zapisuje u matricu širine definirane ključem.  
 - Zatim se stupci čitaju u određenom redoslijedu kako bi se dobio šifrirani tekst.
 
-### 1.3 Kripto analiza
+### Kripto analiza
 
 **Frekvencijska analiza:**
 
@@ -59,9 +59,9 @@ Također ćemo se ukratko dotaknuti osnove kriptanalize klasičnih šifri, poput
 
 ---
 
-## 2. Praktični primjeri u Pythonu
+## Praktični primjeri u Pythonu
 
-### 2.1 Caesarov šifriranje
+### Caesarov šifriranje
 
 ```python
 def caesar_encrypt(plaintext, shift):
@@ -89,9 +89,7 @@ print("Sifrirana poruka (pomak =", shift, "):", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
 
----
-
-### 2.2 Vigenèreov šifriranje
+### Vigenèreov šifriranje
 
 ```python
 def vigenere_encrypt(plaintext, key):
@@ -131,7 +129,7 @@ print("Sifrirana poruka:", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
 
-### 2.3 Rail Fence šifriranje
+### Rail Fence šifriranje
 
 ```python
 def rail_fence_encrypt(plaintext, num_rails):
@@ -177,7 +175,7 @@ print("Sifrirana (Rail Fence):", sifrirana)
 print("Desifrirana poruka:", desifrirana)
 ```
 
-## 3. Zadaci za samostalnu vježbu
+## Zadaci za samostalnu vježbu
 
 {: .important-title }
 > Implementacija Caesarove šifre
