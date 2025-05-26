@@ -32,7 +32,7 @@ AES je suvremeni standard za simetričnu enkripciju. Ključ može biti 128, 192 
 
 ### DES enkripcija (pycryptodome)
 
-> **Napomena:** Za DES enkripciju koristimo modul `pycryptodome` jer pyca/cryptography ne podržava DES. Modul `pycryptodome` instaliramo naredbom `pip install pycryptodome`
+**Napomena:** Za DES enkripciju koristimo modul `pycryptodome` jer pyca/cryptography ne podržava DES. Modul `pycryptodome` instaliramo naredbom `pip install pycryptodome`
 
 ```python
 from Crypto.Cipher import DES

@@ -9,19 +9,20 @@ nav_exclude: true
 
 ### Digitalni potpisi i provjera integriteta
 
-Digitalni potpisi koriste asimetričnu kriptografiju za potvrdu autentičnosti poruke ili dokumenta.  
--**Integritet:** Digitalnim potpisom se osigurava da sadržaj poruke nije mijenjan nakon što je potpisan.  
--**Autentičnost:** Potpis potvrđuje identitet pošiljatelja, jer samo on posjeduje privatni ključ potreban za generiranje potpisa.
+Digitalni potpisi koriste asimetričnu kriptografiju za potvrdu autentičnosti poruke ili dokumenta.
+
+- **Integritet:** Digitalnim potpisom se osigurava da sadržaj poruke nije mijenjan nakon što je potpisan.  
+- **Autentičnost:** Potpis potvrđuje identitet pošiljatelja, jer samo on posjeduje privatni ključ potreban za generiranje potpisa.
 
 ### RSA i ECDSA potpisi
 
--**RSA potpisi:** Temelje se na RSA algoritmu, gdje se koristi par ključeva (javni i privatni). Poruka se potpisuje privatnim ključem, a provjera se vrši javnim ključem.
--**ECDSA potpisi:** Koriste eliptične krivulje (npr. SECP256R1) za generiranje digitalnih potpisa. ECC (Eliptic Curve Cryptography) nudi sličnu razinu sigurnosti kao RSA, ali s kraćim ključevima, što je pogodno za uređaje s ograničenim resursima.
+- **RSA potpisi:** Temelje se na RSA algoritmu, gdje se koristi par ključeva (javni i privatni). Poruka se potpisuje privatnim ključem, a provjera se vrši javnim ključem.
+- **ECDSA potpisi:** Koriste eliptične krivulje (npr. SECP256R1) za generiranje digitalnih potpisa. ECC (Eliptic Curve Cryptography) nudi sličnu razinu sigurnosti kao RSA, ali s kraćim ključevima, što je pogodno za uređaje s ograničenim resursima.
 
 ### SSL/TLS i certifikacijska tijela
 
--**SSL/TLS:** Protokoli koji omogućuju siguran prijenos podataka preko interneta. Digitalni certifikati, izdani od strane pouzdanih certifikacijskih tijela (CA), služe za potvrdu identiteta poslužitelja i uspostavu sigurne veze.
--**Certifikati:** Sadrže javni ključ i identitet poslužitelja, te su digitalno potpisani od strane CA. Samopotpisani certifikati mogu se koristiti u testnim okruženjima.
+- **SSL/TLS:** Protokoli koji omogućuju siguran prijenos podataka preko interneta. Digitalni certifikati, izdani od strane pouzdanih certifikacijskih tijela (CA), služe za potvrdu identiteta poslužitelja i uspostavu sigurne veze.
+- **Certifikati:** Sadrže javni ključ i identitet poslužitelja, te su digitalno potpisani od strane CA. Samopotpisani certifikati mogu se koristiti u testnim okruženjima.
 
 ### Generiranje samopotpisanih certifikata
 
