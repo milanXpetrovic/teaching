@@ -17,7 +17,3 @@ Klijent prikazuje primljenu jednokratnu zaporku korisniku (ili ju generira lokal
 Autentifikacija je uspješna samo ako su oba faktora točna – korisničko ime i lozinka, te OTP kod. Komunikacija između klijenta i servera mora se odvijati preko TCP veze, a svi koraci moraju biti jasno ispisani u terminalu korisnika i operatora servera.
 
 Preporučuje se korištenje biblioteka `hmac`, `hashlib`, `time` i po potrebi `base64`, dok je implementacija TOTP algoritma moguća i ručno (na temelju vremenskih intervala i HMAC-SHA1).
-
-## Napomena
-
-Za naprednije korisnike, zadatak se može proširiti dodavanjem vremenskih ograničenja za važenje OTP koda, brojačima neuspjelih pokušaja, ili povezivanjem s datotekom u kojoj se pohranjuju korisnički računi i tajni ključevi.
