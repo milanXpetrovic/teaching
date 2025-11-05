@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Tjedan 3: Potpuna Pretraga i Backtracking

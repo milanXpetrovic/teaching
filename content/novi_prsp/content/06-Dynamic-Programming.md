@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Tjedan 6: Uvod u Dinamičko Programiranje

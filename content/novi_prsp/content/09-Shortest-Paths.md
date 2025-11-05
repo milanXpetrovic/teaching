@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Tjedan 9: Algoritmi za Najkraći Put

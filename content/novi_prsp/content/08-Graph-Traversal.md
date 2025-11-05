@@ -1,5 +1,5 @@
 ---
-
+nav_exclude: true
 ---
 
 # Tjedan 8: Pretraživanje Grafova

@@ -1,3 +1,6 @@
+---
+nav_exclude: true
+---
 
 # Programiranje za Rješavanje Složenih Problema: Tjedan 1 i 2
 

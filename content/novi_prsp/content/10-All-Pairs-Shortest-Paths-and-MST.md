@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Tjedan 10: Najkraći Putevi Svi-Svim i Minimalno Razapinjuće Stablo (MST)

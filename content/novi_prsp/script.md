@@ -1,8 +1,7 @@
-Of course. Based on the two books you've provided, "Introduction to Algorithms, Third Edition" (CLRS) and the "Competitive Programmer's Handbook" (CPH), here is a curriculum for a semester-long course titled "Programming for Solving Complex Problems."
-
-This curriculum is designed for computer science students who have completed introductory programming courses and have a solid grasp of C++ fundamentals. The structure follows a logical progression, starting with foundational concepts and moving toward more advanced, specialized topics, mirroring the structure of competitive programming training.
-
 ---
+nav_exclude: true
+---
+
 
 ### **Course: Programming for Solving Complex Problems**
 

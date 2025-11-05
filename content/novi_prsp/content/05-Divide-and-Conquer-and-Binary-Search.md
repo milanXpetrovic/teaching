@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Podijeli pa Vladaj i Binarno Pretraživanje

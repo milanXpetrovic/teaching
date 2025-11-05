@@ -1,5 +1,5 @@
-
 ---
+nav_exclude: true
 ---
 
 # Tjedan 12: Upiti nad Rasponima (Range Queries)

@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Tjedan 14: Algoritmi za Stringove i Računalna Geometrija

@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 ---
 
 # Teorija Brojeva i Kombinatorika

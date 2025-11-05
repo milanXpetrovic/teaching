@@ -1,6 +1,7 @@
 ---
-
+nav_exclude: true
 ---
+
 
 # Uvod i Osnove
 

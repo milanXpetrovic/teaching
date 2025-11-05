@@ -1,5 +1,5 @@
 ---
-
+nav_exclude: true
 ---
 
 # Tjedan 7: Napredno Dinamičko Programiranje

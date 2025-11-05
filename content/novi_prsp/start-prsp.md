@@ -1,4 +1,8 @@
+---
+nav_exclude: true
+---
 
+# PRSP
 
 - [Week01-Intro-and-Cpp-Essentials.md](../content/Week01-Intro-and-Cpp-Essentials.md)
 - [Week02-Complexity-and-Sorting.md](../content/Week02-Complexity-and-Sorting.md)
