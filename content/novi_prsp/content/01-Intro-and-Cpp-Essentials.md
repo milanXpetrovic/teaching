@@ -9,6 +9,9 @@ nav_enabled: false
 
 # Uvod i osnove 1
 
+{: .toc }
+
+
 ## Pregled
 
 Dobro došli na kolegij "Programiranje za rješavanje složenih problema"! Ovaj tjedan postavit ćemo temelje za ostatak semestra. Naš cilj je razumjeti što je natjecateljsko programiranje, zašto je C++ dominantan jezik u tom području te kako postaviti brzo i efikasno okruženje. Također ćemo ponoviti i usvojiti ključne C++ konstrukte i strukture podataka iz Standardne Biblioteke Predložaka (STL) koje su neophodne za rješavanje problema.
