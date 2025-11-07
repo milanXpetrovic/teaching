@@ -7,7 +7,7 @@ has_toc: true
 nav_enabled: false
 ---
 
-# Uvod i osnove
+# Uvod i osnove 1
 
 ## Pregled
 
