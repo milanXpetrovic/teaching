@@ -25,4 +25,3 @@ has_toc: false
 - [13-Number-Theory-and-Combinatorics.md](../content/13-Number-Theory-and-Combinatorics.md)
 - [14-String-Algorithms-and-Geometry.md](../content/14-String-Algorithms-and-Geometry.md)
 - [15-Final-Review-and-Contest-Strategy.md](../content/15-Final-Review-and-Contest-Strategy.md)
-

@@ -3,13 +3,14 @@ nav_exclude: true
 layout: default
 parent: PRSP
 nav_order: 1
+has_toc: false
 ---
 
 # Uvod i osnove
 
 ## Pregled
 
-Dobrodošli na kolegij "Programiranje za rješavanje složenih problema"! Ovaj tjedan postavit ćemo temelje za ostatak semestra. Naš cilj je razumjeti što je natjecateljsko programiranje, zašto je C++ dominantan jezik u tom području te kako postaviti brzo i efikasno okruženje. Također ćemo ponoviti i usvojiti ključne C++ konstrukte i strukture podataka iz Standardne Biblioteke Predložaka (STL) koje su neophodne za rješavanje problema.
+Dobro došli na kolegij "Programiranje za rješavanje složenih problema"! Ovaj tjedan postavit ćemo temelje za ostatak semestra. Naš cilj je razumjeti što je natjecateljsko programiranje, zašto je C++ dominantan jezik u tom području te kako postaviti brzo i efikasno okruženje. Također ćemo ponoviti i usvojiti ključne C++ konstrukte i strukture podataka iz Standardne Biblioteke Predložaka (STL) koje su neophodne za rješavanje problema.
 
 Na ovom kolegiju dotičemo se i natjecateljskog programiranja. Natjecateljsko programiranje je misaoni sport u kojem sudionici rješavaju algoritamske probleme unutar zadanih vremenskih i memorijskih ograničenja. Rješavanje problema sastoji se od dva ključna dijela:
 
@@ -28,11 +29,11 @@ Iako se problemi mogu rješavati u raznim jezicima (Python, Java), C++ je daleko
 
 ## Postavljanje efikasnog C++ okruženja
 
-#### Kompajler
+### Kompajler
 
 Koristit ćemo `g++` kompajler, koji je standard na većini natjecateljskih platformi. Na Windowsima se može instalirati putem MinGW-a ili WSL-a (Windows Subsystem for Linux). Na Linuxu i macOS-u je obično već dostupan.
 
-#### Osnovni predložak (template)
+### Osnovni predložak (template)
 
 Većina natjecatelja koristi osnovni predložak koda kako bi ubrzali pisanje. Naš početni predložak izgledat će ovako:
 
@@ -62,7 +63,7 @@ int main(){
 }
 ```
 
-#### Kompajliranje koda
+### Kompajliranje koda
 
 Kod kompajliramo koristeći naredbu u terminalu:
 
@@ -75,7 +76,7 @@ Kod kompajliramo koristeći naredbu u terminalu:
 
 ## Osnove ulaza i izlaza (I/O)
 
-#### Brzi I/O
+### Brzi I/O
 
 Standardni `cin` i `cout` mogu biti spori. Na početku `main` funkcije uvijek dodajte sljedeće linije za ubrzanje:
 
@@ -86,7 +87,7 @@ cin.tie(NULL);
 
 Također, umjesto `endl` koristite `'\n'` za ispis novog reda, jer `endl` dodatno prazni buffer, što usporava program.
 
-#### Čitanje ulaza
+### Čitanje ulaza
 
 Uobičajeni način čitanja podataka:
 
@@ -112,7 +113,7 @@ while (cin >> x) {
 }
 ```
 
-#### Rad s datotekama
+### Rad s datotekama
 
 Za probleme gdje je ulaz/izlaz u datotekama (npr. `input.txt`, `output.txt`), možete preusmjeriti standardne streamove:
 
@@ -127,7 +128,7 @@ Ove linije stavite na početak `main` funkcije, a ostatak koda pišete kao da ko
 
 STL je vaš najvažniji alat. A u nastavku su navedene osnove.
 
-#### `vector` (Dinamičko polje)
+### `vector` (Dinamičko polje)
 
 `vector` je dinamičko polje koje automatski mijenja veličinu.
 
@@ -148,7 +149,7 @@ cout << '\n';
 cout << v.size() << '\n'; // Ispisuje 2
 ```
 
-#### `string`
+### `string`
 
 `string` je sličan `vector<char>`, ali s dodatnim funkcionalnostima.
 
@@ -159,7 +160,7 @@ string s = a + b; // s = "testiranje"
 cout << s.substr(2, 4); // Ispisuje "stir" (podstring od indeksa 2, duljine 4)
 ```
 
-#### `pair` i `tuple`
+### `pair` i `tuple`
 
 `pair` sprema dva elementa (mogu biti različitih tipova), a `tuple` sprema proizvoljan broj elemenata.
 
@@ -171,7 +172,7 @@ tuple<int, char, double> t = {5, 'a', 3.14};
 cout << get<0>(t) << '\n'; // 5
 ```
 
-#### `sort` algoritam
+### `sort` algoritam
 
 Funkcija `sort` sortira elemente u rasponu. Za `vector` se koristi ovako:
 
@@ -196,5 +197,8 @@ sort(arr, arr + n);
 3. **Sortiranje parova:** Napišite program koji čita `n` parova brojeva, sortira ih primarno po prvom elementu, a sekundarno po drugom, te ispisuje sortirane parove.
 4. **Manipulacija stringovima:** Riješite zadatak koji zahtijeva čitanje stringa, pronalaženje podstringa i ispis rezultata.
 5. **Vježba na online platformi:** Riješite nekoliko jednostavnih implementacijskih zadataka na platformi poput Codeforces ili CSES kako biste se navikli na format zadataka.
+    * [Codeforces: Watermelon](https://codeforces.com/problemset/problem/4/A)
+    * [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
+    * [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
 
 ---
