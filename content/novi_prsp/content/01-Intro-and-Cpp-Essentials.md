@@ -3,7 +3,7 @@ nav_exclude: true
 layout: default
 parent: PRSP
 nav_order: 1
-has_toc: false
+has_toc: true
 ---
 
 # Uvod i osnove
@@ -73,6 +73,60 @@ Kod kompajliramo koristeći naredbu u terminalu:
 * `-O2`: Optimizira kod za brzinu.
 * `-Wall`: Prikazuje sva upozorenja, što je korisno za otkrivanje potencijalnih grešaka.
 * `-o solution`: Ime izvršne datoteke.
+
+Naravno — evo uređene i proširene verzije u **Markdown** formatu, spremne da ubaciš u skriptu za studente:
+
+---
+
+#### Korištenje aliasa za brže kompajliranje
+
+Kod natjecateljskog programiranja ili učestalog testiranja koda, praktično je definirati **alias** – prečac koji zamjenjuje dužu naredbu za kompajliranje.
+
+Umjesto da svaki put pišemo:
+
+```bash
+g++ -std=c++17 -O2 -Wall solution.cpp -o s
+```
+
+možemo definirati `alias` u terminalu:
+
+```bash
+alias gpp='g++ -std=c++17 -O2 -Wall solution.cpp -o solution'
+```
+
+Nakon što se alias definira, dovoljno je jednostavno pokrenuti:
+
+```bash
+gpp
+```
+
+što će automatski kompajlirati `solution.cpp` u izvršnu datoteku `s`, koju zatim pokrećemo s:
+
+```bash
+./solution
+```
+
+**Univerzalniji alias:**
+
+Ako često mijenjate ime datoteke, možete napraviti fleksibilniji alias koji prima argumente:
+
+```bash
+alias gpp='g++ -std=c++17 -O2 -Wall -o s'
+```
+
+Tada kompajlirate bilo koju datoteku ovako:
+
+```bash
+gpp main.cpp
+```
+
+ili
+
+```bash
+gpp zadatak1.cpp
+```
+
+---
 
 ## Osnove ulaza i izlaza (I/O)
 
