@@ -1,9 +1,10 @@
 ---
 nav_exclude: true
-layout: minimal 
 parent: PRSP
+layout: minimal 
 nav_order: 1
 has_toc: true
+nav_enabled: false
 ---
 
 # Uvod i osnove
