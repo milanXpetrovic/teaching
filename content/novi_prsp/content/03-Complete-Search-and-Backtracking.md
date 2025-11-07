@@ -20,8 +20,6 @@ nav_order: 3
     * [Problem 3: N-kraljica problem (Backtracking)](#problem-3-n-kraljica-problem-backtracking)
 3. [Zadaci za Vježbu](#zadaci-za-vježbu)
 
----
-
 ### Preporučena literatura
 
 Za bolje razumijevanje tema obrađenih u ovoj skripti, preporučuje se sljedeća literatura:
@@ -373,11 +371,11 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 ![](./queen-chessboard.png)
 
 **Ulaz**
-- Jedan cijeli broj `n` (1 ≤ n ≤ 15), koji predstavlja veličinu šahovske ploče.
+* Jedan cijeli broj `n` (1 ≤ n ≤ 15), koji predstavlja veličinu šahovske ploče.
 
 **Izlaz**
 
-- Jedan cijeli broj, koji predstavlja broj mogućnosti za postavljanje `n` kraljica na šahovskoj ploči.
+* Jedan cijeli broj, koji predstavlja broj mogućnosti za postavljanje `n` kraljica na šahovskoj ploči.
 
 ### Primjer 1
 
@@ -407,7 +405,6 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 10
 ```
 
-
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
 * **Apple Division:** Zadan je skup težina. Podijeli ga na dva podskupa tako da je razlika njihovih zbrojeva minimalna. (Klasičan problem koji se rješava generiranjem podskupova).
@@ -420,6 +417,6 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 * **Cut Ribbon** (Problem 189A): Zadan je komad vrpce duljine `n` i tri moguće duljine `a, b, c` na koje se vrpca može rezati. Koji je maksimalan broj komada koje možemo dobiti? (Rješivo jednostavnom rekurzijom/potpunom pretragom).
 * **Beautiful Sets of Points** (Problem 268B): Iako se može riješiti promatranjem uzorka, ovaj zadatak se može modelirati kao backtracking problem za manje `n`.
 
-- [Chessboard and Queens](https://cses.fi/problemset/task/1624)
-- [Grid Paths](https://cses.fi/problemset/task/1625)
-- [Sail](https://codeforces.com/problemset/problem/298/B)
+* [Chessboard and Queens](https://cses.fi/problemset/task/1624)
+* [Grid Paths](https://cses.fi/problemset/task/1625)
+* [Sail](https://codeforces.com/problemset/problem/298/B)
