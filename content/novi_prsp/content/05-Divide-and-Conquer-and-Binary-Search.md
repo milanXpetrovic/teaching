@@ -5,38 +5,44 @@ nav_exclude: true
 # Podijeli pa Vladaj i Binarno Pretraživanje
 
 ## Sadržaj
-1.  [Uvod i Motivacija](#uvod-i-motivacija)
-    *   [Princip "Podijeli pa Vladaj"](#princip-podijeli-pa-vladaj)
-    *   [Binarno Pretraživanje kao Specijalni Slučaj](#binarno-pretraživanje-kao-specijalni-slučaj)
-    *   [Binarno Pretraživanje po Rješenju](#binarno-pretraživanje-po-rješenju)
-    *   [Preporučena Literatura](#preporučena-literatura)
-2.  [Primjeri Zadataka i Objašnjenja](#primjeri-zadataka-i-objašnjenja)
-    *   [Problem 1: Maksimalni zbroj podniza (Divide and Conquer pristup)](#problem-1-maksimalni-zbroj-podniza-divide-and-conquer-pristup)
-    *   [Problem 2: Pronalaženje fiksne točke](#problem-2-pronalaženje-fiksne-točke)
-    *   [Problem 3: Agresivne krave (Binarno pretraživanje po rješenju)](#problem-3-agresivne-krave-binarno-pretraživanje-po-rješenju)
-3.  [Zadaci za Vježbu](#zadaci-za-vježbu)
+
+1. [Uvod i Motivacija](#uvod-i-motivacija)
+    * [Princip "Podijeli pa Vladaj"](#princip-podijeli-pa-vladaj)
+    * [Binarno Pretraživanje kao Specijalni Slučaj](#binarno-pretraživanje-kao-specijalni-slučaj)
+    * [Binarno Pretraživanje po Rješenju](#binarno-pretraživanje-po-rješenju)
+    * [Preporučena Literatura](#preporučena-literatura)
+2. [Primjeri Zadataka i Objašnjenja](#primjeri-zadataka-i-objašnjenja)
+    * [Problem 1: Maksimalni zbroj podniza (Divide and Conquer pristup)](#problem-1-maksimalni-zbroj-podniza-divide-and-conquer-pristup)
+    * [Problem 2: Pronalaženje fiksne točke](#problem-2-pronalaženje-fiksne-točke)
+    * [Problem 3: Agresivne krave (Binarno pretraživanje po rješenju)](#problem-3-agresivne-krave-binarno-pretraživanje-po-rješenju)
+3. [Zadaci za Vježbu](#zadaci-za-vježbu)
 
 ---
 
 ## Uvod i Motivacija
 
 ### Princip "Podijeli pa Vladaj"
+
 "Podijeli pa vladaj" (engl. *Divide and Conquer*) je moćna algoritamska paradigma koja rješava problem rekurzivno, slijedeći tri koraka:
-1.  **Podijeli (Divide):** Problem se dijeli na jedan ili više manjih podproblema istog tipa.
-2.  **Vladaj (Conquer):** Podproblemi se rješavaju rekurzivno. Ako su podproblemi dovoljno mali, rješavaju se direktno.
-3.  **Kombiniraj (Combine):** Rješenja podproblema se spajaju kako bi se dobilo rješenje originalnog problema.
+
+1. **Podijeli (Divide):** Problem se dijeli na jedan ili više manjih podproblema istog tipa.
+2. **Vladaj (Conquer):** Podproblemi se rješavaju rekurzivno. Ako su podproblemi dovoljno mali, rješavaju se direktno.
+3. **Kombiniraj (Combine):** Rješenja podproblema se spajaju kako bi se dobilo rješenje originalnog problema.
 
 Primjer koji smo već vidjeli je Merge Sort, gdje se niz dijeli na dvije polovice, svaka se rekurzivno sortira, a zatim se sortirane polovice spajaju. Algoritmi temeljeni na ovoj paradigmi često imaju složenost oblika `O(n log n)`.
 
 ### Binarno Pretraživanje kao Specijalni Slučaj
+
 **Binarno pretraživanje** je savršen i vrlo jednostavan primjer "podijeli pa vladaj" tehnike:
-1.  **Podijeli:** Pronađi srednji element sortiranog niza. Time se niz dijeli na dvije polovice.
-2.  **Vladaj:** Usporedi traženi element sa srednjim. Odluči se za jednu od polovica (lijevu ili desnu) u kojoj se element može nalaziti i rekurzivno nastavi pretragu samo u toj polovici.
-3.  **Kombiniraj:** Nema koraka kombiniranja; rješenje podproblema je rješenje cijelog problema.
+
+1. **Podijeli:** Pronađi srednji element sortiranog niza. Time se niz dijeli na dvije polovice.
+2. **Vladaj:** Usporedi traženi element sa srednjim. Odluči se za jednu od polovica (lijevu ili desnu) u kojoj se element može nalaziti i rekurzivno nastavi pretragu samo u toj polovici.
+3. **Kombiniraj:** Nema koraka kombiniranja; rješenje podproblema je rješenje cijelog problema.
 
 Zbog toga što u svakom koraku odbacujemo polovicu preostalih elemenata, binarno pretraživanje ima izuzetno efikasnu složenost **O(log n)**.
 
 ### Binarno Pretraživanje po Rješenju
+
 Ovo je jedna od najmoćnijih tehnika u natjecateljskom programiranju. Primjenjuje se na optimizacijske probleme gdje tražimo **minimalnu** ili **maksimalnu** vrijednost koja zadovoljava određeni uvjet.
 
 **Ideja:** Umjesto da direktno tražimo optimalnu vrijednost, transformiramo problem u jednostavniji, **odlučivački** problem: "Je li moguće postići rješenje s vrijednošću barem/najviše `x`?".
@@ -44,28 +50,32 @@ Ovo je jedna od najmoćnijih tehnika u natjecateljskom programiranju. Primjenjuj
 Ako za problem vrijedi svojstvo **monotonosti** (ako je rješenje `x` moguće, onda je moguće i svako rješenje manje od `x` za maksimizacijske probleme, ili veće od `x` za minimizacijske), tada možemo binarno pretraživati prostor mogućih rješenja kako bismo pronašli optimalnu vrijednost `x`.
 
 ### Preporučena Literatura
-*   **CPH (Competitive Programmer's Handbook):**
-    *   Poglavlje 3.3: *Binary search*
-*   **CLRS (Introduction to Algorithms):**
-    *   Poglavlje 4: *Divide-and-Conquer* (posebno 4.1: Maximum-subarray problem)
-    *   Poglavlje 2.3: *Designing algorithms* (uvod u Merge Sort kao D&C)
+
+* **CPH (Competitive Programmer's Handbook):**
+  * Poglavlje 3.3: *Binary search*
+* **CLRS (Introduction to Algorithms):**
+  * Poglavlje 4: *Divide-and-Conquer* (posebno 4.1: Maximum-subarray problem)
+  * Poglavlje 2.3: *Designing algorithms* (uvod u Merge Sort kao D&C)
 
 ---
 
 ## Primjeri Zadataka i Objašnjenja
 
 ### Problem 1: Maksimalni zbroj podniza (Divide and Conquer pristup)
+
 Iako smo ovaj problem riješili u O(n) vremenu koristeći Kadaneov algoritam, on je također klasičan primjer "podijeli pa vladaj" pristupa.
 
 **Zadatak:** Zadan je niz od `n` brojeva. Pronađi podniz čiji je zbroj elemenata najveći.
 
 **Algoritam (O(n log n)):**
-1.  **Podijeli:** Podijeli niz na dvije polovice, lijevu i desnu.
-2.  **Vladaj:** Rekurzivno pronađi maksimalni zbroj podniza u lijevoj polovici (`max_left`) i u desnoj polovici (`max_right`).
-3.  **Kombiniraj:** Pronađi maksimalni zbroj podniza koji prelazi sredinu (`max_crossing`). To se radi tako da se pronađe maksimalni zbroj koji završava na sredini i ide ulijevo, te maksimalni zbroj koji počinje od sredine i ide udesno. Njihov zbroj je `max_crossing`.
-4.  Rješenje je `max(max_left, max_right, max_crossing)`.
+
+1. **Podijeli:** Podijeli niz na dvije polovice, lijevu i desnu.
+2. **Vladaj:** Rekurzivno pronađi maksimalni zbroj podniza u lijevoj polovici (`max_left`) i u desnoj polovici (`max_right`).
+3. **Kombiniraj:** Pronađi maksimalni zbroj podniza koji prelazi sredinu (`max_crossing`). To se radi tako da se pronađe maksimalni zbroj koji završava na sredini i ide ulijevo, te maksimalni zbroj koji počinje od sredine i ide udesno. Njihov zbroj je `max_crossing`.
+4. Rješenje je `max(max_left, max_right, max_crossing)`.
 
 **Kod (samo ključni dio):**
+
 ```cpp
 // Funkcija za pronalaženje max zbroja koji prelazi sredinu
 long long maxCrossingSum(const vector<int>& arr, int l, int m, int r) {
@@ -131,6 +141,7 @@ while (l <= r) {
     }
 }
 ```
+
 **Složenost:** Klasično binarno pretraživanje, **O(log n)**.
 
 ### Problem 3: Agresivne krave (Binarno pretraživanje po rješenju)
@@ -146,19 +157,22 @@ Optimalno je postaviti krave na pozicije `1, 4, 8` ili `1, 4, 9`. Minimalna udal
 
 **`check(d)` funkcija:**
 Ova funkcija provjerava je li moguće smjestiti `c` krava s minimalnom udaljenošću `d`. Ovo se može provjeriti pohlepno:
-1.  Postavi prvu kravu u prvu štalu.
-2.  Iteriraj kroz preostale štale. Postavi sljedeću kravu u prvu štalu koja je na udaljenosti barem `d` od prethodno postavljene krave.
-3.  Ako uspijemo postaviti svih `c` krava, vrati `true`. Inače `false`.
+
+1. Postavi prvu kravu u prvu štalu.
+2. Iteriraj kroz preostale štale. Postavi sljedeću kravu u prvu štalu koja je na udaljenosti barem `d` od prethodno postavljene krave.
+3. Ako uspijemo postaviti svih `c` krava, vrati `true`. Inače `false`.
 
 **Algoritam:**
-1.  Sortiraj pozicije štala.
-2.  Definiraj prostor pretrage za udaljenost `d`, npr. od `0` do `10^9`.
-3.  Binarno pretražuj taj prostor:
-    *   Za srednju vrijednost `mid`, pozovi `check(mid)`.
-    *   Ako je `check(mid)` `true`, znači da je udaljenost `mid` moguća. Možda postoji i veća, pa tražimo u desnoj polovici: `l = mid + 1`.
-    *   Ako je `check(mid)` `false`, udaljenost `mid` nije moguća. Moramo smanjiti udaljenost: `r = mid - 1`.
+
+1. Sortiraj pozicije štala.
+2. Definiraj prostor pretrage za udaljenost `d`, npr. od `0` do `10^9`.
+3. Binarno pretražuj taj prostor:
+    * Za srednju vrijednost `mid`, pozovi `check(mid)`.
+    * Ako je `check(mid)` `true`, znači da je udaljenost `mid` moguća. Možda postoji i veća, pa tražimo u desnoj polovici: `l = mid + 1`.
+    * Ako je `check(mid)` `false`, udaljenost `mid` nije moguća. Moramo smanjiti udaljenost: `r = mid - 1`.
 
 **Kod:**
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -200,6 +214,7 @@ int main() {
     return 0;
 }
 ```
+
 **Složenost:** Sortiranje je O(n log n). Binarno pretraživanje radi O(log R) iteracija (gdje je R raspon udaljenosti), a `check` funkcija traje O(n). Ukupna složenost je **O(n log n + n log R)**.
 
 ---
@@ -208,11 +223,11 @@ int main() {
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-*   **Sum of Two Values:** Riješite problem koristeći sortiranje i binarno pretraživanje za svaki element (O(n log n)). Zatim usporedite s rješenjem koje koristi dva pokazivača.
-*   **Factory Machines:** Klasičan problem za binarno pretraživanje po rješenju. "Rješenje" je vrijeme. Funkcija `check(t)` provjerava koliko proizvoda se može napraviti u vremenu `t`.
-*   **Towers:** Iako se rješava pohlepno, razmislite kako binarno pretraživanje (`upper_bound`) može pomoći u implementaciji pohlepne strategije.
+* **Sum of Two Values:** Riješite problem koristeći sortiranje i binarno pretraživanje za svaki element (O(n log n)). Zatim usporedite s rješenjem koje koristi dva pokazivača.
+* **Factory Machines:** Klasičan problem za binarno pretraživanje po rješenju. "Rješenje" je vrijeme. Funkcija `check(t)` provjerava koliko proizvoda se može napraviti u vremenu `t`.
+* **Towers:** Iako se rješava pohlepno, razmislite kako binarno pretraživanje (`upper_bound`) može pomoći u implementaciji pohlepne strategije.
 
 ### Codeforces
 
-*   **Hamburgers** (Problem 371B): Odličan zadatak za binarno pretraživanje po rješenju. "Rješenje" je broj hamburgera. `check(k)` funkcija izračunava koliko novca je potrebno za `k` hamburgera.
-*   **Pipeline** (Problem 287B): Još jedan dobar problem za binarno pretraživanje po rješenju. `check` funkcija je jednostavan zbroj.
+* **Hamburgers** (Problem 371B): Odličan zadatak za binarno pretraživanje po rješenju. "Rješenje" je broj hamburgera. `check(k)` funkcija izračunava koliko novca je potrebno za `k` hamburgera.
+* **Pipeline** (Problem 287B): Još jedan dobar problem za binarno pretraživanje po rješenju. `check` funkcija je jednostavan zbroj.

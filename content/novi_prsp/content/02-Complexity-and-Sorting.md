@@ -1,20 +1,15 @@
 ---
 nav_exclude: true
+parent: PRSP
+layout: default 
+nav_order: 2
 ---
 
-# Programiranje za Rješavanje Složenih Problema: Tjedan 1 i 2
+# Analiza složenosti i Sortiranje
 
 ## Sadržaj
 
-* [**Tjedan 1: Uvod u Natjecateljsko Programiranje i Osnove C++-a**](#tjedan-1-uvod-u-natjecateljsko-programiranje-i-osnove-c-a)
-  * [Što je Natjecateljsko Programiranje?](#što-je-natjecateljsko-programiranje)
-  * [C++ kao Jezik Izbora](#c-kao-jezik-izbora)
-  * [Postavljanje Efikasnog C++ Okruženja](#postavljanje-efikasnog-c-okruženja)
-  * [Osnove Ulaza i Izlaza (I/O)](#osnove-ulaza-i-izlaza-io)
-  * [Osnovne Strukture Podataka (STL)](#osnovne-strukture-podataka-stl)
-  * [Zadaci za Vježbu (Tjedan 1)](#zadaci-za-vježbu-tjedan-1)
-
-* [**Tjedan 2: Analiza Složenosti i Sortiranje**](#tjedan-2-analiza-složenosti-i-sortiranje)
+* [**Tjedan 2: Analiza Složenosti i Sortiranje**](#analiza-složenosti-i-sortiranje)
   * [Uvod i Motivacija](#uvod-i-motivacija)
   * [Primjeri Zadataka i Objašnjenja](#primjeri-zadataka-i-objašnjenja)
     * [Problem 1: Broj različitih elemenata](#problem-1-broj-različitih-elemenata)
@@ -23,161 +18,23 @@ nav_exclude: true
     * [Problem 4: Maksimalni zbroj podniza (Maximum Subarray Sum)](#problem-4-maksimalni-zbroj-podniza-maximum-subarray-sum)
   * [Zadaci za Vježbu (Tjedan 2)](#zadaci-za-vježbu-tjedan-2)
 
----
+## Uvod i Motivacija
 
-## Tjedan 1: Uvod u Natjecateljsko Programiranje i Osnove C++-a
-
-### Što je Natjecateljsko Programiranje?
-
-Natjecateljsko programiranje je misaoni sport u kojem sudionici rješavaju algoritamske probleme unutar zadanih vremenskih i memorijskih ograničenja. Rješavanje problema sastoji se od dva ključna dijela:
-
-1. **Dizajn algoritma:** Analiza problema, prepoznavanje poznatih struktura i osmišljavanje rješenja koje je **točno** i **efikasno**.
-2. **Implementacija algoritma:** Pisanje čistog, sažetog i ispravnog koda koji uspješno prolazi sve testne primjere unutar zadanih resursa.
-
-Za razliku od tradicionalnog softverskog inženjerstva, programi su obično kratki (do stotinjak linija koda), ne zahtijevaju dugoročno održavanje, a fokus je na performansama i brzini implementacije.
-
-### C++ kao Jezik Izbora
-
-Iako se problemi mogu rješavati u raznim jezicima (Python, Java), C++ je daleko najpopularniji izbor u natjecateljskom programiranju iz nekoliko razloga:
-
-* **Performanse:** C++ je izuzetno brz jezik, što je ključno kada se programi izvršavaju na velikim ulaznim podacima unutar strogih vremenskih ograničenja (obično 1-2 sekunde).
-* **Standardna Biblioteka Predložaka (STL):** C++ nudi moćnu biblioteku gotovih struktura podataka (poput dinamičkih polja, skupova, mapa) i algoritama (sortiranje, pretraživanje) koje drastično ubrzavaju implementaciju.
-* **Kontrola nad memorijom:** Omogućuje precizno upravljanje memorijom, što je važno za probleme s ograničenom memorijom.
-
-### Postavljanje Efikasnog C++ Okruženja
-
-#### Kompajler
-
-Koristit ćemo `g++` kompajler, koji je standard na većini natjecateljskih platformi. Na Windowsima se može instalirati putem MinGW-a ili WSL-a (Windows Subsystem for Linux). Na Linuxu i macOS-u je obično već dostupan.
-
-#### Osnovni Predložak (Template)
-
-Većina natjecatelja koristi osnovni predložak koda kako bi ubrzali pisanje. Naš početni predložak izgledat će ovako:
-
-```cpp
-#include <bits/stdc++.h> // Uključuje sve standardne biblioteke (samo g++)
-
-using namespace std;
-
-int main() {
-    // Brzi I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    // Rješenje zadatka dolazi ovdje
-
-    return 0;
-}
-```
-
-#### Kompajliranje koda
-
-Kod kompajliramo koristeći naredbu u terminalu:
-`g++ -std=c++11 -O2 -Wall solution.cpp -o solution`
-
-* `-std=c++11`: Koristi C++11 standard (ili noviji, npr. `c++17`).
-* `-O2`: Optimizira kod za brzinu.
-* `-Wall`: Prikazuje sva upozorenja, što je korisno za otkrivanje potencijalnih grešaka.
-* `-o solution`: Ime izvršne datoteke.
-
-### Osnove Ulaza i Izlaza (I/O)
-
-Standardni `cin` i `cout` mogu biti spori. Na početku `main` funkcije uvijek dodajte linije za ubrzanje (kao u predlošku). Također, umjesto `endl` koristite `'\n'` za ispis novog reda.
-
-#### Čitanje Ulaza
-
-Uobičajeni način čitanja podataka:
-
-```cpp
-int a, b;
-string s;
-cin >> a >> b >> s; // Čita "10 20 rijec"
-```
-
-Za čitanje cijele linije, uključujući razmake:
-
-```cpp
-string line;
-getline(cin, line);
-```
-
-### Osnovne Strukture Podataka (STL)
-
-STL je vaš najvažniji alat. Ovaj tjedan fokusiramo se na najosnovnije.
-
-#### `vector` (Dinamičko polje)
-
-```cpp
-vector<int> v;
-v.push_back(5); // Dodaje element na kraj:
-v.push_back(2); //
-
-cout << v; // Ispisuje 5
-
-// Iteracija kroz vektor
-for (int x : v) {
-    cout << x << " ";
-}
-cout << '\n';
-```
-
-#### `string`
-
-```cpp
-string a = "test";
-string b = "iranje";
-string s = a + b; // s = "testiranje"
-cout << s.substr(2, 4); // Ispisuje "stir" (podstring od indeksa 2, duljine 4)
-```
-
-#### `pair` i `tuple`
-
-```cpp
-pair<int, string> p = {1, "rijec"};
-cout << p.first << " " << p.second << '\n'; // 1 rijec
-
-tuple<int, char, double> t = {5, 'a', 3.14};
-cout << get<0>(t) << '\n'; // 5
-```
-
-#### `sort` algoritam
-
-Funkcija `sort` sortira elemente u rasponu. Za `vector` se koristi ovako:
-
-```cpp
-vector<int> v = {4, 2, 5, 3, 5, 8, 3};
-sort(v.begin(), v.end()); // v sada sadrži
-```
-
-### Zadaci za Vježbu (Tjedan 1)
-
-1. **Postavite Svoje Okruženje:** Instalirajte g++ kompajler i odaberite editor (npr. VS Code s C++ ekstenzijama). Napravite svoj osnovni predložak koda.
-2. **Jednostavan Ulaz/Izlaz:** Riješite zadatak koji zahtijeva čitanje nekoliko brojeva i stringova, izvođenje jednostavne matematičke operacije i ispis rezultata.
-3. **Sortiranje Parova:** Napišite program koji čita `n` parova brojeva, sortira ih primarno po prvom elementu, a sekundarno po drugom, te ispisuje sortirane parove.
-4. **Manipulacija Stringovima:** Riješite zadatak koji zahtijeva čitanje stringa, pronalaženje podstringa i ispis rezultata.
-5. **Vježba na Online Judgeu:** Riješite nekoliko jednostavnih "ad-hoc" ili implementacijskih zadataka na platformi poput Codeforces (npr. Div2 A/B razina) kako biste se navikli na format natjecanja.
-
----
-
-## Tjedan 2: Analiza Složenosti i Sortiranje
-
-### Uvod i Motivacija
-
-#### Zašto je brzina važna?
+**Zašto je brzina važna?**
 
 U natjecateljskom programiranju, rješenje nije dovoljno samo ako je točno; ono mora biti i **efikasno**. Programi se testiraju na skupu ulaznih podataka, od kojih su neki vrlo veliki. Standardno vremensko ograničenje je 1-2 sekunde. Ako je vaš algoritam prespor, neće proći sve testne primjere.
 
-#### Big O Notacija: Mjera Efikasnosti
+## Big O notacija: mjera efikasnosti
 
 **Vremenska složenost** (ili Big O notacija) opisuje kako se vrijeme izvršavanja algoritma mijenja s porastom veličine ulaza (`n`). Ona nam omogućuje da procijenimo efikasnost algoritma bez da ga moramo implementirati i testirati.
 
 Najčešće složenosti: **O(1)**, **O(log n)**, **O(n)**, **O(n log n)**, **O(n²)**, **O(2^n)**, **O(n!)**.
 
-#### Sortiranje kao Temeljni Alat
+## Sortiranje kao temeljni alat
 
 Sortiranje je jedan od najvažnijih alata. Mnogi složeni problemi postaju trivijalni ako su ulazni podaci sortirani. U C++-u, koristimo `std::sort` funkciju, koja ima prosječnu složenost O(n log n).
 
-#### Preporučena Literatura
+## Preporučena Literatura
 
 * **CPH (Competitive Programmer's Handbook):**
   * Poglavlje 2: *Time complexity*
@@ -188,7 +45,6 @@ Sortiranje je jedan od najvažnijih alata. Mnogi složeni problemi postaju trivi
   * Poglavlje 7: *Quicksort*
   * Poglavlje 8: *Sorting in Linear Time* (Donja granica za sortiranje usporedbom)
 
----
 
 ### Primjeri Zadataka i Objašnjenja
 

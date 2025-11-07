@@ -5,33 +5,37 @@ nav_exclude: true
 # Tjedan 8: Pretraživanje Grafova
 
 ## Sadržaj
-1.  [Uvod i Motivacija](#uvod-i-motivacija)
-    *   [Modeliranje Problema Grafovima](#modeliranje-problema-grafovima)
-    *   [Strukture za Reprezentaciju Grafa](#strukture-za-reprezentaciju-grafa)
-    *   [DFS vs. BFS: Dvije Osnovne Strategije](#dfs-vs-bfs-dvije-osnovne-strategije)
-    *   [Preporučena Literatura](#preporučena-literatura)
-2.  [Primjeri Zadataka i Objašnjenja](#primjeri-zadataka-i-objašnjenja)
-    *   [Problem 1: Najkraći put u labirintu (BFS)](#problem-1-najkraći-put-u-labirintu-bfs)
-    *   [Problem 2: Brojanje povezanih komponenata (DFS)](#problem-2-brojanje-povezanih-komponenata-dfs)
-    *   [Problem 3: Detekcija ciklusa (DFS)](#problem-3-detekcija-ciklusa-dfs)
-3.  [Zadaci za Vježbu](#zadaci-za-vježbu)
+
+1. [Uvod i Motivacija](#uvod-i-motivacija)
+    * [Modeliranje Problema Grafovima](#modeliranje-problema-grafovima)
+    * [Strukture za Reprezentaciju Grafa](#strukture-za-reprezentaciju-grafa)
+    * [DFS vs. BFS: Dvije Osnovne Strategije](#dfs-vs-bfs-dvije-osnovne-strategije)
+    * [Preporučena Literatura](#preporučena-literatura)
+2. [Primjeri Zadataka i Objašnjenja](#primjeri-zadataka-i-objašnjenja)
+    * [Problem 1: Najkraći put u labirintu (BFS)](#problem-1-najkraći-put-u-labirintu-bfs)
+    * [Problem 2: Brojanje povezanih komponenata (DFS)](#problem-2-brojanje-povezanih-komponenata-dfs)
+    * [Problem 3: Detekcija ciklusa (DFS)](#problem-3-detekcija-ciklusa-dfs)
+3. [Zadaci za Vježbu](#zadaci-za-vježbu)
 
 ---
 
 ## Uvod i Motivacija
 
 ### Modeliranje Problema Grafovima
+
 Grafovi su jedna od najmoćnijih apstraktnih struktura u računarstvu. Mnogi stvarni problemi mogu se modelirati kao grafovi, gdje su čvorovi objekti, a bridovi predstavljaju veze među njima. Primjeri uključuju:
--   **Mreže cesta:** gradovi su čvorovi, ceste su bridovi.
--   **Društvene mreže:** ljudi su čvorovi, prijateljstva su bridovi.
--   **Ovisnosti:** zadaci su čvorovi, brid `A -> B` znači da se zadatak A mora izvršiti prije B.
+* **Mreže cesta:** gradovi su čvorovi, ceste su bridovi.
+* **Društvene mreže:** ljudi su čvorovi, prijateljstva su bridovi.
+* **Ovisnosti:** zadaci su čvorovi, brid `A -> B` znači da se zadatak A mora izvršiti prije B.
 
 Pretraživanje grafa je temeljni postupak koji nam omogućuje da otkrijemo strukturu grafa i odnose među čvorovima. Gotovo svaki složeniji algoritam na grafovima započinje nekom vrstom pretraživanja.
 
 ### Strukture za Reprezentaciju Grafa
+
 Prije nego što možemo pretraživati graf, moramo ga spremiti u memoriju. Najčešći pristup u natjecateljskom programiranju je **lista susjedstva**.
 
 **Lista Susjedstva (Adjacency List):** Za svaki čvor, pamtimo listu njegovih susjeda. U C++-u, ovo se najčešće implementira kao polje `vector`-a.
+
 ```cpp
 const int N = 1e5 + 5; // Maksimalan broj čvorova
 vector<int> adj[N];
@@ -135,6 +139,7 @@ int main() {
     return 0;
 }
 ```
+
 **Složenost:** **O(n * m)**, jer svaki čvor (polje) posjećujemo i stavljamo u red točno jednom.
 
 ### Problem 2: Brojanje povezanih komponenata (DFS)
@@ -144,14 +149,16 @@ int main() {
 **Rješenje:** Ovo je problem brojanja povezanih komponenata.
 
 **Algoritam:**
-1.  Inicijaliziraj polje `visited` za sve čvorove na `false`.
-2.  Inicijaliziraj brojač komponenata na 0.
-3.  Iteriraj kroz sve čvorove od 1 do `n`.
-4.  Ako čvor `i` još nije posjećen:
-    *   Povećaj brojač komponenata.
-    *   Pokreni DFS (ili BFS) iz čvora `i`. Traverza će posjetiti sve čvorove u istoj komponenti.
+
+1. Inicijaliziraj polje `visited` za sve čvorove na `false`.
+2. Inicijaliziraj brojač komponenata na 0.
+3. Iteriraj kroz sve čvorove od 1 do `n`.
+4. Ako čvor `i` još nije posjećen:
+    * Povećaj brojač komponenata.
+    * Pokreni DFS (ili BFS) iz čvora `i`. Traverza će posjetiti sve čvorove u istoj komponenti.
 
 **Kod:**
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -191,6 +198,7 @@ int main() {
     return 0;
 }
 ```
+
 **Složenost:** **O(n + m)**, jer DFS posjećuje svaki čvor i svaki brid točno jednom.
 
 ### Problem 3: Detekcija ciklusa (DFS)
@@ -200,13 +208,15 @@ int main() {
 **Rješenje:** Ciklus postoji ako tijekom DFS pretraživanja naiđemo na već posjećeni čvor koji nije naš direktni roditelj u DFS stablu.
 
 **Algoritam:**
-1.  Modificiraj DFS da prima dva argumenta: `dfs(u, parent)`.
-2.  Kada iz čvora `u` istražujemo susjeda `v`:
-    *   Ako je `v` **direktni roditelj** `p`, ignoriraj ga i nastavi.
-    *   Ako je `v` već posjećen (a nije `p`), pronašli smo **povratni brid** (back edge), što znači da postoji ciklus.
-    *   Ako `v` nije posjećen, rekurzivno pozovi `dfs(v, u)`.
+
+1. Modificiraj DFS da prima dva argumenta: `dfs(u, parent)`.
+2. Kada iz čvora `u` istražujemo susjeda `v`:
+    * Ako je `v` **direktni roditelj** `p`, ignoriraj ga i nastavi.
+    * Ako je `v` već posjećen (a nije `p`), pronašli smo **povratni brid** (back edge), što znači da postoji ciklus.
+    * Ako `v` nije posjećen, rekurzivno pozovi `dfs(v, u)`.
 
 **Kod:**
+
 ```cpp
 // ... adj i visited polja ...
 bool has_cycle = false;
@@ -234,6 +244,7 @@ for (int i = 1; i <= n; ++i) {
 if (has_cycle) cout << "IMA CIKLUS\n";
 else cout << "NEMA CIKLUS\n";
 ```
+
 **Složenost:** **O(n + m)**, jer je ovo samo modifikacija standardnog DFS-a.
 
 ---
@@ -242,13 +253,13 @@ else cout << "NEMA CIKLUS\n";
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-*   **Counting Rooms:** Točan problem brojanja povezanih komponenata.
-*   **Labyrinth:** Točan problem najkraćeg puta u mreži. Dodatno zahtijeva ispis puta, što se može postići pamćenjem roditelja svakog polja.
-*   **Building Teams:** Provjera je li graf bipartitan. Rješava se bojenjem grafa s dvije boje pomoću BFS-a ili DFS-a.
-*   **Message Route:** Klasičan problem najkraćeg puta u ne-težinskom grafu, idealan za BFS.
+* **Counting Rooms:** Točan problem brojanja povezanih komponenata.
+* **Labyrinth:** Točan problem najkraćeg puta u mreži. Dodatno zahtijeva ispis puta, što se može postići pamćenjem roditelja svakog polja.
+* **Building Teams:** Provjera je li graf bipartitan. Rješava se bojenjem grafa s dvije boje pomoću BFS-a ili DFS-a.
+* **Message Route:** Klasičan problem najkraćeg puta u ne-težinskom grafu, idealan za BFS.
 
 ### Codeforces
 
-*   **Kefa and Park** (Problem 580C): Zanimljiv zadatak na stablu (specijalnom grafu) koji zahtijeva DFS ili BFS pretraživanje uz praćenje dodatnih informacija (broj uzastopnih mačaka na putu).
-*   **Party** (Problem 115A): Zadan je hijerarhijski odnos zaposlenika, što formira šumu (skup stabala). Potrebno je pronaći maksimalnu dubinu bilo kojeg stabla, što je klasična primjena DFS-a.
-*   **Ice Cave** (Problem 540C): Malo složeniji problem pretraživanja mreže. Zahtijeva provjeru uvjeta nakon što BFS/DFS završi, a ne samo tijekom pretrage.
+* **Kefa and Park** (Problem 580C): Zanimljiv zadatak na stablu (specijalnom grafu) koji zahtijeva DFS ili BFS pretraživanje uz praćenje dodatnih informacija (broj uzastopnih mačaka na putu).
+* **Party** (Problem 115A): Zadan je hijerarhijski odnos zaposlenika, što formira šumu (skup stabala). Potrebno je pronaći maksimalnu dubinu bilo kojeg stabla, što je klasična primjena DFS-a.
+* **Ice Cave** (Problem 540C): Malo složeniji problem pretraživanja mreže. Zahtijeva provjeru uvjeta nakon što BFS/DFS završi, a ne samo tijekom pretrage.

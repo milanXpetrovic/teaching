@@ -1,16 +1,11 @@
 ---
 nav_exclude: true
 parent: PRSP
-layout: minimal 
+layout: default 
 nav_order: 1
-has_toc: true
-nav_enabled: false
 ---
 
 # Uvod i osnove 1
-
-{: .toc }
-
 
 ## Pregled
 
