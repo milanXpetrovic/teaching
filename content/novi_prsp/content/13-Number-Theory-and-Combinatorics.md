@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Teorija Brojeva i Kombinatorika
+# Teorija brojeva i kombinatorika
 
 ## Sadržaj
 1.  [Uvod i Motivacija](#uvod-i-motivacija)

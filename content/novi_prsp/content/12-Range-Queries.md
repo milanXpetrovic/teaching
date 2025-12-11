@@ -204,4 +204,4 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 *   **Nested Segments** (Problem 652D): Problem koji se rješava tehnikom "sweep-line" u kombinaciji s Fenwick stablom.
 *   **Ants in Leaves** (Problem 932D): Problem na stablu koji se rješava tehnikom "binary lifting" i prefiksnim sumama na putu do korijena.
 
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Teorija brojeva i kombinatorika](../13-Number-Theory-and-Combinatorics){: .btn .btn-purple .float-right}
