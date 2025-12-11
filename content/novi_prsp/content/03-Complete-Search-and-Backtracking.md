@@ -421,4 +421,4 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 * [Grid Paths](https://cses.fi/problemset/task/1625)
 * [Sail](https://codeforces.com/problemset/problem/298/B)
 
-### Sljedeća lekcija: []()
+[Sljedeća lekcija: Potpuna pretraga i backtracking](../04-Greedy-Algorithms/){: .btn .btn-purple .float-right}

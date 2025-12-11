@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 7: Napredno Dinamičko Programiranje
+# Napredno dinamičko programiranje
 
 ## Sadržaj
 
@@ -215,6 +215,4 @@ cout << max(dp, dp) << '\n';
 * **Little Elephant and Bits** (Problem 258A): Pohlepni zadatak, ali dobar za razmišljanje o tome kada DP nije potreban.
 * **Choosing Capital for a Treeland** (Problem 219D): Klasičan problem DP-a na stablima koji zahtijeva dva DFS prolaza (jedan "dolje", jedan "gore").
 
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija:  Pretraživanje grafova](../08-Graph-Traversal/){: .btn .btn-purple .float-right}

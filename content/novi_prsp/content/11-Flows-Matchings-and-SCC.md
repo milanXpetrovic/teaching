@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 11: Mrežni Tokovi, Uparivanja i Jake Komponente
+# Mrežni tokovi, uparivanja i jake komponente
 
 ## Sadržaj
 1.  [Uvod i Motivacija](#uvod-i-motivacija)
@@ -198,7 +198,4 @@ Problem 2-SAT pita je li moguće zadovoljiti bulovsku formulu u 2-CNF obliku, np
 *   **Fox and Names** (Problem 510C): Zadan je skup stringova koji su leksikografski sortirani. Treba otkriti redoslijed slova. Ovo je klasičan problem topološkog sortiranja.
 *   **Weakly Connected Components** (na raznim platformama): Problem koji zahtijeva razumijevanje razlike između slabe i jake povezanosti.```
 
-### Sljedeća lekcija: []()
-
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Upiti nad rasponima (Range queries)](../12-Range-Queries/){: .btn .btn-purple .float-right}

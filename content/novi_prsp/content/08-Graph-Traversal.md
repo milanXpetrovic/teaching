@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 8: Pretraživanje Grafova
+# Pretraživanje grafova
 
 ## Sadržaj
 
@@ -264,7 +264,4 @@ else cout << "NEMA CIKLUS\n";
 * **Party** (Problem 115A): Zadan je hijerarhijski odnos zaposlenika, što formira šumu (skup stabala). Potrebno je pronaći maksimalnu dubinu bilo kojeg stabla, što je klasična primjena DFS-a.
 * **Ice Cave** (Problem 540C): Malo složeniji problem pretraživanja mreže. Zahtijeva provjeru uvjeta nakon što BFS/DFS završi, a ne samo tijekom pretrage.
 
-
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Algoritmi za najkraći put](../09-Shortest-Paths/){: .btn .btn-purple .float-right}

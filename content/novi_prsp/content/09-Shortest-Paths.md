@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 9: Algoritmi za Najkraći Put
+# Algoritmi za najkraći put
 
 ## Sadržaj
 1.  [Uvod i Motivacija](#uvod-i-motivacija)
@@ -239,7 +239,4 @@ Ukupna složenost je **O(nm)**. Ovo je znatno sporije od Dijkstrinog algoritma, 
 *   **Dijkstra?** (Problem 20C): Direktan zadatak za vježbu Dijkstrinog algoritma s ispisom puta.
 *   **Bellman-Ford:** Potražite probleme s tagom `bellman-ford` ili `shortest-paths` na Codeforcesu. Često uključuju negativne težine ili detekciju negativnih ciklusa. Jedan takav klasičan problem je **Wormholes** (dostupan na raznim platformama poput UVA Online Judge, ID 558).
 
-
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Najkraći putevi i minimalno razapinjuće stablo (MST)](../All-Pairs-Shortest-Paths-and-MST/){: .btn .btn-purple .float-right}

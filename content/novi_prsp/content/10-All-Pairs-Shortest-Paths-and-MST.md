@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 10: Najkraći Putevi Svi-Svim i Minimalno Razapinjuće Stablo (MST)
+# Najkraći putevi i minimalno razapinjuće stablo (MST)
 
 ## Sadržaj
 1.  [Uvod i Motivacija](#uvod-i-motivacija)
@@ -256,6 +256,4 @@ cout << total_weight << '\n';
 *   **Transitivno zatvaranje:** Nakon što ste naučili Floyd-Warshall, pokušajte riješiti problem "postoji li put između bilo koja dva čvora" koristeći sličnu logiku, ali s Booleovim vrijednostima.
 *   **Problem s negativnim ciklusima:** Koristite Bellman-Ford ili Floyd-Warshall da detektirate negativni ciklus u grafu.
 
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Mrežni tokovi, uparivanja i jake komponente](../11-Flows-Matchings-and-SCC/){: .btn .btn-purple .float-right}

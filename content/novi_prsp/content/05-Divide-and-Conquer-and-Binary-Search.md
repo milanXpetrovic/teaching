@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Podijeli pa Vladaj i Binarno Pretraživanje
+# Podijeli pa vladaj i binarno pretraživanje
 
 ## Sadržaj
 
@@ -232,4 +232,4 @@ int main() {
 * **Hamburgers** (Problem 371B): Odličan zadatak za binarno pretraživanje po rješenju. "Rješenje" je broj hamburgera. `check(k)` funkcija izračunava koliko novca je potrebno za `k` hamburgera.
 * **Pipeline** (Problem 287B): Još jedan dobar problem za binarno pretraživanje po rješenju. `check` funkcija je jednostavan zbroj.
 
-### Sljedeća lekcija: []()
+[Sljedeća lekcija: Uvod u dinamičko programiranje](../06-Intro-to-Dynamic-Programming/){: .btn .btn-purple .float-right}

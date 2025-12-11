@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 6: Uvod u Dinamičko Programiranje
+# Uvod u dinamičko programiranje
 
 ## Sadržaj
 
@@ -297,6 +297,4 @@ cout << dp[n][m] << '\n';
 * **George and Accommodation** (Problem 467A): Vrlo jednostavan zadatak za zagrijavanje. Nije DP.
 * **Pashmak and Flowers** (Problem 459B): Kombinatorički problem koji zahtijeva sortiranje. Nije DP, ali je dobar za vježbu.
 
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Napredno dinamičko programiranje](../07-Advanced-Dynamic-Programming/){: .btn .btn-purple .float-right}

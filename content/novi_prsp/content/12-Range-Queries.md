@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 12: Upiti nad Rasponima (Range Queries)
+# Upiti nad rasponima (Range queries)
 
 ## Sadržaj
 1.  [Uvod i Motivacija](#uvod-i-motivacija)
@@ -203,8 +203,5 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 *   **Little Artem and Matrix** (Problem 441E): Problem zahtijeva 2D strukturu, ali se može riješiti s `n` paralelnih segmentnih stabala (jedno za svaki redak), vježbajući primjenu na složenijem problemu.
 *   **Nested Segments** (Problem 652D): Problem koji se rješava tehnikom "sweep-line" u kombinaciji s Fenwick stablom.
 *   **Ants in Leaves** (Problem 932D): Problem na stablu koji se rješava tehnikom "binary lifting" i prefiksnim sumama na putu do korijena.
-
-### Sljedeća lekcija: []()
-
 
 [Sljedeća lekcija: ](){: .btn .btn-purple .float-right}
