@@ -411,6 +411,6 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 
 ### Codeforces
 
-Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` težijne `800` i `900`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=greedy,-900).
+Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` do težine `1000`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=brute%20force,-1000).
 
 [Sljedeća lekcija: Potpuna pretraga i backtracking](../04-Greedy-Algorithms/){: .btn .btn-purple .float-right}
