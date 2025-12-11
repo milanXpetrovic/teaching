@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 4: Pohlepni algoritmi (Greedy Algorithms)
+# Pohlepni algoritmi (Greedy Algorithms)
 
 ## Sadržaj
 

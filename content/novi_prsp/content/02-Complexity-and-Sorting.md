@@ -153,7 +153,7 @@ cout << best << '\n';
 
 ---
 
-### Zadaci za vježbu
+## Zadaci za vježbu
 
 Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte riješiti što više uvodnih zadataka kako biste utvrdili gradivo.
 

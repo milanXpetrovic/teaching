@@ -402,6 +402,8 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 10
 ```
 
+## Zadaci za vježbu
+
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
 * **[Apple Division](https://cses.fi/problemset/task/1623):** Zadan je skup težina. Podijeli ga na dva podskupa tako da je razlika njihovih zbrojeva minimalna. (Klasičan problem koji se rješava generiranjem podskupova).
@@ -413,4 +415,4 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 
 Na stracnici Codeforces možete riješiti sve zadatke iz kategorije `brute force` do težine `1000`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=brute%20force,-1000).
 
-[Sljedeća lekcija: Potpuna pretraga i backtracking](../04-Greedy-Algorithms/){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Pohlepni algoritmi](../04-Greedy-Algorithms/){: .btn .btn-purple .float-right}
