@@ -171,6 +171,4 @@ Rješenje: `n/p + n/q - n/lcm(p, q)`.
 *   **Ciel and Flowers** (Problem 321C): Kombinatorički zadatak koji se može riješiti pohlepnim pristupom, ali zahtijeva dobro razmišljanje o parnosti.
 *   **Pashmak and Flowers** (Problem 459B): Kombinatorički zadatak koji uključuje pronalaženje minimuma/maksimuma i prebrojavanje parova.
 
-### Sljedeća lekcija: []()
-
-[Sljedeća lekcija: 14-String-Algorithms-and-Geometry](../../14-String-Algorithms-and-Geometry){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Algoritmi za stringove i računalna geometrija](../../14-String-Algorithms-and-Geometry){: .btn .btn-purple .float-right}
