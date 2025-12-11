@@ -229,8 +229,6 @@ cout << count << '\n';
 Zadan je skup $\{0, 1, 2, ..., n\}$, s pomoću rekurzije generirajte sve podskupove od zadanoga skupa.
 Prilikom ispisa ne treba voditi računa o redoslijedu ispisa podskupova.
 
-![](./search-tree-all-subsets.png)
-
 **Primjer**
 
 **Input:**
@@ -368,9 +366,8 @@ cbaaa
 
 Napišite program koji traži od korisnika da unese broj `n`, što predstavlja veličinu šahovske ploče (n x n). Program treba izračunati i ispisati broj mogućnosti za postavljanje `n` kraljica na šahovskoj ploči tako da nijedna kraljica ne napada drugu. Kraljica može napasti u svim smjerovima: horizontalno, vertikalno i dijagonalno.
 
-![](./queen-chessboard.png)
-
 **Ulaz**
+
 * Jedan cijeli broj `n` (1 ≤ n ≤ 15), koji predstavlja veličinu šahovske ploče.
 
 **Izlaz**
@@ -407,18 +404,13 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Apple Division:** Zadan je skup težina. Podijeli ga na dva podskupa tako da je razlika njihovih zbrojeva minimalna. (Klasičan problem koji se rješava generiranjem podskupova).
-* **Creating Strings:** Zadan je string. Ispiši sve različite permutacije (anagrame) stringa.
-* **Chessboard and Queens:** Varijacija N-kraljica problema gdje su neka polja zabranjena.
-* **Grid Paths:** Pronađi broj puteva od gornjeg lijevog do donjeg desnog kuta `7x7` mreže koji posjećuju svako polje točno jednom. (Klasičan backtracking s jakim pruningom).
+* **[Apple Division](https://cses.fi/problemset/task/1623):** Zadan je skup težina. Podijeli ga na dva podskupa tako da je razlika njihovih zbrojeva minimalna. (Klasičan problem koji se rješava generiranjem podskupova).
+* **[Creating Strings](https://cses.fi/problemset/task/1622):** Zadan je string. Ispiši sve različite permutacije (anagrame) stringa.
+* **[Chessboard and Queens](https://cses.fi/problemset/task/1624):** Varijacija N-kraljica problema gdje su neka polja zabranjena.
+* **[Grid Paths](https://cses.fi/problemset/task/1625):** Pronađi broj puteva od gornjeg lijevog do donjeg desnog kuta `7x7` mreže koji posjećuju svako polje točno jednom. (Klasičan backtracking s jakim pruningom).
 
 ### Codeforces
 
-* **Cut Ribbon** (Problem 189A): Zadan je komad vrpce duljine `n` i tri moguće duljine `a, b, c` na koje se vrpca može rezati. Koji je maksimalan broj komada koje možemo dobiti? (Rješivo jednostavnom rekurzijom/potpunom pretragom).
-* **Beautiful Sets of Points** (Problem 268B): Iako se može riješiti promatranjem uzorka, ovaj zadatak se može modelirati kao backtracking problem za manje `n`.
-
-* [Chessboard and Queens](https://cses.fi/problemset/task/1624)
-* [Grid Paths](https://cses.fi/problemset/task/1625)
-* [Sail](https://codeforces.com/problemset/problem/298/B)
+Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` težijne `800` i `900`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=greedy,-900).
 
 [Sljedeća lekcija: Potpuna pretraga i backtracking](../04-Greedy-Algorithms/){: .btn .btn-purple .float-right}
