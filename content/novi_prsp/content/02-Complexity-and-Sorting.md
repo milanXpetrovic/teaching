@@ -167,6 +167,6 @@ Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte rije�
 
 #### Codeforces
 
-Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` težijne `800` i `900`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=brute+force%2C-900).
+Na stracnici Codeforces možete riješavati zadatke iz kategorije težine `800`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=-800).
 
 [Sljedeća lekcija: Potpuna pretraga i backtracking](../../03-Complete-Search-and-Backtracking/){: .btn .btn-purple .float-right}
