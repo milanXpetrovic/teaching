@@ -19,18 +19,19 @@ nav_exclude: true
 
 ---
 
-## Uvod i Motivacija
+## Uvod i motivacija
 
-### Modeliranje Problema Grafovima
+### Modeliranje problema grafovima
 
 Grafovi su jedna od najmoćnijih apstraktnih struktura u računarstvu. Mnogi stvarni problemi mogu se modelirati kao grafovi, gdje su čvorovi objekti, a bridovi predstavljaju veze među njima. Primjeri uključuju:
+
 * **Mreže cesta:** gradovi su čvorovi, ceste su bridovi.
 * **Društvene mreže:** ljudi su čvorovi, prijateljstva su bridovi.
 * **Ovisnosti:** zadaci su čvorovi, brid `A -> B` znači da se zadatak A mora izvršiti prije B.
 
 Pretraživanje grafa je temeljni postupak koji nam omogućuje da otkrijemo strukturu grafa i odnose među čvorovima. Gotovo svaki složeniji algoritam na grafovima započinje nekom vrstom pretraživanja.
 
-### Strukture za Reprezentaciju Grafa
+### Strukture za reprezentaciju grafa
 
 Prije nego što možemo pretraživati graf, moramo ga spremiti u memoriju. Najčešći pristup u natjecateljskom programiranju je **lista susjedstva**.
 
@@ -42,27 +43,30 @@ vector<int> adj[N];
 
 // Dodavanje brida između čvorova a i b (za neusmjereni graf)
 adj[a].push_back(b);
-adj[b].push_back(a);```
+adj[b].push_back(a);
+```
+
 Ova reprezentacija je efikasna za rijetke grafove (gdje je broj bridova `m` puno manji od `n²`), što je čest slučaj na natjecanjima.
 
 ### DFS vs. BFS: Dvije Osnovne Strategije
 
-1.  **Pretraživanje u dubinu (Depth-First Search - DFS):**
-    *   **Intuicija:** Istražuj jedan put što je dublje moguće prije nego što se vratiš natrag (backtrack). Zamislite da istražujete labirint tako da uvijek skrećete desno dok ne dođete do slijepe ulice, a onda se vraćate i probate druga skretanja.
-    *   **Implementacija:** Prirodno se implementira rekurzijom (koristi implicitni stog poziva).
-    *   **Primjene:** Detekcija ciklusa, topološko sortiranje, pronalaženje povezanih komponenata.
+1. **Pretraživanje u dubinu (Depth-First Search - DFS):**
+    * **Intuicija:** Istražuj jedan put što je dublje moguće prije nego što se vratiš natrag (backtrack). Zamislite da istražujete labirint tako da uvijek skrećete desno dok ne dođete do slijepe ulice, a onda se vraćate i probate druga skretanja.
+    * **Implementacija:** Prirodno se implementira rekurzijom (koristi implicitni stog poziva).
+    * **Primjene:** Detekcija ciklusa, topološko sortiranje, pronalaženje povezanih komponenata.
 
-2.  **Pretraživanje u širinu (Breadth-First Search - BFS):**
-    *   **Intuicija:** Prvo posjeti sve susjede, zatim susjede susjeda, i tako dalje, šireći se u slojevima. Zamislite valove koji se šire iz točke gdje je bačen kamen u vodu.
-    *   **Implementacija:** Koristi red (queue) za praćenje čvorova koje treba posjetiti.
-    *   **Primjene:** Pronalaženje **najkraćeg puta** u ne-težinskom grafu (grafu gdje su svi bridovi jednake duljine).
+2. **Pretraživanje u širinu (Breadth-First Search - BFS):**
+    * **Intuicija:** Prvo posjeti sve susjede, zatim susjede susjeda, i tako dalje, šireći se u slojevima. Zamislite valove koji se šire iz točke gdje je bačen kamen u vodu.
+    * **Implementacija:** Koristi red (queue) za praćenje čvorova koje treba posjetiti.
+    * **Primjene:** Pronalaženje **najkraćeg puta** u ne-težinskom grafu (grafu gdje su svi bridovi jednake duljine).
 
 ### Preporučena Literatura
-*   **CPH (Competitive Programmer's Handbook):**
-    *   Poglavlje 11: *Basics of graphs*
-    *   Poglavlje 12: *Graph traversal*
-*   **CLRS (Introduction to Algorithms):**
-    *   Poglavlje 22: *Elementary Graph Algorithms*
+
+* **CPH (Competitive Programmer's Handbook):**
+    * Poglavlje 11: *Basics of graphs*
+    * Poglavlje 12: *Graph traversal*
+* **CLRS (Introduction to Algorithms):**
+    * Poglavlje 22: *Elementary Graph Algorithms*
 
 ---
 
@@ -75,17 +79,19 @@ Ova reprezentacija je efikasna za rijetke grafove (gdje je broj bridova `m` puno
 **Rješenje:** Ovo je klasičan problem za BFS. Graf modeliramo tako da je svako slobodno polje čvor, a bridovi postoje između susjednih slobodnih polja.
 
 **Algoritam:**
-1.  Inicijaliziraj 2D polje `distance` na beskonačno za sva polja.
-2.  Kreiraj red i u njega stavi početnu poziciju `A`. Postavi `distance[A] = 0`.
-3.  Dok red nije prazan:
-    *   Izvadi trenutnu poziciju `(r, c)` iz reda.
-    *   Ako je `(r, c)` završna pozicija `B`, algoritam je gotov.
-    *   Za svakog susjeda `(nr, nc)` od `(r, c)`:
-        *   Ako je susjed unutar mreže, nije zid i još nije posjećen (`distance` je beskonačno):
-            *   Postavi `distance[nr][nc] = distance[r][c] + 1`.
-            *   Dodaj `(nr, nc)` u red.
+
+1. Inicijaliziraj 2D polje `distance` na beskonačno za sva polja.
+2. Kreiraj red i u njega stavi početnu poziciju `A`. Postavi `distance[A] = 0`.
+3. Dok red nije prazan:
+    * Izvadi trenutnu poziciju `(r, c)` iz reda.
+    * Ako je `(r, c)` završna pozicija `B`, algoritam je gotov.
+    * Za svakog susjeda `(nr, nc)` od `(r, c)`:
+        * Ako je susjed unutar mreže, nije zid i još nije posjećen (`distance` je beskonačno):
+            * Postavi `distance[nr][nc] = distance[r][c] + 1`.
+            * Dodaj `(nr, nc)` u red.
 
 **Kod:**
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -249,19 +255,17 @@ else cout << "NEMA CIKLUS\n";
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Counting Rooms:** Točan problem brojanja povezanih komponenata.
-* **Labyrinth:** Točan problem najkraćeg puta u mreži. Dodatno zahtijeva ispis puta, što se može postići pamćenjem roditelja svakog polja.
-* **Building Teams:** Provjera je li graf bipartitan. Rješava se bojenjem grafa s dvije boje pomoću BFS-a ili DFS-a.
-* **Message Route:** Klasičan problem najkraćeg puta u ne-težinskom grafu, idealan za BFS.
+* **[Counting Rooms](https://cses.fi/problemset/task/1192):** Točan problem brojanja povezanih komponenata.
+* **[Labyrinth](https://cses.fi/problemset/task/1193):** Točan problem najkraćeg puta u mreži. Dodatno zahtijeva ispis puta, što se može postići pamćenjem roditelja svakog polja.
+* **[Building Teams](https://cses.fi/problemset/task/1668):** Provjera je li graf bipartitan. Rješava se bojenjem grafa s dvije boje pomoću BFS-a ili DFS-a.
+* **[Message Route](https://cses.fi/problemset/task/1667):** Klasičan problem najkraćeg puta u ne-težinskom grafu, idealan za BFS.
 
 ### Codeforces
 
-* **Kefa and Park** (Problem 580C): Zanimljiv zadatak na stablu (specijalnom grafu) koji zahtijeva DFS ili BFS pretraživanje uz praćenje dodatnih informacija (broj uzastopnih mačaka na putu).
-* **Party** (Problem 115A): Zadan je hijerarhijski odnos zaposlenika, što formira šumu (skup stabala). Potrebno je pronaći maksimalnu dubinu bilo kojeg stabla, što je klasična primjena DFS-a.
-* **Ice Cave** (Problem 540C): Malo složeniji problem pretraživanja mreže. Zahtijeva provjeru uvjeta nakon što BFS/DFS završi, a ne samo tijekom pretrage.
+Na stracnici Codeforces možete riješiti zadatke iz kategorije `graphs` krenite od težine `800`, zadatke možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=graphs).
 
 [Sljedeća lekcija: Algoritmi za najkraći put](../09-Shortest-Paths/){: .btn .btn-purple .float-right}
