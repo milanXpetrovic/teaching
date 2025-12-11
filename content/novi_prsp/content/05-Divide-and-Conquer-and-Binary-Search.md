@@ -103,7 +103,9 @@ long long maxSubarraySum(const vector<int>& arr, int l, int r) {
     long long max_right = maxSubarraySum(arr, m + 1, r);
     long long max_cross = maxCrossingSum(arr, l, m, r);
     return max({max_left, max_right, max_cross});
-}```
+}
+```
+
 **Analiza:** Rekurzija je `T(n) = 2T(n/2) + O(n)`, što po Master teoremu daje složenost **O(n log n)**. Iako sporije od Kadaneovog algoritma, ovo je sjajan primjer D&C paradigme.
 
 ### Problem 2: Pronalaženje fiksne točke
@@ -120,13 +122,15 @@ Budući da su elementi u `a` različiti cijeli brojevi, `a[i+1] - a[i] >= 1`. St
 Sada možemo binarno pretraživati niz `b` za vrijednost 0.
 
 **Algoritam:**
-1.  Primijeni binarno pretraživanje na rasponu indeksa `[0, n-1]`.
-2.  Na svakom koraku, provjeri srednji indeks `mid`.
-    *   Ako je `a[mid] == mid`, pronašli smo rješenje.
-    *   Ako je `a[mid] > mid`, fiksna točka (ako postoji) mora biti u lijevoj polovici (indeksi `< mid`).
-    *   Ako je `a[mid] < mid`, fiksna točka (ako postoji) mora biti u desnoj polovici (indeksi `> mid`).
+
+1. Primijeni binarno pretraživanje na rasponu indeksa `[0, n-1]`.
+2. Na svakom koraku, provjeri srednji indeks `mid`.
+    * Ako je `a[mid] == mid`, pronašli smo rješenje.
+    * Ako je `a[mid] > mid`, fiksna točka (ako postoji) mora biti u lijevoj polovici (indeksi `< mid`).
+    * Ako je `a[mid] < mid`, fiksna točka (ako postoji) mora biti u desnoj polovici (indeksi `> mid`).
 
 **Kod:**
+
 ```cpp
 int l = 0, r = n - 1, ans = -1;
 while (l <= r) {
@@ -192,7 +196,7 @@ bool check(long long d, int c, const vector<int>& stalls) {
 }
 
 int main() {
-    // ... Brzi I/O ...
+    // I/O
     int n, c;
     cin >> n >> c;
     vector<int> stalls(n);

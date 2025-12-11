@@ -2,7 +2,7 @@
 nav_exclude: true
 ---
 
-# Tjedan 4: Pohlepni Algoritmi (Greedy Algorithms)
+# Tjedan 4: Pohlepni algoritmi (Greedy Algorithms)
 
 ## Sadržaj
 
@@ -95,13 +95,13 @@ Pohlepna strategija **ne radi** za proizvoljne sustave novčića.
 
 Ovaj primjer pokazuje da lokalno optimalan izbor (uzeti najveći novčić) nije doveo do globalno optimalnog rješenja. Općeniti problem novčića rješava se dinamičkim programiranjem (kao što smo vidjeli prošli tjedan).
 
-### Problem 2: Raspoređivanje događaja (Activity Selection)
+### Problem 2: Raspoređivanje događaja (Activity selection)
 
 **Zadatak:** Zadan je skup od `n` događaja, svaki s vremenom početka i završetka. Potrebno je odabrati maksimalan broj događaja koji se međusobno ne preklapaju.
 
 **Primjer:** Događaji (početak, kraj): `(1, 4), (3, 5), (0, 6), (5, 7), (8, 9)`
 
-#### Pohlepna Strategija
+#### Pohlepna strategija
 
 Intuitivno, mogli bismo probati:
 
@@ -168,7 +168,7 @@ int main() {
 
 **Složenost:** O(n log n) zbog sortiranja. Pohlepni odabir nakon toga traje O(n).
 
-### Problem 3: Huffmanovo kodiranje (Data Compression)
+### Problem 3: Huffmanovo kodiranje (Data compression)
 
 **Zadatak:** Zadan je skup znakova i njihove frekvencije pojavljivanja. Dizajniraj **prefiksni kod** (gdje nijedan kod nije prefiks drugog) tako da ukupna duljina kodiranog teksta bude minimalna.
 
@@ -248,19 +248,21 @@ void HuffmanCodes(vector<char>& data, vector<unsigned>& freq, int size) {
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Movie Festival:** Klasičan primjer problema odabira aktivnosti.
-* **Tasks and Deadlines:** Problem koji ima jednostavno pohlepno rješenje nakon sortiranja. Razmislite po kojem kriteriju treba sortirati.
-* **Stick Lengths:** Cilj je minimizirati sumu apsolutnih razlika. Pohlepni izbor je odabrati medijan.
-* **Towers:** Zanimljiv problem koji se rješava pohlepno korištenjem strukture podataka (npr. `multiset`) za praćenje vrhova tornjeva.
+* **[Movie Festival](https://cses.fi/problemset/task/1629):** Klasičan primjer problema odabira aktivnosti.
+* **[Tasks and Deadlines](https://cses.fi/problemset/task/1630):** Problem koji ima jednostavno pohlepno rješenje nakon sortiranja. Razmislite po kojem kriteriju treba sortirati.
+* **[Stick Lengths](https://cses.fi/problemset/task/1074):** Cilj je minimizirati sumu apsolutnih razlika. Pohlepni izbor je odabrati medijan.
+* **[Towers](https://cses.fi/problemset/task/1073):** Zanimljiv problem koji se rješava pohlepno korištenjem strukture podataka (npr. `multiset`) za praćenje vrhova tornjeva.
 
 ### Codeforces
 
-* **Ciel and Receipt** (Problem 320A): Problem povrata novca koji se može riješiti pohlepnim odabirom najveće moguće potencije broja 2.
-* **Lecture Sleep** (Problem 961B): Pohlepna ideja se kombinira s tehnikom kliznog prozora (sliding window).
-* **Boats Competition** (Problem 1399C): Sortiraj natjecatelje i koristi tehniku dva pokazivača kako bi pohlepno formirao timove.
+Na stracnici Codeforces možete riješiti sve zadatke iz kategorije `greedy` do težine `1000`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=greedy%2C-1000).
+
+* **[Ciel and Receipt](https://codeforces.com/problemset/problem/320/A)** (Problem 320A): Problem povrata novca koji se može riješiti pohlepnim odabirom najveće moguće potencije broja 2.
+
+* **[Boats Competition](https://codeforces.com/problemset/problem/1399/C)** (Problem 1399C): Sortiraj natjecatelje i koristi tehniku dva pokazivača kako bi pohlepno formirao timove.
 
 [Sljedeća lekcija: Podijeli pa vladaj i binarno pretraživanje](../05-Divide-and-Conquer-and-Binary-Search/){: .btn .btn-purple .float-right}
