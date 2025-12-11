@@ -18,9 +18,9 @@ nav_exclude: true
 
 ---
 
-## Uvod i Motivacija
+## Uvod i motivacija
 
-### Nadogradnja Osnovnih DP Koncepata
+### Nadogradnja osnovnih DP koncepata
 
 Prošli tjedan smo naučili osnove dinamičkog programiranja: rješavanje problema rastavljanjem na preklapajuće podprobleme i pamćenjem njihovih rješenja. Vidjeli smo kako se jednostavni 1D i 2D problemi mogu riješiti tabulacijom.
 
@@ -30,7 +30,7 @@ Ovaj tjedan idemo korak dalje. Proučit ćemo probleme gdje definiranje "stanja"
 2. **Pronađi prijelaz (rekurzivnu relaciju):** Kako rješenje većeg problema ovisi o rješenjima manjih?
 3. **Riješi podprobleme u ispravnom redoslijedu.**
 
-### Tipovi Naprednih DP Problema
+### Tipovi naprednih DP problema
 
 Ovaj tjedan ćemo obraditi tri ključne kategorije naprednog DP-a:
 
@@ -50,9 +50,9 @@ Ovaj tjedan ćemo obraditi tri ključne kategorije naprednog DP-a:
 
 ---
 
-## Primjeri Zadataka i Objašnjenja
+## Primjeri zadataka i objašnjenja
 
-### Problem 1: Problem Ruksaka (The Knapsack Problem)
+### Problem 1: Problem ruksaka (The Knapsack Problem)
 
 Ovo je jedan od najpoznatijih problema u algoritamskom programiranju. Postoji nekoliko varijanti, a mi ćemo obraditi dvije najvažnije.
 
@@ -98,13 +98,13 @@ int main() {
 
 **Složenost:** Vremenska `O(n * W)`, prostorna `O(W)`.
 
-### Problem 2: Dinamičko Programiranje na Podskupovima (Bitmask DP)
+### Problem 2: Dinamičko programiranje na podskupovima (Bitmask DP)
 
 Ova tehnika se koristi kada je `n` malo (obično `n <= 20`), a stanje DP-a ovisi o podskupu elemenata. Podskup predstavljamo `n`-bitnim brojem (maskom).
 
 **Zadatak (Traveling Salesperson Problem - TSP):** Zadan je skup od `n` gradova i udaljenosti između svakog para gradova. Pronađi najkraći put koji počinje u gradu 1, posjećuje svaki grad točno jednom i vraća se u grad 1.
 
-#### Rješenje (O(n² * 2^n))
+#### Rješenje $(O(n^2 * 2^n))$
 
 1. **Stanje:** `dp[mask][i]` = duljina najkraćeg puta koji počinje u gradu 1, posjećuje točno skup gradova predstavljen `maskom`, i završava u gradu `i`. `mask` je `n`-bitni broj gdje `j`-ti bit označava je li grad `j+1` posjećen.
 2. **Prijelaz:** Da bismo izračunali `dp[mask][i]`, moramo doći u grad `i` iz nekog drugog grada `j` koji je već u `mask`. Put do grada `j` mora posjetiti gradove `mask` bez `i`.
@@ -145,9 +145,9 @@ for (int i = 0; i < n; ++i) {
 cout << ans << '\n';
 ```
 
-**Složenost:** **O(n² * 2^n)**.
+**Složenost:** **$O(n^2 * 2^n)$**.
 
-### Problem 3: Dinamičko Programiranje na Stablima
+### Problem 3: Dinamičko programiranje na stablima
 
 DP na stablima je tehnika gdje se rješenje za čvor računa na temelju rješenja za njegovu djecu. Obično se implementira pomoću DFS-a.
 
@@ -196,23 +196,20 @@ cout << max(dp, dp) << '\n';
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Money Sums:** Varijacija knapsack problema. Stanje je `dp[i]`, boolean vrijednost koja govori je li zbroj `i` moguć.
-* **Rectangle Cutting:** 2D DP. `dp[w][h]` je minimalan broj rezova za pravokutnik `w x h`.
-* **Projects:** DP na sortiranim događajima. `dp[i]` je maksimalan profit koristeći prvih `i` projekata. Zahtijeva binarno pretraživanje za optimizaciju prijelaza.
-* **Elevator Rides:** Klasičan bitmask DP. Stanje je `dp[mask] = {broj_voznji, tezina_zadnje_voznje}`.
-* **Counting Tilings:** Teži bitmask DP (tzv. "DP on profiles"). `dp[i][mask]` je broj načina za popločavanje prvih `i` stupaca s profilom `mask`.
-* **Tree Diameter:** Iako se može riješiti s dva DFS-a, može se riješiti i DP-om na stablu.
-* **Tree Distances I & II:** Dva dobra zadatka za vježbu DP-a na stablima.
+* **[Money Sums](https://cses.fi/problemset/task/1745):** Varijacija knapsack problema. Stanje je `dp[i]`, boolean vrijednost koja govori je li zbroj `i` moguć.
+* **[Rectangle Cutting](https://cses.fi/problemset/task/1744):** 2D DP. `dp[w][h]` je minimalan broj rezova za pravokutnik `w x h`.
+* **[Projects](https://cses.fi/problemset/task/1140):** DP na sortiranim događajima. `dp[i]` je maksimalan profit koristeći prvih `i` projekata. Zahtijeva binarno pretraživanje za optimizaciju prijelaza.
+* **[Elevator Rides](https://cses.fi/problemset/task/1653):** Klasičan bitmask DP. Stanje je `dp[mask] = {broj_voznji, tezina_zadnje_voznje}`.
+* **[Counting Tilings](https://cses.fi/problemset/task/2181):** Teži bitmask DP (tzv. "DP on profiles"). `dp[i][mask]` je broj načina za popločavanje prvih `i` stupaca s profilom `mask`.
+* **[Tree Diameter](https://cses.fi/problemset/task/1131):** Iako se može riješiti s dva DFS-a, može se riješiti i DP-om na stablu.
+* **[Tree Distances I](https://cses.fi/problemset/task/1132) & [Tree DistancesII](https://cses.fi/problemset/task/1133):** Dva dobra zadatka za vježbu DP-a na stablima.
 
 ### Codeforces
 
-* **Flowers** (Problem 474D): Dobar uvodni DP zadatak koji se kombinira s prefiksnim sumama.
-* **Booking System** (Problem 416C): Problem uparivanja koji se može riješiti pohlepno nakon sortiranja, ali ima i DP rješenje (varijanta knapsacka).
-* **Little Elephant and Bits** (Problem 258A): Pohlepni zadatak, ali dobar za razmišljanje o tome kada DP nije potreban.
-* **Choosing Capital for a Treeland** (Problem 219D): Klasičan problem DP-a na stablima koji zahtijeva dva DFS prolaza (jedan "dolje", jedan "gore").
+Na stracnici Codeforces možete nastaviti riješavat sve zadatke iz kategorije `dp`, zadatke možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp).
 
 [Sljedeća lekcija:  Pretraživanje grafova](../08-Graph-Traversal/){: .btn .btn-purple .float-right}

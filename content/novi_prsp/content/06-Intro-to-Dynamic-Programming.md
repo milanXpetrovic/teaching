@@ -281,22 +281,22 @@ cout << dp[n][m] << '\n';
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Dice Combinations:** Klasičan 1D DP. Stanje `dp[i]` je broj načina da se dobije zbroj `i`.
-* **Minimizing Coins:** Točno problem novčića (minimizacija) koji smo obradili.
-* **Coin Combinations I:** Točno problem novčića (prebrojavanje) koji smo obradili.
-* **Coin Combinations II:** Slično kao I, ali redoslijed novčića nije bitan. Zahtijeva malo drugačiji DP pristup.
-* **Removing Digits:** Pohlepno rješenje radi, ali je i dobar uvod u "digit DP". `dp[n]` je minimalan broj koraka od `n` do 0.
-* **Grid Paths:** 2D DP na mreži, ali s preprekama.
-* **Book Shop:** Klasičan 0-1 knapsack problem.
-* **Edit Distance:** Točno problem udaljenosti uređivanja.
+Na stranici CSES se nalazi cijela kategorija zadataka Dynamic Programming. Neki od njih su:
+
+* **[Dice Combinations](https://cses.fi/problemset/task/1633):** Klasičan 1D DP. Stanje `dp[i]` je broj načina da se dobije zbroj `i`.
+* **[Minimizing Coins](https://cses.fi/problemset/task/1634):** Točno problem novčića (minimizacija) koji smo obradili.
+* **[Coin Combinations I](https://cses.fi/problemset/task/1635):** Točno problem novčića (prebrojavanje) koji smo obradili.
+* **[Coin Combinations II](https://cses.fi/problemset/task/1636):** Slično kao I, ali redoslijed novčića nije bitan. Zahtijeva malo drugačiji DP pristup.
+* **[Removing Digits](https://cses.fi/problemset/task/1637):** Pohlepno rješenje radi, ali je i dobar uvod u "digit DP". `dp[n]` je minimalan broj koraka od `n` do 0.
+* **[Grid Paths I](https://cses.fi/problemset/task/1638):** 2D DP na mreži, ali s preprekama.
+* **[Book Shop](https://cses.fi/problemset/task/1158):** Klasičan 0-1 knapsack problem.
+* **[Edit Distance](https://cses.fi/problemset/task/1639):** Točno problem udaljenosti uređivanja.
 
 ### Codeforces
 
-* **Hit the Lottery** (Problem 996A): Jednostavan pohlepni zadatak (problem novčića gdje pohlepni pristup radi). Dobar za usporedbu s DP-om.
-* **Vanya and Lanterns** (Problem 492B): Ovaj problem se rješava sortiranjem i pohlepnim razmišljanjem, ali se može promatrati kao problem pokrivanja, što ima veze s DP-om.
-* **Exams** (Problem 479C): Pohlepni zadatak koji zahtijeva sortiranje po drugom kriteriju ako su prvi jednaki.
-* **Cut Ribbon** (Problem 189A): Slično problemu novčića. `dp[i]` je maksimalan broj komada za duljinu `i`.
-* **George and Accommodation** (Problem 467A): Vrlo jednostavan zadatak za zagrijavanje. Nije DP.
-* **Pashmak and Flowers** (Problem 459B): Kombinatorički problem koji zahtijeva sortiranje. Nije DP, ali je dobar za vježbu.
+Na stracnici Codeforces možete riješiti sve zadatke iz kategorije `dp` krenite od težine `800`, zadatke možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp).
+
+* **[Hit the Lottery](https://codeforces.com/problemset/problem/996/A):** (Problem 996A): Jednostavan pohlepni zadatak (problem novčića gdje pohlepni pristup radi). Dobar za usporedbu s DP-om.
+* **[Vanya and Lanterns](https://codeforces.com/problemset/problem/492/B):** (Problem 492B): Ovaj problem se rješava sortiranjem i pohlepnim razmišljanjem, ali se može promatrati kao problem pokrivanja, što ima veze s DP-om.
 
 [Sljedeća lekcija: Napredno dinamičko programiranje](../07-Advanced-Dynamic-Programming/){: .btn .btn-purple .float-right}
