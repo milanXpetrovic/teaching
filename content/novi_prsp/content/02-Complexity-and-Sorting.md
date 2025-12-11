@@ -16,7 +16,7 @@ nav_order: 2
     * [Problem 2: Raspoređivanje događaja (Activity Selection)](#problem-2-raspoređivanje-događaja-activity-selection)
     * [Problem 3: Dodjela stanova (Two Pointers tehnika)](#problem-3-dodjela-stanova-two-pointers-tehnika)
     * [Problem 4: Maksimalni zbroj podniza (Maximum Subarray Sum)](#problem-4-maksimalni-zbroj-podniza-maximum-subarray-sum)
-  * [Zadaci za Vježbu (Tjedan 2)](#zadaci-za-vježbu-tjedan-2)
+  * [Zadaci za Vježbu](#zadaci-za-vježbu)
 
 ## Uvod i motivacija
 
@@ -45,17 +45,13 @@ Sortiranje je jedan od najvažnijih alata. Mnogi složeni problemi postaju trivi
   * Poglavlje 7: *Quicksort*
   * Poglavlje 8: *Sorting in Linear Time* (Donja granica za sortiranje usporedbom)
 
-
 ### Primjeri Zadataka i Objašnjenja
 
 #### Problem 1: Broj različitih elemenata
 
-
 #### Problem 2: Raspoređivanje događaja (Activity Selection)
 
-
 #### Problem 3: Dodjela stanova (Two Pointers tehnika)
-
 
 #### Problem 4: Maksimalni zbroj podniza (Maximum Subarray Sum)
 
@@ -172,6 +168,5 @@ Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte rije�
 #### Codeforces
 
 Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` težijne `800` i `900`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=brute+force%2C-900).
-
 
 [Sljedeća lekcija: Potpuna pretraga i backtracking](../../03-Complete-Search-and-Backtracking/){: .btn .btn-purple .float-right}
