@@ -66,14 +66,11 @@ int main(){
 
 Kod kompajliramo koristeći naredbu u terminalu:
 
-```g++ -std=c++11 -O2 -Wall solution.cpp -o solution```
+```g++ -O2 -Wall solution.cpp -o solution```
 
-* `-std=c++17`: Koristi C++17 standard (ili neki noviji).
 * `-O2`: Optimizira kod za brzinu.
 * `-Wall`: Prikazuje sva upozorenja, što je korisno za otkrivanje potencijalnih grešaka.
 * `-o solution`: Ime izvršne datoteke.
-
-Naravno — evo uređene i proširene verzije u **Markdown** formatu, spremne da ubaciš u skriptu za studente:
 
 ---
 
@@ -84,13 +81,13 @@ Kod natjecateljskog programiranja ili učestalog testiranja koda, praktično je 
 Umjesto da svaki put pišemo:
 
 ```bash
-g++ -std=c++17 -O2 -Wall solution.cpp -o s
+g++ -O2 -Wall solution.cpp -o solution
 ```
 
 možemo definirati `alias` u terminalu:
 
 ```bash
-alias gpp='g++ -std=c++17 -O2 -Wall solution.cpp -o solution'
+alias gpp='g++ -O2 -Wall solution.cpp -o solution'
 ```
 
 Nakon što se alias definira, dovoljno je jednostavno pokrenuti:
@@ -99,7 +96,7 @@ Nakon što se alias definira, dovoljno je jednostavno pokrenuti:
 gpp
 ```
 
-što će automatski kompajlirati `solution.cpp` u izvršnu datoteku `s`, koju zatim pokrećemo s:
+što će automatski kompajlirati `solution.cpp` u izvršnu datoteku `solution`, koju zatim pokrećemo s:
 
 ```bash
 ./solution
@@ -110,7 +107,7 @@ gpp
 Ako često mijenjate ime datoteke, možete napraviti fleksibilniji alias koji prima argumente:
 
 ```bash
-alias gpp='g++ -std=c++17 -O2 -Wall -o s'
+alias gpp='g++ -O2 -Wall -o solution'
 ```
 
 Tada kompajlirate bilo koju datoteku ovako:
@@ -254,4 +251,4 @@ sort(arr, arr + n);
     * [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
     * [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
 
-[Sljedeća lekcija: Analiza složenosti i sortiranje](02-Complexity-and-Sorting){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Analiza složenosti i sortiranje](../2-Complexity-and-Sorting){: .btn .btn-purple .float-right}
