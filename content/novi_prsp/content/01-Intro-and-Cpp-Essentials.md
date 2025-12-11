@@ -254,4 +254,4 @@ sort(arr, arr + n);
     * [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
     * [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
 
-### Sljedeća lekcija: [Analiza složenosti i sortiranje](../content/02-Complexity-and-Sorting)
+### Sljedeća lekcija: [Analiza složenosti i sortiranje](02-Complexity-and-Sorting)
