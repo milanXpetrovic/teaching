@@ -50,15 +50,12 @@ Sortiranje je jedan od najvažnijih alata. Mnogi složeni problemi postaju trivi
 
 #### Problem 1: Broj različitih elemenata
 
-... (tekst ostaje isti kao u prethodnoj verziji) ...
 
 #### Problem 2: Raspoređivanje događaja (Activity Selection)
 
-... (tekst ostaje isti kao u prethodnoj verziji) ...
 
 #### Problem 3: Dodjela stanova (Two Pointers tehnika)
 
-... (tekst ostaje isti kao u prethodnoj verziji) ...
 
 #### Problem 4: Maksimalni zbroj podniza (Maximum Subarray Sum)
 
@@ -160,24 +157,21 @@ cout << best << '\n';
 
 ---
 
-### Zadaci za Vježbu (Tjedan 2)
+### Zadaci za vježbu
 
 Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte riješiti što više zadataka kako biste utvrdili gradivo.
 
 #### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Distinct Numbers:** Direktan primjer korištenja sortiranja ili `set` strukture.
-* **Apartments:** Implementacija tehnike dva pokazivača koju smo upravo obradili.
-* **Ferris Wheel:** Još jedan dobar problem za vježbu pohlepnog pristupa i tehnike dva pokazivača nakon sortiranja.
-* **Concert Tickets:** Problem koji se može riješiti sortiranjem, ali zahtijeva i korištenje neke strukture podataka (`multiset` ili binarno pretraživanje) za efikasno pronalaženje.
-* **Maximum Subarray Sum:** Implementirajte sva tri rješenja i testirajte ih.
+* **[Distinct Numbers](https://cses.fi/problemset/task/1621):** Direktan primjer korištenja sortiranja ili `set` strukture.
+* **[Apartments](https://cses.fi/problemset/task/1084):** Implementacija tehnike dva pokazivača koju smo upravo obradili.
+* **[Ferris Wheel](https://cses.fi/problemset/task/1090):** Još jedan dobar problem za vježbu pohlepnog pristupa i tehnike dva pokazivača nakon sortiranja.
+* **[Concert Tickets](https://cses.fi/problemset/task/1091):** Problem koji se može riješiti sortiranjem, ali zahtijeva i korištenje neke strukture podataka (`multiset` ili binarno pretraživanje) za efikasno pronalaženje.
+* **[Maximum Subarray Sum](https://cses.fi/problemset/task/1643):** Implementirajte sva tri rješenja i testirajte ih.
 
 #### Codeforces
 
-* **T-primes** (Problem 230B): Ovaj zadatak kombinira sito za pronalaženje prostih brojeva (koje ćemo detaljnije raditi kasnije) i binarno pretraživanje na sortiranom nizu "T-prime" brojeva.
-* **Worms** (Problem 474B): Klasičan problem koji se rješava pomoću prefiksnih suma i binarnog pretraživanja (`lower_bound` funkcija je idealna za ovo).
-* **Books** (Problem 279B): Problem koji se može riješiti tehnikom dva pokazivača ili binarnim pretraživanjem po odgovoru.
+Na stracnici Codeforces možete riješavati zadatke iz kategorije `brute force` težijne `800` i `900`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=brute+force%2C-900).
 
-03-Complete-Search-and-Backtracking
 
 [Sljedeća lekcija: Potpuna pretraga i backtracking](../../03-Complete-Search-and-Backtracking/){: .btn .btn-purple .float-right}
