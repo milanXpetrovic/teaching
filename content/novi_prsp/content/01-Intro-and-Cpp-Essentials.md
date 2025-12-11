@@ -253,3 +253,5 @@ sort(arr, arr + n);
     * [Codeforces: Watermelon](https://codeforces.com/problemset/problem/4/A)
     * [CSES: Weird Algorithm](https://cses.fi/problemset/task/1068)
     * [Codeforces: Way Too Long Words](https://codeforces.com/problemset/problem/71/A)
+
+### Sljedeća lekcija: [Analiza složenosti i sortiranje](../content/02-Complexity-and-Sorting)
