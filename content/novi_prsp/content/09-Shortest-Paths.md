@@ -5,31 +5,33 @@ nav_exclude: true
 # Algoritmi za najkraći put
 
 ## Sadržaj
-1.  [Uvod i Motivacija](#uvod-i-motivacija)
-    *   [Problem Najkraćeg Puta](#problem-najkraćeg-puta)
-    *   [Razlika u Odnosu na BFS](#razlika-u-odnosu-na-bfs)
-    *   [Dva Ključna Algoritma: Dijkstra i Bellman-Ford](#dva-ključna-algoritma-dijkstra-i-bellman-ford)
-    *   [Preporučena Literatura](#preporučena-literatura)
-2.  [Dijkstra Algoritam (za ne-negativne težine)](#dijkstra-algoritam-za-ne-negativne-težine)
-    *   [Intuicija: Širenje Kruga Poznatog](#intuicija-širenje-kruga-poznatog)
-    *   [Implementacija s Prioritetnim Redom](#implementacija-s-prioritetnim-redom)
-    *   [Analiza Složenosti](#analiza-složenosti)
-3.  [Bellman-Ford Algoritam (za težine koje mogu biti negativne)](#bellman-ford-algoritam-za-težine-koje-mogu-biti-negativne)
-    *   [Intuicija: Iterativno Poboljšavanje](#intuicija-iterativno-poboljšavanje)
-    *   [Detekcija Negativnih Ciklusa](#detekcija-negativnih-ciklusa)
-    *   [Implementacija](#implementacija)
-    *   [Analiza Složenosti](#analiza-složenosti-1)
-4.  [Zadaci za Vježbu](#zadaci-za-vježbu)
+
+1. [Uvod i Motivacija](#uvod-i-motivacija)
+    * [Problem Najkraćeg Puta](#problem-najkraćeg-puta)
+    * [Razlika u Odnosu na BFS](#razlika-u-odnosu-na-bfs)
+    * [Dva Ključna Algoritma: Dijkstra i Bellman-Ford](#dva-ključna-algoritma-dijkstra-i-bellman-ford)
+    * [Preporučena Literatura](#preporučena-literatura)
+2. [Dijkstra Algoritam (za ne-negativne težine)](#dijkstra-algoritam-za-ne-negativne-težine)
+    * [Intuicija: Širenje Kruga Poznatog](#intuicija-širenje-kruga-poznatog)
+    * [Implementacija s Prioritetnim Redom](#implementacija-s-prioritetnim-redom)
+    * [Analiza Složenosti](#analiza-složenosti)
+3. [Bellman-Ford Algoritam (za težine koje mogu biti negativne)](#bellman-ford-algoritam-za-težine-koje-mogu-biti-negativne)
+    * [Intuicija: Iterativno Poboljšavanje](#intuicija-iterativno-poboljšavanje)
+    * [Detekcija Negativnih Ciklusa](#detekcija-negativnih-ciklusa)
+    * [Implementacija](#implementacija)
+    * [Analiza Složenosti](#analiza-složenosti-1)
+4. [Zadaci za Vježbu](#zadaci-za-vježbu)
 
 ---
 
 ## Uvod i Motivacija
 
 ### Problem Najkraćeg Puta
+
 Problem pronalaženja najkraćeg puta između dva čvora u grafu jedan je od najvažnijih i najčešćih problema u računarstvu. Primjene su svuda oko nas:
--   **GPS navigacija:** Pronalaženje najbrže rute od točke A do točke B.
--   **Mrežni usmjerivači:** Određivanje najefikasnijeg puta za slanje paketa podataka.
--   **Analiza ovisnosti:** Pronalaženje najkraćeg niza koraka za izvršenje zadatka.
+* **GPS navigacija:** Pronalaženje najbrže rute od točke A do točke B.
+* **Mrežni usmjerivači:** Određivanje najefikasnijeg puta za slanje paketa podataka.
+* **Analiza ovisnosti:** Pronalaženje najkraćeg niza koraka za izvršenje zadatka.
 
 Formalno, zadan je **težinski usmjeren graf** `G = (V, E)` gdje svaka veza `(u, v)` ima težinu `w(u, v)`. Duljina puta je zbroj težina veza na tom putu. Cilj je pronaći put minimalne duljine od početnog čvora `s` do svih ostalih čvorova (ili do određenog ciljnog čvora `t`).
 
@@ -55,7 +57,7 @@ Ovaj tjedan fokusiramo se na dva temeljna algoritma:
 
 ---
 
-## Dijkstra Algoritam (za ne-negativne težine)
+## Dijkstrin algoritam (za ne-negativne težine)
 
 ### Intuicija: širenje kruga poznatog
 
@@ -69,6 +71,7 @@ Dijkstra algoritam je **pohlepni algoritam**. Možemo ga zamisliti kao proces š
 ### Implementacija s prioritetnim redom
 
 Za efikasno pronalaženje čvora s najmanjom udaljenošću, koristimo **prioritetni red (min-heap)**.
+
 * U red spremamo parove `(udaljenost, čvor)`.
 * Na početku, u red stavimo `(0, s)`.
 * U svakoj iteraciji, `extract-min` operacija nam u `O(log n)` vremenu daje sljedeći najbliži čvor.
@@ -166,7 +169,7 @@ Zbog toga, algoritam jednostavno ponavlja proces relaksacije **svih bridova u gr
     * Za svaki brid `(a, b)` s težinom `w`:
         * Relaksiraj brid: `dist[b] = min(dist[b], dist[a] + w)`.
 
-### Detekcija Negativnih Ciklusa
+### Detekcija negativnih ciklusa
 
 Što se dogodi ako algoritam pokrenemo `n` puta umjesto `n-1`?
 
@@ -230,7 +233,7 @@ int main() {
 }
 ```
 
-### Analiza Složenosti
+### Analiza složenosti
 
 * Inicijalizacija: O(n).
 * Glavni dio: `n-1` iteracija, svaka prolazi kroz `m` bridova. Ukupno `(n-1) * m`.
@@ -240,19 +243,19 @@ Ukupna složenost je **O(nm)**. Ovo je znatno sporije od Dijkstrinog algoritma, 
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Shortest Routes I:** Standardna primjena Dijkstrinog algoritma.
-* **Shortest Routes II:** Problem najkraćeg puta između svih parova. Može se riješiti pokretanjem Dijkstre `n` puta (ako nema negativnih težina), ili Floyd-Warshall algoritmom (koji ćemo raditi kasnije).
-* **High Score:** Problem pronalaženja *najdužeg* puta. Može se transformirati u problem najkraćeg puta množenjem svih težina s -1. Ovo stvara negativne težine i potencijalne negativne cikluse (koji su sada "pozitivni" ciklusi). Bellman-Ford je potreban.
-* **Flight Discount:** Zahtijeva modifikaciju stanja. Umjesto `dist[u]`, koristimo `dist[u][0]` (bez popusta) i `dist[u][1]` (s popustom). Primijeni Dijkstrin algoritam na ovaj prošireni graf stanja.
-* **Flight Routes:** Pronalaženje `k` najkraćih puteva. Modifikacija Dijkstrinog algoritma gdje za svaki čvor pamtimo `k` najboljih udaljenosti, npr. u `priority_queue` ili `multiset`.
+* **[Shortest Routes I](https://cses.fi/problemset/task/1671):** Standardna primjena Dijkstrinog algoritma.
+* **[Shortest Routes II](https://cses.fi/problemset/task/1672):** Problem najkraćeg puta između svih parova. Može se riješiti pokretanjem Dijkstre `n` puta (ako nema negativnih težina), ili Floyd-Warshall algoritmom (koji ćemo raditi kasnije).
+* **[High Score](https://cses.fi/problemset/task/1673):** Problem pronalaženja *najdužeg* puta. Može se transformirati u problem najkraćeg puta množenjem svih težina s -1. Ovo stvara negativne težine i potencijalne negativne cikluse (koji su sada "pozitivni" ciklusi). Bellman-Ford je potreban.
+* **[Flight Discount](https://cses.fi/problemset/task/1195):** Zahtijeva modifikaciju stanja. Umjesto `dist[u]`, koristimo `dist[u][0]` (bez popusta) i `dist[u][1]` (s popustom). Primijeni Dijkstrin algoritam na ovaj prošireni graf stanja.
+* **[Flight Routes](https://cses.fi/problemset/task/1196):** Pronalaženje `k` najkraćih puteva. Modifikacija Dijkstrinog algoritma gdje za svaki čvor pamtimo `k` najboljih udaljenosti, npr. u `priority_queue` ili `multiset`.
 
 ### Codeforces
 
-* **Dijkstra?** (Problem 20C): Direktan zadatak za vježbu Dijkstrinog algoritma s ispisom puta.
-* **Bellman-Ford:** Potražite probleme s tagom `bellman-ford` ili `shortest-paths` na Codeforcesu. Često uključuju negativne težine ili detekciju negativnih ciklusa. Jedan takav klasičan problem je **Wormholes** (dostupan na raznim platformama poput UVA Online Judge, ID 558).
+* **[Dijkstra?](https://codeforces.com/problemset/problem/20/C)** (Problem 20C): Direktan zadatak za vježbu Dijkstrinog algoritma s ispisom puta.
+* Potražite probleme s tagom`shortest-paths` na [Codeforcesu](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=shortest+paths). Često uključuju negativne težine ili detekciju negativnih ciklusa.
 
 [Sljedeća lekcija: Najkraći putevi i minimalno razapinjuće stablo (MST)](../10-All-Pairs-Shortest-Paths-and-MST/){: .btn .btn-purple .float-right}

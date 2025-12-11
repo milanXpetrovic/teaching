@@ -157,7 +157,7 @@ cout << best << '\n';
 
 Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte riješiti što više uvodnih zadataka kako biste utvrdili gradivo.
 
-#### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
+### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
 Na stranici CSES možete riješavati po redu zadatke iz kategorije Introductory Problems, neki od njih su:
 
@@ -167,7 +167,7 @@ Na stranici CSES možete riješavati po redu zadatke iz kategorije Introductory 
 * **[Concert Tickets](https://cses.fi/problemset/task/1091):** Problem koji se može riješiti sortiranjem, ali zahtijeva i korištenje neke strukture podataka (`multiset` ili binarno pretraživanje) za efikasno pronalaženje.
 * **[Maximum Subarray Sum](https://cses.fi/problemset/task/1643):** Implementirajte sva tri rješenja i testirajte ih.
 
-#### Codeforces
+### Codeforces
 
 Na stracnici Codeforces možete riješavati zadatke iz kategorije težine `800`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=-800).
 

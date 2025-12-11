@@ -60,9 +60,9 @@ Danas ćemo obraditi dva klasična pohlepna algoritma za MST:
 
 ---
 
-## Najkraći Putevi Svi-Svim: Floyd-Warshall Algoritam
+## Najkraći putevi: Floyd-Warshall Algoritam
 
-### Intuicija: Postupno Dodavanje Međukoraka
+### Intuicija: Postupno dodavanje međukoraka
 
 Floyd-Warshall je algoritam temeljen na dinamičkom programiranju. Ideja je postupno poboljšavati procjene udaljenosti između svih parova čvorova `(i, j)`.
 
@@ -113,7 +113,7 @@ for (int k = 1; k <= n; ++k) {
 
 ---
 
-## Minimalno Razapinjuće Stablo (MST)
+## Minimalno razapinjuće stablo (MST)
 
 ### Problem 1: Kruskalov algoritam
 
@@ -142,7 +142,7 @@ Kako efikasno provjeriti jesu li dva čvora u istom stablu i kako spojiti dva st
 
 S optimizacijama (unija po veličini/rangu i kompresija putanje), ove operacije su gotovo konstantne u prosjeku (amortizirano vrijeme `O(α(n))`, gdje je `α` izuzetno sporo rastuća inverzna Ackermannova funkcija).
 
-#### Implementacija Kruskalovog algoritma
+#### Implementacija kruskalovog algoritma
 
 ```cpp
 #include <iostream>
@@ -199,9 +199,9 @@ int main() {
 
 **Složenost:** **O(m log m)**, dominirana sortiranjem bridova.
 
-### Problem 2: Primov Algoritam
+### Problem 2: primov algoritam
 
-#### Pohlepna strategija i usporedba s dijkstrom
+#### Pohlepna strategija i usporedba s Dijkstrom
 
 Primov algoritam također koristi pohlepnu strategiju, ali na drugačiji način:
 **"Gradi stablo počevši od jednog čvora, na svakom koraku dodajući najlakši brid koji povezuje stablo s čvorom izvan stabla."**
@@ -220,7 +220,7 @@ Primov algoritam također koristi pohlepnu strategiju, ali na drugačiji način:
 * **Dijkstra:** Ključ je ukupna udaljenost od izvora `s`.
 * **Prim:** Ključ je težina **samo jednog brida** koji povezuje čvor s trenutnim stablom.
 
-#### Implementacija Primovog Algoritma
+#### Implementacija primovog algoritma
 
 ```cpp
 // ... adj, n, m ...
@@ -258,23 +258,25 @@ cout << total_weight << '\n';
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Road Reparation:** Klasičan MST problem. Može se riješiti Kruskalovim ili Primovim algoritmom.
-* **Road Construction:** Zahtijeva praćenje povezanih komponenata. Union-Find je idealan za ovo.
-* **Flight Routes Check:** Problem provjere jake povezanosti, ali se može riješiti i s dva prolaza DFS/BFS-a. Razmislite kako se MST koncepti mogu (ili ne mogu) primijeniti.
+* **[Road Reparation](https://cses.fi/problemset/task/1675):** Klasičan MST problem. Može se riješiti Kruskalovim ili Primovim algoritmom.
+* **[Road Construction](https://cses.fi/problemset/task/1676):** Zahtijeva praćenje povezanih komponenata. Union-Find je idealan za ovo.
+* **[Flight Routes Check](https://cses.fi/problemset/task/1682):** Problem provjere jake povezanosti, ali se može riješiti i s dva prolaza DFS/BFS-a. Razmislite kako se MST koncepti mogu (ili ne mogu) primijeniti.
 
 ### Codeforces
 
-* **DZY Loves Bridges** (Problem 445B): Brojanje povezanih komponenata i primjena Kruskalovog principa za spajanje uz minimalan trošak.
-* **Edgy Trees** (Problem 1131C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
-* **Minimum spanning tree for each edge?** (Problem 609E): Napredniji problem koji zahtijeva razumijevanje svojstava MST-a. Nakon što se nađe jedan MST, za svaki brid koji nije u njemu, treba pronaći najteži brid na ciklusu koji bi taj brid stvorio.
+Do sada bi trebali moći riješiti većinu zadataka sa tagom `graphs` ili `dfs and similar` ili ` shortest paths` do teženi `1200`.
+
+* **[DZY Loves Bridges](https://codeforces.com/problemset/problem/445/B)** (Problem 445B): Brojanje povezanih komponenata i primjena Kruskalovog principa za spajanje uz minimalan trošak.
+* **[Edgy Trees](https://codeforces.com/problemset/problem/1139/C)** (Problem 1131C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
 
 ### Ostali Klasični Problemi
 
 * **Transitivno zatvaranje:** Nakon što ste naučili Floyd-Warshall, pokušajte riješiti problem "postoji li put između bilo koja dva čvora" koristeći sličnu logiku, ali s Booleovim vrijednostima.
+
 * **Problem s negativnim ciklusima:** Koristite Bellman-Ford ili Floyd-Warshall da detektirate negativni ciklus u grafu.
 
 [Sljedeća lekcija: Mrežni tokovi, uparivanja i jake komponente](../11-Flows-Matchings-and-SCC/){: .btn .btn-purple .float-right}
