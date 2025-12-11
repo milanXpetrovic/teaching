@@ -171,4 +171,4 @@ Na stranici CSES možete riješavati po redu zadatke iz kategorije Introductory 
 
 Na stracnici Codeforces možete riješavati zadatke iz kategorije težine `800`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=-800).
 
-[Sljedeća lekcija: Potpuna pretraga i backtracking](../../03-Complete-Search-and-Backtracking/){: .btn .btn-purple .float-right}
+[Sljedeća lekcija: Potpuna pretraga i backtracking](../03-Complete-Search-and-Backtracking/){: .btn .btn-purple .float-right}
