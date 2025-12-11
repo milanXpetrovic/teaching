@@ -155,9 +155,11 @@ cout << best << '\n';
 
 ### Zadaci za vježbu
 
-Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte riješiti što više zadataka kako biste utvrdili gradivo.
+Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte riješiti što više uvodnih zadataka kako biste utvrdili gradivo.
 
 #### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
+
+Na stranici CSES možete riješavati po redu zadatke iz kategorije Introductory Problems, neki od njih su:
 
 * **[Distinct Numbers](https://cses.fi/problemset/task/1621):** Direktan primjer korištenja sortiranja ili `set` strukture.
 * **[Apartments](https://cses.fi/problemset/task/1084):** Implementacija tehnike dva pokazivača koju smo upravo obradili.
