@@ -296,3 +296,5 @@ cout << dp[n][m] << '\n';
 * **Cut Ribbon** (Problem 189A): Slično problemu novčića. `dp[i]` je maksimalan broj komada za duljinu `i`.
 * **George and Accommodation** (Problem 467A): Vrlo jednostavan zadatak za zagrijavanje. Nije DP.
 * **Pashmak and Flowers** (Problem 459B): Kombinatorički problem koji zahtijeva sortiranje. Nije DP, ali je dobar za vježbu.
+
+### Sljedeća lekcija: []()

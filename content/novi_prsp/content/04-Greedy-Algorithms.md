@@ -2,7 +2,6 @@
 nav_exclude: true
 ---
 
-
 # Tjedan 4: Pohlepni Algoritmi (Greedy Algorithms)
 
 ## Sadržaj
@@ -263,3 +262,5 @@ void HuffmanCodes(vector<char>& data, vector<unsigned>& freq, int size) {
 * **Ciel and Receipt** (Problem 320A): Problem povrata novca koji se može riješiti pohlepnim odabirom najveće moguće potencije broja 2.
 * **Lecture Sleep** (Problem 961B): Pohlepna ideja se kombinira s tehnikom kliznog prozora (sliding window).
 * **Boats Competition** (Problem 1399C): Sortiraj natjecatelje i koristi tehniku dva pokazivača kako bi pohlepno formirao timove.
+
+### Sljedeća lekcija: []()

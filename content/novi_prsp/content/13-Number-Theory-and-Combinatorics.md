@@ -170,3 +170,5 @@ Rješenje: `n/p + n/q - n/lcm(p, q)`.
 *   **Divisibility by Eight** (Problem 550C): Problem koji se može riješiti DP-om, ali ima i elegantno rješenje temeljeno na teoriji brojeva (svojstva djeljivosti).
 *   **Ciel and Flowers** (Problem 321C): Kombinatorički zadatak koji se može riješiti pohlepnim pristupom, ali zahtijeva dobro razmišljanje o parnosti.
 *   **Pashmak and Flowers** (Problem 459B): Kombinatorički zadatak koji uključuje pronalaženje minimuma/maksimuma i prebrojavanje parova.
+
+### Sljedeća lekcija: []()

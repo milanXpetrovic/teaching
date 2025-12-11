@@ -166,7 +166,9 @@ DP na stablima je tehnika gdje se rješenje za čvor računa na temelju rješenj
 3. **Bazni slučaj:** Za list `u`, `dp[u][0] = 0` i `dp[u][1] = w_u`.
 4. **Rješenje:** Nakon DFS-a od korijena `r`, konačno rješenje je `max(dp[r][0], dp[r][1])`.
 
-**Kod:**```cpp
+**Kod:**
+
+```cpp
 vector<int> adj[N];
 vector<int> weights(N);
 vector<vector<long long>> dp(N, vector<long long>(2));
@@ -188,8 +190,8 @@ void dfs(int u, int p) {
 // U main funkciji, nakon izgradnje stabla
 dfs(1, 0); // Krenemo od korijena 1, roditelj 0
 cout << max(dp, dp) << '\n';
-
 ```
+
 **Složenost:** **O(N)**, jer radimo jedan DFS prolaz kroz stablo.
 
 ---
@@ -198,17 +200,19 @@ cout << max(dp, dp) << '\n';
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-*   **Money Sums:** Varijacija knapsack problema. Stanje je `dp[i]`, boolean vrijednost koja govori je li zbroj `i` moguć.
-*   **Rectangle Cutting:** 2D DP. `dp[w][h]` je minimalan broj rezova za pravokutnik `w x h`.
-*   **Projects:** DP na sortiranim događajima. `dp[i]` je maksimalan profit koristeći prvih `i` projekata. Zahtijeva binarno pretraživanje za optimizaciju prijelaza.
-*   **Elevator Rides:** Klasičan bitmask DP. Stanje je `dp[mask] = {broj_voznji, tezina_zadnje_voznje}`.
-*   **Counting Tilings:** Teži bitmask DP (tzv. "DP on profiles"). `dp[i][mask]` je broj načina za popločavanje prvih `i` stupaca s profilom `mask`.
-*   **Tree Diameter:** Iako se može riješiti s dva DFS-a, može se riješiti i DP-om na stablu.
-*   **Tree Distances I & II:** Dva dobra zadatka za vježbu DP-a na stablima.
+* **Money Sums:** Varijacija knapsack problema. Stanje je `dp[i]`, boolean vrijednost koja govori je li zbroj `i` moguć.
+* **Rectangle Cutting:** 2D DP. `dp[w][h]` je minimalan broj rezova za pravokutnik `w x h`.
+* **Projects:** DP na sortiranim događajima. `dp[i]` je maksimalan profit koristeći prvih `i` projekata. Zahtijeva binarno pretraživanje za optimizaciju prijelaza.
+* **Elevator Rides:** Klasičan bitmask DP. Stanje je `dp[mask] = {broj_voznji, tezina_zadnje_voznje}`.
+* **Counting Tilings:** Teži bitmask DP (tzv. "DP on profiles"). `dp[i][mask]` je broj načina za popločavanje prvih `i` stupaca s profilom `mask`.
+* **Tree Diameter:** Iako se može riješiti s dva DFS-a, može se riješiti i DP-om na stablu.
+* **Tree Distances I & II:** Dva dobra zadatka za vježbu DP-a na stablima.
 
 ### Codeforces
 
-*   **Flowers** (Problem 474D): Dobar uvodni DP zadatak koji se kombinira s prefiksnim sumama.
-*   **Booking System** (Problem 416C): Problem uparivanja koji se može riješiti pohlepno nakon sortiranja, ali ima i DP rješenje (varijanta knapsacka).
-*   **Little Elephant and Bits** (Problem 258A): Pohlepni zadatak, ali dobar za razmišljanje o tome kada DP nije potreban.
-*   **Choosing Capital for a Treeland** (Problem 219D): Klasičan problem DP-a na stablima koji zahtijeva dva DFS prolaza (jedan "dolje", jedan "gore").
+* **Flowers** (Problem 474D): Dobar uvodni DP zadatak koji se kombinira s prefiksnim sumama.
+* **Booking System** (Problem 416C): Problem uparivanja koji se može riješiti pohlepno nakon sortiranja, ali ima i DP rješenje (varijanta knapsacka).
+* **Little Elephant and Bits** (Problem 258A): Pohlepni zadatak, ali dobar za razmišljanje o tome kada DP nije potreban.
+* **Choosing Capital for a Treeland** (Problem 219D): Klasičan problem DP-a na stablima koji zahtijeva dva DFS prolaza (jedan "dolje", jedan "gore").
+
+### Sljedeća lekcija: []()

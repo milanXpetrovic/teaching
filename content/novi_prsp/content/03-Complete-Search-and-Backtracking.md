@@ -420,3 +420,5 @@ Napišite program koji traži od korisnika da unese broj `n`, što predstavlja v
 * [Chessboard and Queens](https://cses.fi/problemset/task/1624)
 * [Grid Paths](https://cses.fi/problemset/task/1625)
 * [Sail](https://codeforces.com/problemset/problem/298/B)
+
+### Sljedeća lekcija: []()

@@ -197,3 +197,5 @@ Problem 2-SAT pita je li moguće zadovoljiti bulovsku formulu u 2-CNF obliku, np
 *   **Police Stations** (Problem 371D): Zanimljiv problem koji se može modelirati kao mrežni tok, iako postoji i jednostavnije rješenje.
 *   **Fox and Names** (Problem 510C): Zadan je skup stringova koji su leksikografski sortirani. Treba otkriti redoslijed slova. Ovo je klasičan problem topološkog sortiranja.
 *   **Weakly Connected Components** (na raznim platformama): Problem koji zahtijeva razumijevanje razlike između slabe i jake povezanosti.```
+
+### Sljedeća lekcija: []()

@@ -5,7 +5,7 @@ layout: default
 nav_order: 2
 ---
 
-# Analiza složenosti i Sortiranje
+# Analiza složenosti i sortiranje
 
 ## Sadržaj
 
@@ -18,7 +18,7 @@ nav_order: 2
     * [Problem 4: Maksimalni zbroj podniza (Maximum Subarray Sum)](#problem-4-maksimalni-zbroj-podniza-maximum-subarray-sum)
   * [Zadaci za Vježbu (Tjedan 2)](#zadaci-za-vježbu-tjedan-2)
 
-## Uvod i Motivacija
+## Uvod i motivacija
 
 **Zašto je brzina važna?**
 
@@ -179,3 +179,5 @@ Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte rije�
 * **Books** (Problem 279B): Problem koji se može riješiti tehnikom dva pokazivača ili binarnim pretraživanjem po odgovoru.
 
 03-Complete-Search-and-Backtracking
+
+### Sljedeća lekcija: []()

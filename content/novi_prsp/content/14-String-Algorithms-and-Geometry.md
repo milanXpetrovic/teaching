@@ -5,18 +5,19 @@ nav_exclude: true
 # Tjedan 14: Algoritmi za Stringove i Računalna Geometrija
 
 ## Sadržaj
-1.  [Uvod i Motivacija](#uvod-i-motivacija)
-    *   [Dva Svijeta Problema](#dva-svijeta-problema)
-    *   [Preporučena Literatura](#preporučena-literatura)
-2.  [Algoritmi za Stringove](#algoritmi-za-stringove)
-    *   [Problem 1: Heširanje Stringova (String Hashing)](#problem-1-heširanje-stringova-string-hashing)
-    *   [Problem 2: Knuth-Morris-Pratt (KMP) algoritam](#problem-2-knuth-morris-pratt-kmp-algoritam)
-    *   [Problem 3: Trie (Prefiksno Stablo)](#problem-3-trie-prefiksno-stablo)
-3.  [Računalna Geometrija](#računalna-geometrija)
-    *   [Oprez: Aritmetika s pomičnim zarezom](#oprez-aritmetika-s-pomičnim-zarezom)
-    *   [Osnovni Geometrijski Primitivi: Vektorski Produkt](#osnovni-geometrijski-primitivi-vektorski-produkt)
-    *   [Problem 4: Konveksna Ljuska (Convex Hull)](#problem-4-konveksna-ljuska-convex-hull)
-4.  [Zadaci za Vježbu](#zadaci-za-vježbu)
+
+1. [Uvod i Motivacija](#uvod-i-motivacija)
+    * [Dva Svijeta Problema](#dva-svijeta-problema)
+    * [Preporučena Literatura](#preporučena-literatura)
+2. [Algoritmi za Stringove](#algoritmi-za-stringove)
+    * [Problem 1: Heširanje Stringova (String Hashing)](#problem-1-heširanje-stringova-string-hashing)
+    * [Problem 2: Knuth-Morris-Pratt (KMP) algoritam](#problem-2-knuth-morris-pratt-kmp-algoritam)
+    * [Problem 3: Trie (Prefiksno Stablo)](#problem-3-trie-prefiksno-stablo)
+3. [Računalna Geometrija](#računalna-geometrija)
+    * [Oprez: Aritmetika s pomičnim zarezom](#oprez-aritmetika-s-pomičnim-zarezom)
+    * [Osnovni Geometrijski Primitivi: Vektorski Produkt](#osnovni-geometrijski-primitivi-vektorski-produkt)
+    * [Problem 4: Konveksna Ljuska (Convex Hull)](#problem-4-konveksna-ljuska-convex-hull)
+4. [Zadaci za Vježbu](#zadaci-za-vježbu)
 
 ---
 
@@ -229,3 +230,5 @@ for (int i = 2; i < n; ++i) {
 *   **Polygon** (naći zadatak s tim imenom, npr. 166B): Zadatak koji obično testira razumijevanje konveksnosti i geometrijskih primitiva.
 *   **Points on Line** (Problem 251A): Problem koji kombinira geometrijsku intuiciju s tehnikom dva pokazivača ili binarnim pretraživanjem.
 *   **Good Substrings** (Problem 271D): Kombinacija heširanja stringova i rada sa setovima za brojanje jedinstvenih podstringova.
+
+### Sljedeća lekcija: []()

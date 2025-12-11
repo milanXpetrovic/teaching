@@ -263,3 +263,6 @@ else cout << "NEMA CIKLUS\n";
 * **Kefa and Park** (Problem 580C): Zanimljiv zadatak na stablu (specijalnom grafu) koji zahtijeva DFS ili BFS pretraživanje uz praćenje dodatnih informacija (broj uzastopnih mačaka na putu).
 * **Party** (Problem 115A): Zadan je hijerarhijski odnos zaposlenika, što formira šumu (skup stabala). Potrebno je pronaći maksimalnu dubinu bilo kojeg stabla, što je klasična primjena DFS-a.
 * **Ice Cave** (Problem 540C): Malo složeniji problem pretraživanja mreže. Zahtijeva provjeru uvjeta nakon što BFS/DFS završi, a ne samo tijekom pretrage.
+
+
+### Sljedeća lekcija: []()

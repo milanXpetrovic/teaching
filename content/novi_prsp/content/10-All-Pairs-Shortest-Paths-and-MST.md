@@ -255,3 +255,5 @@ cout << total_weight << '\n';
 ### Ostali Klasični Problemi
 *   **Transitivno zatvaranje:** Nakon što ste naučili Floyd-Warshall, pokušajte riješiti problem "postoji li put između bilo koja dva čvora" koristeći sličnu logiku, ali s Booleovim vrijednostima.
 *   **Problem s negativnim ciklusima:** Koristite Bellman-Ford ili Floyd-Warshall da detektirate negativni ciklus u grafu.
+
+### Sljedeća lekcija: []()

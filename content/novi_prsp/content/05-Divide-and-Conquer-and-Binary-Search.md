@@ -231,3 +231,5 @@ int main() {
 
 * **Hamburgers** (Problem 371B): Odličan zadatak za binarno pretraživanje po rješenju. "Rješenje" je broj hamburgera. `check(k)` funkcija izračunava koliko novca je potrebno za `k` hamburgera.
 * **Pipeline** (Problem 287B): Još jedan dobar problem za binarno pretraživanje po rješenju. `check` funkcija je jednostavan zbroj.
+
+### Sljedeća lekcija: []()
