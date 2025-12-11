@@ -241,3 +241,5 @@ Ukupna složenost je **O(nm)**. Ovo je znatno sporije od Dijkstrinog algoritma, 
 
 
 ### Sljedeća lekcija: []()
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

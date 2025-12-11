@@ -263,4 +263,5 @@ void HuffmanCodes(vector<char>& data, vector<unsigned>& freq, int size) {
 * **Lecture Sleep** (Problem 961B): Pohlepna ideja se kombinira s tehnikom kliznog prozora (sliding window).
 * **Boats Competition** (Problem 1399C): Sortiraj natjecatelje i koristi tehniku dva pokazivača kako bi pohlepno formirao timove.
 
-### Sljedeća lekcija: []()
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

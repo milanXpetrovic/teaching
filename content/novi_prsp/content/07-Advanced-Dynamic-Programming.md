@@ -216,3 +216,5 @@ cout << max(dp, dp) << '\n';
 * **Choosing Capital for a Treeland** (Problem 219D): Klasičan problem DP-a na stablima koji zahtijeva dva DFS prolaza (jedan "dolje", jedan "gore").
 
 ### Sljedeća lekcija: []()
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

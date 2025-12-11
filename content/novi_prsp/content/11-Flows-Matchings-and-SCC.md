@@ -199,3 +199,6 @@ Problem 2-SAT pita je li moguće zadovoljiti bulovsku formulu u 2-CNF obliku, np
 *   **Weakly Connected Components** (na raznim platformama): Problem koji zahtijeva razumijevanje razlike između slabe i jake povezanosti.```
 
 ### Sljedeća lekcija: []()
+
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

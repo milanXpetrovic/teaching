@@ -257,3 +257,5 @@ cout << total_weight << '\n';
 *   **Problem s negativnim ciklusima:** Koristite Bellman-Ford ili Floyd-Warshall da detektirate negativni ciklus u grafu.
 
 ### Sljedeća lekcija: []()
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

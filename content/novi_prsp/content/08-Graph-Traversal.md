@@ -266,3 +266,5 @@ else cout << "NEMA CIKLUS\n";
 
 
 ### Sljedeća lekcija: []()
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

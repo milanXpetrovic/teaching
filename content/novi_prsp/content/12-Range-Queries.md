@@ -205,3 +205,6 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 *   **Ants in Leaves** (Problem 932D): Problem na stablu koji se rješava tehnikom "binary lifting" i prefiksnim sumama na putu do korijena.
 
 ### Sljedeća lekcija: []()
+
+
+[Sljedeća lekcija: ](){: .btn .btn-purple .float-right}

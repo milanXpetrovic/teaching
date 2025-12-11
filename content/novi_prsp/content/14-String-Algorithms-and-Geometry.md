@@ -231,4 +231,4 @@ for (int i = 2; i < n; ++i) {
 *   **Points on Line** (Problem 251A): Problem koji kombinira geometrijsku intuiciju s tehnikom dva pokazivača ili binarnim pretraživanjem.
 *   **Good Substrings** (Problem 271D): Kombinacija heširanja stringova i rada sa setovima za brojanje jedinstvenih podstringova.
 
-### Sljedeća lekcija: []()
+[Sljedeća lekcija: 15-Final-Review-and-Contest-Strategy](../../15-Final-Review-and-Contest-Strategy){: .btn .btn-purple .float-right}

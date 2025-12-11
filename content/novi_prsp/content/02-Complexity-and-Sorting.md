@@ -180,4 +180,4 @@ Preporučeni zadaci za vježbu nalaze se na online platformama. Pokušajte rije�
 
 03-Complete-Search-and-Backtracking
 
-### Sljedeća lekcija: []()
+[Sljedeća lekcija: 03-Complete-Search-and-Backtracking](03-Complete-Search-and-Backtracking){: .btn .btn-purple .float-right}
