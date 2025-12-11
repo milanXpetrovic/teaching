@@ -21,13 +21,13 @@ nav_exclude: true
 
 ---
 
-## Uvod i Motivacija
+## Uvod i motivacija
 
-### Što je Dinamičko Programiranje?
+### Što je dinamičko programiranje?
 
 **Dinamičko programiranje (DP)** je moćna tehnika za rješavanje optimizacijskih i prebrojavačkih problema. Ona spaja ispravnost potpune pretrage s efikasnošću pohlepnih algoritama. DP se primjenjuje na probleme koji se mogu rastaviti na **preklapajuće podprobleme**, a čija rješenja se mogu kombinirati da bi se dobilo rješenje originalnog problema.
 
-### Ključne Ideje: Preklapajući Podproblemi i Optimalna Podstruktura
+### Ključne ideje: Preklapajući podproblemi i optimalna podstruktura
 
 Da bismo mogli primijeniti DP, problem mora imati dva svojstva:
 
@@ -46,7 +46,7 @@ int fib(int n) {
 
 Ovaj kod je izuzetno spor (složenost `O(2^n)`). Zašto? Pogledajmo stablo poziva za `fib(5)`:
 
-```
+```text
       fib(5)
      /      \
   fib(4)    fib(3)
@@ -57,7 +57,7 @@ fib(3) fib(2) fib(2) fib(1)
 
 Primjećujemo da se `fib(3)` računa dvaput, `fib(2)` triput, itd. Ovo je klasičan primjer **preklapajućih podproblema**. Dinamičko programiranje rješava ovaj problem tako da **pamti** rješenje svakog podproblema nakon što ga prvi put izračuna.
 
-### Dva Pristupa: Memoizacija (Top-Down) i Tabulacija (Bottom-Up)
+### Dva pristupa: memoizacija (Top-Down) i tabulacija (Bottom-Up)
 
 1. **Memoizacija (Top-Down):** Zadržavamo prirodnu rekurzivnu strukturu, ali dodajemo mehanizam za pamćenje (obično polje ili mapa). Prije nego što izračunamo rješenje za podproblem, provjerimo jesmo li ga već riješili.
 
@@ -87,14 +87,14 @@ Primjećujemo da se `fib(3)` računa dvaput, `fib(2)` triput, itd. Ovo je klasi�
 
     Ovo je također **O(n)**, ali u praksi često brže zbog manjeg overhead-a (nema rekurzivnih poziva). **Tabulacija je standardni pristup u natjecateljskom programiranju.**
 
-### Koraci u Rješavanju DP Problema
+### Koraci u rješavanju DP problema
 
 1. **Definiraj stanje:** Što je podproblem? Odredi parametre koji jedinstveno opisuju podproblem. Npr. `dp[i]` može biti rješenje za prvih `i` elemenata.
 2. **Pronađi rekurzivnu relaciju:** Kako se rješenje za `dp[i]` može izračunati pomoću rješenja manjih podproblema (npr. `dp[i-1]`, `dp[j]` za `j < i`)?
 3. **Definiraj bazne slučajeve:** Koji su najmanji podproblemi čija rješenja znamo unaprijed? Npr. `dp[0]`.
 4. **Odredi redoslijed računanja:** Kojim redom treba popunjavati DP tablicu? (Obično od manjih indeksa prema većima).
 
-### Preporučena Literatura
+### Preporučena literatura
 
 * **CPH (Competitive Programmer's Handbook):**
   * Poglavlje 7: *Dynamic programming*
@@ -103,7 +103,7 @@ Primjećujemo da se `fib(3)` računa dvaput, `fib(2)` triput, itd. Ovo je klasi�
 
 ---
 
-## Primjeri Zadataka i Objašnjenja
+## Primjeri zadataka i objašnjenja
 
 ### Problem 1: Problem novčića (Minimizacija)
 
@@ -129,7 +129,7 @@ Primjećujemo da se `fib(3)` računa dvaput, `fib(2)` triput, itd. Ovo je klasi�
 const int INF = 1e9;
 
 int main() {
-    // ... Brzi I/O ...
+    //  I/O 
     int n; // Ciljani iznos
     cin >> n;
     vector<int> coins = {1, 3, 4};
@@ -162,12 +162,14 @@ int main() {
 **Zadatak:** Zadan je isti skup novčića i iznos `n`. Na koliko načina možemo formirati iznos `n`?
 
 **Primjer:** Iznos `n = 5`, Kovanice `{1, 3, 4}`. Načini su:
+
 * 1+1+1+1+1
 * 1+1+3
 * 1+4
 * 1+3+1
 * 3+1+1
 * 4+1
+
 Ukupno 6 načina.
 
 #### Rješenje (Bottom-Up DP)
@@ -204,7 +206,7 @@ cout << dp[n] << '\n';
 
 **Primjer:** Niz `[6, 2, 5, 1, 7, 4, 8, 3]`. Najduži rastući podniz je `[2, 5, 7, 8]`, duljine 4.
 
-#### Rješenje (O(n²))
+#### Rješenje ($O(n^2)$)
 
 1. **Stanje:** `dp[i]` = duljina najdužeg rastućeg podniza koji **završava** na indeksu `i`.
 2. **Rekurzivna relacija:** Za `dp[i]`, možemo proširiti bilo koji LIS koji završava na indeksu `j < i` ako je `array[j] < array[i]`. Želimo onaj najduži.
@@ -275,7 +277,7 @@ cout << dp[n][m] << '\n';
 
 ---
 
-## Zadaci za Vježbu
+## Zadaci za vježbu
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 

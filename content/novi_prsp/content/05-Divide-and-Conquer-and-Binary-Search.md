@@ -227,13 +227,12 @@ int main() {
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* **Sum of Two Values:** Riješite problem koristeći sortiranje i binarno pretraživanje za svaki element (O(n log n)). Zatim usporedite s rješenjem koje koristi dva pokazivača.
-* **Factory Machines:** Klasičan problem za binarno pretraživanje po rješenju. "Rješenje" je vrijeme. Funkcija `check(t)` provjerava koliko proizvoda se može napraviti u vremenu `t`.
-* **Towers:** Iako se rješava pohlepno, razmislite kako binarno pretraživanje (`upper_bound`) može pomoći u implementaciji pohlepne strategije.
+* **[Sum of Two Values](https://cses.fi/problemset/task/1640):** Riješite problem koristeći sortiranje i binarno pretraživanje za svaki element (O(n log n)). Zatim usporedite s rješenjem koje koristi dva pokazivača.
+* **[Factory Machines](https://cses.fi/problemset/task/1620):** Klasičan problem za binarno pretraživanje po rješenju. "Rješenje" je vrijeme. Funkcija `check(t)` provjerava koliko proizvoda se može napraviti u vremenu `t`.
+* **[Towers](https://cses.fi/problemset/task/1073):** Iako se rješava pohlepno, razmislite kako binarno pretraživanje (`upper_bound`) može pomoći u implementaciji pohlepne strategije.
 
 ### Codeforces
 
-* **Hamburgers** (Problem 371B): Odličan zadatak za binarno pretraživanje po rješenju. "Rješenje" je broj hamburgera. `check(k)` funkcija izračunava koliko novca je potrebno za `k` hamburgera.
-* **Pipeline** (Problem 287B): Još jedan dobar problem za binarno pretraživanje po rješenju. `check` funkcija je jednostavan zbroj.
+Na stracnici Codeforces možete riješiti sve zadatke iz kategorije `binary search` do težine `1000`, koje možete pronaći na [poveznici](https://codeforces.com/problemset?tags=binary%20search,-1000). A za dodatnu vježbu možete i riješavati zadatke iz kategorije `divide and conquer`.
 
 [Sljedeća lekcija: Uvod u dinamičko programiranje](../06-Intro-to-Dynamic-Programming/){: .btn .btn-purple .float-right}
