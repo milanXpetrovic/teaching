@@ -33,13 +33,11 @@ style: |
   }
 ---
 <!-- _class: title  -->
-<!-- paginate: false -->
 # Najkraći putevi i minimalno razapinjuće stablo (MST)
 
 Programiranje za rješavanje složenih problema
 
 ---
-<!-- paginate: true -->
 # Sadržaj
 
 1. **Uvod i Motivacija**
