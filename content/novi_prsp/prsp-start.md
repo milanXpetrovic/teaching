@@ -19,7 +19,7 @@ has_toc: true
 - [Dinamičko programiranje II. dio](../content/07-Advanced-Dynamic-Programming)
 - [Putovanje kroz graf](../content/08-Graph-Traversal)
 - [Najkraći putovi u grafu](../content/09-Shortest-Paths)
-- **Najkraći putevi i minimalno razapinjuće stablo** [Skripta](../content/10-All-Pairs-Shortest-Paths-and-MST) [Prezentacija](../pres/10-All-Pairs-Shortest-Paths-and-MST)
+- **Najkraći putevi i minimalno razapinjuće stablo** [Skripta](../content/10-All-Pairs-Shortest-Paths-and-MST) | [Prezentacija](../pres/10-All-Pairs-Shortest-Paths-and-MST)
 - [Mrežni tokovi, uparivanja i jake komponente](../content/11-Flows-Matchings-and-SCC)
 - [Upiti nad rasponima (Range queries)](../content/12-Range-Queries)
 - [Teorija brojeva i kombinatorika](../content/13-Number-Theory-and-Combinatorics)
