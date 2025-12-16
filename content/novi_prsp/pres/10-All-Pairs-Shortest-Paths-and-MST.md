@@ -21,7 +21,6 @@ style: |
     font-size: 32px;
     color: #005f87;
   }
-  /* OVO POPRAVLJA PAGINACIJU */
   section::after {
     content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
     font-weight: bold;
@@ -34,13 +33,13 @@ style: |
   }
 ---
 <!-- _class: title  -->
-
+<!-- paginate: false -->
 # Najkraći putevi i minimalno razapinjuće stablo (MST)
 
 Programiranje za rješavanje složenih problema
 
 ---
-
+<!-- paginate: true -->
 # Sadržaj
 
 1. **Uvod i Motivacija**

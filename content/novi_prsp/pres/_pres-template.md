@@ -21,7 +21,6 @@ style: |
     font-size: 32px;
     color: #005f87;
   }
-  /* OVO POPRAVLJA PAGINACIJU */
   section::after {
     content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
     font-weight: bold;
@@ -33,13 +32,15 @@ style: |
     z-index: 999; /* Osigurava da je broj IZNAD footera */
   }
 ---
-
+<!-- paginate: false -->
 <!-- _class: title  -->
 # Naslov
 
 IME_PREDMETA
+
 ---
 
+<!-- paginate: true -->
 ## Slide sa slikom
 
 **Opis slike**
