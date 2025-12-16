@@ -21,6 +21,17 @@ style: |
     font-size: 32px;
     color: #005f87;
   }
+  /* OVO POPRAVLJA PAGINACIJU */
+  section::after {
+    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+    font-weight: bold;
+    font-size: 20px;
+    color: #005f87;
+    position: absolute;
+    bottom: 25px; 
+    right: 30px;
+    z-index: 999; /* Osigurava da je broj IZNAD footera */
+  }
 ---
 
 <!-- _class: title  -->
