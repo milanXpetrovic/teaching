@@ -434,26 +434,6 @@ Mogli bismo koristiti BFS ili DFS da provjerimo postoji li put od $U$ do $V$, al
 
 ---
 
-# Vizualizacija procesa
-
-```text
-Početak: (1)   (2)   (3)   (4)  -> Svako je svoj šef.
-
-Korak 1: Spoji 1-2
-(1-2)   (3)   (4)           -> 1 je šef za 2.
-
-Korak 2: Spoji 3-4
-(1-2)   (3-4)               -> 3 je šef za 4.
-
-Korak 3: Pokušaj spojiti 1-4
-Find(1) -> 1
-Find(4) -> 3
-Različiti su! Spoji (Unija 1 i 3).
-(1-2-3-4)                   -> Svi su povezani.
-```
-
----
-
 ```cpp
 // Union-Find (DSU) struktura
 vector<int> parent, sz;
