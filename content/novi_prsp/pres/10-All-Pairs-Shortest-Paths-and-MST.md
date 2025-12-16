@@ -66,7 +66,7 @@ Ovi pristupi mogu biti prespori za guste grafove. Danas učimo **Floyd-Warshall*
 
 # Problem minimalnog razapinjućeg stabla (MST) (1/2)
 
-![w:800px center](../../../img/graph_vs_minimum_spanning_tree.png)
+![w:800px center](/teaching/img/graph_vs_minimum_spanning_tree.png)
 **Prikaz razlike između grafa i MST-a**
 
 Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/discrete_mathematics/discrete_mathematics_spanning_trees.htm)
