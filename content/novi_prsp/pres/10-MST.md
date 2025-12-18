@@ -184,7 +184,7 @@ long long total_weight = 0;
 
 while (!q.empty()) {
     int u = q.top().second;
-    long long w = -q.top().first;
+    long long w = -q.top().first; // Vraćamo iz minusa u plus
     q.pop();
 
     if (visited[u]) continue;
@@ -193,6 +193,8 @@ while (!q.empty()) {
 
     for (auto edge : adj[u]) {
         if (!visited[edge.first]) {
+            // edge.second je težina, edge.first je susjed
+            // edge.second dodajemo kao negativnu vrijednost
             q.push({-edge.second, edge.first});
         }
     }
