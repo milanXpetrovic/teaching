@@ -283,7 +283,7 @@ Za efikasnu provjeru jesu li gradovi već povezani koristimo **Union-Find (DSU)*
 
 ---
 
-# Implementacija: Strukture
+# Implementacija: Strukture i usporediBridove
 
 ```cpp
 #include <iostream>
@@ -299,9 +299,6 @@ struct Edge {
 bool usporediBridove(const Edge& a, const Edge& b) {
     return a.weight < b.weight;
 }
-
-// unutar maina pozovemo
-// sort(edges.begin(), edges.end(), usporediBridove);
 
 ```
 
@@ -320,7 +317,7 @@ Izvor: [Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_
 
 ## "Tko je ovdje šef?"
 
-Zamisli da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj šef.
+Zamislite da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj šef.
 
 Cilj nam je efikasno pratiti tko pripada kojoj ekipi dok spajamo gradove cestama.
 
@@ -394,7 +391,7 @@ int main() {
     }
 
     // 1. Sortiranje bridova
-    sort(edges.begin(), edges.end());
+    sort(edges.begin(), edges.end(), usporediBridove);
 
     // 2. Inicijalizacija DSU
     parent.resize(n + 1);
