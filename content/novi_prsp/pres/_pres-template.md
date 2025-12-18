@@ -52,7 +52,7 @@ Izvor: [text](link)
 # Prezentacija u pdf
 
 ```bash
-marp file.md --pdf --theme-set beam.css --allow-local-files
+marp file.md --html --theme-set beam.css --allow-local-files
 ```
 
 ---
