@@ -155,7 +155,7 @@ section::after {
 ;" data-marpit-pagination-total="40" data-size="16:9">
 <header>Minimalno razapinjuće stablo (MST)</header>
 <h1 id="problem-minimalnog-razapinju%C4%87eg-stabla-mst-12">Problem minimalnog razapinjućeg stabla (MST) (1/2)</h1>
-<p><img src="/teaching/img/graph_vs_minimum_spanning_tree.png" alt="center" style="width:800px;" /><br />
+<p><img src="/teaching/img/graph_vs_minimum_spanning_tree.png" alt="center" style="width:500px;" /><br />
 <strong>Prikaz razlike između grafa i MST-a</strong></p>
 <p>Izvor: <a href="https://www.tutorialspoint.com/discrete_mathematics/discrete_mathematics_spanning_trees.htm">Discrete Mathematics - Spanning Trees</a></p>
 <footer>Programiranje za rješavanje složenih problema | Vježbe 2025/26</footer>
@@ -361,7 +361,7 @@ section::after {
 <header>Minimalno razapinjuće stablo (MST)</header>
 
 <h1 id="3-minimalno-razapinju%C4%87e-stablo-mst-13">3. Minimalno Razapinjuće Stablo (MST) (1/3)</h1>
-<h2 id="problem-1-kruskalov-algoritam">Problem 1: Kruskalov algoritam</h2>
+<h2 id="kruskalov-algoritam">Kruskalov algoritam</h2>
 <p><strong>Pohlepna strategija:</strong></p>
 <blockquote>
 <p>&quot;Na svakom koraku, dodaj najlakši brid u grafu koji ne stvara ciklus.&quot;</p>
@@ -436,7 +436,7 @@ section::after {
 ;" data-marpit-pagination-total="40" data-size="16:9">
 <header>Minimalno razapinjuće stablo (MST)</header>
 <h1 id="3-minimalno-razapinju%C4%87e-stablo-mst-23">3. Minimalno Razapinjuće Stablo (MST) (2/3)</h1>
-<h2 id="kruskalov-algoritam">Kruskalov algoritam</h2>
+<h2 id="kruskalov-algoritam-1">Kruskalov algoritam</h2>
 <p><img src="../../../img/kruskal-algorithm-animation.gif" alt="center" style="width:350px;" /><br />
 <strong>Vizualizacija Krsukalova algoritma</strong><br />
 Izvor: <a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">Kruskal's algorithm</a></p>
@@ -789,7 +789,7 @@ q.<span class="hljs-built_in">push</span>({<span class="hljs-number">0</span>, <
 
 <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) {
     <span class="hljs-type">int</span> u = q.<span class="hljs-built_in">top</span>().second;
-    <span class="hljs-type">long</span> <span class="hljs-type">long</span> w = -q.<span class="hljs-built_in">top</span>().first;
+    <span class="hljs-type">long</span> <span class="hljs-type">long</span> w = -q.<span class="hljs-built_in">top</span>().first; <span class="hljs-comment">// Vraćamo iz minusa u plus</span>
     q.<span class="hljs-built_in">pop</span>();
 
     <span class="hljs-keyword">if</span> (visited[u]) <span class="hljs-keyword">continue</span>;
@@ -798,11 +798,14 @@ q.<span class="hljs-built_in">push</span>({<span class="hljs-number">0</span>, <
 
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> edge : adj[u]) {
         <span class="hljs-keyword">if</span> (!visited[edge.first]) {
+            <span class="hljs-comment">// edge.second je težina, edge.first je susjed</span>
+            <span class="hljs-comment">// edge.second dodajemo kao negativnu vrijednost</span>
             q.<span class="hljs-built_in">push</span>({-edge.second, edge.first});
         }
     }
 }
 </code></pre>
+<p><strong>Napomena</strong>: Obratiti pažnju na korištenje <strong>negativnih</strong> težina u <code>pq</code>.</p>
 <footer>Programiranje za rješavanje složenih problema | Vježbe 2025/26</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-header="Minimalno razapinjuće stablo (MST)" data-footer="Programiranje za rješavanje složenih problema | Vježbe 2025/26" data-class="lead" data-theme="beam" data-style="section {
@@ -1195,7 +1198,7 @@ section::after {
 ;" data-marpit-pagination-total="40" data-size="16:9">
 <header>Minimalno razapinjuće stablo (MST)</header>
 <h1 id="rubni-slu%C4%8Dajevi-i-zamke">Rubni slučajevi i zamke</h1>
-<h2 id="1-nemogu%C4%87e-rje%C5%A1enje-impossible">1. Nemoguće rješenje (&quot;IMPOSSIBLE&quot;)</h2>
+<h2 id="1-nemogu%C4%87e-rje%C5%A1enje-ispis-impossible">1. Nemoguće rješenje (ispis <code>IMPOSSIBLE</code>)</h2>
 <p>Što ako je graf nepovezan (npr. otok do kojeg ne vodi ni jedna cesta)?</p>
 <ul>
 <li>Ako nakon prolaska kroz sve ceste broj odabranih bridova nije <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="5.254ex" height="1.692ex" role="img" focusable="false" viewBox="0 -666 2322.4 748"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(822.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(1822.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></svg></mjx-container>, rješenje ne postoji.</li>
@@ -1205,7 +1208,7 @@ section::after {
 <ul>
 <li>Cijena ceste <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="0.98ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 433 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g></g></svg></mjx-container> može biti do <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="3.25ex" height="2.005ex" role="img" focusable="false" viewBox="0 -864 1436.6 886"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mn" transform="translate(1033,393.1) scale(0.707)"><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"></path></g></g></g></g></svg></mjx-container>.</li>
 <li>Ukupna cijena može biti <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="16.333ex" height="2.158ex" role="img" focusable="false" viewBox="0 -871.8 7219.2 953.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mn" transform="translate(1033,393.1) scale(0.707)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g></g><g data-mml-node="mo" transform="translate(1658.8,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="msup" transform="translate(2659,0)"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mn" transform="translate(1033,393.1) scale(0.707)"><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"></path></g></g><g data-mml-node="mo" transform="translate(4373.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msup" transform="translate(5429.1,0)"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="TeXAtom" transform="translate(1033,393.1) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(500,0)"></path></g></g></g></g></g></svg></mjx-container>.</li>
-<li><strong>Obavezno</strong> koristi <code>long long</code> za sumu cijena.</li>
+<li>Koristiti <code>long long</code> za sumu cijena.</li>
 </ul>
 <footer>Programiranje za rješavanje složenih problema | Vježbe 2025/26</footer>
 </section>
@@ -1265,7 +1268,7 @@ section::after {
 }
 ;" data-marpit-pagination-total="40" data-size="16:9">
 <header>Minimalno razapinjuće stablo (MST)</header>
-<h1 id="implementacija-strukture">Implementacija: Strukture</h1>
+<h1 id="implementacija-strukture-i-usporedibridove">Implementacija: Strukture i usporediBridove</h1>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
@@ -1274,11 +1277,12 @@ section::after {
 
 <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Edge</span> {
     <span class="hljs-type">int</span> u, v, weight;
-    <span class="hljs-comment">// Sortiranje po težini</span>
-    <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(<span class="hljs-type">const</span> Edge&amp; other) <span class="hljs-type">const</span> {
-        <span class="hljs-keyword">return</span> weight &lt; other.weight;
-    }
 };
+
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">usporediBridove</span><span class="hljs-params">(<span class="hljs-type">const</span> Edge&amp; a, <span class="hljs-type">const</span> Edge&amp; b)</span> </span>{
+    <span class="hljs-keyword">return</span> a.weight &lt; b.weight;
+}
+
 </code></pre>
 <footer>Programiranje za rješavanje složenih problema | Vježbe 2025/26</footer>
 </section>
@@ -1402,7 +1406,7 @@ section::after {
 <header>Minimalno razapinjuće stablo (MST)</header>
 <h1 id="primjena-union-find-dsu-22">Primjena Union-Find (DSU) (2/2)</h1>
 <h2 id="tko-je-ovdje-%C5%A1ef">&quot;Tko je ovdje šef?&quot;</h2>
-<p>Zamisli da je na početku svaki grad (čvor) zasebna &quot;ekipa&quot; i sam je svoj šef.</p>
+<p>Zamislite da je na početku svaki grad (čvor) zasebna &quot;ekipa&quot; i sam je svoj šef.</p>
 <p>Cilj nam je efikasno pratiti tko pripada kojoj ekipi dok spajamo gradove cestama.</p>
 <p><strong>Struktura podržava dvije brze operacije:</strong></p>
 <ol>
@@ -1699,15 +1703,14 @@ section::after {
         cin &gt;&gt; edges[i].u &gt;&gt; edges[i].v &gt;&gt; edges[i].weight;
     }
 
-    <span class="hljs-comment">// 1. Sortiranje bridova</span>
-    <span class="hljs-built_in">sort</span>(edges.<span class="hljs-built_in">begin</span>(), edges.<span class="hljs-built_in">end</span>());
+    <span class="hljs-comment">// sortiranje bridova</span>
+    <span class="hljs-built_in">sort</span>(edges.<span class="hljs-built_in">begin</span>(), edges.<span class="hljs-built_in">end</span>(), usporediBridove);
 
-    <span class="hljs-comment">// 2. Inicijalizacija DSU</span>
-    parent.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);
-    sz.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// inicijalizacija DSU</span>
+    parent.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>); <span class="hljs-comment">// svako svoj &#x27;sef&#x27;</span>
+    sz.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// velicina svake komponente je 1</span>
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) parent[i] = i;
 
-    <span class="hljs-comment">// ... nastavak na idućem slajdu</span>
 </code></pre>
 <footer>Programiranje za rješavanje složenih problema | Vježbe 2025/26</footer>
 </section>
@@ -1771,7 +1774,7 @@ section::after {
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-cpp">    <span class="hljs-type">long</span> <span class="hljs-type">long</span> total_cost = <span class="hljs-number">0</span>;
     <span class="hljs-type">int</span> edges_count = <span class="hljs-number">0</span>;
 
-    <span class="hljs-comment">// 3. Kruskalov algoritam</span>
+    <span class="hljs-comment">// Kruskalov algoritam</span>
     <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges) {
         <span class="hljs-keyword">if</span> (<span class="hljs-built_in">find_set</span>(edge.u) != <span class="hljs-built_in">find_set</span>(edge.v)) {
             <span class="hljs-built_in">unite_sets</span>(edge.u, edge.v);
@@ -1780,7 +1783,7 @@ section::after {
         }
     }
 
-    <span class="hljs-comment">// 4. Provjera rješenja</span>
+    <span class="hljs-comment">// provjera </span>
     <span class="hljs-comment">// MST mora imati točno n-1 bridova da bi povezao n čvorova</span>
     <span class="hljs-keyword">if</span> (edges_count == n - <span class="hljs-number">1</span>) {
         cout &lt;&lt; total_cost &lt;&lt; endl;

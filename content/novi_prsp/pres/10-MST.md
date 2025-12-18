@@ -390,15 +390,14 @@ int main() {
         cin >> edges[i].u >> edges[i].v >> edges[i].weight;
     }
 
-    // 1. Sortiranje bridova
+    // sortiranje bridova
     sort(edges.begin(), edges.end(), usporediBridove);
 
-    // 2. Inicijalizacija DSU
-    parent.resize(n + 1);
-    sz.resize(n + 1, 1);
+    // inicijalizacija DSU
+    parent.resize(n + 1); // svako svoj 'sef'
+    sz.resize(n + 1, 1); // velicina svake komponente je 1
     for (int i = 1; i <= n; i++) parent[i] = i;
 
-    // ... nastavak na idućem slajdu
 ```
 
 ---
@@ -409,7 +408,7 @@ int main() {
     long long total_cost = 0;
     int edges_count = 0;
 
-    // 3. Kruskalov algoritam
+    // Kruskalov algoritam
     for (const auto& edge : edges) {
         if (find_set(edge.u) != find_set(edge.v)) {
             unite_sets(edge.u, edge.v);
@@ -418,7 +417,7 @@ int main() {
         }
     }
 
-    // 4. Provjera rješenja
+    // provjera 
     // MST mora imati točno n-1 bridova da bi povezao n čvorova
     if (edges_count == n - 1) {
         cout << total_cost << endl;
