@@ -82,7 +82,7 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 
 # 3. Minimalno Razapinjuće Stablo (MST) (1/3)
 
-## Problem 1: Kruskalov algoritam
+## Kruskalov algoritam
 
 **Pohlepna strategija:**
 > "Na svakom koraku, dodaj najlakši brid u grafu koji ne stvara ciklus."
