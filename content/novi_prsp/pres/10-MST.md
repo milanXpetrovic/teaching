@@ -201,8 +201,6 @@ while (!q.empty()) {
 }
 ```
 
-**Napomena**: Obratiti pažnju na korištenje **negativnih** težina u `pq`.
-
 ---
 
 <!-- _class: lead -->
@@ -573,6 +571,11 @@ int main() {
     cin >> n >> m;
 
     init_dsu(n);
+    // num_components = n;
+    // max_component_size = 1;
+    // parent.resize(n + 1);
+    // sz.resize(n + 1, 1); 
+    // for (int i = 1; i <= n; i++) parent[i] = i;
 
     for (int i = 0; i < m; i++) {
         int u, v;
