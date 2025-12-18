@@ -268,7 +268,7 @@ Za efikasnu provjeru jesu li gradovi već povezani koristimo **Union-Find (DSU)*
 
 # Rubni slučajevi i zamke
 
-## 1. Nemoguće rješenje ("IMPOSSIBLE")
+## 1. Nemoguće rješenje (ispis `IMPOSSIBLE`)
 
 Što ako je graf nepovezan (npr. otok do kojeg ne vodi ni jedna cesta)?
 
@@ -279,7 +279,7 @@ Za efikasnu provjeru jesu li gradovi već povezani koristimo **Union-Find (DSU)*
 
 - Cijena ceste $c$ može biti do $10^9$.
 - Ukupna cijena može biti $10^5 \times 10^9 = 10^{14}$.
-- **Obavezno** koristi `long long` za sumu cijena.
+- Koristiti `long long` za sumu cijena.
 
 ---
 
