@@ -73,7 +73,6 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 - **Competitive Programmer's Handbook (CPH):**
   - Poglavlje 15: *Spanning trees*
 - **CLRS (Introduction to Algorithms):**
-  - Poglavlje 25: *All-Pairs Shortest Paths*
   - Poglavlje 23: *Minimum Spanning Trees*
   - Poglavlje 21: *Data Structures for Disjoint Sets*
 
@@ -212,8 +211,6 @@ while (!q.empty()) {
   - Klasičan MST (Prim ili Kruskal).
 - **[Road Construction](https://cses.fi/problemset/task/1676)**
   - Praćenje veličine komponenata (Union-Find).
-- **[Flight Routes Check](https://cses.fi/problemset/task/1682)**
-  - Jaka povezanost.
 
 ---
 
@@ -640,7 +637,6 @@ Prilikom rješavanja zadataka, obratite pažnju na sljedeće:
 1. **Tipovi podataka:** Suma težina u MST-u često prelazi `int`. Koristite **`long long`**!
 2. **Vrsta grafa:**
    - **Neusmjeren:** Povezanost se lako provjerava BFS-om ili DSU-om.
-   - **Usmjeren:** Za jaku povezanost trebate **2x DFS** (pravi i obrnuti graf).
 
 ---
 
