@@ -405,7 +405,6 @@ int main() {
 ```cpp
     long long total_cost = 0;
     int edges_count = 0;
-
     // Kruskalov algoritam
     for (const auto& edge : edges) {
         if (find_set(edge.u) != find_set(edge.v)) {
@@ -414,7 +413,6 @@ int main() {
             edges_count++;
         }
     }
-
     // provjera 
     // MST mora imati točno n-1 bridova da bi povezao n čvorova
     if (edges_count == n - 1) {
@@ -425,7 +423,6 @@ int main() {
         if (n == 1) cout << 0 << endl; 
         else cout << "IMPOSSIBLE" << endl;
     }
-
     return 0;
 }
 ```
@@ -535,7 +532,7 @@ int find_set(int v) {
 
 ---
 
-# Implementacija: logika spajanja (unite)
+# Implementacija: Logika spajanja (unite)
 
 Ovo je glavni dio rješenja. Ovdje ažuriramo tražene vrijednosti.
 
@@ -560,7 +557,7 @@ void unite_sets(int a, int b) {
 
 ---
 
-# Implementacija: glavni program
+# Implementacija: Glavni program
 
 ```cpp
 int main() {
