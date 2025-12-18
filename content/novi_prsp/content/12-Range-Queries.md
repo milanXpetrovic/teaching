@@ -208,12 +208,12 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 
 ### CSES Problem Set ([https://cses.fi/problemset/](https://cses.fi/problemset/))
 
-* ***Static Range Sum Queries:** Idealno za vježbu prefiksnih suma.
-* ***Static Range Minimum Queries:** Može se riješiti segmentnim stablom. Pokušajte implementirati rješenje za min, a ne za sum.
-* ***Dynamic Range Sum Queries:** Riješite problem koristeći Fenwick stablo, a zatim i segmentno stablo, te usporedite implementacije.
-* ***Dynamic Range Minimum Queries:** Klasičan problem za segmentno stablo.
-* ***Range Xor Queries:** Primjer gdje Fenwick stablo nije direktno primjenjivo, ali segmentno stablo jest. Potrebno je samo promijeniti operaciju spajanja iz `+` u `^` (XOR).
-* ***Hotel Queries:** Zanimljiv problem koji zahtijeva pretraživanje po segmentnom stablu. Traži se prvi hotel s dovoljno slobodnih soba, što je nestandardni upit, ali se efikasno rješava rekurzivnom prirodom segmentnog stabla.
+* **Static Range Sum Queries:** Idealno za vježbu prefiksnih suma.
+* **Static Range Minimum Queries:** Može se riješiti segmentnim stablom. Pokušajte implementirati rješenje za min, a ne za sum.
+* **Dynamic Range Sum Queries:** Riješite problem koristeći Fenwick stablo, a zatim i segmentno stablo, te usporedite implementacije.
+* **Dynamic Range Minimum Queries:** Klasičan problem za segmentno stablo.
+* **Range Xor Queries:** Primjer gdje Fenwick stablo nije direktno primjenjivo, ali segmentno stablo jest. Potrebno je samo promijeniti operaciju spajanja iz `+` u `^` (XOR).
+* **Hotel Queries:** Zanimljiv problem koji zahtijeva pretraživanje po segmentnom stablu. Traži se prvi hotel s dovoljno slobodnih soba, što je nestandardni upit, ali se efikasno rješava rekurzivnom prirodom segmentnog stabla.
 
 ### Codeforces
 
