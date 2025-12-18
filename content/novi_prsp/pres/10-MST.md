@@ -199,6 +199,8 @@ while (!q.empty()) {
 }
 ```
 
+**Napomena**: Obratiti pažnju na korištenje **negativnih** težina u `pq`.
+
 ---
 
 <!-- _class: lead -->
