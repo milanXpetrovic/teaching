@@ -294,11 +294,15 @@ using namespace std;
 
 struct Edge {
     int u, v, weight;
-    // Sortiranje po težini
-    bool operator<(const Edge& other) const {
-        return weight < other.weight;
-    }
 };
+
+bool usporediBridove(const Edge& a, const Edge& b) {
+    return a.weight < b.weight;
+}
+
+// unutar maina pozovemo
+// sort(edges.begin(), edges.end(), usporediBridove);
+
 ```
 
 ---
