@@ -550,11 +550,11 @@ void unite_sets(int a, int b) {
         // Union by size optimizacija: manje stablo ide pod veće
         if (sz[a] < sz[b]) swap(a, b);
         
-        parent[b] = a;       // Spajamo b pod a
-        sz[a] += sz[b];      // Ažuriramo veličinu korijena a
+        parent[b] = a; // Spajamo b pod a
+        sz[a] += sz[b]; // Ažuriramo veličinu korijena a
         
         // Ažuriranje globalnih brojaca
-        num_components--;    // Jedna komponenta manje
+        num_components--; // Jedna komponenta manje
         max_component_size = max(max_component_size, sz[a]);
     }
 }
