@@ -21,7 +21,7 @@ has_toc: true
 | 7. | **Dinamičko programiranje II. dio** | [Skripta](../content/07-Advanced-Dynamic-Programming) · [Prezentacija](../pres/07-Advanced-Dynamic-Programming.html) |
 | 8. | **Putovanje kroz graf** | [Skripta](../content/08-Graph-Traversal) · [Prezentacija](../pres/08-Graph-Traversal.html) |
 | 9. | **Najkraći putovi u grafu** | [Skripta](../content/09-Shortest-Paths) · [Prezentacija](../pres/09-Shortest-Paths.html) |
-| 10. | **Najkraći putevi i MST** | [Skripta](../content/10-All-Pairs-Shortest-Paths-and-MST) · [Prezentacija](../pres/10-All-Pairs-Shortest-Paths-and-MST.html) |
+| 10. | **Najkraći putevi i MST** | [Skripta](../content/10-MST) · [Prezentacija](../pres/10-All-Pairs-Shortest-Paths-and-MST.html) |
 | 11. | **Mrežni tokovi i jake komponente** | [Skripta](../content/11-Flows-Matchings-and-SCC) · [Prezentacija](../pres/11-Flows-Matchings-and-SCC.html) |
 | 12. | **Upiti nad rasponima** | [Skripta](../content/12-Range-Queries) · [Prezentacija](../pres/12-Range-Queries.html) |
 | 13. | **Teorija brojeva i kombinatorika** | [Skripta](../content/13-Number-Theory-and-Combinatorics) · [Prezentacija](../pres/13-Number-Theory-and-Combinatorics.html) |
