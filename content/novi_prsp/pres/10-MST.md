@@ -647,3 +647,9 @@ Do sada bi trebali moći riješiti većinu zadataka sa tagom `graphs` ili `dfs a
 
 - **[DZY Loves Bridges](https://codeforces.com/problemset/problem/445/B)** (Problem 445B): Brojanje povezanih komponenata i primjena Kruskalovog principa za spajanje uz minimalan trošak.
 - **[Edgy Trees](https://codeforces.com/problemset/problem/1139/C)** (Problem 1131C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
+
+---
+
+# Sretni blagdani!
+
+![center](https://media.istockphoto.com/id/1281596611/photo/happy-old-santa-claus-wearing-hat-holding-gift-box-using-laptop-computer-sitting-at-workshop.jpg?s=612x612&w=0&k=20&c=08djNS6Rqj1si3Pjlxu5LZnFTjFah803V6wjXa3o_kQ=)
