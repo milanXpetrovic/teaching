@@ -256,6 +256,192 @@ Tražite zadatke s tagom `greedy` težine 800-1200.
 ---
 
 <!-- _class: title -->
+# Movie Festival (CSES)
+
+## Activity Selection u praksi
+
+---
+
+# Analiza: Movie Festival
+
+**Problem:**
+U kinu se prikazuje $n$ filmova. Svaki ima vrijeme početka i kraja.
+Želimo pogledati **maksimalan broj filmova** u cijelosti (bez preklapanja).
+
+### Intuicija
+Ovo je identičan problem kao **Activity Selection**.
+Pohlepna strategija: Uvijek biraj film koji **najranije završava**, a da ne počinje prije nego što je prethodni završio.
+
+Zašto? Time ostavljamo najviše vremena za ostale filmove.
+
+---
+
+# Implementacija: Movie Festival
+
+```cpp
+int n; cin >> n;
+vector<pair<int, int>> movies(n);
+for(int i=0; i<n; ++i) 
+    cin >> movies[i].second >> movies[i].first; // Učitaj kao {kraj, početak}
+
+sort(movies.begin(), movies.end()); // Sortira po kraju (first)
+
+int count = 0;
+int current_time = 0;
+
+for(auto m : movies) {
+    if(m.second >= current_time) { // m.second je početak
+        count++;
+        current_time = m.first; // m.first je kraj
+    }
+}
+cout << count << endl;
+```
+
+---
+
+<!-- _class: title -->
+# Stick Lengths (CSES)
+
+## Medijan kao optimalna točka
+
+---
+
+# Analiza: Stick Lengths
+
+**Problem:**
+Imamo $n$ štapova duljina $p_1, p_2, \dots, p_n$.
+Želimo ih sve skratiti ili produžiti na istu duljinu $x$.
+Cijena promjene je $|p_i - x|$. Minimiziraj ukupnu cijenu $\sum |p_i - x|$.
+
+### Intuicija
+Tražimo broj $x$ koji minimizira sumu apsolutnih udaljenosti.
+- Da je kvadratna udaljenost $(p_i - x)^2$, to bi bio prosjek (mean).
+- Za apsolutnu udaljenost, to je **medijan**.
+
+Ako sortiramo niz, medijan je element na sredini (`p[n/2]`).
+
+---
+
+# Implementacija: Stick Lengths
+
+```cpp
+int n; cin >> n;
+vector<int> p(n);
+for(int i=0; i<n; ++i) cin >> p[i];
+
+sort(p.begin(), p.end());
+
+int median = p[n / 2];
+long long cost = 0;
+
+for(int x : p) {
+    cost += abs(x - median);
+}
+
+cout << cost << endl;
+```
+**Napomena:** Koristite `long long` za cijenu jer suma može biti velika!
+
+---
+
+<!-- _class: title -->
+# Tasks and Deadlines (CSES)
+
+## Minimizacija kazne
+
+---
+
+# Analiza: Tasks and Deadlines
+
+**Problem:**
+Imamo $n$ zadataka. Svaki traje $a_i$ i ima rok $d_i$.
+Za svaki zadatak dobivamo nagradu $d_i - f_i$, gdje je $f_i$ vrijeme završetka.
+Maksimiziraj ukupnu nagradu.
+
+### Intuicija
+Ukupna nagrada = $\sum (d_i - f_i) = \sum d_i - \sum f_i$.
+$\sum d_i$ je konstanta (ne ovisi o redoslijedu).
+Da bismo maksimizirali izraz, moramo **minimizirati $\sum f_i$** (sumu vremena završetaka).
+
+Suma završetaka je minimalna ako **kraće zadatke radimo prve**.
+(Ako imamo zadatke trajanja 2 i 10: redoslijed 2, 10 daje završetke 2 i 12 (suma 14). Redoslijed 10, 2 daje 10 i 12 (suma 22)).
+
+---
+
+# Implementacija: Tasks and Deadlines
+
+```cpp
+int n; cin >> n;
+vector<pair<int, int>> tasks(n);
+for(int i=0; i<n; ++i) cin >> tasks[i].first >> tasks[i].second; // {trajanje, rok}
+
+sort(tasks.begin(), tasks.end()); // Sortiraj po trajanju
+
+long long current_time = 0;
+long long reward = 0;
+
+for(auto t : tasks) {
+    current_time += t.first;
+    reward += (t.second - current_time);
+}
+
+cout << reward << endl;
+```
+
+---
+
+<!-- _class: title -->
+# Towers (CSES)
+
+## Pohlepno slaganje i Multiset
+
+---
+
+# Analiza: Towers
+
+**Problem:**
+Imamo $n$ kocaka različitih veličina koje dolaze jedna po jedna.
+Kocku možemo staviti na vrh postojećeg tornja ako je manja od trenutne vršne kocke. Inače započinjemo novi toranj.
+Minimiziraj broj tornjeva.
+
+### Intuicija
+Kad dođe kocka veličine $X$, na koji toranj je staviti?
+Želimo "potrošiti" toranj čiji je vrh **najmanji mogući, ali veći od $X$**.
+Zašto? Da bismo veće vrhove sačuvali za veće kocke koje možda dođu kasnije.
+
+Koristimo `multiset` za praćenje vrhova svih tornjeva. Za $X$ tražimo `upper_bound(X)`.
+
+---
+
+# Implementacija: Towers
+
+```cpp
+int n; cin >> n;
+multiset<int> towers;
+
+for(int i=0; i<n; ++i) {
+    int x; cin >> x;
+    
+    // Nađi najmanji vrh koji je strogo veći od x
+    auto it = towers.upper_bound(x);
+    
+    if(it == towers.end()) {
+        // Nema takvog tornja, moramo napraviti novi
+        towers.insert(x);
+    } else {
+        // Proširujemo postojeći toranj
+        // Mičemo stari vrh i stavljamo novi (x)
+        towers.erase(it);
+        towers.insert(x);
+    }
+}
+cout << towers.size() << endl;
+```
+
+---
+
+<!-- _class: title -->
 # Zaključak i najbitnije napomene
 
 ---
@@ -283,5 +469,3 @@ Tražite zadatke s tagom `greedy` težine 800-1200.
   - Prije kodiranja, probaj naći mali testni slučaj gdje tvoja ideja pada u vodu.
 - **Ako pohlepno ne radi:**
   - Vjerojatno trebaš **Dinamičko programiranje** (DP).
-
----

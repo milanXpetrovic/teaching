@@ -246,10 +246,164 @@ Složenost: $O(N \log (\text{max\_dist}))$.
 
 ---
 
+<!-- _class: title -->
+# Sum of Two Values (CSES)
+
+## Two Pointers ili Binary Search
+
+---
+
+# Analiza: Sum of Two Values
+
+**Problem:**
+Zadan je niz od $n$ cijelih brojeva i ciljni zbroj $x$.
+Pronađi **indekse** dva broja čiji je zbroj točno $x$.
+
+### Pristup 1: Sortiranje + Binarno pretraživanje
+1. Spremimo parove `{vrijednost, originalni_indeks}`.
+2. Sortiramo niz.
+3. Za svaki element $a$, tražimo $x - a$ u ostatku niza koristeći binarno pretraživanje.
+**Složenost:** $O(N \log N)$.
+
+### Pristup 2: Two Pointers (Dva pokazivača)
+1. Sortiramo niz.
+2. Postavimo $L=0, R=N-1$.
+3. Ako je $A[L] + A[R] < x \implies L++$.
+4. Ako je $A[L] + A[R] > x \implies R--$.
+
+---
+
+# Implementacija: Sum of Two Values
+
+```cpp
+int n, target; cin >> n >> target;
+vector<pair<int, int>> a(n);
+for(int i=0; i<n; ++i) {
+    cin >> a[i].first;
+    a[i].second = i + 1; // 1-based indeksiranje
+}
+sort(a.begin(), a.end());
+
+int l = 0, r = n - 1;
+while(l < r) {
+    int sum = a[l].first + a[r].first;
+    if(sum == target) {
+        cout << a[l].second << " " << a[r].second << endl;
+        return 0;
+    }
+    if(sum < target) l++;
+    else r--;
+}
+cout << "IMPOSSIBLE" << endl;
+```
+
+---
+
+<!-- _class: title -->
+# Factory Machines (CSES)
+
+## Binarno pretraživanje po rješenju
+
+---
+
+# Analiza: Factory Machines
+
+**Problem:**
+Imamo $n$ strojeva. Stroj $i$ treba $k_i$ sekundi za jedan proizvod.
+Koliko je minimalno vremena potrebno za proizvodnju $t$ proizvoda?
+
+### Intuicija (BS on Answer)
+Ako možemo proizvesti $t$ proizvoda u vremenu $T$, možemo i u vremenu $T+1$.
+Funkcija "mogu li proizvesti" je monotona.
+
+**Check funkcija:**
+Za zadano vrijeme `time`, stroj $i$ proizvede $\lfloor \text{time} / k_i \rfloor$ proizvoda.
+Ukupno proizvoda = $\sum \lfloor \text{time} / k_i \rfloor$.
+Paziti na overflow (suma može preći $t$, limitiramo je).
+
+---
+
+# Implementacija: Factory Machines
+
+```cpp
+long long n, t; cin >> n >> t;
+vector<long long> k(n);
+for(int i=0; i<n; ++i) cin >> k[i];
+
+long long l = 0, r = 1e18, ans = 1e18; // 1e18 je sigurna gornja granica
+
+while(l <= r) {
+    long long mid = l + (r - l) / 2;
+    long long products = 0;
+    for(long long x : k) {
+        products += mid / x;
+        if(products >= t) break; // Optimizacija i zaštita od overflowa
+    }
+
+    if(products >= t) {
+        ans = mid;
+        r = mid - 1;
+    } else {
+        l = mid + 1;
+    }
+}
+cout << ans << endl;
+```
+
+---
+
+<!-- _class: title -->
+# Towers (CSES)
+
+## Pohlepni pristup s Multisetom
+
+---
+
+# Analiza: Towers
+
+**Problem:**
+Kocke dolaze jedna po jedna. Kocku veličine $X$ možemo staviti na vrh postojećeg tornja ako je vrh tog tornja **strogo veći** od $X$.
+Inače započinjemo novi toranj. Minimiziraj broj tornjeva.
+
+### Intuicija
+Pohlepno: Kocku $X$ stavi na toranj čiji je vrh **najmanji mogući, ali veći od $X$**.
+Zašto? Čuvamo velike vrhove za velike kocke koje dolaze kasnije.
+Trebamo strukturu koja podržava:
+1. Nađi najmanji element $> X$.
+2. Obriši ga i ubaci $X$.
+
+Koristimo `std::multiset` i `upper_bound`.
+
+---
+
+# Implementacija: Towers
+
+```cpp
+int n; cin >> n;
+multiset<int> towers;
+
+for(int i=0; i<n; ++i) {
+    int x; cin >> x;
+    
+    // upper_bound vraća iterator na prvi element strogo veći od x
+    auto it = towers.upper_bound(x);
+    
+    if(it == towers.end()) {
+        // Nema većeg elementa -> novi toranj
+        towers.insert(x);
+    } else {
+        // Našli smo toranj -> zamijeni vrh
+        towers.erase(it);
+        towers.insert(x);
+    }
+}
+cout << towers.size() << endl;
+```
+
+---
+
 <!-- _class: lead -->
 
 # Pitanja?
 
 Sljedeća lekcija: Uvod u dinamičko programiranje
-
-```
