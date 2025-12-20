@@ -1,39 +1,27 @@
 ---
 marp: true
-theme: beam
+theme: uniri-beam
 size: 16:9
 paginate: true
 math: mathjax
 header: "Upiti nad rasponima (Range Queries)"
 footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
-style: |
-  section {
-    font-size: 24px;
-  }
-  code {
-    font-size: 18px; /* Optimizes code readability */
-  }
-  h1 {
-    font-size: 40px;
-    color: #000000ff;
-  }
-  h2 {
-    font-size: 32px;
-    color: #000000ff;
-  }
-  strong{
-    color: #ff0000ff;
-  }
-  section::after {
-    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
-    font-weight: bold;
-    font-size: 20px;
-    color: #6e6e6eff;
-    position: absolute;
-    bottom: 25px; 
-    right: 30px;
-    z-index: 999; /* Osigurava da je broj IZNAD footera */
-  }
+  
+---
+
+
+---
+
+### 8. Slajd: Hotel Queries (Spuštanje po stablu)
+
+Ovo je napredniji koncept (Binary search on Tree).
+
+* **Gdje:** Slajd "Intuicija: Max Segment Tree".
+* **Što tražiti (Keywords):** `segment tree traversal descent path`
+* **Opis slike:** Prikaz segmentnog stabla gdje je jedna putanja od korijena do nekog lista obojana (npr. crveno). To vizualizira "šetnju" kroz stablo ovisno o uvjetu (`tree[node] >= val`).
+
+---
+
 ---
 
 <!-- _class: title -->
@@ -47,13 +35,13 @@ style: |
 ## Sadržaj
 
 1. **Uvod i Motivacija**
-   - Što su upiti nad rasponima?
-   - Zašto je naivni pristup prespor?
+   * Što su upiti nad rasponima?
+   * Zašto je naivni pristup prespor?
 2. **Statički Upiti**
-   - Prefiksne sume
+   * Prefiksne sume
 3. **Dinamički Upiti (Ažuriranje točke)**
-   - Fenwick stablo (Binary Indexed Tree)
-   - Segmentno stablo
+   * Fenwick stablo (Binary Indexed Tree)
+   * Segmentno stablo
 4. **Zadaci za vježbu**
 
 ---
@@ -72,20 +60,19 @@ Imamo niz $A$. Želimo efikasno odgovarati na pitanja o podnizu (rasponu) $[L, R
 
 Ako za svaki upit vrtimo petlju od $L$ do $R$:
 
-- Složenost jednog upita: $O(N)$
-- Za $Q$ upita: **$O(N \cdot Q)$**
-- Za $N, Q = 10^5$, to je $10^{10}$ operacija $\to$ **Time Limit Exceeded (TLE)**.
+* Složenost jednog upita: $O(N)$
+* Za $Q$ upita: **$O(N \cdot Q)$**
+* Za $N, Q = 10^5$, to je $10^{10}$ operacija $\to$ **Time Limit Exceeded (TLE)**.
 
 Cilj: **$O(\log N)$** ili **$O(1)$** po upitu.
 
 ---
 
-## 1. Statički Upiti: Prefiksne Sume
+# Statički upiti: Prefiksne Sume (1/2)
 
 Ako se niz **ne mijenja** (nema update-a), možemo koristiti prefiksne sume.
 
-**Ideja:**
-`P[i]` sadrži zbroj prvih $i$ elemenata: $A[0] + \dots + A[i-1]$.
+**Ideja:** `P[i]` sadrži zbroj prvih $i$ elemenata: $A[0] + \dots + A[i-1]$.
 
 **Izgradnja $O(N)$:**
 
@@ -96,32 +83,43 @@ for (int i = 0; i < n; ++i) {
 }
 ```
 
-**Upit $O(1)$:**
-Zbroj raspona $[L, R]$ (inkluzivno, 0-indeksirano) je:
+**Upit $O(1)$:** Zbroj raspona $[L, R]$ (inkluzivno, 0-indeksirano) je:
 $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 ---
 
-# 2. Dinamički upiti: Motivacija
+# Statički upiti: Prefiksne Sume (2/2)
+
+![w:900px center](/img/prsp/range-queries/prefiksne-sume-vizualizacija.png)
+
+---
+
+# Dinamički upiti: Motivacija
 
 Što ako se vrijednosti u nizu **mijenjaju**?
 
-- Prefiksne sume zahtijevaju ponovnu izgradnju: $O(N)$ po promjeni.
-- Trebamo strukturu koja podržava i **Update** i **Query** brzo.
+* Prefiksne sume zahtijevaju ponovnu izgradnju: $O(N)$ po promjeni.
+* Trebamo strukturu koja podržava i **Update** i **Query** brzo.
 
-### Fenwick stablo (Binary Indexed Tree - BIT)
+## Fenwick stablo (Binary Indexed Tree - BIT)
 
-- Podržava **Point Update** i **Range Sum**.
+* Podržava **Point Update** i **Range Sum**.
 
-- Složenost: **$O(\log N)$** za obje operacije.
-- Memorija: **$O(N)$**.
-- Jako malo koda, bazira se na bitovnim operacijama.
+* Složenost: **$O(\log N)$** za obje operacije.
+* Memorija: **$O(N)$**.
+* Jako malo koda, bazira se na bitovnim operacijama.
 
 **Intuicija:** Svaki indeks $k$ pamti sumu određenog raspona definiranog najvećom potencijom broja 2 koja dijeli $k$ (LSB).
 
 ---
 
-# Fenwick stablo: implementacija
+# Fenwick stablo
+
+![center](/img/prsp/range-queries/fenwick-tree-structure-fixed.png)
+
+---
+
+# Fenwick stablo: implementacija (1/2)
 
 Koristimo bitovne trikove za kretanje po stablu.
 *(Implementacija za 0-based indeksiranje)*
@@ -149,28 +147,40 @@ long long query(int l, int r) {
 
 ---
 
-# 3. Segmentno Stablo
+# Fenwick stablo: implementacija (2/2)
 
-Fleksibilnije od Fenwick stabla. Podržava:
-
-- Sum, Min, Max, GCD, XOR...
-- Čak i složenije operacije (npr. max subsegment sum).
-
-**Struktura:**
-
-- Binarno stablo izgrađeno nad nizom.
-- **Listovi:** Elementi originalnog niza.
-- **Unutarnji čvorovi:** Agregat (npr. zbroj) svoje djece.
-
-**Složenost:**
-
-- Izgradnja: $O(N)$
-- Upit: $O(\log N)$
-- Ažuriranje: $O(\log N)$
+![center](/img/prsp/range-queries/fenwick-update-path-fixed.png)
 
 ---
 
-## Segmentno Stablo: Implementacija (Rekurzivna)
+# Segmentno stablo
+
+Fleksibilnije od Fenwick stabla. Podržava:
+
+* Sum, Min, Max, GCD, XOR...
+* Čak i složenije operacije (npr. max subsegment sum).
+
+**Struktura:**
+
+* Binarno stablo izgrađeno nad nizom.
+* **Listovi:** Elementi originalnog niza.
+* **Unutarnji čvorovi:** Agregat (npr. zbroj) svoje djece.
+
+**Složenost:**
+
+* Izgradnja: $O(N)$
+* Upit: $O(\log N)$
+* Ažuriranje: $O(\log N)$
+
+---
+
+# Segmentno stablo: Vizualizacija
+
+![center](/img/prsp/range-queries/segment-tree-structure.png)
+
+---
+
+## Segmentno stablo: Implementacija (Rekurzivna)
 
 ```cpp
 long long tree[4 * N]; // 4x veličina niza
@@ -202,7 +212,13 @@ void update(int node, int start, int end, int idx, int val) {
 
 ---
 
-## Segmentno Stablo: Upit
+# Segmentno stablo: Upit (1/3)
+
+![w:800px center](/img/prsp/range-queries/segment-tree-query-decomposition.png)
+
+---
+
+# Segmentno stablo: Upit (2/3)
 
 Tražimo sumu u rasponu $[l, r]$.
 
@@ -246,13 +262,13 @@ Svaki upit traži zbroj elemenata u rasponu $[a, b]$.
 
 **Ulaz:**
 
-- $N, Q$ ($1 \le N, Q \le 2 \cdot 10^5$)
-- Niz vrijednosti $x_i$ ($1 \le x_i \le 10^9$)
-- $Q$ linija s parovima $(a, b)$.
+* $N, Q$ ($1 \le N, Q \le 2 \cdot 10^5$)
+* Niz vrijednosti $x_i$ ($1 \le x_i \le 10^9$)
+* $Q$ linija s parovima $(a, b)$.
 
 **Izlaz:**
 
-- Zbroj elemenata za svaki upit.
+* Zbroj elemenata za svaki upit.
 
 ---
 
@@ -271,10 +287,10 @@ for(int i = 0; i < q; ++i) {
 
 **Analiza složenosti:**
 
-- Jedan upit: $O(N)$
-- $Q$ upita: $O(N \cdot Q)$
-- Uvrštavanje ograničenja: $(2 \cdot 10^5) \times (2 \cdot 10^5) = 4 \cdot 10^{10}$ operacija.
-- Limit je 1 sekunda ($\approx 10^8$ operacija). Ovo je **presporo (TLE)**.
+* Jedan upit: $O(N)$
+* $Q$ upita: $O(N \cdot Q)$
+* Uvrštavanje ograničenja: $(2 \cdot 10^5) \times (2 \cdot 10^5) = 4 \cdot 10^{10}$ operacija.
+* Limit je 1 sekunda ($\approx 10^8$ operacija). Ovo je **presporo (TLE)**.
 
 ---
 
@@ -303,9 +319,9 @@ $$ \text{Sum}(a, b) = P[b] - P[a-1] $$
 
 **Složenost:**
 
-- **Izgradnja P:** $O(N)$ (jedan prolaz kroz niz).
-- **Upit:** $O(1)$ (samo jedno oduzimanje).
-- **Ukupno:** $O(N + Q)$. Ovo je vrlo brzo.
+* **Izgradnja P:** $O(N)$ (jedan prolaz kroz niz).
+* **Upit:** $O(1)$ (samo jedno oduzimanje).
+* **Ukupno:** $O(N + Q)$. Ovo je vrlo brzo.
 
 ---
 
@@ -319,11 +335,6 @@ $$ \text{Sum}(a, b) = P[b] - P[a-1] $$
 ## Kod rješenja (C++)
 
 ```cpp
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
 int main() {
     // Brži I/O
     ios_base::sync_with_stdio(false);
@@ -339,20 +350,28 @@ int main() {
     for (int i = 1; i <= n; i++) {
         int x;
         cin >> x;
-        // Trenutni prefiks = Prethodni prefiks + trenutna vrijednost
-        P[i] = P[i-1] + x;
+        P[i] = P[i-1] + x; // Trenutni prefiks = Prethodni prefiks + trenutna vrijednost
     }
 
     while (q--) {
         int a, b;
         cin >> a >> b;
-        // Formula za sumu raspona
-        cout << P[b] - P[a-1] << "\n";
+        cout << P[b] - P[a-1] << "\n"; // Formula za sumu raspona
     }
 
     return 0;
 }
 ```
+
+---
+
+# Osvrt: Static Range Sum Queries
+
+## Ključne lekcije
+
+1. **Long Long:** Zbroj niza od $2 \cdot 10^5$ elemenata veličine $10^9$ može biti $2 \cdot 10^{14}$. To ne stane u `int`.
+2. **1-based indeksiranje:** Iako C++ koristi 0-based, u prefiksnim sumama je često lakše koristiti 1-based (`P[0]=0`) kako bi formula `P[R] - P[L-1]` radila i za $L=1$ bez dodatnih `if` uvjeta.
+3. **Ograničenje:** Ova metoda radi isključivo za **statične** nizove. Ako se dogodi *update*, moramo ponovno računati cijeli niz $P$ u $O(N)$.
 
 ---
 
@@ -372,8 +391,8 @@ Svaki upit traži **minimalnu vrijednost** u rasponu $[a, b]$.
 
 **Ograničenja:**
 
-- $N, Q \le 2 \cdot 10^5$.
-- Niz je statičan (nema `update` operacija).
+* $N, Q \le 2 \cdot 10^5$.
+* Niz je statičan (nema `update` operacija).
 
 **Zašto ne prefiksne sume?**
 Kod zbrajanja vrijedi `sum(a, b) = P[b] - P[a-1]`.
@@ -388,8 +407,8 @@ Za statičke upite nad operacijama kao što su `min`, `max`, `gcd` (tzv. idempot
 
 **Performanse:**
 
-- **Izgradnja:** $O(N \log N)$
-- **Upit:** $O(1)$ (Konstantno vrijeme!)
+* **Izgradnja:** $O(N \log N)$
+* **Upit:** $O(1)$ (Konstantno vrijeme!)
 
 **Ideja:**
 Unaprijed izračunamo minimum za sve raspone čija je duljina **potencija broja 2**.
@@ -414,7 +433,7 @@ $$ st[i][j] = \min(st[i][j-1], \quad st[i + 2^{j-1}][j-1]) $$
 
 ---
 
-## Implementacija izgradnje
+# Implementacija izgradnje
 
 ```cpp
 const int MAXN = 200005;
@@ -437,7 +456,7 @@ for (int j = 1; j < K; j++) { // Za svaku potenciju j
 
 ---
 
-## Kako odgovoriti na upit u $O(1)$?
+# Kako odgovoriti na upit u $O(1)$? (1/2)
 
 Želimo minimum u $[L, R]$. Duljina raspona je $len = R - L + 1$.
 Nađemo najveću potenciju $k$ takvu da $2^k \le len$.
@@ -453,7 +472,13 @@ $$ \min(st[L][k], \quad st[R - 2^k + 1][k]) $$
 
 ---
 
-## Kod rješenja (C++)
+# Kako odgovoriti na upit u $O(1)$? (2/2)
+
+![w:900px center](/img/prsp/range-queries/sparse_table_overlap.png)
+
+---
+
+# Implementacija: Priprema konstanti
 
 ```cpp
 #include <iostream>
@@ -462,11 +487,20 @@ $$ \min(st[L][k], \quad st[R - 2^k + 1][k]) $$
 #include <cmath>
 using namespace std;
 
-const int MAXN = 200005;
-const int K = 20; // 2^18 > 200,000
-int st[MAXN][K];
-int logs[MAXN]; // Precomputed logaritmi
+    
+const int MAXN = 200005; // Maksimalni N (obično 2e5 + 5 (da smo sigurni))
+const int K = 20; // Broj razina: 2^20 > 200,000 (dovoljno je i 18)
 
+int st[MAXN][K]; // Glavna tablica
+int logs[MAXN]; // Tablica za brzi logaritam
+  
+```
+
+---
+
+# Implementacija: glavni dio
+
+```cpp
 int main() {
     int n, q; cin >> n >> q;
     // Učitaj i postavi nultu razinu (duljina 1)
@@ -493,13 +527,13 @@ int main() {
 
 ---
 
-## Alternativa: Segmentno stablo
+# Alternativa: Segmentno stablo
 
 Ovaj zadatak se može riješiti i **Segmentnim stablom**.
 
-- **Složenost:** $O(N)$ izgradnja, $O(\log N)$ upit.
-- **Prednost:** Radi i ako se niz mijenja (Dynamic updates).
-- **Nedostatak:** Sporije od Sparse Table za statičke podatke (zbog rekurzije i $\log N$ faktora).
+* **Složenost:** $O(N)$ izgradnja, $O(\log N)$ upit.
+* **Prednost:** Radi i ako se niz mijenja (Dynamic updates).
+* **Nedostatak:** Sporije od Sparse Table za statičke podatke (zbog rekurzije i $\log N$ faktora).
 
 Za potrebe ovog zadatka ($10^5$ upita), Sparse Table je elegantnije rješenje, ali Segmentno stablo bi također prošlo unutar limita.
 
@@ -513,7 +547,7 @@ Za potrebe ovog zadatka ($10^5$ upita), Sparse Table je elegantnije rješenje, a
 
 ---
 
-## Zadatak: Dynamic Range Sum Queries
+# Zadatak: Dynamic Range Sum Queries
 
 **Problem:**
 
@@ -524,19 +558,19 @@ Zadan je niz od $N$ cijelih brojeva. Trebamo obraditi $Q$ upita dva tipa:
 
 **Ograničenja:**
 
-- $N, Q \le 2 \cdot 10^5$.
-- Vremenski limit: 1.00 s.
+* $N, Q \le 2 \cdot 10^5$.
+* Vremenski limit: 1.00 s.
 
 **Ključna razlika od prošlog zadatka:**
 
 Vrijednosti se **mijenjaju**.
 
-- Prefiksne sume bi trebale $O(N)$ za svaki update $\to$ Presporo ($O(NQ)$).
-- Običan niz bi trebao $O(N)$ za svaki zbroj $\to$ Presporo.
+* Prefiksne sume bi trebale $O(N)$ za svaki update $\to$ Presporo ($O(NQ)$).
+* Običan niz bi trebao $O(N)$ za svaki zbroj $\to$ Presporo.
 
 ---
 
-## Rješenje: Fenwickovo Stablo (BIT)
+# Rješenje: Fenwickovo Stablo (BIT)
 
 Trebamo strukturu koja radi obje operacije (Update i Query) u **$O(\log N)$**.
 Fenwickovo stablo je savršen kandidat za probleme sume.
@@ -547,12 +581,12 @@ Svaki indeks `i` pokriva raspon duljine $2^k$, gdje je $k$ broj nula na kraju bi
 
 **Operacije:**
 
-- **Update:** Dodaj vrijednost na indeks `i` i sve njegove "roditelje" u BIT-u.
-- **Query(i):** Zbroji vrijednosti penjući se po stablu (oduzimajući LSB).
+* **Update:** Dodaj vrijednost na indeks `i` i sve njegove "roditelje" u BIT-u.
+* **Query(i):** Zbroji vrijednosti penjući se po stablu (oduzimajući LSB).
 
 ---
 
-## Implementacija BIT-a (1-based indexing)
+# Implementacija BIT-a (1-based indexing)
 
 Fenwick stablo prirodno radi s indeksima od 1 do $N$, što odgovara ulazu zadatka.
 
@@ -579,7 +613,7 @@ long long query(int idx) {
 
 ---
 
-## Zamka: "Set" vs "Add"
+# Zamka: "Set" vs "Add"
 
 Zadatak traži: "Postavi vrijednost na indeksu $k$ na $u$" (**Assignment**).
 BIT podržava: "Dodaj $x$ na indeks $k$" (**Increment**).
@@ -600,7 +634,7 @@ arr[k] = u;
 
 ---
 
-## Upit za raspon $[a, b]$
+# Upit za raspon $[a, b]$
 
 BIT funkcija `query(i)` vraća sumu prefiksa $[1, i]$.
 Zbroj raspona $[a, b]$ dobivamo isto kao kod prefiksnih suma:
@@ -609,7 +643,7 @@ $$ \text{Sum}(a, b) = \text{query}(b) - \text{query}(a - 1) $$
 
 ---
 
-## Potpuni kod rješenja
+# Potpuni kod rješenja: Inicijalizacija
 
 ```cpp
 #include <iostream>
@@ -629,7 +663,13 @@ long long query(int idx) {
     for (; idx > 0; idx -= idx & -idx) sum += bit[idx];
     return sum;
 }
+```
 
+---
+
+# Potpuni kod rješenja
+
+```cpp
 int main() {
     int q; cin >> n >> q;
     bit.resize(n + 1, 0);
@@ -657,18 +697,18 @@ int main() {
 
 ---
 
-## Alternativa: Segmentno Stablo
+# Alternativa: Segmentno Stablo
 
 Ovaj zadatak se može riješiti i **Segmentnim stablom**.
 
-- **Prednosti:** Intuitivnije za "Set value" operaciju (ne treba računati razliku), lakše se proširuje na složenije upite (min/max).
-- **Mane:** Više koda, veća memorijska potrošnja ($4N$ vs $N$), malo sporija konstanta.
+* **Prednosti:** Intuitivnije za "Set value" operaciju (ne treba računati razliku), lakše se proširuje na složenije upite (min/max).
+* **Mane:** Više koda, veća memorijska potrošnja ($4N$ vs $N$), malo sporija konstanta.
 
 Za sumu s ažuriranjem točke, **Fenwick stablo** je obično preferirani izbor u natjecateljskom programiranju zbog brzine pisanja.
 
 ---
 
-## Zadatak: Dynamic Range Minimum Queries
+# Zadatak: Dynamic Range Minimum Queries
 
 **Problem:**
 Zadan je niz od $N$ cijelih brojeva. Trebamo obraditi $Q$ upita dva tipa:
@@ -678,35 +718,35 @@ Zadan je niz od $N$ cijelih brojeva. Trebamo obraditi $Q$ upita dva tipa:
 
 **Ograničenja:**
 
-- $N, Q \le 2 \cdot 10^5$.
-- Vremenski limit: 1.00 s.
+* $N, Q \le 2 \cdot 10^5$.
+* Vremenski limit: 1.00 s.
 
 **Zašto ne prethodne metode?**
 
-- **Prefiksne sume/BIT:** Operacija `min` nema inverz (ne možemo "oduzeti" minimum).
-- **Sparse Table:** Ne podržava efikasno ažuriranje vrijednosti (zahtijeva ponovnu izgradnju).
+* **Prefiksne sume/BIT:** Operacija `min` nema inverz (ne možemo "oduzeti" minimum).
+* **Sparse Table:** Ne podržava efikasno ažuriranje vrijednosti (zahtijeva ponovnu izgradnju).
 
 Rješenje: **Segmentno Stablo**.
 
 ---
 
-## Segmentno Stablo: Struktura
+# Segmentno stablo: Struktura
 
 Segmentno stablo je binarno stablo izgrađeno nad nizom.
 
-- **Listovi:** Sadrže elemente originalnog niza.
-- **Unutarnji čvorovi:** Sadrže minimum svoje djece.
+* **Listovi:** Sadrže elemente originalnog niza.
+* **Unutarnji čvorovi:** Sadrže minimum svoje djece.
     `tree[v] = min(tree[2*v], tree[2*v+1])`
 
 **Svojstva:**
 
-- Visina stabla je $O(\log N)$.
-- Svaki raspon $[a, b]$ može se dekomponirati na $O(\log N)$ čvorova stabla.
-- Promjena elementa utječe samo na put od lista do korijena ($O(\log N)$ čvorova).
+* Visina stabla je $O(\log N)$.
+* Svaki raspon $[a, b]$ može se dekomponirati na $O(\log N)$ čvorova stabla.
+* Promjena elementa utječe samo na put od lista do korijena ($O(\log N)$ čvorova).
 
 ---
 
-## Implementacija: Izgradnja (Build)
+# Implementacija: Izgradnja (Build)
 
 Koristimo polje `tree` veličine $4N$.
 Funkcija `build` rekurzivno gradi stablo.
@@ -732,7 +772,7 @@ void build(int v, int tl, int tr) {
 
 ---
 
-## Implementacija: Ažuriranje (Update)
+# Implementacija: Ažuriranje (Update)
 
 Promjena vrijednosti na poziciji `pos` u `new_val`.
 Tražimo put do lista koji pokriva `pos`, ažuriramo ga, i pri povratku iz rekurzije ažuriramo roditelje.
@@ -756,7 +796,7 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 
 ---
 
-## Implementacija: Upit (Query)
+# Implementacija: Upit (Query)
 
 Tražimo minimum u rasponu $[l, r]$.
 Postoje 3 slučaja za trenutni čvor $[tl, tr]$:
@@ -782,7 +822,7 @@ int query(int v, int tl, int tr, int l, int r) {
 
 ---
 
-## Glavni program
+# Glavni program
 
 Paziti na indeksiranje! CSES koristi 1-based, naša implementacija SegTree-a je najlakša ako interno koristi 1-based (za `tl, tr`).
 
@@ -814,18 +854,16 @@ int main() {
 
 ---
 
-## Sažetak složenosti
+# Sažetak složenosti
 
 Za niz veličine $N$ i $Q$ upita:
 
-- **Build:** $O(N)$ (posjećujemo svaki čvor jednom).
-- **Update:** $O(\log N)$ (visina stabla).
-- **Query:** $O(\log N)$ (u najgorem slučaju posjećujemo 4 čvora po razini).
+* **Build:** $O(N)$ (posjećujemo svaki čvor jednom).
+* **Update:** $O(\log N)$ (visina stabla).
+* **Query:** $O(\log N)$ (u najgorem slučaju posjećujemo 4 čvora po razini).
 
 Segmentno stablo je **univerzalan alat**.
 Promjenom jedne linije koda (`min` u `+`, `max`, `gcd`, `xor`) rješavamo potpuno druge probleme.
-
----
 
 ---
 
@@ -837,7 +875,7 @@ Promjenom jedne linije koda (`min` u `+`, `max`, `gcd`, `xor`) rješavamo potpun
 
 ---
 
-## Zadatak: Range Xor Queries
+# Zadatak: Range Xor Queries
 
 **Problem:**
 Zadan je niz od $N$ cijelih brojeva. Trebamo odgovoriti na $Q$ upita.
@@ -846,8 +884,8 @@ $$ x_a \oplus x_{a+1} \oplus \dots \oplus x_b $$
 
 **Ograničenja:**
 
-- $N, Q \le 2 \cdot 10^5$.
-- Niz je statičan (nema izmjena).
+* $N, Q \le 2 \cdot 10^5$.
+* Niz je statičan (nema izmjena).
 
 **Pitanje:**
 Možemo li koristiti Segmentno stablo?
@@ -855,7 +893,7 @@ Da, ali to je $O(Q \log N)$. Budući da je niz statičan, možemo li brže?
 
 ---
 
-## Svojstvo XOR operacije
+# Svojstvo XOR operacije
 
 Prisjetimo se ključnih svojstava XOR-a ($\oplus$):
 
@@ -871,7 +909,7 @@ Možemo "poništiti" utjecaj nekog broja ponovnim XOR-anjem.
 
 ---
 
-## Rješenje: Prefiksni XOR
+# Rješenje: Prefiksni XOR
 
 Definiramo niz `P` (prefiksni XOR):
 `P[i]` = $x_1 \oplus x_2 \oplus \dots \oplus x_i$
@@ -888,48 +926,34 @@ Kada napravimo $P[b] \oplus P[a-1]$, dio $(x_1 \dots x_{a-1})$ se pojavljuje dva
 
 ---
 
-## Implementacija
-
-Složenost:
-
-- **Izgradnja:** $O(N)$
-- **Upit:** $O(1)$
+# Implementacija
 
 ```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     int n, q;
     cin >> n >> q;
-
-    // P[i] sadrži xor sumu x[1]...x[i]
-    vector<int> P(n + 1, 0);
+    vector<int> P(n + 1, 0); // P[i] sadrži xor sumu x[1]...x[i]
 
     for (int i = 1; i <= n; i++) {
         int x; cin >> x;
-        // P[i] = P[i-1] ^ x
-        P[i] = P[i-1] ^ x;
+        P[i] = P[i-1] ^ x; // P[i] = P[i-1] ^ x
     }
 
     while (q--) {
         int a, b;
         cin >> a >> b;
-        // O(1) upit
-        cout << (P[b] ^ P[a-1]) << "\n";
+        cout << (P[b] ^ P[a-1]) << "\n"; // O(1) upit
     }
-
     return 0;
 }
 ```
 
 ---
 
-## Što ako bi niz bio dinamičan?
+# Što ako bi niz bio dinamičan?
 
 Ako bi zadatak imao **Update** operacije ("promijeni vrijednost na indeksu $k$"), prefiksni niz više ne bi bio efikasan ($O(N)$ update).
 
@@ -937,27 +961,20 @@ U tom slučaju koristili bismo **Fenwickovo stablo** ili **Segmentno stablo**.
 
 Jedina promjena u odnosu na "Range Sum Queries":
 
-- Umjesto `+` koristimo `^` (XOR).
-- Kod Fenwick stabla, `update` operacija je: `add(k, val ^ current_val)`.
+* Umjesto `+` koristimo `^` (XOR).
+* Kod Fenwick stabla, `update` operacija je: `add(k, val ^ current_val)`.
 
 Segmentno stablo za XOR:
 
 ```cpp
-// Merge funkcija u segmentnom stablu
-tree[v] = tree[2*v] ^ tree[2*v+1];
+tree[v] = tree[2*v] ^ tree[2*v+1]; // Merge funkcija u segmentnom stablu
 ```
 
 ---
 
-<!-- _class: title -->
-
-# Zadatak: Hotel Queries (CSES)
+# Zadatak: Hotel Queries
 
 ## Pretraživanje po Segmentnom stablu (Tree Descent)
-
----
-
-## Zadatak: Hotel Queries
 
 **Problem:**
 Imamo $N$ hotela. Za svaki hotel znamo broj slobodnih soba ($h_i$).
@@ -967,16 +984,16 @@ Nakon dodjele, broj soba u tom hotelu se smanjuje.
 
 **Ulaz:**
 
-- $N, M \le 2 \cdot 10^5$.
-- Kapaciteti do $10^9$.
+* $N, M \le 2 \cdot 10^5$.
+* Kapaciteti do $10^9$.
 
 **Izlaz:**
 
-- Za svaku grupu ispiši indeks hotela (ili 0 ako nema mjesta).
+* Za svaku grupu ispiši indeks hotela (ili 0 ako nema mjesta).
 
 ---
 
-## Zašto naivni pristup ne radi?
+# Zašto naivni pristup ne radi?
 
 Za svaku grupu bismo morali prolaziti kroz hotele od 1 do $N$ dok ne nađemo prvi slobodan.
 
@@ -1000,7 +1017,7 @@ Trebamo rješenje brže od linearnog pretraživanja, idealno **$O(\log N)$** po 
 
 ---
 
-## Intuicija: Max Segment Tree
+# Intuicija: Max Segment Tree (1/2)
 
 Kako brzo naći prvi broj $\ge X$?
 Ako u čvoru segmentnog stabla pamtimo **MAKSIMUM** raspona, možemo donositi odluke:
@@ -1012,12 +1029,18 @@ Stojimo u čvoru. Trebamo hotel s barem $r$ soba.
 
 1. Ako je `tree[v] < r`, u ovom rasponu uopće nema dovoljno velikog hotela. (Vrati 0).
 2. Inače, rješenje sigurno postoji. Gdje je *prvi* takav?
-    - Pogledaj **lijevo dijete**: Ako `tree[2*v] >= r`, rješenje je lijevo! (Prioritet lijevom jer tražimo prvi indeks).
-    - Inače, rješenje mora biti **desno** (jer znamo da postoji u trenutnom čvoru, a nije lijevo).
+    * Pogledaj **lijevo dijete**: Ako `tree[2*v] >= r`, rješenje je lijevo! (Prioritet lijevom jer tražimo prvi indeks).
+    * Inače, rješenje mora biti **desno** (jer znamo da postoji u trenutnom čvoru, a nije lijevo).
 
 ---
 
-## Implementacija: Struktura
+# Intuicija: Max Segment Tree (2/2)
+
+![w:900px center](/img/prsp/range-queries/segment-tree-query-decomposition.png)
+
+---
+
+# Implementacija: Struktura
 
 Koristimo standardno Segmentno stablo za **Maximum**.
 
@@ -1039,7 +1062,7 @@ Izazov je funkcija `query` koja ne vraća vrijednost, već **pronalazi indeks**.
 
 ---
 
-## Implementacija: Pretraživanje (Query)
+# Implementacija: Pretraživanje (Query)
 
 Ova funkcija vraća indeks prvog hotela s dovoljno soba, ili 0 ako ne postoji.
 
@@ -1065,7 +1088,7 @@ int query(int v, int tl, int tr, int needed) {
 
 ---
 
-## Glavni program
+# Glavni program: Hotel Queries (1/2)
 
 Logika za svaku grupu:
 
@@ -1073,6 +1096,10 @@ Logika za svaku grupu:
 2. Ako postoji, ispiši ga.
 3. Smanji kapacitet tog hotela (lokalno u nizu).
 4. Ažuriraj Segmentno stablo s novim kapacitetom.
+
+---
+
+# Glavni program: Hotel Queries (2/2)
 
 ```cpp
 int main() {
@@ -1099,19 +1126,19 @@ int main() {
 
 ---
 
-## Analiza složenosti
+# Analiza složenosti
 
-- **Izgradnja:** $O(N)$.
-- **Upit (Query):** Spuštamo se od korijena do lista. U svakom koraku radimo jednu usporedbu i idemo lijevo ili desno. Visina stabla je $\log N$. $\to O(\log N)$.
-- **Ažuriranje (Update):** Standardno $O(\log N)$.
-- **Ukupno:** $O(M \log N)$.
+* **Izgradnja:** $O(N)$.
+* **Upit (Query):** Spuštamo se od korijena do lista. U svakom koraku radimo jednu usporedbu i idemo lijevo ili desno. Visina stabla je $\log N$. $\to O(\log N)$.
+* **Ažuriranje (Update):** Standardno $O(\log N)$.
+* **Ukupno:** $O(M \log N)$.
 
 Za $N, M = 2 \cdot 10^5$, $\log N \approx 18$.
 Ukupno operacija $\approx 3.6 \cdot 10^6$, što je znatno ispod limita od $10^8$.
 
 ---
 
-## Sažetak: Segment Tree Walk
+# Sažetak: Segment Tree Walk
 
 Ovo je moćna tehnika. Umjesto binarnog pretraživanja *nad rješenjem* ($O(\log^2 N)$), koristimo strukturu stabla za binarno pretraživanje ($O(\log N)$).
 
@@ -1121,3 +1148,19 @@ Ključni uvjeti:
 2. Problem mora tražiti "prvi" ili "k-ti" element s nekim svojstvom.
 
 ---
+<!-- _class: title -->
+
+# Zaključak
+
+## Pregled današnjih vježbi
+
+---
+
+# Koju strukturu odabrati?
+
+| Struktura | Update | Query | Složenost | Memorija | Koristi kad... |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Prefiksne sume** | Sporo $O(N)$ | $O(1)$ | $O(N)$ | $O(N)$ | Niz je statičan, traži se suma/xor. |
+| **Sparse Table** | Nemoguće | $O(1)$ | $O(N \log N)$ | $O(N \log N)$ | Statičan niz, traži se Min/Max/GCD. |
+| **Fenwick (BIT)** | $O(\log N)$ | $O(\log N)$ | $O(N)$ | $O(N)$ | Dinamičan niz, traži se prefiksna suma. Malo koda. |
+| **Segmentno stablo** | $O(\log N)$ | $O(\log N)$ | $O(N)$ | $O(4N)$ | Dinamičan niz, složeni upiti (Min/Max na rasponu). |

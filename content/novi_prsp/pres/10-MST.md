@@ -1,39 +1,11 @@
 ---
 marp: true
-theme: beam
+theme: uniri-beam
 size: 16:9
 paginate: true
 math: mathjax
 header: "Minimalno razapinjuće stablo (MST)"
 footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
-style: |
-  section {
-    font-size: 24px;
-  }
-  code {
-    font-size: 18px; /* Optimizes code readability */
-  }
-  h1 {
-    font-size: 40px;
-    color: #000000ff;
-  }
-  h2 {
-    font-size: 32px;
-    color: #000000ff;
-  }
-  strong{
-    color: #ff0000ff;
-  }
-  section::after {
-    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
-    font-weight: bold;
-    font-size: 20px;
-    color: #000000ff;
-    position: absolute;
-    bottom: 25px; 
-    right: 30px;
-    z-index: 999; /* Osigurava da je broj IZNAD footera */
-  }
 ---
 <!-- _class: title  -->
 # Minimalno razapinjuće stablo (MST)
@@ -80,7 +52,7 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 
 <!-- _class: lead -->
 
-# 3. Minimalno Razapinjuće Stablo (MST) (1/3)
+# Minimalno Razapinjuće Stablo (MST) (1/4)
 
 ## Kruskalov algoritam
 
@@ -97,7 +69,7 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 
 ---
 
-# 3. Minimalno Razapinjuće Stablo (MST) (2/3)
+# Minimalno Razapinjuće Stablo (MST) (2/4)
 
 ## Kruskalov algoritam
 
@@ -107,20 +79,60 @@ Izvor: [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
 
 ---
 
-# 3. Minimalno Razapinjuće Stablo (MST) (3/3)
+# Minimalno Razapinjuće Stablo (MST) (3/4)
 
-## Union-Find struktura (DSU)
+## Izazov implementacije: Detekcija ciklusa
 
-Za efikasno izvršavanje Kruskalovog algoritma, moramo brzo provjeriti jesu li čvorovi povezani.
+Lako je reći "ako ne stvara ciklus", ali kako to efikasno provjeriti u kodu?
 
-- **`find(i)`**: Vraća "šefa" (predstavnika) komponente kojoj $i$ pripada.
-- **`unite(i, j)`**: Spaja komponente od $i$ i $j$.
+### Opcija A: BFS/DFS pretraga
 
-**Optimizacije:**
+- Prije dodavanja brida $(u, v)$, pokrenemo BFS da vidimo postoji li već put od $u$ do $v$.
+- **Problem:** Presporo! Za svaki brid moramo prolaziti graf. Složenost bi bila $O(M \cdot N)$.
 
-- *Path Compression* (spljoštavanje stabla pri traženju).
-- *Union by Rank/Size* (spajanje manjeg stabla pod veće).
-- **Složenost:** Gotovo konstantna, $O(\alpha(n))$ amortizirano.
+### Opcija B: Praćenje skupova (DSU)
+
+- Pamtimo "skupove" povezanih čvorova.
+- Ako su $u$ i $v$ u istom skupu $\rightarrow$ imamo ciklus.
+- Ovo je **trenutna** provjera. Zato koristimo **Union-Find**.
+
+---
+
+# Minimalno Razapinjuće Stablo (MST) (4/4)
+
+## Rješenje: Union-Find (DSU) struktura
+
+Da bismo Kruskala učinili brzim, koristimo strukturu koja podržava dvije operacije:
+
+1. **`Find` (Pronađi):** Tko je "šef" komponente kojoj čvor pripada?
+   - *Služi za provjeru:* `find(u) == find(v)` znači da su već povezani.
+2. **`Union` (Unija):** Spoji dvije komponente u jednu.
+   - *Služi za gradnju:* Kad dodamo brid, spajamo skupove.
+
+---
+
+# Union-Find: Intuicija (1/2)
+
+## Vizualizacija spajanja
+
+![w:280px center](../../../img/union-find-kruskal-animation.gif)
+Izvor: [Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+
+---
+
+# Union-Find: Intuicija (2/2)
+
+## "Tko je ovdje šef?"
+
+Zamislite da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj šef.
+
+- Kada spajamo dva grada, jedan šef postaje podređen drugome.
+- Svi gradovi u jednoj komponenti imaju **istog glavnog šefa** (predstavnika).
+
+**Optimizacije koje strukturu čine brzom ($O(\alpha(n))$):**
+
+1. **Path Compression:** Svi zaposlenici direktno pamte glavnog šefa.
+2. **Union by Size:** Manja ekipa se uvijek pripaja većoj.
 
 ---
 
@@ -128,11 +140,11 @@ Za efikasno izvršavanje Kruskalovog algoritma, moramo brzo provjeriti jesu li �
 
 ```cpp
 struct Edge { int u, v, weight; };
-bool compareEdges(const Edge& a, const Edge& b) { return a.weight < b.weight; }
+bool usporediBridove(const Edge& a, const Edge& b) { return a.weight < b.weight; }
 
 // ... DSU funkcije find_set i unite_sets ...
 
-sort(edges.begin(), edges.end(), compareEdges);
+sort(edges.begin(), edges.end(), usporediBridove);
 
 long long total_weight = 0;
 for (Edge e : edges) {
@@ -205,7 +217,7 @@ while (!q.empty()) {
 
 <!-- _class: lead -->
 
-# 4. Zadaci za vježbu
+#  Zadaci za vježbu
 
 ## CSES Problem Set
 
@@ -237,7 +249,7 @@ Cilj je odabrati skup cesta tako da su **svi gradovi povezani**, a ukupna cijena
 2. Najefikasniji način povezivanja $n$ čvorova bez suvišnih bridova je **stablo** ($n-1$ bridova).
 3. Tražimo stablo s najmanjom sumom težina.
 
-**Zaključak:** Ovo je klasiča primjer **MST (Minimalno Razapinjuće Stablo)** problema.
+**Zaključak:** Ovo je klasičan primjer **MST (Minimalno Razapinjuće Stablo)** problema.
 
 ---
 
@@ -302,57 +314,7 @@ bool usporediBridove(const Edge& a, const Edge& b) {
 
 ---
 
-# Primjena Union-Find (DSU) (1/2)
-
-## Intuicija iza Union-Find (DSU)
-
-![w:280px center](../../../img/union-find-kruskal-animation.gif)
-Izvor: [Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
-
----
-
-# Primjena Union-Find (DSU) (2/2)
-
-## "Tko je ovdje šef?"
-
-Zamislite da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj šef.
-
-Cilj nam je efikasno pratiti tko pripada kojoj ekipi dok spajamo gradove cestama.
-
-**Struktura podržava dvije brze operacije:**
-
-1. **`Find` (Pronađi):** Tko je glavni predstavnik ("šef") tvoje ekipe?
-2. **`Union` (Unija):** Spoji dvije ekipe u jednu (šef jedne ekipe postaje podređen šefu druge).
-
----
-
-# Kako Union-Find rješava MST?
-
-Kruskalov algoritam nam daje najjeftiniju cestu između grada $U$ i $V$. Moramo odlučiti hoćemo li je graditi.
-
-**Logika:**
-
-1. Pitamo: `Find(U)` i `Find(V)`. (Tko su im šefovi?)
-2. **Slučaj A:** Imaju istog šefa.
-   - To znači da su $U$ i $V$ već povezani nekim prijašnjim putem.
-   - Dodavanje ove ceste stvorilo bi **ciklus** (krug).
-   - **Odluka:** Odbacujemo cestu (nepotreban trošak).
-3. **Slučaj B:** Imaju različite šefove.
-   - Nisu povezani. Ovo je najjeftiniji način da ih spojimo.
-   - **Odluka:** `Union(U, V)` (gradimo cestu i spajamo komponente).
-
----
-
-# Zašto baš Union-Find?
-
-Mogli bismo koristiti BFS ili DFS da provjerimo postoji li put od $U$ do $V$, ali...
-
-- **BFS/DFS:** Postaje spor. Za svaku cestu moramo prolaziti kroz graf. Složenost bi bila $O(M \cdot N)$.
-- **Union-Find:** Brz.
-  - Uz optimizaciju ("Path Compression"), operacije su gotovo trenutačne ($O(1)$ amortizirano).
-  - Ukupna složenost Kruskalovog algoritma postaje određena sortiranjem: $O(M \log M)$.
-
----
+# Union-Find (DSU)
 
 ```cpp
 // Union-Find (DSU) struktura
@@ -647,9 +609,3 @@ Do sada bi trebali moći riješiti većinu zadataka sa tagom `graphs` ili `dfs a
 
 - **[DZY Loves Bridges](https://codeforces.com/problemset/problem/445/B)** (Problem 445B): Brojanje povezanih komponenata i primjena Kruskalovog principa za spajanje uz minimalan trošak.
 - **[Edgy Trees](https://codeforces.com/problemset/problem/1139/C)** (Problem 1131C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
-
----
-
-# Sretni blagdani!
-
-![center](https://media.istockphoto.com/id/1281596611/photo/happy-old-santa-claus-wearing-hat-holding-gift-box-using-laptop-computer-sitting-at-workshop.jpg?s=612x612&w=0&k=20&c=08djNS6Rqj1si3Pjlxu5LZnFTjFah803V6wjXa3o_kQ=)

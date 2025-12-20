@@ -1,44 +1,59 @@
 ---
 marp: true
-theme: beam
+theme: uniri-beam
 size: 16:9
 paginate: true
 math: mathjax
 header: "Mrežni tokovi, uparivanja i jake komponente"
 footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
-style: |
-  section {
-    font-size: 24px;
-  }
-  code {
-    font-size: 18px; /* Optimizes code readability */
-  }
-  h1 {
-    font-size: 40px;
-    color: #000000ff;
-  }
-  h2 {
-    font-size: 32px;
-    color: #000000ff;
-  }
-  strong{
-    color: #ff0000ff;
-  }
-  section::after {
-    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
-    font-weight: bold;
-    font-size: 20px;
-    color: #6e6e6eff;
-    position: absolute;
-    bottom: 25px; 
-    right: 30px;
-    z-index: 999; /* Osigurava da je broj IZNAD footera */
-  }
 ---
 <!-- _class: title -->
 
 # Mrežni tokovi, uparivanja i jake komponente
+
 ## Ford-Fulkerson, Edmonds-Karp, Bipartitno uparivanje, Kosaraju
+
+---
+
+# Slike
+
+- Uvod i Motivacija (Protok)
+- http://www.b4b.com.lv/blog-1/params/post/4802130/system-constraint-bottleneck-dialogue-part-2
+- https://site-2143475.mozfiles.com/files/2143475/toc1.png
+
+- Slajd "Ford-Fulkerson metoda" ili "Edmonds-Karp".
+Izvor: <https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm>
+<https://upload.wikimedia.org/wikipedia/commons/a/ad/FordFulkersonDemo.gif>
+<https://commons.wikimedia.org/wiki/File:FordFulkerson.gif>
+
+Izvor: Graphs - Maximum flow (Edmonds-Karp)
+<https://inginious.org/course/competitive-programming/graphs-maxflow>
+<https://inginious.org/course/competitive-programming/graphs-maxflow/anim.gif>
+
+- slajd Ključni koncept: Rezidualni graf
+
+- Slajd: Min-Cut Teorem
+https://samarthmittal94.medium.com/graph-theory-max-min-flow-9aa0b378683d
+
+Minimum cut for the network
+https://miro.medium.com/v2/resize:fit:640/format:webp/1*JMGSruP13HaLSpIfSpc2Gw.png
+
+- Slajd: Maksimalno Uparivanje (Bipartitni graf)
+
+https://cp-algorithms.com/graph/strongly-connected-components.html
+
+https://cp-algorithms.com/graph/strongly-connected-components-tikzpicture/graph.svg
+
+- Slajd: Kosaraju (Transponirani graf)
+https://en.wikipedia.org/wiki/Transpose_graph
+transposed-graph.jpg
+
+
+- Slajd: Police Chase (Zadatak)
+https://images.telegram.hr/qVKdQ8iUuK6he71o2-vLq-AOztpQKTgGGKWkTMgLwlg/preset:single1/aHR0cHM6Ly93d3cudGVsZWdyYW0uaHIvd3AtY29udGVudC91cGxvYWRzLzIwMjUvMDcvODcuanBn.jpg
+
+https://www.telegram.hr/vijesti/ovo-je-zagreb-danas-zbog-mimohoda-zatvorene-brojne-ulice-dosta-je-promjena-i-u-javnom-prijevozu/
+
 
 ---
 
@@ -62,18 +77,24 @@ style: |
 
 # Uvod i Motivacija
 
-### 1. Protok (Flow)
+# 1. Protok (Flow)
+
 Zamislite mrežu cijevi. Želimo poslati **maksimalnu količinu vode** od izvora do ponora.
-* Primjeri: Promet u gradu, podaci u računalnoj mreži, logistika.
+
+- Primjeri: Promet u gradu, podaci u računalnoj mreži, logistika.
 
 ### 2. Uparivanje (Matching)
+
 Imamo radnike i poslove. Svaki radnik može raditi samo određene poslove.
-* Cilj: Zaposliti što više ljudi (maksimalno uparivanje).
+
+- Cilj: Zaposliti što više ljudi (maksimalno uparivanje).
 
 ### 3. Struktura grafova (SCC)
+
 Kako analizirati grafove koji imaju cikluse?
-* **Jako povezana komponenta (SCC):** Unutar nje možemo doći od svakog do svakog.
-* Ako sažmemo SCC-ove, dobivamo **DAG** (usmjereni aciklički graf).
+
+- **Jako povezana komponenta (SCC):** Unutar nje možemo doći od svakog do svakog.
+- Ako sažmemo SCC-ove, dobivamo **DAG** (usmjereni aciklički graf).
 
 ---
 
@@ -83,6 +104,7 @@ Imamo usmjereni graf s izvorom $s$ i ponorom $t$.
 Svaki brid $(u, v)$ ima **kapacitet** $c(u, v)$.
 
 **Pravila toka $f(u, v)$:**
+
 1. **Kapacitet:** $0 \le f(u, v) \le c(u, v)$ (Ne možemo poslati više nego što cijev prima).
 2. **Očuvanje toka:** Sve što uđe u čvor (osim $s$ i $t$), mora i izaći.
 
@@ -93,9 +115,10 @@ Svaki brid $(u, v)$ ima **kapacitet** $c(u, v)$.
 Kako znamo možemo li poslati još toka? Gledamo **rezidualni graf**.
 
 Za svaki brid $(u, v)$ s kapacitetom $C$ i trenutnim tokom $F$:
+
 1. **Forward edge $(u, v)$:** Preostali kapacitet je $C - F$.
 2. **Backward edge $(v, u)$:** Kapacitet je $F$.
-   * *Ovo je ključno!* Omogućuje nam da "poništimo" odluku i preusmjerimo tok ako nađemo bolji put.
+   - *Ovo je ključno!* Omogućuje nam da "poništimo" odluku i preusmjerimo tok ako nađemo bolji put.
 
 ---
 
@@ -109,10 +132,12 @@ Ideja: Dok god postoji put od $s$ do $t$ u rezidualnom grafu, šalji tok tim put
 4. Povećaj tok na bridovima puta, smanji na obrnutim bridovima.
 5. Ponavljaj dok puta nema.
 
-### Edmonds-Karp Algoritam
+## Edmonds-Karp Algoritam
+
 Specifična implementacija Ford-Fulkersona koja koristi **BFS** za traženje puta.
-* **Složenost:** $O(V \cdot E^2)$
-* Garantira najkraći put (u broju bridova), što osigurava zaustavljanje.
+
+- **Složenost:** $O(V \cdot E^2)$
+- Garantira najkraći put (u broju bridova), što osigurava zaustavljanje.
 
 ---
 
@@ -163,6 +188,7 @@ Imamo dva skupa čvorova, $L$ (lijevo) i $R$ (desno). Bridovi idu samo iz $L$ u 
 Želimo odabrati maksimalan broj bridova koji nemaju zajedničkih vrhova.
 
 **Svođenje na Max Flow:**
+
 1. Dodaj **izvor $s$** i spoji ga sa svim čvorovima u $L$ (kapacitet 1).
 2. Dodaj **ponor $t$** i spoji sve čvorove iz $R$ prema njemu (kapacitet 1).
 3. Svi bridovi između $L$ i $R$ imaju kapacitet 1.
@@ -174,12 +200,13 @@ Imamo dva skupa čvorova, $L$ (lijevo) i $R$ (desno). Bridovi idu samo iz $L$ u 
 
 **Definicija:** Podskup čvorova gdje postoji put $u \to v$ i $v \to u$ za svaki par.
 
-### Kosarajuov Algoritam $O(N+M)$
+## Kosarajuov Algoritam $O(N+M)$
+
 Koristi dva prolaza DFS-a.
 
 1. **Prvi prolaz (DFS):**
    Napravi DFS po grafu. Bilježi redoslijed završetka obrade čvorova (stavi ih na stog).
-   
+
 2. **Drugi prolaz (Reverzni DFS):**
    Transponiraj graf (okreni sve bridove: $u \to v$ postaje $v \to u$).
    Uzimaj čvorove sa stoga (obrnutim redoslijedom završetka).
@@ -220,20 +247,23 @@ Imamo logičku formulu: $(x_1 \lor \neg x_2) \land (\neg x_1 \lor x_3) \dots$
 Može li se zadovoljiti?
 
 **Svođenje na SCC:**
-* Svaka varijabla ima dva čvora: $x_i$ i $\neg x_i$.
-* Klauzula $(a \lor b)$ je isto što i $(\neg a \implies b)$ i $(\neg b \implies a)$.
-* Dodaj bridove za implikacije.
+
+- Svaka varijabla ima dva čvora: $x_i$ i $\neg x_i$.
+- Klauzula $(a \lor b)$ je isto što i $(\neg a \implies b)$ i $(\neg b \implies a)$.
+- Dodaj bridove za implikacije.
 
 **Rješenje:**
 Formula je **nezadovoljiva** ako i samo ako se $x_i$ i $\neg x_i$ nalaze u **istoj SCC** (jer to znači $x_i \implies \neg x_i$ i obrnuto, što je kontradikcija).
 
 ---
+
 # Zadaci za vježbu
 
 ---
 <!-- _class: title -->
 
 # : Police Chase (CSES)
+
 ## Primjena Max-Flow Min-Cut teorema
 
 ---
@@ -244,10 +274,12 @@ Formula je **nezadovoljiva** ako i samo ako se $x_i$ i $\neg x_i$ nalaze u **ist
 Kaaleppi je opljačkao banku (čvor 1) i bježi prema luci (čvor $n$). Policija želi spriječiti bijeg zatvaranjem ulica.
 
 **Ulaz:**
-* $n$ križanja ($2 \le n \le 500$) i $m$ ulica.
-* Ulice su dvosmjerne.
+
+- $n$ križanja ($2 \le n \le 500$) i $m$ ulica.
+- Ulice su dvosmjerne.
 
 **Izlaz:**
+
 1. **Minimalni broj ulica** koje treba zatvoriti da ne postoji put od 1 do $n$.
 2. Popis tih ulica.
 
@@ -257,14 +289,15 @@ Kaaleppi je opljačkao banku (čvor 1) i bježi prema luci (čvor $n$). Policija
 
 Ovo je klasičan problem **Minimalnog reza (Min-Cut)**.
 
-* Želimo podijeliti graf na dva dijela: jedan koji sadrži izvor (Banku), a drugi ponor (Luku).
-* Cijena reza je broj bridova koje "presijecamo".
-* Želimo minimizirati tu cijenu.
+- Želimo podijeliti graf na dva dijela: jedan koji sadrži izvor (Banku), a drugi ponor (Luku).
+- Cijena reza je broj bridova koje "presijecamo".
+- Želimo minimizirati tu cijenu.
 
 **Teorem o maksimalnom toku i minimalnom rezu:**
 > Vrijednost maksimalnog toka u mreži jednaka je kapacitetu minimalnog reza.
 
 **Ideja rješenja:**
+
 1. Svakoj ulici dodijelimo **kapacitet 1**.
 2. Izračunamo **Maksimalni tok** od 1 do $n$. Vrijednost toka = broj ulica.
 3. Pronađemo koje su to ulice analizom **rezidualnog grafa**.
@@ -275,8 +308,9 @@ Ovo je klasičan problem **Minimalnog reza (Min-Cut)**.
 
 Budući da su ulice dvosmjerne, a graf toka je usmjeren:
 Svaka ulica između $u$ i $v$ postaje:
-* Brid $u \to v$ s kapacitetom 1.
-* Brid $v \to u$ s kapacitetom 1.
+
+- Brid $u \to v$ s kapacitetom 1.
+- Brid $v \to u$ s kapacitetom 1.
 
 Zašto 1? Jer zatvaranje jedne ulice "košta" 1.
 
@@ -337,8 +371,9 @@ Nakon što Max Flow algoritam završi, kako znamo koje ulice zatvoriti?
 **Definicija Min-Cuta:**
 
 Minimalni rez dijeli čvorove na dva skupa:
-* **Skup S:** Čvorovi koji su i dalje **dohvatljivi** iz izvora u *rezidualnom grafu*.
-* **Skup T:** Čvorovi koji su postali nedohvatljivi jer su bridovi "zasićeni".
+
+- **Skup S:** Čvorovi koji su i dalje **dohvatljivi** iz izvora u *rezidualnom grafu*.
+- **Skup T:** Čvorovi koji su postali nedohvatljivi jer su bridovi "zasićeni".
 
 **Algoritam za rekonstrukciju:**
 
@@ -384,17 +419,17 @@ for (auto& edge : original_edges) {
 # Sažetak rješenja
 
 1. **Modeliraj problem:**
-   * Čvorovi = Križanja.
-   * Bridovi = Ulice (dvosmjerni, kapacitet 1).
-   * Izvor = 1, Ponor = $N$.
+   - Čvorovi = Križanja.
+   - Bridovi = Ulice (dvosmjerni, kapacitet 1).
+   - Izvor = 1, Ponor = $N$.
 
 2. **Izračunaj Max Flow:**
-   * Rezultat (broj) je minimalni broj ulica koje treba zatvoriti.
-   * Ovo "zasićuje" usko grlo mreže.
+   - Rezultat (broj) je minimalni broj ulica koje treba zatvoriti.
+   - Ovo "zasićuje" usko grlo mreže.
 
 3. **Pronađi Min Cut:**
-   * Nađi sve čvorove do kojih još uvijek možemo doći iz izvora (skup $S$).
-   * Bridovi koji povezuju $S$ i ostatak svijeta su tražene ulice.
+   - Nađi sve čvorove do kojih još uvijek možemo doći iz izvora (skup $S$).
+   - Bridovi koji povezuju $S$ i ostatak svijeta su tražene ulice.
 
 ---
 
@@ -416,14 +451,16 @@ Svaki učenik može plesati **najviše s jednim** partnerom.
 Pronaći **maksimalan broj parova** koji mogu plesati istovremeno i ispisati te parove.
 
 **Ograničenja:**
-* $N, M \le 500$
-* $K \le 1000$
+
+- $N, M \le 500$
+- $K \le 1000$
 
 ---
 
 # Intuicija: Bipartitni graf
 
 Ovo je problem na **bipartitnom grafu** jer čvorove možemo podijeliti u dvije skupine:
+
 1. **Lijeva strana:** Dječaci (1 do $N$).
 2. **Desna strana:** Djevojčice (1 do $M$).
 
@@ -438,16 +475,16 @@ Tražimo **Maksimalno uparivanje (Matching):** skup bridova bez zajedničkih vrh
 Problem rješavamo pretvaranjem u mrežu toka.
 
 1. **Dodamo Super-Izvor ($S$):** Spojimo ga sa svim dječacima.
-   * Kapacitet bridova $S \to \text{Boy}_i$ je **1**.
-   * (Znači: svaki dječak može sudjelovati u najviše 1 paru).
+   - Kapacitet bridova $S \to \text{Boy}_i$ je **1**.
+   - (Znači: svaki dječak može sudjelovati u najviše 1 paru).
 
 2. **Dodamo Super-Ponor ($T$):** Spojimo sve djevojčice s njim.
-   * Kapacitet bridova $\text{Girl}_j \to T$ je **1**.
-   * (Znači: svaka djevojčica može sudjelovati u najviše 1 paru).
+   - Kapacitet bridova $\text{Girl}_j \to T$ je **1**.
+   - (Znači: svaka djevojčica može sudjelovati u najviše 1 paru).
 
 3. **Veza Dječak-Djevojčica:**
-   * Ako dječak $i$ i djevojčica $j$ žele plesati, dodamo brid $\text{Boy}_i \to \text{Girl}_j$.
-   * Kapacitet je **1**.
+   - Ako dječak $i$ i djevojčica $j$ žele plesati, dodamo brid $\text{Boy}_i \to \text{Girl}_j$.
+   - Kapacitet je **1**.
 
 **Rezultat:** Maksimalni tok u ovoj mreži = Maksimalan broj parova.
 
@@ -458,10 +495,11 @@ Problem rješavamo pretvaranjem u mrežu toka.
 Da bismo izgradili graf, moramo jedinstveno označiti čvorove jer su u ulazu dječaci 1..N i djevojčice 1..M.
 
 **Mapiranje:**
-* **Izvor ($S$):** Čvor 0.
-* **Dječaci ($1 \dots N$):** Čvorovi $1 \dots N$.
-* **Djevojčice ($1 \dots M$):** Čvorovi $N+1 \dots N+M$.
-* **Ponor ($T$):** Čvor $N+M+1$.
+
+- **Izvor ($S$):** Čvor 0.
+- **Dječaci ($1 \dots N$):** Čvorovi $1 \dots N$.
+- **Djevojčice ($1 \dots M$):** Čvorovi $N+1 \dots N+M$.
+- **Ponor ($T$):** Čvor $N+M+1$.
 
 ```cpp
 int n, m, k; cin >> n >> m >> k;
@@ -558,17 +596,17 @@ for (int i = 1; i <= n; ++i) { // Iteriraj kroz dječake
 # Sažetak
 
 1. **Modeliranje:**
-   * Izvor $\to$ Dječaci (cap 1).
-   * Djevojčice $\to$ Ponor (cap 1).
-   * Dječak $\to$ Djevojčica (cap 1).
+   - Izvor $\to$ Dječaci (cap 1).
+   - Djevojčice $\to$ Ponor (cap 1).
+   - Dječak $\to$ Djevojčica (cap 1).
 
 2. **Algoritam:**
-   * Pusti Max Flow.
-   * Vrijednost toka je broj parova.
+   - Pusti Max Flow.
+   - Vrijednost toka je broj parova.
 
 3. **Ispis:**
-   * Provjeri zasićene bridove između dječaka i djevojčica.
-   * Pazi na mapiranje indeksa ($v - n$ za djevojčice).
+   - Provjeri zasićene bridove između dječaka i djevojčica.
+   - Pazi na mapiranje indeksa ($v - n$ za djevojčice).
 
 ---
 
@@ -591,8 +629,8 @@ Koliko najviše dana možemo igrati (tj. koliko različitih puteva možemo prona
 
 **Ograničenja:**
 
-* $N \le 500$, $M \le 1000$.
-* Bridovi su usmjereni.
+- $N \le 500$, $M \le 1000$.
+- Bridovi su usmjereni.
 
 ---
 
@@ -602,14 +640,14 @@ Ovo je školski primjer problema **bridno disjunktnih puteva**.
 
 1. **Kapaciteti:**
    Svakom teleporteru dodijelimo **kapacitet 1**.
-   * To osigurava da kroz njega tok može proći najviše jednom.
-   
+   - To osigurava da kroz njega tok može proći najviše jednom.
+
 2. **Tok:**
    Pustimo Maksimalni tok od čvora 1 do čvora $N$.
-   
+
 3. **Značenje rezultata:**
-   * **Vrijednost Max Flow-a ($K$)** = Maksimalni broj dana (puteva).
-   * Svaka jedinica toka koja stigne u ponor predstavlja jedan validan put.
+   - **Vrijednost Max Flow-a ($K$)** = Maksimalni broj dana (puteva).
+   - Svaka jedinica toka koja stigne u ponor predstavlja jedan validan put.
 
 ---
 
@@ -640,13 +678,14 @@ Nakon što algoritam završi, bridovi koji su dio rješenja imat će `flow == 1`
 Imamo mrežu kroz koju "teče" $K$ jedinica toka. Kako ih razdvojiti u $K$ zasebnih puteva?
 
 **Ideja (Ljuštenje grafa):**
+
 1. Znamo da imamo $K$ puteva.
 2. Pokrenemo petlju $K$ puta.
 3. U svakoj iteraciji radimo **DFS** (ili jednostavnu šetnju) od izvora (1) do ponora ($N$).
 4. Krećemo se **samo po bridovima koji imaju `flow == 1`**.
 5. **Ključno:** Kad prođemo kroz brid, postavimo mu `flow = 0`.
-   * Time ga "brišemo" iz grafa da ga idući put ne koristimo.
-   * Zbog očuvanja toka, sigurno ćemo stići do ponora.
+   - Time ga "brišemo" iz grafa da ga idući put ne koristimo.
+   - Zbog očuvanja toka, sigurno ćemo stići do ponora.
 
 ---
 
@@ -723,13 +762,14 @@ for (int k = 0; k < max_flow; ++k) {
 2. **Alat:** Maksimalni tok s kapacitetima bridova = 1.
 3. **Rezultat:** Vrijednost toka je broj puteva.
 4. **Ispis:**
-   * Graf sada sadrži superpoziciju svih puteva.
-   * Koristimo pohlepni prolaz (DFS/While) prateći bridove s tokom.
-   * **Destruktivno čitanje:** Kad iskoristimo brid za jedan put, brišemo mu tok da ga ne bi koristili za drugi put.
+   - Graf sada sadrži superpoziciju svih puteva.
+   - Koristimo pohlepni prolaz (DFS/While) prateći bridove s tokom.
+   - **Destruktivno čitanje:** Kad iskoristimo brid za jedan put, brišemo mu tok da ga ne bi koristili za drugi put.
 
 ---
 
 # CSES: Coin Collector
+
 ## Kondenzacija grafa i DP na DAG-u
 
 ---
@@ -745,9 +785,10 @@ Sakupiti **maksimalan ukupan broj novčića**.
 (Napomena: Ako se vrtimo u krug, možemo pokupiti novčiće iz svih soba u tom krugu).
 
 **Ograničenja:**
-* $N \le 10^5$, $M \le 2 \cdot 10^5$.
-* Novčići $k_i \le 10^9$.
-* **Pazi:** Ukupna suma može premašiti 32-bitni integer -> Koristi `long long`.
+
+- $N \le 10^5$, $M \le 2 \cdot 10^5$.
+- Novčići $k_i \le 10^9$.
+- **Pazi:** Ukupna suma može premašiti 32-bitni integer -> Koristi `long long`.
 
 ---
 
@@ -808,6 +849,7 @@ for (int u = 1; u <= n; ++u) {
     }
 }
 ```
+
 *Napomena:* Ovdje možemo dobiti višestruke bridove između istih komponenti. Za DP nam to ne smeta (samo ćemo uzeti max više puta), ali možemo koristiti `std::unique` ili `std::set` ako želimo čišći graf.
 
 ---
@@ -861,10 +903,10 @@ int main() {
 
 **Složenost:**
 
-* Kosaraju: $O(N + M)$
-* Izgradnja DAG-a: $O(N + M)$
-* DP (svaki brid i čvor DAG-a jednom): $O(N_{scc} + M_{scc})$
-* **Ukupno:** $O(N + M)$, što je idealno za $10^5$.
+- Kosaraju: $O(N + M)$
+- Izgradnja DAG-a: $O(N + M)$
+- DP (svaki brid i čvor DAG-a jednom): $O(N_{scc} + M_{scc})$
+- **Ukupno:** $O(N + M)$, što je idealno za $10^5$.
 
 ---
 
@@ -875,13 +917,14 @@ int main() {
 2. **Izračunaj težine:** Svaki čvor u novom grafu ima težinu = sumi novčića u toj komponenti.
 3. **Izgradi DAG:** Bridovi idu samo između različitih komponenata.
 4. **DP:** Nađi put s najvećom sumom u DAG-u.
-   * `dp[u] = weight[u] + max(dp[neighbours])`
+   - `dp[u] = weight[u] + max(dp[neighbours])`
 
 ---
 
 <!-- _class: title -->
 
 # CSES: Planets and Kingdoms
+
 ## Direktna primjena Jakih Komponenti (SCC)
 
 ---
@@ -893,12 +936,14 @@ Imamo $N$ planeta i $M$ jednosmjernih teleportera.
 Definicija kraljevstva: Dva planeta $A$ i $B$ pripadaju istom kraljevstvu **ako i samo ako** postoji put od $A$ do $B$ **I** put od $B$ do $A$.
 
 **Cilj:**
+
 1. Odrediti ukupan broj kraljevstava.
 2. Svakom planetu dodijeliti oznaku kraljevstva (broj od $1$ do $K$).
 
 **Ograničenja:**
-* $N \le 10^5$, $M \le 2 \cdot 10^5$.
-* Potrebna složenost: Linearna $O(N+M)$.
+
+- $N \le 10^5$, $M \le 2 \cdot 10^5$.
+- Potrebna složenost: Linearna $O(N+M)$.
 
 ---
 
@@ -907,6 +952,7 @@ Definicija kraljevstva: Dva planeta $A$ i $B$ pripadaju istom kraljevstvu **ako 
 Uvjet zadatka ($A \to B$ i $B \to A$) je točna matematička definicija **Jako Povezane Komponente (Strongly Connected Component - SCC)**.
 
 Zadatak se svodi na:
+
 1. Pronađi sve SCC-ove u grafu.
 2. Prebroji ih.
 3. Svakom čvoru pridruži ID njegove komponente.
@@ -920,13 +966,13 @@ Koristit ćemo **Kosarajuov algoritam** (dva prolaza DFS-a).
 Algoritam radi u dva koraka koristeći DFS:
 
 1. **Prvi prolaz (Originalni graf):**
-   * Cilj je odrediti "topološki" poredak završetka obrade.
-   * Kad DFS završi s čvorom $u$, stavimo ga na **stog** (ili listu).
-   
+   - Cilj je odrediti "topološki" poredak završetka obrade.
+   - Kad DFS završi s čvorom $u$, stavimo ga na **stog** (ili listu).
+
 2. **Drugi prolaz (Transponirani graf):**
-   * "Okrenemo" sve bridove ($u \to v$ postaje $v \to u$).
-   * Uzimamo čvorove sa stoga (zadnji obrađen $\to$ prvi).
-   * Ako čvor nije posjećen, pokrećemo DFS. Svi dohvatljivi čvorovi u ovom koraku čine **jedno kraljevstvo**.
+   - "Okrenemo" sve bridove ($u \to v$ postaje $v \to u$).
+   - Uzimamo čvorove sa stoga (zadnji obrađen $\to$ prvi).
+   - Ako čvor nije posjećen, pokrećemo DFS. Svi dohvatljivi čvorovi u ovom koraku čine **jedno kraljevstvo**.
 
 ---
 
@@ -948,6 +994,7 @@ void dfs1(int u) {
     order.push_back(u); 
 }
 ```
+
 *Napomena:* Učitavanjem bridova odmah gradimo i `rev_adj` (obrnuti graf).
 `rev_adj[v].push_back(u)` za svaki ulaz `u -> v`.
 
@@ -1024,8 +1071,8 @@ Memorijski limit je također siguran (koristimo nekoliko nizova veličine $N$).
 1. Problem traži particioniranje grafa na skupove uzajamno dohvatljivih čvorova.
 2. To je definicija **Jako Povezanih Komponenti (SCC)**.
 3. Rješenje je "udžbenička" primjena **Kosarajuovog algoritma**:
-   * DFS1 (sortiraj po vremenu završetka).
-   * Obrni bridove.
-   * DFS2 (broji komponente i označavaj).
+   - DFS1 (sortiraj po vremenu završetka).
+   - Obrni bridove.
+   - DFS2 (broji komponente i označavaj).
 
 ---

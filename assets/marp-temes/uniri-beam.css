@@ -1,0 +1,131 @@
+/* @theme uniri-beam */
+/* Bazirano na 'beam' temi uz UNIRI prilagodbe */
+
+@import "default";
+
+:root {
+  font-family: "CMU Sans Serif", "Segoe UI", Helvetica, sans-serif;
+  --main: #1f38c5;
+  --secondary: #141414;
+}
+
+section {
+  background-color: #ffffff;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjUwbW0iIGhlaWdodD0iNS4zNTQ2bW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI1MCA1LjM1NDYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMC4zNDcgLTkxLjAyOCkiPgo8cmVjdCB4PSIyMC4zNDciIHk9IjkxLjAyOCIgd2lkdGg9IjEyNSIgaGVpZ2h0PSI1LjM1NDYiIGZpbGw9IiMxNDE0MTQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIwIi8+CjxwYXRoIGQ9Im0xNDUuMzUgOTMuNzA1di0yLjY3NzNoMTI1djUuMzU0NmgtMTI1eiIgZmlsbD0iIzFmMzhjNSIgc3Ryb2tlLXdpZHRoPSIwIi8+CjwvZz4KPC9zdmc+);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 150% 1em;
+  padding: 2em;
+  font-size: 24px;
+}
+
+header {
+  font-size: 0.6em;
+  text-align: right;
+  position: absolute;
+  top: 96.2%;
+  width: 100%;
+  right: 0;
+  left: -51%;
+  color: white;
+}
+
+footer {
+  font-size: 0.6em;
+  position: absolute;
+  text-align: left;
+  top: 96.2%;
+  width: 100%;
+  right: 0;
+  left: 50.8%;
+  color: white;
+}
+
+h1 {
+  font-size: 40px;
+  color: #000000;
+  font-family: "CMU Bright", "Segoe UI Semibold";
+}
+
+h1:nth-of-type(1) {
+  color: #ffffff;
+  background-color: var(--main);
+  border-top: 0.3em solid var(--main);
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 1.5em;
+  text-indent: 0.5em;
+  font-size: 1.6em; 
+}
+
+h2 {
+  font-size: 32px;
+  color: #000000;
+}
+
+h3, h4, h5, h6 {
+  color: #141414;
+}
+
+code {
+  font-size: 18px;
+  background-color: rgba(100, 100, 100, 0.2);
+}
+
+strong {
+  color: #ff0000;
+}
+
+mark {
+  background-color: #f5db7e;
+}
+
+section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  font-weight: bold;
+  font-size: 20px;
+  color: #6e6e6e;
+  
+  position: absolute;
+  bottom: 25px; 
+  right: 30px;
+  z-index: 999;
+}
+
+.katex {
+  font: normal 1.05em KaTeX_Main, "Times New Roman", serif
+}
+
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.title>h1 {
+  font-family: "CMU Bright", "Segoe UI Semibold";
+  color: #ffffff;
+  background-color: var(--main);
+  border-radius: 25px;
+  text-align: center;
+  width: 80%;
+  padding-bottom: 0.2em;
+  position: static;
+  margin-bottom: 20px;
+}
+
+section.tinytext>p,
+section.tinytext>ul,
+section.tinytext>blockquote {
+  font-size: 0.65em;
+}

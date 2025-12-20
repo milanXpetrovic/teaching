@@ -1,37 +1,13 @@
 ---
 marp: true
-theme: beam
+theme: uniri-beam
 size: 16:9
 paginate: true
 math: mathjax
 header: "NASLOV"
-footer: "IME_PREDMETA"
-style: |
-  section {
-    font-size: 24px;
-  }
-  code {
-    font-size: 18px; /* Optimizes code readability */
-  }
-  h1 {
-    font-size: 40px;
-    color: #005f87;
-  }
-  h2 {
-    font-size: 32px;
-    color: #005f87;
-  }
-  section::after {
-    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
-    font-weight: bold;
-    font-size: 20px;
-    color: #005f87;
-    position: absolute;
-    bottom: 25px; 
-    right: 30px;
-    z-index: 999; /* Osigurava da je broj IZNAD footera */
-  }
+footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 ---
+
 <!-- paginate: false -->
 <!-- _class: title  -->
 # Naslov
