@@ -213,7 +213,7 @@ bool comparePoints(const Point& a, const Point& b) {
     return a.y < b.y;
 }
 
-vector<Point> points = {{1, 2}, {3, 1}, {1, 5}};
+vector<Point> points = { {1, 2}, {3, 1}, {1, 5} };
 sort(points.begin(), points.end(), comparePoints);
 ```
 
@@ -464,5 +464,3 @@ cout << gondolas << endl;
   - Što ako je niz prazan? Što ako su svi brojevi isti? Što ako je $N=1$?
 - **Ne kompliciraj:**
   - Ako postoji jednostavno rješenje (npr. sortiranje), vjerojatno je bolje od komplicirane strukture podataka.
-
----
