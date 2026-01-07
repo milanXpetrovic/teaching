@@ -732,8 +732,7 @@ Rješenje: **Segmentno Stablo**.
 Segmentno stablo je binarno stablo izgrađeno nad nizom.
 
 - **Listovi:** Sadrže elemente originalnog niza.
-
-* **Unutarnji čvorovi:** Sadrže minimum svoje djece.
+- **Unutarnji čvorovi:** Sadrže minimum svoje djece.
     `tree[v] = min(tree[2*v], tree[2*v+1])`
 
 **Svojstva:**
