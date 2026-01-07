@@ -20,7 +20,7 @@ has_toc: false
 | 7. | **Dinamičko programiranje II. dio** | [Prezentacija](../html/07-Advanced-Dynamic-Programming.html) |
 | 8. | **Putovanje kroz graf** | [Prezentacija](../html/08-Graph-Traversal.html) |
 | 9. | **Najkraći putovi u grafu** | [Prezentacija](../html/09-Shortest-Paths.html) |
-| 10. | **Minimalno razapinjajuće stablo** | [Prezentacija](../html/10- MST.html) |
+| 10. | **Minimalno razapinjajuće stablo** | [Prezentacija](../html/10-MST.html) |
 | 11. | **Upiti nad rasponima** | [Prezentacija](../html/11-Range-Queries.html) |
 | 12. | **Algoritmi na stablima i LCA** | [Prezentacija](../html/12-Tree-Algorithms-and-LCA.html) |
 | 13. | **Mrežni tokovi i jake komponente** | [Prezentacija](../html/13-Flows-Matchings-and-SCC.html) |
