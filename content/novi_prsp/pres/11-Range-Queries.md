@@ -75,7 +75,7 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 # Statički upiti: Prefiksne Sume (2/2)
 
-![w:900px center](/img/prsp/range-queries/prefiksne-sume-vizualizacija.png)
+![w:900px center](../../../img/prsp/range-queries/prefiksne-sume-vizualizacija.png)
 
 ---
 
@@ -100,7 +100,7 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 # Fenwick stablo
 
-![center](/img/prsp/range-queries/fenwick-tree-structure-fixed.png)
+![center](../../../img/prsp/range-queries/fenwick-tree-structure-fixed.png)
 
 ---
 
@@ -134,7 +134,7 @@ long long query(int l, int r) {
 
 # Fenwick stablo: implementacija (2/2)
 
-![center](/img/prsp/range-queries/fenwick-update-path-fixed.png)
+![center](../../../img/prsp/range-queries/fenwick-update-path-fixed.png)
 
 ---
 
@@ -161,7 +161,7 @@ Fleksibilnije od Fenwick stabla. Podržava:
 
 # Segmentno stablo: Vizualizacija
 
-![center](/img/prsp/range-queries/segment-tree-structure.png)
+![center](../../../img/prsp/range-queries/segment-tree-structure.png)
 
 ---
 
@@ -199,7 +199,7 @@ void update(int node, int start, int end, int idx, int val) {
 
 # Segmentno stablo: Upit (1/3)
 
-![w:800px center](/img/prsp/range-queries/segment-tree-query-decomposition.png)
+![w:800px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
 
 ---
 
@@ -459,7 +459,7 @@ $$ \min(st[L][k], \quad st[R - 2^k + 1][k]) $$
 
 # Kako odgovoriti na upit u $O(1)$? (2/2)
 
-![w:900px center](/img/prsp/range-queries/sparse_table_overlap.png)
+![w:900px center](../../../img/prsp/range-queries/sparse_table_overlap.png)
 
 ---
 
@@ -1022,7 +1022,7 @@ Stojimo u čvoru. Trebamo hotel s barem $r$ soba.
 
 # Intuicija: Max Segment Tree (2/2)
 
-![w:900px center](/img/prsp/range-queries/segment-tree-query-decomposition.png)
+![w:900px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
 
 ---
 
