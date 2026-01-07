@@ -20,13 +20,19 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 # Sadržaj
 
 1. **Uvod i Motivacija**
-   * Što su upiti nad rasponima?
-   * Zašto je naivni pristup prespor?
+
+- Što su upiti nad rasponima?
+- Zašto je naivni pristup prespor?
+
 2. **Statički Upiti**
-   * Prefiksne sume
+
+- Prefiksne sume
+
 3. **Dinamički Upiti (Ažuriranje točke)**
-   * Fenwick stablo (Binary Indexed Tree)
-   * Segmentno stablo
+
+- Fenwick stablo (Binary Indexed Tree)
+- Segmentno stablo
+
 4. **Zadaci za vježbu**
 
 ---
@@ -45,9 +51,9 @@ Imamo niz $A$. Želimo efikasno odgovarati na pitanja o podnizu (rasponu) $[L, R
 
 Ako za svaki upit vrtimo petlju od $L$ do $R$:
 
-* Složenost jednog upita: $O(N)$
-* Za $Q$ upita: **$O(N \cdot Q)$**
-* Za $N, Q = 10^5$, to je $10^{10}$ operacija $\to$ **Time Limit Exceeded (TLE)**.
+- Složenost jednog upita: $O(N)$
+- Za $Q$ upita: **$O(N \cdot Q)$**
+- Za $N, Q = 10^5$, to je $10^{10}$ operacija $\to$ **Time Limit Exceeded (TLE)**.
 
 Cilj: **$O(\log N)$** ili **$O(1)$** po upitu.
 
@@ -83,16 +89,16 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 Što ako se vrijednosti u nizu **mijenjaju**?
 
-* Prefiksne sume zahtijevaju ponovnu izgradnju: $O(N)$ po promjeni.
-* Trebamo strukturu koja podržava i **Update** i **Query** brzo.
+- Prefiksne sume zahtijevaju ponovnu izgradnju: $O(N)$ po promjeni.
+- Trebamo strukturu koja podržava i **Update** i **Query** brzo.
 
 ## Fenwick stablo (Binary Indexed Tree - BIT)
 
-* Podržava **Point Update** i **Range Sum**.
+- Podržava **Point Update** i **Range Sum**.
 
-* Složenost: **$O(\log N)$** za obje operacije.
-* Memorija: **$O(N)$**.
-* Jako malo koda, bazira se na bitovnim operacijama.
+- Složenost: **$O(\log N)$** za obje operacije.
+- Memorija: **$O(N)$**.
+- Jako malo koda, bazira se na bitovnim operacijama.
 
 **Intuicija:** Svaki indeks $k$ pamti sumu određenog raspona definiranog najvećom potencijom broja 2 koja dijeli $k$ (LSB).
 
@@ -142,26 +148,26 @@ long long query(int l, int r) {
 
 Fleksibilnije od Fenwick stabla. Podržava:
 
-* Sum, Min, Max, GCD, XOR...
-* Čak i složenije operacije (npr. max subsegment sum).
+- Sum, Min, Max, GCD, XOR...
+- Čak i složenije operacije (npr. max subsegment sum).
 
 **Struktura:**
 
-* Binarno stablo izgrađeno nad nizom.
-* **Listovi:** Elementi originalnog niza.
-* **Unutarnji čvorovi:** Agregat (npr. zbroj) svoje djece.
+- Binarno stablo izgrađeno nad nizom.
+- **Listovi:** Elementi originalnog niza.
+- **Unutarnji čvorovi:** Agregat (npr. zbroj) svoje djece.
 
 **Složenost:**
 
-* Izgradnja: $O(N)$
-* Upit: $O(\log N)$
-* Ažuriranje: $O(\log N)$
+- Izgradnja: $O(N)$
+- Upit: $O(\log N)$
+- Ažuriranje: $O(\log N)$
 
 ---
 
 # Segmentno stablo: Vizualizacija
 
-![center](../../../img/prsp/range-queries/segment-tree-structure.png)
+![w:900px center](../../../img/prsp/range-queries/segment-tree-structure.png)
 
 ---
 
@@ -199,7 +205,7 @@ void update(int node, int start, int end, int idx, int val) {
 
 # Segmentno stablo: Upit (1/3)
 
-![w:800px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
+![w:900px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
 
 ---
 
@@ -247,13 +253,13 @@ Svaki upit traži zbroj elemenata u rasponu $[a, b]$.
 
 **Ulaz:**
 
-* $N, Q$ ($1 \le N, Q \le 2 \cdot 10^5$)
-* Niz vrijednosti $x_i$ ($1 \le x_i \le 10^9$)
-* $Q$ linija s parovima $(a, b)$.
+- $N, Q$ ($1 \le N, Q \le 2 \cdot 10^5$)
+- Niz vrijednosti $x_i$ ($1 \le x_i \le 10^9$)
+- $Q$ linija s parovima $(a, b)$.
 
 **Izlaz:**
 
-* Zbroj elemenata za svaki upit.
+- Zbroj elemenata za svaki upit.
 
 ---
 
@@ -272,10 +278,10 @@ for(int i = 0; i < q; ++i) {
 
 **Analiza složenosti:**
 
-* Jedan upit: $O(N)$
-* $Q$ upita: $O(N \cdot Q)$
-* Uvrštavanje ograničenja: $(2 \cdot 10^5) \times (2 \cdot 10^5) = 4 \cdot 10^{10}$ operacija.
-* Limit je 1 sekunda ($\approx 10^8$ operacija). Ovo je **presporo (TLE)**.
+- Jedan upit: $O(N)$
+- $Q$ upita: $O(N \cdot Q)$
+- Uvrštavanje ograničenja: $(2 \cdot 10^5) \times (2 \cdot 10^5) = 4 \cdot 10^{10}$ operacija.
+- Limit je 1 sekunda ($\approx 10^8$ operacija). Ovo je **presporo (TLE)**.
 
 ---
 
@@ -304,9 +310,9 @@ $$ \text{Sum}(a, b) = P[b] - P[a-1] $$
 
 **Složenost:**
 
-* **Izgradnja P:** $O(N)$ (jedan prolaz kroz niz).
-* **Upit:** $O(1)$ (samo jedno oduzimanje).
-* **Ukupno:** $O(N + Q)$. Ovo je vrlo brzo.
+- **Izgradnja P:** $O(N)$ (jedan prolaz kroz niz).
+- **Upit:** $O(1)$ (samo jedno oduzimanje).
+- **Ukupno:** $O(N + Q)$. Ovo je vrlo brzo.
 
 ---
 
@@ -376,8 +382,8 @@ Svaki upit traži **minimalnu vrijednost** u rasponu $[a, b]$.
 
 **Ograničenja:**
 
-* $N, Q \le 2 \cdot 10^5$.
-* Niz je statičan (nema `update` operacija).
+- $N, Q \le 2 \cdot 10^5$.
+- Niz je statičan (nema `update` operacija).
 
 **Zašto ne prefiksne sume?**
 Kod zbrajanja vrijedi `sum(a, b) = P[b] - P[a-1]`.
@@ -392,8 +398,8 @@ Za statičke upite nad operacijama kao što su `min`, `max`, `gcd` (tzv. idempot
 
 **Performanse:**
 
-* **Izgradnja:** $O(N \log N)$
-* **Upit:** $O(1)$ (Konstantno vrijeme!)
+- **Izgradnja:** $O(N \log N)$
+- **Upit:** $O(1)$ (Konstantno vrijeme!)
 
 **Ideja:**
 Unaprijed izračunamo minimum za sve raspone čija je duljina **potencija broja 2**.
@@ -516,9 +522,9 @@ int main() {
 
 Ovaj zadatak se može riješiti i **Segmentnim stablom**.
 
-* **Složenost:** $O(N)$ izgradnja, $O(\log N)$ upit.
-* **Prednost:** Radi i ako se niz mijenja (Dynamic updates).
-* **Nedostatak:** Sporije od Sparse Table za statičke podatke (zbog rekurzije i $\log N$ faktora).
+- **Složenost:** $O(N)$ izgradnja, $O(\log N)$ upit.
+- **Prednost:** Radi i ako se niz mijenja (Dynamic updates).
+- **Nedostatak:** Sporije od Sparse Table za statičke podatke (zbog rekurzije i $\log N$ faktora).
 
 Za potrebe ovog zadatka ($10^5$ upita), Sparse Table je elegantnije rješenje, ali Segmentno stablo bi također prošlo unutar limita.
 
@@ -543,15 +549,15 @@ Zadan je niz od $N$ cijelih brojeva. Trebamo obraditi $Q$ upita dva tipa:
 
 **Ograničenja:**
 
-* $N, Q \le 2 \cdot 10^5$.
-* Vremenski limit: 1.00 s.
+- $N, Q \le 2 \cdot 10^5$.
+- Vremenski limit: 1.00 s.
 
 **Ključna razlika od prošlog zadatka:**
 
 Vrijednosti se **mijenjaju**.
 
-* Prefiksne sume bi trebale $O(N)$ za svaki update $\to$ Presporo ($O(NQ)$).
-* Običan niz bi trebao $O(N)$ za svaki zbroj $\to$ Presporo.
+- Prefiksne sume bi trebale $O(N)$ za svaki update $\to$ Presporo ($O(NQ)$).
+- Običan niz bi trebao $O(N)$ za svaki zbroj $\to$ Presporo.
 
 ---
 
@@ -566,8 +572,8 @@ Svaki indeks `i` pokriva raspon duljine $2^k$, gdje je $k$ broj nula na kraju bi
 
 **Operacije:**
 
-* **Update:** Dodaj vrijednost na indeks `i` i sve njegove "roditelje" u BIT-u.
-* **Query(i):** Zbroji vrijednosti penjući se po stablu (oduzimajući LSB).
+- **Update:** Dodaj vrijednost na indeks `i` i sve njegove "roditelje" u BIT-u.
+- **Query(i):** Zbroji vrijednosti penjući se po stablu (oduzimajući LSB).
 
 ---
 
@@ -686,8 +692,8 @@ int main() {
 
 Ovaj zadatak se može riješiti i **Segmentnim stablom**.
 
-* **Prednosti:** Intuitivnije za "Set value" operaciju (ne treba računati razliku), lakše se proširuje na složenije upite (min/max).
-* **Mane:** Više koda, veća memorijska potrošnja ($4N$ vs $N$), malo sporija konstanta.
+- **Prednosti:** Intuitivnije za "Set value" operaciju (ne treba računati razliku), lakše se proširuje na složenije upite (min/max).
+- **Mane:** Više koda, veća memorijska potrošnja ($4N$ vs $N$), malo sporija konstanta.
 
 Za sumu s ažuriranjem točke, **Fenwick stablo** je obično preferirani izbor u natjecateljskom programiranju zbog brzine pisanja.
 
@@ -698,6 +704,7 @@ Za sumu s ažuriranjem točke, **Fenwick stablo** je obično preferirani izbor u
 # CSES: Dynamic Range Minimum Queries
 
 ---
+
 # Zadatak: Dynamic Range Minimum Queries
 
 **Problem:**
@@ -708,13 +715,13 @@ Zadan je niz od $N$ cijelih brojeva. Trebamo obraditi $Q$ upita dva tipa:
 
 **Ograničenja:**
 
-* $N, Q \le 2 \cdot 10^5$.
-* Vremenski limit: 1.00 s.
+- $N, Q \le 2 \cdot 10^5$.
+- Vremenski limit: 1.00 s.
 
 **Zašto ne prethodne metode?**
 
-* **Prefiksne sume/BIT:** Operacija `min` nema inverz (ne možemo "oduzeti" minimum).
-* **Sparse Table:** Ne podržava efikasno ažuriranje vrijednosti (zahtijeva ponovnu izgradnju).
+- **Prefiksne sume/BIT:** Operacija `min` nema inverz (ne možemo "oduzeti" minimum).
+- **Sparse Table:** Ne podržava efikasno ažuriranje vrijednosti (zahtijeva ponovnu izgradnju).
 
 Rješenje: **Segmentno Stablo**.
 
@@ -724,15 +731,16 @@ Rješenje: **Segmentno Stablo**.
 
 Segmentno stablo je binarno stablo izgrađeno nad nizom.
 
-* **Listovi:** Sadrže elemente originalnog niza.
+- **Listovi:** Sadrže elemente originalnog niza.
+
 * **Unutarnji čvorovi:** Sadrže minimum svoje djece.
     `tree[v] = min(tree[2*v], tree[2*v+1])`
 
 **Svojstva:**
 
-* Visina stabla je $O(\log N)$.
-* Svaki raspon $[a, b]$ može se dekomponirati na $O(\log N)$ čvorova stabla.
-* Promjena elementa utječe samo na put od lista do korijena ($O(\log N)$ čvorova).
+- Visina stabla je $O(\log N)$.
+- Svaki raspon $[a, b]$ može se dekomponirati na $O(\log N)$ čvorova stabla.
+- Promjena elementa utječe samo na put od lista do korijena ($O(\log N)$ čvorova).
 
 ---
 
@@ -844,9 +852,9 @@ int main() {
 
 Za niz veličine $N$ i $Q$ upita:
 
-* **Build:** $O(N)$ (posjećujemo svaki čvor jednom).
-* **Update:** $O(\log N)$ (visina stabla).
-* **Query:** $O(\log N)$ (u najgorem slučaju posjećujemo 4 čvora po razini).
+- **Build:** $O(N)$ (posjećujemo svaki čvor jednom).
+- **Update:** $O(\log N)$ (visina stabla).
+- **Query:** $O(\log N)$ (u najgorem slučaju posjećujemo 4 čvora po razini).
 
 Segmentno stablo je **univerzalan alat**.
 Promjenom jedne linije koda (`min` u `+`, `max`, `gcd`, `xor`) rješavamo potpuno druge probleme.
@@ -870,8 +878,8 @@ $$ x_a \oplus x_{a+1} \oplus \dots \oplus x_b $$
 
 **Ograničenja:**
 
-* $N, Q \le 2 \cdot 10^5$.
-* Niz je statičan (nema izmjena).
+- $N, Q \le 2 \cdot 10^5$.
+- Niz je statičan (nema izmjena).
 
 **Pitanje:**
 Možemo li koristiti Segmentno stablo?
@@ -947,8 +955,8 @@ U tom slučaju koristili bismo **Fenwickovo stablo** ili **Segmentno stablo**.
 
 Jedina promjena u odnosu na "Range Sum Queries":
 
-* Umjesto `+` koristimo `^` (XOR).
-* Kod Fenwick stabla, `update` operacija je: `add(k, val ^ current_val)`.
+- Umjesto `+` koristimo `^` (XOR).
+- Kod Fenwick stabla, `update` operacija je: `add(k, val ^ current_val)`.
 
 Segmentno stablo za XOR:
 
@@ -970,12 +978,12 @@ Nakon dodjele, broj soba u tom hotelu se smanjuje.
 
 **Ulaz:**
 
-* $N, M \le 2 \cdot 10^5$.
-* Kapaciteti do $10^9$.
+- $N, M \le 2 \cdot 10^5$.
+- Kapaciteti do $10^9$.
 
 **Izlaz:**
 
-* Za svaku grupu ispiši indeks hotela (ili 0 ako nema mjesta).
+- Za svaku grupu ispiši indeks hotela (ili 0 ako nema mjesta).
 
 ---
 
@@ -1015,8 +1023,8 @@ Stojimo u čvoru. Trebamo hotel s barem $r$ soba.
 
 1. Ako je `tree[v] < r`, u ovom rasponu uopće nema dovoljno velikog hotela. (Vrati 0).
 2. Inače, rješenje sigurno postoji. Gdje je *prvi* takav?
-    * Pogledaj **lijevo dijete**: Ako `tree[2*v] >= r`, rješenje je lijevo! (Prioritet lijevom jer tražimo prvi indeks).
-    * Inače, rješenje mora biti **desno** (jer znamo da postoji u trenutnom čvoru, a nije lijevo).
+   -Pogledaj **lijevo dijete**: Ako `tree[2*v] >= r`, rješenje je lijevo! (Prioritet lijevom jer tražimo prvi indeks).
+   -Inače, rješenje mora biti **desno** (jer znamo da postoji u trenutnom čvoru, a nije lijevo).
 
 ---
 
@@ -1114,10 +1122,10 @@ int main() {
 
 # Analiza složenosti
 
-* **Izgradnja:** $O(N)$.
-* **Upit (Query):** Spuštamo se od korijena do lista. U svakom koraku radimo jednu usporedbu i idemo lijevo ili desno. Visina stabla je $\log N$. $\to O(\log N)$.
-* **Ažuriranje (Update):** Standardno $O(\log N)$.
-* **Ukupno:** $O(M \log N)$.
+- **Izgradnja:** $O(N)$.
+- **Upit (Query):** Spuštamo se od korijena do lista. U svakom koraku radimo jednu usporedbu i idemo lijevo ili desno. Visina stabla je $\log N$. $\to O(\log N)$.
+- **Ažuriranje (Update):** Standardno $O(\log N)$.
+- **Ukupno:** $O(M \log N)$.
 
 Za $N, M = 2 \cdot 10^5$, $\log N \approx 18$.
 Ukupno operacija $\approx 3.6 \cdot 10^6$, što je znatno ispod limita od $10^8$.
