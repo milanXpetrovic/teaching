@@ -9,21 +9,6 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
   
 ---
 
-
----
-
-### 8. Slajd: Hotel Queries (Spuštanje po stablu)
-
-Ovo je napredniji koncept (Binary search on Tree).
-
-* **Gdje:** Slajd "Intuicija: Max Segment Tree".
-* **Što tražiti (Keywords):** `segment tree traversal descent path`
-* **Opis slike:** Prikaz segmentnog stabla gdje je jedna putanja od korijena do nekog lista obojana (npr. crveno). To vizualizira "šetnju" kroz stablo ovisno o uvjetu (`tree[node] >= val`).
-
----
-
----
-
 <!-- _class: title -->
 
 # Upiti nad rasponima
