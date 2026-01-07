@@ -17,7 +17,7 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 
 ---
 
-## Sadržaj
+# Sadržaj
 
 1. **Uvod i Motivacija**
    * Što su upiti nad rasponima?
@@ -31,7 +31,7 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 
 ---
 
-## Uvod: Što su upiti nad rasponima?
+# Uvod: Što su upiti nad rasponima?
 
 Imamo niz $A$. Želimo efikasno odgovarati na pitanja o podnizu (rasponu) $[L, R]$.
 
@@ -165,7 +165,7 @@ Fleksibilnije od Fenwick stabla. Podržava:
 
 ---
 
-## Segmentno stablo: Implementacija (Rekurzivna)
+# Segmentno stablo: Implementacija (Rekurzivna)
 
 ```cpp
 long long tree[4 * N]; // 4x veličina niza
@@ -226,7 +226,7 @@ long long query(int node, int start, int end, int l, int r) {
 *Za Min/Max upite mijenjamo `+` u `min()`/`max()` i neutralni element (0 u $\infty$ ili $-\infty$).*
 
 ---
-
+<!-- _class: title -->
 # Zadaci za vježbu
 
 ---
@@ -239,7 +239,7 @@ long long query(int node, int start, int end, int l, int r) {
 
 ---
 
-## Zadatak: Static Range Sum Queries
+# Zadatak: Static Range Sum Queries
 
 **Problem:**
 Zadan je niz od $N$ cijelih brojeva. Trebamo odgovoriti na $Q$ upita.
@@ -257,7 +257,7 @@ Svaki upit traži zbroj elemenata u rasponu $[a, b]$.
 
 ---
 
-## Zašto naivni pristup ne radi?
+# Zašto naivni pristup ne radi?
 
 Naivno rješenje bi za svaki upit vrtjelo petlju od $a$ do $b$.
 
@@ -279,7 +279,7 @@ for(int i = 0; i < q; ++i) {
 
 ---
 
-## Rješenje: Prefiksne sume
+# Rješenje: Prefiksne sume
 
 Budući da se niz **ne mijenja** (statičan je), možemo unaprijed izračunati zbrojeve.
 
@@ -293,7 +293,7 @@ $$ P[i] = P[i-1] + x[i] $$
 
 ---
 
-## Intuicija: Oduzimanje raspona
+# Intuicija: Oduzimanje raspona
 
 Kako dobiti zbroj od $a$ do $b$ koristeći samo `P`?
 
@@ -310,14 +310,14 @@ $$ \text{Sum}(a, b) = P[b] - P[a-1] $$
 
 ---
 
-## Implementacija: Detalji
+# Implementacija: Detalji
 
 1. **Indeksiranje:** Zadatak koristi 1-bazirano indeksiranje ($1 \dots N$). Najlakše je alocirati niz veličine `N+1` i postaviti `P[0] = 0`. Tako formula `P[b] - P[a-1]` radi i kada je $a=1$.
 2. **Tip podataka:** Maksimalni zbroj može biti $2 \cdot 10^5 \times 10^9 = 2 \cdot 10^{14}$. To ne stane u `int`. **Obavezno koristi `long long`**.
 
 ---
 
-## Kod rješenja (C++)
+# Kod rješenja (C++)
 
 ```cpp
 int main() {
@@ -368,7 +368,7 @@ int main() {
 
 ---
 
-## Zadatak: Static Range Minimum Queries
+# Zadatak: Static Range Minimum Queries
 
 **Problem:**
 Zadan je niz od $N$ cijelih brojeva. Trebamo odgovoriti na $Q$ upita.
@@ -386,7 +386,7 @@ $$ \min(a, b) \neq \text{prefMin}[b] - \text{prefMin}[a-1] $$
 
 ---
 
-## Rješenje: Sparse Table (Rijetka tablica)
+# Rješenje: Sparse Table (Rijetka tablica)
 
 Za statičke upite nad operacijama kao što su `min`, `max`, `gcd` (tzv. idempotentne operacije), **Sparse Table** je najmoćnija struktura.
 
@@ -403,7 +403,7 @@ Raspon pokriven s `st[i][j]` je $[i, i + 2^j - 1]$.
 
 ---
 
-## Izgradnja tablice (Precomputation)
+# Izgradnja tablice (Precomputation)
 
 Koristimo dinamičko programiranje.
 Raspon duljine $2^j$ možemo podijeliti na dva raspona duljine $2^{j-1}$.
@@ -693,6 +693,11 @@ Za sumu s ažuriranjem točke, **Fenwick stablo** je obično preferirani izbor u
 
 ---
 
+<!-- _class: title -->
+
+# CSES: Dynamic Range Minimum Queries
+
+---
 # Zadatak: Dynamic Range Minimum Queries
 
 **Problem:**
@@ -815,14 +820,10 @@ Paziti na indeksiranje! CSES koristi 1-based, naša implementacija SegTree-a je 
 int main() {
     int n, q;
     cin >> n >> q;
-    
     arr.resize(n + 1);
     tree.resize(4 * n + 1);
-    
     for (int i = 1; i <= n; i++) cin >> arr[i];
-    
     build(1, 1, n); // Korijen je 1, pokriva [1, n]
-    
     while (q--) {
         int type;
         cin >> type;
