@@ -6,7 +6,6 @@ paginate: true
 math: mathjax
 header: "Upiti nad rasponima (Range Queries)"
 footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
-  
 ---
 
 <!-- _class: title -->
@@ -24,16 +23,16 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 - Što su upiti nad rasponima?
 - Zašto je naivni pristup prespor?
 
-2. **Statički Upiti**
+1. **Statički Upiti**
 
 - Prefiksne sume
 
-3. **Dinamički Upiti (Ažuriranje točke)**
+1. **Dinamički Upiti (Ažuriranje točke)**
 
 - Fenwick stablo (Binary Indexed Tree)
 - Segmentno stablo
 
-4. **Zadaci za vježbu**
+1. **Zadaci za vježbu**
 
 ---
 
@@ -45,7 +44,7 @@ Imamo niz $A$. Želimo efikasno odgovarati na pitanja o podnizu (rasponu) $[L, R
 
 1. **Sum:** Zbroj elemenata od $L$ do $R$.
 2. **Min/Max:** Najmanji/najveći element u rasponu.
-3. **GCD/XOR:** Ostale asocijativne operacije.
+3. **najveći zajednički djelitelj (GCD), XOR, ..:** Ostale asocijativne operacije.
 
 ### Problem naivnog pristupa
 
@@ -61,7 +60,7 @@ Cilj: **$O(\log N)$** ili **$O(1)$** po upitu.
 
 # Statički upiti: Prefiksne Sume (1/2)
 
-Ako se niz **ne mijenja** (nema update-a), možemo koristiti prefiksne sume.
+Ako se niz **ne mijenja**, možemo koristiti prefiksne sume.
 
 **Ideja:** `P[i]` sadrži zbroj prvih $i$ elemenata: $A[0] + \dots + A[i-1]$.
 
@@ -75,7 +74,7 @@ for (int i = 0; i < n; ++i) {
 ```
 
 **Upit $O(1)$:** Zbroj raspona $[L, R]$ (inkluzivno, 0-indeksirano) je:
-$$ \text{sum}(L, R) = P[R+1] - P[L] $$
+$$ \text{sum}(L, R) = P[R] - P[L-1] $$
 
 ---
 
@@ -100,7 +99,7 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 - Memorija: **$O(N)$**.
 - Jako malo koda, bazira se na bitovnim operacijama.
 
-**Intuicija:** Svaki indeks $k$ pamti sumu određenog raspona definiranog najvećom potencijom broja 2 koja dijeli $k$ (LSB).
+**Intuicija:** Svaki indeks $k$ pamti sumu određenog raspona definiranog najvećom potencijom broja 2 koja dijeli $k$ (LSB). LSB (Least Significant Bit) je najmanje značajni bit u binarnom zapisu broja — najdesniji bit koji je 1.
 
 ---
 
@@ -110,7 +109,101 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 ---
 
-# Fenwick stablo: implementacija (1/2)
+# Logika: Tko je za što odgovoran?
+
+Ključ razumijevanja je u **binarnom zapisu** indeksa. Svaki čvor u nizu ne čuva samo svoju vrijednost, već sumu određenog bloka.
+
+- Dužina bloka određena je **najmanjim bitom jedinice** (LSB - Least Significant Bit).
+- **Pravilo:** Indeks pokriva raspon `[indeks - LSB + 1, indeks]`.
+
+**Primjeri (1-based notacija):**
+
+- `12` (`1100`) $\rightarrow$ LSB je 4. Pokriva 4 elementa: `[9, 10, 11, 12]`.
+- `6` (`0110`) $\rightarrow$ LSB je 2. Pokriva 2 elementa: `[5, 6]`.
+- `7` (`0111`) $\rightarrow$ LSB je 1. Pokriva 1 element: `[7]`.
+
+---
+
+# Fenwick stablo: ažuriranje vrijednosti
+
+![center](../../../img/prsp/range-queries/fenwick-update-path-fixed.png)
+
+---
+
+# Logika kretanja: Gore i dolje
+
+Kako se krećemo po stablu ovisi o operaciji:
+
+1. **Upit (Query/Read):** Krećemo se **DOLJE** (prema 0).
+    - Uzimamo sumu trenutnog bloka.
+    - Oduzimamo dužinu bloka da skočimo na kraj prethodnog raspona.
+    - *Cilj:* Sakupiti sve dijelove prefiksa.
+
+2. **Ažuriranje (Update):** Krećemo se **GORE** (prema N).
+    - Ažuriramo trenutni čvor.
+    - Dodajemo dužinu bloka da nađemo prvog "roditelja" koji nas sadrži.
+    - *Cilj:* Obavijestiti sve veće blokove da se dio njih promijenio.
+
+---
+
+# Fenwick stablo: implementacija
+
+Budući da u C++ najčešće koristimo indekse od 0, formule se blago prilagođavaju kako bi oponašale logiku LSB-a:
+
+**1. Kretanje gore (Update):** `idx = idx | (idx + 1)`
+
+- Ova operacija popunjava nizom jedinica skroz desno, efektivno skačući na sljedeći raspon koji "pokriva" trenutni indeks.
+- Primjer: Ako smo na `0011` (3), operacija nas vodi na `0111` (7), pa `1111` (15)...
+
+**2. Kretanje dolje (Query):** `r = (r & (r + 1)) - 1`
+
+- Ovo je ekvivalent brisanja najmanjeg bita u 1-based sustavu, ali prilagođeno za 0-based.
+- Efektivno "skida" zadnji blok raspona.
+
+---
+
+# Računanje sume raspona $[L, R]$
+
+Fenwick stablo ne može izravno vratiti sumu od $L$ do $R$. Ono uvijek vraća **prefiks sumu** (od početka do nekog indeksa).
+
+Koristimo princip oduzimanja prefiksa: $Suma(L, R) = Suma(0, R) - Suma(0, L-1)$
+
+**Vizualno:**
+
+1. Tražimo sumu plavog dijela (od $L$ do $R$)
+2. Izračunamo sumu do $R$ (`query(R)`)
+3. Oduzmemo sumu do $L-1$ (`query(L-1)`)
+4. Ostatak je traženi raspon
+
+*Vremenska složenost ostaje $O(\log N)$ jer radimo samo dva upita.*
+
+---
+
+# Primjer: Upit za raspon $[5, 13]$
+
+Želimo izračunati sumu elemenata od indeksa 5 do 13, formula: `Rezultat = query(13) - query(4)`
+
+**1. Korak: Izračun `query(13)` (Suma $[0, 13]$)**, algoritam kreće od 13 i skuplja blokove unazad (prema 0):
+
+- Uzima **blok 13** (pokriva samo sebe). $\rightarrow$ *skače na 12*
+- Uzima **blok 12** (pokriva $[9, 12]$). $\rightarrow$ *skače na 8*
+- Uzima **blok 8** (pokriva $[1, 8]$). $\rightarrow$ *skače na 0 (kraj)*
+
+> $\text{Suma}_A = \text{tree}[13] + \text{tree}[12] + \text{tree}[8]$
+
+**2. Korak: Izračun `query(4)` (Suma $[0, 4]$)**, algoritam kreće od 4 (jer je to $L-1$) i skuplja unazad:
+
+- Uzima **blok 4** (pokriva $[1, 4]$). $\rightarrow$ *skače na 0 (kraj)*
+
+> $\text{Suma}_B = \text{tree}[4]$
+
+**3. Korak: Oduzimanje**
+`Rezultat` = $\text{Suma}_A - \text{Suma}_B$.
+Efektivno smo od sume prvih 13 brojeva "odrezali" prva 4 broja. Ostaje točno suma od 5 do 13.
+
+---
+
+# Fenwick stablo: implementacija
 
 Koristimo bitovne trikove za kretanje po stablu.
 *(Implementacija za 0-based indeksiranje)*
@@ -138,12 +231,6 @@ long long query(int l, int r) {
 
 ---
 
-# Fenwick stablo: implementacija (2/2)
-
-![center](../../../img/prsp/range-queries/fenwick-update-path-fixed.png)
-
----
-
 # Segmentno stablo
 
 Fleksibilnije od Fenwick stabla. Podržava:
@@ -156,12 +243,12 @@ Fleksibilnije od Fenwick stabla. Podržava:
 - Binarno stablo izgrađeno nad nizom.
 - **Listovi:** Elementi originalnog niza.
 - **Unutarnji čvorovi:** Agregat (npr. zbroj) svoje djece.
+- **Korijen:** Agregat cijelog niza $[0, N-1]$.
 
 **Složenost:**
 
 - Izgradnja: $O(N)$
-- Upit: $O(\log N)$
-- Ažuriranje: $O(\log N)$
+- Upit i ažuriranje: $O(\log N)$
 
 ---
 
@@ -171,31 +258,61 @@ Fleksibilnije od Fenwick stabla. Podržava:
 
 ---
 
-# Segmentno stablo: Implementacija (Rekurzivna)
+# Kako pamtimo stablo u nizu?
+
+Iako je logička struktura stablo, fizički koristimo običan niz.
+Koristimo **Heap-like indeksiranje**, slično kao kod binarne gomile (Binary heap):
+
+Ako je čvor na indeksu `k`:
+
+- Njegovo **lijevo dijete** je na `2 * k`
+- Njegovo **desno dijete** je na `2 * k + 1`
+- Korijen je na indeksu `1`.
+
+> Zato alociramo niz veličine `4 * N`.
+> *(Sigurna granica jer stablo nije uvijek savršeno popunjeno ako N nije potencija broja 2).*
+
+---
+
+# Segmentno stablo: Izgradnja (Build)
+
+Rekurzivno dijelimo niz na polovice dok ne dođemo do listova. Zatim se vraćamo nazad (backtracking) i računamo sume.
 
 ```cpp
 long long tree[4 * N]; // 4x veličina niza
 
-// Izgradnja stabla
+// Poziv: build(1, 0, n-1)
 void build(int node, int start, int end) {
     if (start == end) {
+        // Došli smo do lista
         tree[node] = A[start];
     } else {
         int mid = (start + end) / 2;
+        // Rekurzivno gradi djecu
         build(2*node, start, mid);
         build(2*node+1, mid+1, end);
-        tree[node] = tree[2*node] + tree[2*node+1]; // SUM operacija
+        // Spoji rezultate (Pull up)
+        tree[node] = tree[2*node] + tree[2*node+1]; 
     }
 }
+```
 
+# Segmentno stablo: Ažuriranje (Update)
+
+Slično binarnoj pretrazi. Tražimo list koji treba mijenjati, a pri povratku ažuriramo sve pretke.
+
+```cpp
 // Ažuriranje (Point Update)
 void update(int node, int start, int end, int idx, int val) {
     if (start == end) {
         tree[node] = val;
     } else {
         int mid = (start + end) / 2;
-        if (start <= idx && idx <= mid) update(2*node, start, mid, idx, val);
-        else update(2*node+1, mid+1, end, idx, val);
+        if (start <= idx && idx <= mid) 
+            update(2*node, start, mid, idx, val); // Lijevo
+        else 
+            update(2*node+1, mid+1, end, idx, val); // Desno
+        
         tree[node] = tree[2*node] + tree[2*node+1];
     }
 }
@@ -203,35 +320,72 @@ void update(int node, int start, int end, int idx, int val) {
 
 ---
 
-# Segmentno stablo: Upit (1/3)
+# Logika upita: Tri slučaja
+
+Kad tražimo sumu raspona $[L, R]$, svaki čvor u stablu provjerava svoj raspon $[start, end]$ u odnosu na traženi $[L, R]$.
+
+Postoje samo 3 situacije:
+
+1. 🔴 **Bez preklapanja:** Čvor je potpuno izvan $[L, R]$.
+    - *Akcija:* Vrati `0` (ili neutralni element).
+2. 🟢 **Potpuno preklapanje:** Čvor je cijeli unutar $[L, R]$.
+    - *Akcija:* Vrati vrijednost čvora `tree[node]`. **Ne idi dublje!**
+3. 🟡 **Djelomično preklapanje:** Dio čvora je unutra, dio vani.
+    - *Akcija:* Podijeli se! Pozovi upit za lijevo i desno dijete.
+
+---
+
+# Segmentno stablo: Upit (Code)
+
+Implementacija tri slučaja:
+
+```cpp
+long long query(int node, int start, int end, int l, int r) {
+    // 1. Potpuno izvan (🔴)
+    if (r < start || end < l) return 0;
+
+    // 2. Potpuno unutar (🟢)
+    if (l <= start && end <= r) return tree[node];
+
+    // 3. Djelomično (🟡) -> pitaj djecu
+    int mid = (start + end) / 2;
+    long long p1 = query(2*node, start, mid, l, r);
+    long long p2 = query(2*node+1, mid+1, end, l, r);
+    
+    return p1 + p2;
+}
+```
+
+---
+
+# Primjer izvršavanja upita
+
+Niz: `[1, 2, 3, 4, 5, 6, 7, 8]` (indeksi 0-7).
+Upit: **Suma od 2 do 6** (`[2, 6]`). Očekujemo $3+4+5+6+7 = 25$.
+
+1. **Korijen [0, 7]:** Djelomično se preklapa s [2, 6]. $\rightarrow$ Zovi djecu.
+    2.  **Lijevo [0, 3]:** Djelomično.
+        3.  **LL [0, 1]:** Potpuno izvan [2, 6]. $\rightarrow$ Vrati `0`.
+        4.  **LR [2, 3]:** Potpuno unutar [2, 6]. $\rightarrow$ Vrati `sum(2,3)` = **7**.
+        *Lijeva suma = 0 + 7 = 7.*
+    5.  **Desno [4, 7]:** Djelomično.
+        6.  **RL [4, 5]:** Potpuno unutar [2, 6]. $\rightarrow$ Vrati `sum(4,5)` = **11**.
+        7.  **RR [6, 7]:** Djelomično (jer trebamo samo 6).
+            8.  **RRL [6, 6]:** Unutra. $\rightarrow$ Vrati **7**.
+            9.  **RRR [7, 7]:** Vani. $\rightarrow$ Vrati `0`.
+            *RR suma = 7.*
+        *Desna suma = 11 + 7 = 18.*
+
+**Konačni rezultat:** $7 + 18 = 25$.
+
+---
+
+# Segmentno stablo: Vizuralizacija
 
 ![w:900px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
 
 ---
 
-# Segmentno stablo: Upit (2/3)
-
-Tražimo sumu u rasponu $[l, r]$.
-
-```cpp
-long long query(int node, int start, int end, int l, int r) {
-    // 1. Raspon čvora je potpuno izvan traženog raspona
-    if (r < start || end < l) return 0;
-
-    // 2. Raspon čvora je potpuno unutar traženog raspona
-    if (l <= start && end <= r) return tree[node];
-
-    // 3. Djelomično preklapanje -> pitaj djecu
-    int mid = (start + end) / 2;
-    long long p1 = query(2*node, start, mid, l, r);
-    long long p2 = query(2*node+1, mid+1, end, l, r);
-    return p1 + p2;
-}
-```
-
-*Za Min/Max upite mijenjamo `+` u `min()`/`max()` i neutralni element (0 u $\infty$ ili $-\infty$).*
-
----
 <!-- _class: title -->
 # Zadaci za vježbu
 
@@ -370,7 +524,7 @@ int main() {
 
 # CSES: Static Range Minimum Queries
 
-## Uvod u Sparse Table (Rijetka tablica)
+## Uvod u Sparse Table
 
 ---
 
@@ -392,7 +546,7 @@ $$ \min(a, b) \neq \text{prefMin}[b] - \text{prefMin}[a-1] $$
 
 ---
 
-# Rješenje: Sparse Table (Rijetka tablica)
+# Rješenje: Sparse Table
 
 Za statičke upite nad operacijama kao što su `min`, `max`, `gcd` (tzv. idempotentne operacije), **Sparse Table** je najmoćnija struktura.
 
@@ -1033,54 +1187,6 @@ Stojimo u čvoru. Trebamo hotel s barem $r$ soba.
 
 ---
 
-# Implementacija: Struktura
-
-Koristimo standardno Segmentno stablo za **Maximum**.
-
-```cpp
-// Build i Update su standardni za Max SegTree
-void update(int v, int tl, int tr, int pos, int new_val) {
-    if (tl == tr) {
-        tree[v] = new_val;
-    } else {
-        int tm = (tl + tr) / 2;
-        if (pos <= tm) update(2*v, tl, tm, pos, new_val);
-        else update(2*v+1, tm+1, tr, pos, new_val);
-        tree[v] = max(tree[2*v], tree[2*v+1]);
-    }
-}
-```
-
-Izazov je funkcija `query` koja ne vraća vrijednost, već **pronalazi indeks**.
-
----
-
-# Implementacija: Pretraživanje (Query)
-
-Ova funkcija vraća indeks prvog hotela s dovoljno soba, ili 0 ako ne postoji.
-
-```cpp
-int query(int v, int tl, int tr, int needed) {
-    // Ako ni maksimalni hotel u ovom rasponu nema dovoljno mjesta -> 0
-    if (tree[v] < needed) return 0;
-    
-    // Ako smo došli do lista, to je naš hotel!
-    if (tl == tr) return tl;
-    
-    int tm = (tl + tr) / 2;
-    
-    // Prioritet: Probaj lijevo
-    if (tree[2*v] >= needed) {
-        return query(2*v, tl, tm, needed);
-    } else {
-        // Ako ne može lijevo, sigurno može desno (jer tree[v] >= needed)
-        return query(2*v+1, tm+1, tr, needed);
-    }
-}
-```
-
----
-
 # Glavni program: Hotel Queries (1/2)
 
 Logika za svaku grupu:
@@ -1089,33 +1195,6 @@ Logika za svaku grupu:
 2. Ako postoji, ispiši ga.
 3. Smanji kapacitet tog hotela (lokalno u nizu).
 4. Ažuriraj Segmentno stablo s novim kapacitetom.
-
----
-
-# Glavni program: Hotel Queries (2/2)
-
-```cpp
-int main() {
-    // ... učitaj n, m i hotele ...
-    // Izgradi stablo (tree[v] = max kapacitet)
-    
-    for (int i = 0; i < m; ++i) {
-        int r; cin >> r; // Broj soba koji grupa treba
-        
-        // 1. Pronađi
-        int index = query(1, 1, n, r);
-        
-        cout << index << " ";
-        
-        if (index != 0) {
-            // 2. Smanji kapacitet
-            hotels[index] -= r;
-            // 3. Ažuriraj stablo
-            update(1, 1, n, index, hotels[index]);
-        }
-    }
-}
-```
 
 ---
 
