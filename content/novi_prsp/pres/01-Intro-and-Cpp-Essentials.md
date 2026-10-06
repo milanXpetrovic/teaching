@@ -5,10 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Uvod i C++ osnove"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
 
-<!-- paginate: false -->
+<!-- _paginate: false -->
 <!-- _class: title  -->
 # Uvod i C++ osnove
 
@@ -129,10 +129,11 @@ v.push_back(2);  // [3, 5, 2]
 // Iteracija
 for (int x : v) {
     cout << x << " ";
+}
 
 // Sortiranje
 sort(v.begin(), v.end()); // [2, 3, 5]
-}
+
 ```
 
 ---
@@ -205,7 +206,7 @@ $\approx 10^8$ (100 milijuna).
 - **[Weird Algorithm](https://cses.fi/problemset/task/1068)**
   - Simulacija procesa, `long long`.
 - **[Missing Number](https://cses.fi/problemset/task/1083)**
-  - Matematika (suma niza) ili XOR ili boolean polje.
+  - Matematika (suma niza, pazite na `long long`) ili XOR ili boolean polje.
 - **[Repetitions](https://cses.fi/problemset/task/1069)**
   - Linearni prolaz kroz string.
 
@@ -226,14 +227,16 @@ Počinjemo s brojem $n$.
 
 - Ako je $n$ paran, $n = n / 2$.
 - Ako je $n$ neparan, $n = 3n + 1$.
+
 Ponavljamo dok $n$ ne postane 1. Ispisati sekvencu.
 
 **Ograničenja:**
 $1 \le n \le 10^6$.
 
-**Zamka:**
+**Paziti:**
 Iako je $n$ mali, vrijednost može narasti iznad granice `int` (2 milijarde) tijekom procesa.
-Npr. $n$ raste s $3n+1$.
+*Npr. $n$ raste s $3n+1$.*
+
 $\rightarrow$ Moramo koristiti **`long long`**.
 
 ---
@@ -282,14 +285,14 @@ int main() {
 
 # Kako rješavati zadatke na Codeforcesu?
 
-1. **Pročitaj zadatak:** Pažljivo pročitaj tekst, ograničenja i primjere.
-2. **Analiziraj:** Razmisli o rubnim slučajevima i algoritmu.
-3. **Implementiraj:** Napiši kod u svom editoru (VS Code, CLion...).
-4. **Testiraj:** Provjeri radi li kod na primjerima iz zadatka.
-5. **Predaj (Submit):**
-   - Odaberi jezik (npr. GNU C++17 ili C++20).
-   - Zalijepi kod ili uploadaj datoteku.
-   - Čekaj presudu (Verdict).
+1. **Pročitajte zadatak:** Pažljivo pročitajte tekst, ograničenja i primjere.
+2. **Analizirajte:** Razmislite o rubnim slučajevima i algoritmu.
+3. **Implementirajte:** Napišite kod u svojem editoru (VS Code, CLion...).
+4. **Testirajte:** Provjerite radi li kod na primjerima iz zadatka.
+5. **Predajte (Submit):**
+   - Odaberite jezik (npr. GNU C++17 ili C++20).
+   - Zalijepite kod ili učitajte datoteku.
+   - Pričekajte presudu (Verdict).
 
 ---
 
@@ -316,8 +319,9 @@ int main() {
 **Problem:**
 Pete i Billy su kupili lubenicu težine $w$ kilograma. Žele je podijeliti na dva dijela tako da:
 
-1. Svaki dio ima **parnu** težinu (2, 4, 6...).
-2. Dijelovi ne moraju biti jednaki.
+1. Svaki dio ima **parnu** težinu.
+2. Svaki dio ima **pozitivnu** težinu (veću od 0).
+3. Dijelovi ne moraju biti jednaki.
 
 **Pitanje:**
 Je li moguće podijeliti lubenicu na takav način? Ispisati "YES" ili "NO".
@@ -340,23 +344,40 @@ Je li svaki paran broj rješenje?
 
 - $w=4 \rightarrow 2 + 2$ (OK)
 - $w=8 \rightarrow 4 + 4$ ili $2 + 6$ (OK)
+- Općenito: $w = 2 + (w - 2)$, pa je i $w - 2$ paran i pozitivan ako je $w > 2$.
 
 ---
 
-# Rubni slučajevi (Edge Cases)
+# Rubni slučaj: $w = 2$
 
-Što je s najmanjim parnim brojem?
+Naivno rješenje: "YES ako je $w$ paran".
 
-- **$w = 2$**
+Za $w = 2$ moguće podjele su:
 
-Možemo li 2 podijeliti na dva parna dijela?
+| Podjela | Oba parna? | Oba pozitivna? |
+| :--- | :---: | :---: |
+| $1 + 1$ | ✗ | ✓ |
+| $0 + 2$ | ✓ | ✗ |
 
-- Jedina podjela je $1 + 1$.
-- 1 nije paran broj.
-- Dakle, za $w=2$ odgovor je **"NO"**.
+Nijedna ne zadovoljava oba uvjeta → odgovor je **"NO"**.
 
-**Zaključak:**
-Odgovor je "YES" ako je $w$ paran i $w > 2$. U suprotnom "NO".
+**Zaključak:** "YES" ako i samo ako je $w$ paran i $w > 2$.
+
+---
+
+# Lekcija: uvijek testirajte granice
+
+Prije predaje provjerite **najmanje i najveće vrijednosti** iz ograničenja:
+
+| $w$ | Očekivano | Naivno (`w % 2 == 0`) |
+| :---: | :---: | :---: |
+| 1 | NO | NO ✓ |
+| **2** | **NO** | **YES ✗** |
+| 3 | NO | NO ✓ |
+| 4 | YES | YES ✓ |
+| 100 | YES | YES ✓ |
+
+Primjeri u zadatku ne pokrivaju $w = 2$, pa ovu grešku otkrije tek test.
 
 ---
 
@@ -372,9 +393,9 @@ int main() {
 
     // Provjera uvjeta: paran i veći od 2
     if (w % 2 == 0 && w > 2) {
-        cout << "YES" << endl;
+        cout << "YES" << "\n";
     } else {
-        cout << "NO" << endl;
+        cout << "NO" << "\n";
     }
 
     return 0;
@@ -386,9 +407,9 @@ int main() {
 # Kako predati rješenje?
 
 1. Otvorite [Codeforces Problem 4A](https://codeforces.com/problemset/problem/4/A).
-2. Klik na gumb **Submit** (u izborniku ili desno).
-3. Zalijepi gornji kod.
+2. Kliknite na gumb **Submit** (u izborniku ili desno).
+3. Zalijepite gornji kod.
 4. Odaberite **GNU C++17** (ili noviji).
-5. Klik **Submit**.
+5. Kliknite **Submit**.
 
-Ako je sve u redu, vidjeti ćeš zeleni tekst **Accepted**.
+Ako je sve u redu, vidjet ćete zeleni tekst **Accepted**.
