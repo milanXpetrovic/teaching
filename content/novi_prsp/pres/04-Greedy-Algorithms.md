@@ -5,9 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Pohlepni algoritmi"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
 
+<!-- _paginate: false -->
 <!-- _class: title  -->
 
 # Pohlepni algoritmi
@@ -45,6 +46,7 @@ Programiranje za rješavanje složenih problema
 **Definicija:** Strategija koja na svakom koraku donosi **lokalno optimalan izbor** u nadi da će to dovesti do **globalno optimalnog rješenja**.
 
 **Karakteristike:**
+
 - **Konačnost odluke:** Jednom napravljen izbor se ne preispituje (nema *backtrackinga*).
 - **Brzina:** Obično vrlo efikasni ($O(N)$ ili $O(N \log N)$ zbog sortiranja).
 - **Jednostavnost:** Lako se implementiraju, ali...
@@ -56,11 +58,11 @@ Programiranje za rješavanje složenih problema
 
 Obje tehnike koriste svojstvo **optimalne podstrukture**, ali pristupaju problemu drugačije:
 
-| Dinamičko Programiranje | Pohlepni Algoritmi |
+| Dinamičko programiranje | Pohlepni algoritmi |
 | :--- | :--- |
-| **Bottom-up:** Rješava sve podprobleme, pa donosi odluku. | **Top-down:** Donosi odluku odmah, pa rješava preostali problem. |
+| Prvo rješava podprobleme, a zatim na temelju njih donosi odluku. | Prvo donosi odluku, a zatim rješava preostali podproblem. |
 | Razmatra **sve** opcije. | Razmatra **samo jednu** (pohlepnu) opciju. |
-| Sporije, ali sigurnije. | Brže, ali ne radi uvijek. |
+| Sporije, ali uvijek točno. | Brže, ali ne radi uvijek. |
 
 ---
 
@@ -85,33 +87,36 @@ Da bi pohlepni pristup bio ispravan, problem mora zadovoljiti:
 
 # Problem novčića
 
-**Zadatak:** Pronađi minimalan broj novčića za iznos $N$ koristeći zadane denominacije.
+**Zadatak:** Treba pronaći minimalan broj novčića za iznos $N$ koristeći zadane denominacije.
 
 **Pohlepna strategija:**
-Uvijek uzmi **najveći mogući novčić** koji je manji ili jednak preostalom iznosu.
+Uvijek uzimamo **najveći mogući novčić** koji nije veći od preostalog iznosa.
 
-**Primjer (Euro):** $N = 48$
-1. Uzmi 20 (ostalo 28)
-2. Uzmi 20 (ostalo 8)
-3. Uzmi 5 (ostalo 3)
-4. Uzmi 2 (ostalo 1)
-5. Uzmi 1 (ostalo 0)
+**Primjer (euro centi: 1, 2, 5, 10, 20, 50):** $N = 48$
+
+1. Uzimamo 20 (ostaje 28)
+2. Uzimamo 20 (ostaje 8)
+3. Uzimamo 5 (ostaje 3)
+4. Uzimamo 2 (ostaje 1)
+5. Uzimamo 1 (ostaje 0)
+
 **Rješenje:** 5 novčića. (Optimalno!)
 
 ---
 
 # Kada pohlepni pristup NE radi?
 
-Pohlepna strategija radi za "kanonske" sustave (Euro, Dolar), ali ne za sve.
+Pohlepna strategija radi za "kanonske" sustave (euro, dolar), ali ne za sve.
 
 **Kontraprimjer:**
+
 - Kovanice: $\{1, 3, 4\}$
 - Cilj: $6$
 
 **Pohlepno:** $4 + 1 + 1$ $\rightarrow$ **3 novčića**.
 **Optimalno:** $3 + 3$ $\rightarrow$ **2 novčića**.
 
-**Zaključak:** Za općeniti skup kovanica moramo koristiti **Dinamičko programiranje**.
+**Zaključak:** Za općeniti skup kovanica moramo koristiti **dinamičko programiranje**.
 
 ---
 
@@ -124,9 +129,10 @@ Pohlepna strategija radi za "kanonske" sustave (Euro, Dolar), ali ne za sve.
 
 # Problem: Activity Selection
 
-**Zadatak:** Odaberi maksimalan broj događaja koji se ne preklapaju. Svaki događaj ima `start` i `end` vrijeme.
+**Zadatak:** Treba odabrati maksimalan broj događaja koji se ne preklapaju. Svaki događaj ima `start` i `end` vrijeme.
 
 **Koja je ispravna pohlepna strategija?**
+
 1. ~~Najkraći događaj?~~ (Ne, kratak može biti u sredini dva duga)
 2. ~~Najraniji početak?~~ (Ne, jedan dugi može blokirati sve ostale)
 3. **Najraniji završetak!**
@@ -136,14 +142,21 @@ Odabirom događaja koji **najranije završava**, oslobađamo resurs što je prij
 
 ---
 
-# Algoritam i Implementacija
+# Algoritam
 
-1. **Sortiraj** događaje po vremenu završetka.
-2. Uzmi prvi događaj.
-3. Uzmi sljedeći koji počinje **nakon** što je prethodni završio.
+1. **Sortiramo** događaje po vremenu završetka.
+2. Uzimamo prvi događaj.
+3. Uzimamo sljedeći koji počinje **nakon** što je prethodni završio.
+
+**Složenost:** $O(N \log N)$ zbog sortiranja.
+
+---
+
+# Implementacija: Activity Selection
 
 ```cpp
 struct Event { int start, end; };
+
 // Sortiramo po vremenu završetka
 bool compareEvents(const Event& a, const Event& b) {
     return a.end < b.end;
@@ -151,17 +164,16 @@ bool compareEvents(const Event& a, const Event& b) {
 
 sort(events.begin(), events.end(), compareEvents);
 
-int count = 1;
+int ans = 1;
 int last_end = events[0].end;
 
 for (int i = 1; i < n; ++i) {
     if (events[i].start >= last_end) { // Ako se ne preklapa
-        count++;
+        ans++;
         last_end = events[i].end;
     }
 }
 ```
-**Složenost:** $O(N \log N)$ zbog sortiranja.
 
 ---
 
@@ -178,7 +190,7 @@ for (int i = 1; i < n; ++i) {
 **Uvjet:** Kodovi moraju biti **prefiksni** (nijedan kod nije početak drugog).
 
 **Pohlepna strategija:**
-Gradi stablo odozdo prema gore. U svakom koraku spoji **dva čvora s najmanjom frekvencijom**.
+Gradimo stablo odozdo prema gore. U svakom koraku spajamo **dva čvora s najmanjom frekvencijom**.
 
 **Alat:** Prioritetni red (`std::priority_queue`).
 
@@ -186,40 +198,61 @@ Gradi stablo odozdo prema gore. U svakom koraku spoji **dva čvora s najmanjom f
 
 # Algoritam (Huffman)
 
-1. Kreiraj list za svaki znak (težina = frekvencija).
-2. Ubaci sve u **Min-Heap**.
+1. Kreiramo list za svaki znak (težina = frekvencija).
+2. Ubacimo sve u **min-heap**.
 3. Dok u heapu ima više od 1 čvora:
-   - Izvadi dva najmanja: $A$ i $B$.
-   - Kreiraj novi čvor $C$ s težinom $freq(A) + freq(B)$.
-   - Postavi $A$ i $B$ kao djecu od $C$.
-   - Vrati $C$ u heap.
+   - Izvadimo dva najmanja: $A$ i $B$.
+   - Kreiramo novi čvor $C$ s težinom $freq(A) + freq(B)$.
+   - Postavimo $A$ i $B$ kao djecu od $C$.
+   - Vratimo $C$ u heap.
 
 **Rezultat:** Stablo gdje put lijevo znači `0`, a desno `1`.
 
 ---
 
-# Implementacija (Snippet)
+# Implementacija: čvor i usporedba
 
 ```cpp
-priority_queue<Node*, vector<Node*>, compare> minHeap;
+struct Node {
+    char ch;
+    int freq;
+    Node *left = nullptr, *right = nullptr;
+    Node(char c, int f) : ch(c), freq(f) {}
+};
 
-// Inicijalizacija heapa...
+// Min-heap: čvor s manjom frekvencijom ima veći prioritet
+struct Compare {
+    bool operator()(Node* a, Node* b) {
+        return a->freq > b->freq;
+    }
+};
 
-while (minHeap.size() != 1) {
-    // Uzmi dva najmanja
-    left = minHeap.top(); minHeap.pop();
-    right = minHeap.top(); minHeap.pop();
+priority_queue<Node*, vector<Node*>, Compare> minHeap;
+```
 
-    // Spoji ih u novi čvor
-    top = new Node('$', left->freq + right->freq);
-    top->left = left;
-    top->right = right;
-    
-    minHeap.push(top);
+---
+
+# Implementacija: gradnja stabla
+
+```cpp
+// Inicijalizacija: za svaki znak ubacimo list u minHeap
+
+while (minHeap.size() > 1) {
+    // Uzimamo dva najmanja
+    Node* a = minHeap.top(); minHeap.pop();
+    Node* b = minHeap.top(); minHeap.pop();
+
+    // Spajamo ih u novi čvor ('$' označava unutarnji čvor)
+    Node* c = new Node('$', a->freq + b->freq);
+    c->left = a;
+    c->right = b;
+
+    minHeap.push(c);
 }
 // minHeap.top() je korijen Huffmanovog stabla
 ```
-**Složenost:** $O(N \log N)$.
+
+**Složenost:** $O(N \log N)$, gdje je $N$ broj različitih znakova.
 
 ---
 
@@ -233,12 +266,12 @@ while (minHeap.size() != 1) {
 # CSES Problem Set
 
 1. **[Movie Festival](https://cses.fi/problemset/task/1629)**
-   - Klasičan *Activity Selection* problem. Sortiraj po kraju filma.
+   - Klasičan *Activity Selection* problem. Sortiramo po kraju filma.
 2. **[Stick Lengths](https://cses.fi/problemset/task/1074)**
-   - Minimiziraj sumu razlika $|x - p_i|$. Optimalno $x$ je **medijan**.
+   - Minimizacija sume razlika $|x - p_i|$. Optimalni $x$ je **medijan**.
 3. **[Tasks and Deadlines](https://cses.fi/problemset/task/1630)**
-   - Maksimiziraj profit = $deadline - finish$.
-   - *Hint:* Obavljaj kraće zadatke prve.
+   - Maksimizacija nagrade $= deadline - finish$.
+   - *Hint:* Kraće zadatke obavljamo prve.
 4. **[Towers](https://cses.fi/problemset/task/1073)**
    - Slaganje kocki jedne na drugu. Zahtijeva `multiset` za efikasno traženje "baze".
 
@@ -248,10 +281,10 @@ while (minHeap.size() != 1) {
 
 Tražite zadatke s tagom `greedy` težine 800-1200.
 
-- **[Ciel and Receipt](https://codeforces.com/problemset/problem/320/A)**
-  - Problem sličan problemu novčića (potencije broja 2).
+- **[Hit the Lottery](https://codeforces.com/problemset/problem/996/A)**
+  - Problem novčića s novčanicama 1, 5, 10, 20, 100 (kanonski sustav).
 - **[Boats Competition](https://codeforces.com/problemset/problem/1399/C)**
-  - Formiranje parova s istom težinom. Sortiranje + Two Pointers.
+  - Formiranje parova s istim zbrojem težina. Sortiranje + Two Pointers.
 
 ---
 
@@ -268,9 +301,9 @@ Tražite zadatke s tagom `greedy` težine 800-1200.
 U kinu se prikazuje $n$ filmova. Svaki ima vrijeme početka i kraja.
 Želimo pogledati **maksimalan broj filmova** u cijelosti (bez preklapanja).
 
-### Intuicija
+**Intuicija:**
 Ovo je identičan problem kao **Activity Selection**.
-Pohlepna strategija: Uvijek biraj film koji **najranije završava**, a da ne počinje prije nego što je prethodni završio.
+Pohlepna strategija: uvijek biramo film koji **najranije završava**, a da ne počinje prije nego što je prethodni završio.
 
 Zašto? Time ostavljamo najviše vremena za ostale filmove.
 
@@ -281,21 +314,21 @@ Zašto? Time ostavljamo najviše vremena za ostale filmove.
 ```cpp
 int n; cin >> n;
 vector<pair<int, int>> movies(n);
-for(int i=0; i<n; ++i) 
-    cin >> movies[i].second >> movies[i].first; // Učitaj kao {kraj, početak}
+for (int i = 0; i < n; ++i)
+    cin >> movies[i].second >> movies[i].first; // Učitavamo kao {kraj, početak}
 
 sort(movies.begin(), movies.end()); // Sortira po kraju (first)
 
-int count = 0;
+int ans = 0;
 int current_time = 0;
 
-for(auto m : movies) {
-    if(m.second >= current_time) { // m.second je početak
-        count++;
+for (auto m : movies) {
+    if (m.second >= current_time) { // m.second je početak
+        ans++;
         current_time = m.first; // m.first je kraj
     }
 }
-cout << count << endl;
+cout << ans << "\n";
 ```
 
 ---
@@ -312,10 +345,11 @@ cout << count << endl;
 **Problem:**
 Imamo $n$ štapova duljina $p_1, p_2, \dots, p_n$.
 Želimo ih sve skratiti ili produžiti na istu duljinu $x$.
-Cijena promjene je $|p_i - x|$. Minimiziraj ukupnu cijenu $\sum |p_i - x|$.
+Cijena promjene je $|p_i - x|$. Treba minimizirati ukupnu cijenu $\sum |p_i - x|$.
 
-### Intuicija
+**Intuicija:**
 Tražimo broj $x$ koji minimizira sumu apsolutnih udaljenosti.
+
 - Da je kvadratna udaljenost $(p_i - x)^2$, to bi bio prosjek (mean).
 - Za apsolutnu udaljenost, to je **medijan**.
 
@@ -328,19 +362,20 @@ Ako sortiramo niz, medijan je element na sredini (`p[n/2]`).
 ```cpp
 int n; cin >> n;
 vector<int> p(n);
-for(int i=0; i<n; ++i) cin >> p[i];
+for (int i = 0; i < n; ++i) cin >> p[i];
 
 sort(p.begin(), p.end());
 
 int median = p[n / 2];
 long long cost = 0;
 
-for(int x : p) {
+for (int x : p) {
     cost += abs(x - median);
 }
 
-cout << cost << endl;
+cout << cost << "\n";
 ```
+
 **Napomena:** Koristite `long long` za cijenu jer suma može biti velika!
 
 ---
@@ -357,15 +392,15 @@ cout << cost << endl;
 **Problem:**
 Imamo $n$ zadataka. Svaki traje $a_i$ i ima rok $d_i$.
 Za svaki zadatak dobivamo nagradu $d_i - f_i$, gdje je $f_i$ vrijeme završetka.
-Maksimiziraj ukupnu nagradu.
+Treba maksimizirati ukupnu nagradu.
 
-### Intuicija
+**Intuicija:**
 Ukupna nagrada = $\sum (d_i - f_i) = \sum d_i - \sum f_i$.
 $\sum d_i$ je konstanta (ne ovisi o redoslijedu).
 Da bismo maksimizirali izraz, moramo **minimizirati $\sum f_i$** (sumu vremena završetaka).
 
 Suma završetaka je minimalna ako **kraće zadatke radimo prve**.
-(Ako imamo zadatke trajanja 2 i 10: redoslijed 2, 10 daje završetke 2 i 12 (suma 14). Redoslijed 10, 2 daje 10 i 12 (suma 22)).
+(Ako imamo zadatke trajanja 2 i 10: redoslijed 2, 10 daje završetke 2 i 12 (suma 14). Redoslijed 10, 2 daje 10 i 12 (suma 22).)
 
 ---
 
@@ -374,19 +409,20 @@ Suma završetaka je minimalna ako **kraće zadatke radimo prve**.
 ```cpp
 int n; cin >> n;
 vector<pair<int, int>> tasks(n);
-for(int i=0; i<n; ++i) cin >> tasks[i].first >> tasks[i].second; // {trajanje, rok}
+for (int i = 0; i < n; ++i)
+    cin >> tasks[i].first >> tasks[i].second; // {trajanje, rok}
 
-sort(tasks.begin(), tasks.end()); // Sortiraj po trajanju
+sort(tasks.begin(), tasks.end()); // Sortiramo po trajanju
 
 long long current_time = 0;
 long long reward = 0;
 
-for(auto t : tasks) {
+for (auto t : tasks) {
     current_time += t.first;
     reward += (t.second - current_time);
 }
 
-cout << reward << endl;
+cout << reward << "\n";
 ```
 
 ---
@@ -401,16 +437,17 @@ cout << reward << endl;
 # Analiza: Towers
 
 **Problem:**
-Imamo $n$ kocaka različitih veličina koje dolaze jedna po jedna.
-Kocku možemo staviti na vrh postojećeg tornja ako je manja od trenutne vršne kocke. Inače započinjemo novi toranj.
-Minimiziraj broj tornjeva.
+Imamo $n$ kocaka koje dolaze jedna po jedna (veličine se mogu ponavljati).
+Kocku možemo staviti na vrh postojećeg tornja samo ako je **strogo manja** od trenutne vršne kocke. Inače započinjemo novi toranj.
+Treba minimizirati broj tornjeva.
 
-### Intuicija
+**Intuicija:**
 Kad dođe kocka veličine $X$, na koji toranj je staviti?
-Želimo "potrošiti" toranj čiji je vrh **najmanji mogući, ali veći od $X$**.
+Želimo "potrošiti" toranj čiji je vrh **najmanji mogući, ali strogo veći od $X$**.
 Zašto? Da bismo veće vrhove sačuvali za veće kocke koje možda dođu kasnije.
 
-Koristimo `multiset` za praćenje vrhova svih tornjeva. Za $X$ tražimo `upper_bound(X)`.
+Vrhove svih tornjeva pratimo u `multiset`-u i za $X$ tražimo `upper_bound(X)`.
+Zbog strogog uvjeta koristimo `upper_bound`, a ne `lower_bound` (jednaku kocku ne smijemo staviti na vrh).
 
 ---
 
@@ -420,23 +457,23 @@ Koristimo `multiset` za praćenje vrhova svih tornjeva. Za $X$ tražimo `upper_b
 int n; cin >> n;
 multiset<int> towers;
 
-for(int i=0; i<n; ++i) {
+for (int i = 0; i < n; ++i) {
     int x; cin >> x;
-    
-    // Nađi najmanji vrh koji je strogo veći od x
+
+    // Najmanji vrh koji je strogo veći od x
     auto it = towers.upper_bound(x);
-    
-    if(it == towers.end()) {
-        // Nema takvog tornja, moramo napraviti novi
+
+    if (it == towers.end()) {
+        // Nema takvog tornja, radimo novi
         towers.insert(x);
     } else {
-        // Proširujemo postojeći toranj
-        // Mičemo stari vrh i stavljamo novi (x)
+        // Proširujemo postojeći toranj:
+        // mičemo stari vrh i stavljamo novi (x)
         towers.erase(it);
         towers.insert(x);
     }
 }
-cout << towers.size() << endl;
+cout << towers.size() << "\n";
 ```
 
 ---
@@ -450,11 +487,11 @@ cout << towers.size() << endl;
 
 1. **Pohlepni pristup:**
    - Donošenje lokalno optimalnih odluka u nadi da ćemo doći do globalnog optimuma.
-   - Brzo i jednostavno, ali ne radi uvijek (npr. Coin problem s čudnim kovanicama).
+   - Brzo i jednostavno, ali ne radi uvijek (npr. problem novčića s neobičnim kovanicama).
 
 2. **Ključni algoritmi:**
-   - **Activity Selection:** Uvijek biraj događaj koji **najranije završava**.
-   - **Huffmanovo kodiranje:** Spajaj dva čvora s najmanjom frekvencijom (koristeći `priority_queue`).
+   - **Activity Selection:** Uvijek biramo događaj koji **najranije završava**.
+   - **Huffmanovo kodiranje:** Spajamo dva čvora s najmanjom frekvencijom (koristeći `priority_queue`).
 
 3. **Kada koristiti?**
    - Kad problem ima **svojstvo pohlepnog izbora** i **optimalnu podstrukturu**.
@@ -465,7 +502,7 @@ cout << towers.size() << endl;
 
 - **Sortiranje je često prvi korak:**
   - Većina pohlepnih algoritama zahtijeva sortiran ulaz (po cijeni, težini, vremenu kraja...).
-- **Pokušaj smisliti kontraprimjer:**
-  - Prije kodiranja, probaj naći mali testni slučaj gdje tvoja ideja pada u vodu.
+- **Pokušajte smisliti kontraprimjer:**
+  - Prije kodiranja probajte naći mali testni slučaj na kojem vaša ideja pada.
 - **Ako pohlepno ne radi:**
-  - Vjerojatno trebaš **Dinamičko programiranje** (DP).
+  - Vjerojatno trebate **dinamičko programiranje** (DP).

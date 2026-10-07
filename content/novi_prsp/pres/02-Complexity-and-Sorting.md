@@ -5,10 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Složenost i sortiranje"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
 
-<!-- paginate: false -->
+<!-- _paginate: false -->
 <!-- _class: title  -->
 # Složenost i sortiranje
 
@@ -64,11 +64,13 @@ Ako je limit 1s, a $n=10^5$, algoritam mora biti $O(n)$ ili $O(n \log n)$.
 # Problem: Najveći zbroj podniza
 
 **Zadatak:**
-Zadan je niz od $n$ brojeva. Pronađi najveći mogući zbroj uzastopnih elemenata.
+Zadan je niz od $n$ brojeva. Treba pronaći najveći mogući zbroj uzastopnih elemenata.
 
 **Primjer:**
 Niz: `2, -3, 1, 5, -2, 3, 5, -2`
 Najveći zbroj: **12** (podniz `1, 5, -2, 3, 5`)
+
+U primjerima koda niz je učitan u `vector<long long> a(n)`.
 
 ---
 
@@ -77,12 +79,12 @@ Najveći zbroj: **12** (podniz `1, 5, -2, 3, 5`)
 Provjeravamo sve moguće podnizove $(i, j)$ i za svaki računamo sumu.
 
 ```cpp
-int best = INT_MIN;
+long long best = LLONG_MIN;
 for (int i = 0; i < n; i++) {
     for (int j = i; j < n; j++) {
-        int sum = 0;
+        long long sum = 0;
         for (int k = i; k <= j; k++) {
-            sum += array[k];
+            sum += a[k];
         }
         best = max(best, sum);
     }
@@ -100,11 +102,11 @@ cout << best << "\n";
 Možemo računati sumu u hodu, bez treće petlje.
 
 ```cpp
-int best = INT_MIN;
+long long best = LLONG_MIN;
 for (int i = 0; i < n; i++) {
-    int sum = 0;
+    long long sum = 0;
     for (int j = i; j < n; j++) {
-        sum += array[j];
+        sum += a[j];
         best = max(best, sum);
     }
 }
@@ -125,12 +127,12 @@ Za svaku poziciju $k$, koji je maksimalni zbroj podniza koji **završava** na to
 Ili je to samo element na poziciji $k$, ili produžujemo prethodni podniz.
 
 ```cpp
-long long best = -1e18;
+long long best = LLONG_MIN;
 long long sum = 0;
 
 for (int k = 0; k < n; k++) {
-    // Nastavljamo niz ili krećemo ispočetka od array[k]
-    sum = max((long long)array[k], sum + array[k]);
+    // Nastavljamo niz ili krećemo ispočetka od a[k]
+    sum = max(a[k], sum + a[k]);
     best = max(best, sum);
 }
 cout << best << "\n";
@@ -155,7 +157,7 @@ auto start = chrono::high_resolution_clock::now();
 auto stop = chrono::high_resolution_clock::now();
 auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 
-cout << "Vrijeme: " << duration.count() << " mikrosekundi" << endl;
+cout << "Vrijeme: " << duration.count() << " mikrosekundi" << "\n";
 ```
 
 ---
@@ -176,8 +178,8 @@ Mnogi problemi postaju jednostavniji ako su podaci sortirani.
 - Pronalaženje duplikata ili jedinstvenih elemenata.
 
 **Složenost sortiranja:**
-Standardni algoritmi (Merge Sort, Quick Sort, Heap Sort) rade u **$O(n \log n)$**.
-U C++ koristimo `std::sort`.
+Merge Sort i Heap Sort jamče $O(n \log n)$, a Quick Sort to postiže u prosjeku (najgori slučaj $O(n^2)$).
+U C++ koristimo `std::sort`, koji jamči **$O(n \log n)$**.
 
 ---
 
@@ -190,7 +192,7 @@ U C++ koristimo `std::sort`.
 vector<int> v = {4, 2, 5, 3, 5, 8, 3};
 
 // Sortiranje u rastućem poretku
-sort(v.begin(), v.end()); 
+sort(v.begin(), v.end());
 
 // Sortiranje u padajućem poretku
 sort(v.rbegin(), v.rend());
@@ -219,6 +221,22 @@ sort(points.begin(), points.end(), comparePoints);
 
 ---
 
+# Napomene o komparatoru
+
+**Komparator mora biti strog:** koristite `<`, nikad `<=`.
+
+- S `<=` je ponašanje `std::sort` nedefinirano.
+- Na nizovima s jednakim elementima program se može srušiti (**Runtime Error**).
+
+**Parovi se već sortiraju leksikografski:**
+
+```cpp
+vector<pair<int, int>> points = { {1, 2}, {3, 1}, {1, 5} };
+sort(points.begin(), points.end()); // po x, zatim po y
+```
+
+---
+
 <!-- _class: lead -->
 # Zadaci za vježbu
 
@@ -228,13 +246,16 @@ sort(points.begin(), points.end(), comparePoints);
 
 # Zadaci
 
-1. **[Distinct Numbers](https://cses.fi/problemset/task/1621)**
+1. **[Maximum Subarray Sum](https://cses.fi/problemset/task/1643)**
+   - Kadaneov algoritam s današnjih vježbi.
+   - *Hint:* Vrijednosti su do $10^9$, koristite `long long`.
+2. **[Distinct Numbers](https://cses.fi/problemset/task/1621)**
    - Koliko različitih brojeva ima u nizu?
-   - *Hint:* Sortiraj pa broj promjene ili koristi `set`.
-2. **[Apartments](https://cses.fi/problemset/task/1084)**
-   - Dodijeli stanove podstanarima (pohlepno + sortiranje).
-3. **[Ferris Wheel](https://cses.fi/problemset/task/1090)**
-   - Optimizacija parova (Two pointers na sortiranom nizu).
+   - *Hint:* Sortirajte pa prebrojite promjene ili koristite `set`.
+3. **[Apartments](https://cses.fi/problemset/task/1084)**
+   - Dodjela stanova podstanarima (pohlepno + sortiranje).
+4. **[Ferris Wheel](https://cses.fi/problemset/task/1090)**
+   - Optimalno sparivanje (dva pokazivača na sortiranom nizu).
 
 ---
 
@@ -252,16 +273,15 @@ Zadan je niz od $n$ cijelih brojeva. Treba izračunati koliko ima **različitih*
 
 **Ograničenja:** $n \le 2 \cdot 10^5$.
 
-### Intuicija
+**Pristup 1: `std::set`**
 
-1. **Pristup sa `std::set`:**
-   - Ubacimo sve brojeve u `set`. On automatski miče duplikate.
-   - Rješenje je `s.size()`.
-   - **Složenost:** $O(n \log n)$ zbog strukture stabla.
+- Ubacimo sve brojeve u `set`, koji automatski miče duplikate. Rješenje je `s.size()`.
+- Složenost: $O(n \log n)$ zbog strukture stabla.
 
-2. **Pristup sortiranjem (Brže i manje memorije):**
-   - Ako sortiramo niz, svi isti brojevi će biti jedan do drugog (npr. `1, 1, 2, 2, 2, 5`).
-   - Samo trebamo prebrojati koliko puta se broj promijeni u odnosu na prethodni.
+**Pristup 2: sortiranje** (brže i manje memorije)
+
+- Nakon sortiranja isti su brojevi jedan do drugog (npr. `1, 1, 2, 2, 2, 5`).
+- Prebrojimo koliko se puta broj promijeni u odnosu na prethodni.
 
 ---
 
@@ -281,14 +301,14 @@ int main() {
 
     sort(x.begin(), x.end()); // O(n log n)
 
-    int distinct_count = 1; // Prvi broj je uvijek jedinstven (ako n > 0)
+    int distinct_count = 1; // Prvi broj je uvijek jedinstven (n >= 1)
     for (int i = 1; i < n; i++) {
         // Ako je trenutni broj različit od prethodnog, našli smo novi
         if (x[i] != x[i-1]) {
             distinct_count++;
         }
     }
-    cout << distinct_count << endl;
+    cout << distinct_count << "\n";
     return 0;
 }
 ```
@@ -311,16 +331,19 @@ Imamo $n$ podstanara i $m$ stanova.
 - Svaki stan ima fiksnu veličinu $b$.
 - Cilj: Dodijeliti stanove tako da usrećimo **maksimalan broj** ljudi.
 
-### Intuicija (Greedy)
+---
+
+# Intuicija: Apartments (Greedy)
 
 Trebamo li malom stanu pridružiti nekoga tko traži mali stan ili veliki?
+
 Logično je da **najmanji stan** pokušamo dati onome tko traži **najmanju kvadraturu**. Ako njemu ne odgovara (jer je stan premalen), nikome drugome neće odgovarati (jer svi ostali traže još veće stanove).
 
 **Strategija:**
 
-1. Sortiraj želje podstanara.
-2. Sortiraj veličine stanova.
-3. Koristi dva pokazivača (`i` za ljude, `j` za stanove).
+1. Sortiramo želje podstanara.
+2. Sortiramo veličine stanova.
+3. Koristimo dva pokazivača (`i` za ljude, `j` za stanove).
 
 ---
 
@@ -331,11 +354,11 @@ Neka su `applicants` i `apartments` sortirani nizovi.
 Iteriramo dok imamo ljudi i stanova:
 
 1. Ako je stan `j` **premalen** za osobu `i` (`apartments[j] < applicants[i] - k`):
-   - Taj stan ne može uzeti nitko (jer ostali traže još više). Odbaci stan (`j++`).
+   - Taj stan ne može uzeti nitko (jer ostali traže još više). Odbacujemo stan (`j++`).
 2. Ako je stan `j` **prevelik** za osobu `i` (`apartments[j] > applicants[i] + k`):
-   - Ovoj osobi ne možemo naći stan (jer su ostali stanovi još veći). Odbaci osobu (`i++`).
+   - Ovoj osobi ne možemo naći stan (jer su ostali stanovi još veći). Odbacujemo osobu (`i++`).
 3. Inače (stan je taman):
-   - **Match!** Dodijeli stan, povećaj brojač, pomakni oba pokazivača (`i++`, `j++`).
+   - **Match!** Dodjeljujemo stan, povećavamo brojač i pomičemo oba pokazivača (`i++`, `j++`).
 
 ---
 
@@ -350,7 +373,7 @@ int i = 0, j = 0, matches = 0;
 while (i < n && j < m) {
     // Stan je premalen za trenutnog podstanara
     if (apartments[j] < applicants[i] - k) {
-        j++; 
+        j++;
     }
     // Stan je prevelik za trenutnog podstanara
     else if (apartments[j] > applicants[i] + k) {
@@ -363,7 +386,7 @@ while (i < n && j < m) {
         j++;
     }
 }
-cout << matches << endl;
+cout << matches << "\n";
 ```
 
 ---
@@ -381,9 +404,7 @@ cout << matches << endl;
 Imamo $n$ djece s težinama $p_i$. Gondola nosi **maksimalno dvoje** djece i ima limit težine $X$.
 Cilj: Minimizirati broj gondola.
 
-### Intuicija
-
-Želimo iskoristiti svaku gondolu što bolje.
+**Intuicija:**
 Najkritičnije je **najteže dijete**. Ono sigurno mora ići u neku gondolu.
 Pitanje je: *Može li itko ići s njim?*
 
@@ -396,13 +417,13 @@ Ako najteže dijete može ići s ikim, najbolje je da ide s **najlakšim** djete
 
 # Algoritam (Two Pointers)
 
-1. Sortiraj djecu po težini.
-2. Postavi pokazivač `i` na početak (najlakši) i `j` na kraj (najteži).
+1. Sortiramo djecu po težini.
+2. Postavimo pokazivač `i` na početak (najlakši) i `j` na kraj (najteži).
 3. Dok se pokazivači ne susretnu (`i <= j`):
    - Uvijek uzimamo najtežeg (`j`).
-   - Provjeri stane li i najlakši (`i`) s njim: `weight[i] + weight[j] <= X`.
-     - Ako stane: uzmi i njega (`i++`).
-   - U svakom slučaju, najteži odlazi (`j--`) i koristimo jednu gondolu (`gondolas++`).
+   - Provjerimo stane li i najlakši (`i`) s njim: `p[i] + p[j] <= X`.
+     - Ako stane, uzimamo i njega (`i++`).
+   - U svakom slučaju najteži odlazi (`j--`) i koristimo jednu gondolu (`gondolas++`).
 
 ---
 
@@ -426,7 +447,7 @@ while (i <= j) {
     }
     gondolas++; // U svakom koraku jedna gondola odlazi
 }
-cout << gondolas << endl;
+cout << gondolas << "\n";
 ```
 
 **Zaključak:** Sortiranje nam je omogućilo da pohlepno donosimo optimalne odluke s krajeva niza. Složenost: $O(n \log n)$.
@@ -441,7 +462,7 @@ cout << gondolas << endl;
 # Što smo danas naučili?
 
 1. **Analiza složenosti je ključna:**
-   - Prije pisanja koda, procijenite hoće li algoritam proći vremensko ograničenje.
+   - Prije pisanja koda procijenite hoće li algoritam proći vremensko ograničenje.
    - $10^8$ operacija $\approx 1$ sekunda.
 
 2. **Sortiranje je moćan alat:**
@@ -449,18 +470,18 @@ cout << gondolas << endl;
    - Omogućuje korištenje **pohlepnih algoritama** i **tehnike dva pokazivača** (*Apartments*, *Ferris Wheel*).
 
 3. **Efikasnost C++-a:**
-   - `std::sort` je brz ($O(N \log N)$).
+   - `std::sort` je brz ($O(n \log n)$).
    - Koristite `vector` i reference (`&`) za prosljeđivanje velikih struktura.
 
 ---
 
 # Zlatna pravila za rješavanje zadataka
 
-- **Provjeri ograničenja ($N$):**
-  - Ako je $N=10^5$, rješenje mora biti $O(N)$ ili $O(N \log N)$. $O(N^2)$ neće proći.
-- **Paziti na `overflow`:**
-  - Ako zbrajaš puno brojeva ili množiš, koristi `long long`.
+- **Provjerite ograničenja ($n$):**
+  - Ako je $n=10^5$, rješenje mora biti $O(n)$ ili $O(n \log n)$. $O(n^2)$ neće proći.
+- **Pazite na overflow:**
+  - Ako zbrajate puno brojeva ili množite, koristite `long long`.
 - **Rubni slučajevi:**
-  - Što ako je niz prazan? Što ako su svi brojevi isti? Što ako je $N=1$?
-- **Ne kompliciraj:**
+  - Što ako je niz prazan? Što ako su svi brojevi isti? Što ako je $n=1$?
+- **Ne komplicirajte:**
   - Ako postoji jednostavno rješenje (npr. sortiranje), vjerojatno je bolje od komplicirane strukture podataka.

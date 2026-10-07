@@ -5,10 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Potpuna pretraga i backtracking"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
 
-<!-- paginate: false -->
+<!-- _paginate: false -->
 <!-- _class: title  -->
 # Potpuna pretraga i backtracking
 
@@ -74,14 +74,15 @@ Programiranje za rješavanje složenih problema
 <!-- _class: lead -->
 # Generiranje podskupova
 
-## Problem ruksaka (Knapsack) za male N
+## Zbroj podskupa (Subset Sum) za male N
 
 ---
 
 # Problem: Generiranje svih podskupova
 
 **Zadatak:**
-Zadan je skup od $n$ predmeta s težinama. Pronađi podskup čija je suma težina što bliža, ali ne veća od kapaciteta $W$.
+Zadan je skup od $n$ predmeta s težinama. Treba pronaći podskup čija je suma težina što bliža kapacitetu $W$, ali ne veća od njega.
+(Ovo je pojednostavljeni problem ruksaka, bez vrijednosti predmeta.)
 
 **Pristup:**
 Svaki element možemo ili **uključiti** u podskup ili **ne uključiti**.
@@ -91,19 +92,21 @@ Ukupno ima $2^n$ mogućih podskupova.
 
 # Rješenje 1: Rekurzija
 
-Funkcija `search(k)` odlučuje za $k$-ti element.
+Funkcija `search(k, current_weight)` odlučuje za $k$-ti element.
 
 ```cpp
+long long best = 0;
+
 void search(int k, long long current_weight) {
     if (k == n) { // Svi elementi su razmotreni
-        // Provjeri je li current_weight najbolje rješenje
+        best = max(best, current_weight);
         return;
     }
 
-    // Opcija 1: Ne uključiti element k
+    // Opcija 1: ne uključujemo element k
     search(k + 1, current_weight);
 
-    // Opcija 2: Uključiti element k (ako stane)
+    // Opcija 2: uključujemo element k (ako stane)
     if (current_weight + weights[k] <= W) {
         search(k + 1, current_weight + weights[k]);
     }
@@ -127,7 +130,7 @@ for (int mask = 0; mask < (1 << n); ++mask) {
             current_sum += weights[i];
         }
     }
-    
+
     if (current_sum <= W) {
         best_sum = max(best_sum, current_sum);
     }
@@ -148,13 +151,13 @@ for (int mask = 0; mask < (1 << n); ++mask) {
 # Problem: Generiranje svih permutacija
 
 **Zadatak:**
-Zadan je skup od $n$ gradova. Pronađi najkraći put koji posjećuje svaki grad točno jednom.
+Zadan je skup od $n$ gradova. Treba pronaći najkraći put koji posjećuje svaki grad točno jednom.
 
 **Rješenje:**
 Isprobati sve moguće redoslijede (permutacije) gradova.
 Broj permutacija je $n!$ (faktorijela).
-Za $n=10$, $10! \approx 3.6 \cdot 10^6$ (brzo).
-Za $n=20$, presporo.
+Za $n=10$, $10! \approx 3,6 \cdot 10^6$ (brzo).
+Za $n=20$, $20! \approx 2,4 \cdot 10^{18}$ (presporo).
 
 ---
 
@@ -169,9 +172,9 @@ for (int i = 0; i < n; ++i) p[i] = i; // Početna permutacija: 0, 1, 2...
 long long min_path = -1;
 
 do {
-    // Izračunaj duljinu puta za trenutnu permutaciju p
+    // Duljina puta za trenutnu permutaciju p
     long long current_path = calculate_path(p);
-    
+
     if (min_path == -1 || current_path < min_path) {
         min_path = current_path;
     }
@@ -193,14 +196,14 @@ do {
 # Problem: N-kraljica
 
 **Zadatak:**
-Na šahovsku ploču $n \times n$ postavi $n$ kraljica tako da se nikoje dvije ne napadaju.
-(Kraljica napada horizontalno, vertikalno i dijagonalno).
+Na šahovsku ploču $n \times n$ treba postaviti $n$ kraljica tako da se nikoje dvije ne napadaju.
+(Kraljica napada horizontalno, vertikalno i dijagonalno.)
 
 **Pristup:**
 Postavljamo kraljice red po red. U svakom redu pokušamo staviti kraljicu u neki stupac.
 
 **Pruning (Rezanje):**
-Ako stavimo kraljicu na polje koje je već napadnuto, odmah stajemo i vraćamo se (ne idemo u dubinu).
+Ako je polje već napadnuto, kraljicu tamo ni ne stavljamo, nego odmah probamo sljedeći stupac (ne idemo u dubinu).
 
 ---
 
@@ -208,24 +211,25 @@ Ako stavimo kraljicu na polje koje je već napadnuto, odmah stajemo i vraćamo s
 
 ```cpp
 void search(int y) {
-    if (y == n) { count++; return; } // Našli smo rješenje
-    
+    if (y == n) { ans++; return; } // Našli smo rješenje
+
     for (int x = 0; x < n; ++x) {
-        // Ako je pozicija (y, x) napadnuta, preskoči (PRUNING)
+        // Ako je polje (y, x) napadnuto, preskačemo ga (PRUNING)
         if (column[x] || diag1[x+y] || diag2[x-y+n-1]) continue;
 
-        // Postavi kraljicu
+        // Postavljamo kraljicu
         column[x] = diag1[x+y] = diag2[x-y+n-1] = true;
-        
+
         search(y + 1); // Rekurzivni poziv za sljedeći red
 
-        // BACKTRACK: Makni kraljicu da probamo drugu opciju
+        // BACKTRACK: mičemo kraljicu da probamo sljedeću opciju
         column[x] = diag1[x+y] = diag2[x-y+n-1] = false;
     }
 }
 ```
 
-Koristimo pomoćna polja `column`, `diag1`, `diag2` za $O(1)$ provjeru napada.
+Pomoćna polja `column`, `diag1`, `diag2` daju $O(1)$ provjeru napada.
+Brojač zovemo `ans`, jer se globalni `count` sudara sa `std::count`.
 
 ---
 
@@ -240,13 +244,13 @@ Koristimo pomoćna polja `column`, `diag1`, `diag2` za $O(1)$ provjeru napada.
 # CSES Problem Set
 
 1. **[Apple Division](https://cses.fi/problemset/task/1623)**
-   - Podijeli jabuke u dvije grupe s minimalnom razlikom težina.
+   - Podjela jabuka u dvije grupe s minimalnom razlikom težina.
    - *Rješenje:* Generiranje podskupova (rekurzija ili bitmaske).
 2. **[Creating Strings](https://cses.fi/problemset/task/1622)**
-   - Generiraj sve unikatne permutacije stringa.
-   - *Rješenje:* `next_permutation` (pazi na duplikate slova).
+   - Ispis svih različitih permutacija stringa.
+   - *Rješenje:* `next_permutation` na prethodno sortiranom stringu.
 3. **[Chessboard and Queens](https://cses.fi/problemset/task/1624)**
-   - N-kraljica problem, ali su neka polja na ploči blokirana.
+   - Problem 8 kraljica, ali su neka polja na ploči blokirana.
 4. **[Grid Paths](https://cses.fi/problemset/task/1625)**
    - Napredniji backtracking s jakim optimizacijama.
 
@@ -263,10 +267,9 @@ Koristimo pomoćna polja `column`, `diag1`, `diag2` za $O(1)$ provjeru napada.
 
 **Problem:**
 Imamo $n$ jabuka s težinama $p_1, p_2, \dots, p_n$. Treba ih podijeliti u dvije grupe tako da je razlika u ukupnim težinama grupa **minimalna**.
-**Ograničenja:** $n \le 20$.
+**Ograničenja:** $n \le 20$, $p_i \le 10^9$ (sume trebaju `long long`).
 
-## Intuicija
-
+**Intuicija:**
 Svaka jabuka može ići u **Grupu 1** ili **Grupu 2**.
 To je binarni izbor za svaku od $n$ jabuka.
 Ukupan broj načina je $2^n$. Za $n=20$, $2^{20} \approx 10^6$, što je vrlo brzo.
@@ -313,8 +316,7 @@ U `main` funkciji pozivamo `solve(0, 0, 0)`.
 Zadan je string (npr. `aabac`). Treba ispisati sve **različite** permutacije tog stringa po abecednom redu.
 **Ograničenja:** Duljina stringa $\le 8$.
 
-## Intuicija
-
+**Intuicija:**
 Broj permutacija za duljinu 8 je $8! = 40320$, što je malo.
 Glavni izazov su **duplikati** (npr. zamjena dva slova 'a' ne stvara novi string).
 
@@ -334,9 +336,9 @@ do {
     permutations.push_back(s);
 } while (next_permutation(s.begin(), s.end()));
 
-cout << permutations.size() << endl;
+cout << permutations.size() << "\n";
 for (const string& p : permutations) {
-    cout << p << endl;
+    cout << p << "\n";
 }
 ```
 
@@ -354,10 +356,10 @@ for (const string& p : permutations) {
 # Analiza: Chessboard and Queens
 
 **Problem:**
-Postavi 8 kraljica na $8 \times 8$ ploču tako da se ne napadaju. Dodatno, neka polja su označena s `*` i na njih **ne smijemo** staviti kraljicu.
+Na ploču $8 \times 8$ treba postaviti 8 kraljica tako da se ne napadaju. Neka polja su označena s `*` i na njih se kraljica **ne smije** staviti.
+Treba prebrojati na koliko je načina to moguće.
 
-## Intuicija
-
+**Intuicija:**
 Ovo je standardni problem N-kraljica ($N=8$), uz jedan dodatni uvjet.
 U rekurzivnoj funkciji, prije nego postavimo kraljicu na `(y, x)`, provjeravamo:
 
@@ -375,7 +377,7 @@ void search(int y) {
 
     for (int x = 0; x < 8; x++) {
         // Dodatna provjera: board[y][x] == '*'
-        if (col[x] || d1[x+y] || d2[x-y+7] || board[y][x] == '*') 
+        if (col[x] || d1[x+y] || d2[x-y+7] || board[y][x] == '*')
             continue;
 
         col[x] = d1[x+y] = d2[x-y+7] = true;
@@ -385,7 +387,7 @@ void search(int y) {
 }
 ```
 
-Složenost je manja od klasičnih 8-kraljica zbog dodatnih ograničenja (manje grana stabla).
+Složenost je manja od klasičnih 8 kraljica zbog dodatnih ograničenja (manje grana stabla).
 
 ---
 
@@ -400,51 +402,49 @@ Složenost je manja od klasičnih 8-kraljica zbog dodatnih ograničenja (manje g
 # Analiza: Grid Paths
 
 **Problem:**
-Pronađi broj puteva duljine 48 od `(0,0)` do `(6,6)` u mreži $7 \times 7$ koji posjećuju svako polje točno jednom.
-Ulazni string definiraju smjerove (npr. `????D...`) koje moramo poštovati.
+U mreži $7 \times 7$ treba prebrojati putove od **gornjeg lijevog** do **donjeg lijevog** kuta koji posjećuju svako polje točno jednom (48 koraka).
+Ulazni string od 48 znakova propisuje smjer svakog koraka (`D`, `U`, `L`, `R`), a `?` znači bilo koji smjer.
 
-## Intuicija
-
-Naivni backtracking ($4^{48}$) je nemoguć. Trebamo **jako rezanje (pruning)**.
+**Intuicija:**
+Naivni backtracking (do $4^{48}$ grana) je nemoguć. Trebamo **jako rezanje (pruning)**.
 
 **Ključne optimizacije:**
 
-1. Ako udarimo u zid (ili posjećeno polje), a možemo ići lijevo i desno $\rightarrow$ mreža se dijeli na dva nepovezana dijela. Ne možemo posjetiti sve $\rightarrow$ **RETURN**.
-2. Ako stignemo na cilj `(6,6)` prije 48. koraka $\rightarrow$ **RETURN**.
+1. Ako stignemo u donji lijevi kut prije 48. koraka $\rightarrow$ **RETURN**.
+2. Ako su polja iznad i ispod nas blokirana, a lijevo i desno slobodna (ili obrnuto), mreža se dijeli na dva dijela koja ne možemo oba posjetiti $\rightarrow$ **RETURN**.
 
 ---
 
 # Implementacija: Grid Paths (Optimizacija)
 
 ```cpp
-// (r, c) trenutna pozicija, step je broj koraka
+// visited[9][9]: rub (redak/stupac 0 i 8) unaprijed je označen kao posjećen,
+// pa ne trebamo provjeravati granice. Start je (1,1), cilj (7,1).
 void solve(int r, int c, int step) {
-    // Stigli na cilj
-    if (r == 6 && c == 0) { 
-        if (step == 48) count++; 
-        return; 
+    if (r == 7 && c == 1) {            // Stigli smo u donji lijevi kut
+        if (step == 48) ans++;
+        return;
     }
-    
-    // OPTIMIZACIJA: Zid ispred, a lijevo i desno slobodno -> Split
-    if (visited[r+dr[dir]][c+dc[dir]] && 
-        !visited[r+dr[left]][c+dc[left]] && 
-        !visited[r+dr[right]][c+dc[right]]) 
-            return;
+
+    // OPTIMIZACIJA: mreža se dijeli na dva dijela
+    if (visited[r-1][c] && visited[r+1][c] &&
+        !visited[r][c-1] && !visited[r][c+1]) return;
+    if (visited[r][c-1] && visited[r][c+1] &&
+        !visited[r-1][c] && !visited[r+1][c]) return;
 
     visited[r][c] = true;
-    // ... rekurzivni pozivi za 4 smjera ...
+    // ... za svaki smjer dopušten znakom s[step]:
+    //     ako susjed nije posjećen, solve(susjed, step + 1)
     visited[r][c] = false;
 }
 ```
 
-Ovaj problem je poznat kao jedan od najtežih u uvodnoj sekciji zbog potrebe za specifičnim optimizacijama.
+Ovaj zadatak je među najtežima u uvodnom dijelu CSES-a jer bez optimizacija ne prolazi.
 
 ---
 
 # Codeforces
 
-Preporuka: Rješavati zadatke s tagom `brute force` težine do 1200.
+Preporuka: rješavajte zadatke s tagom `brute force` težine do 1200.
 
 [Codeforces Brute Force Problems](https://codeforces.com/problemset?tags=brute%20force)
-
----

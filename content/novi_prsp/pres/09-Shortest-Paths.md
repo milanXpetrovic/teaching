@@ -5,8 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Traženje najkraćeg puta u grafu"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
+
+<!-- _paginate: false -->
 <!-- _class: title -->
 
 # Algoritmi za najkraći put
@@ -17,37 +19,39 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
 
 # Sadržaj
 
-1. **Uvod i Motivacija**
+1. **Uvod i motivacija**
    * Problem najkraćeg puta vs. BFS
    * Pregled algoritama
 2. **Dijkstrin algoritam**
-   * Princip rada (Pohlepni pristup)
-   * Implementacija (Priority Queue)
+   * Princip rada (pohlepni pristup)
+   * Implementacija (priority queue)
 3. **Bellman-Ford algoritam**
    * Rad s negativnim težinama
    * Detekcija negativnih ciklusa
-4. **Zadaci za vježbu**
+4. **Floyd-Warshall algoritam** (kroz zadatak Shortest Routes II)
+5. **Zadaci za vježbu**
 
 ---
 
-# Uvod: Problem najkraćeg puta
+# Uvod: problem najkraćeg puta
 
 Zadan je **težinski usmjeren graf** $G = (V, E)$ gdje svaka veza $(u, v)$ ima težinu $w(u, v)$.
-Cilj: Pronaći put minimalne ukupne težine od izvora $s$ do cilja $t$.
+Cilj: pronaći put minimalne ukupne težine od izvora $s$ do cilja $t$.
 
 **Primjene:**
 
-* **GPS navigacija:** Najbrža ruta (vrijeme je težina).
-* **Mreže:** Routing protokoli (OSPF).
-* **Ekonomija:** Minimizacija troškova transakcija.
+* **GPS navigacija:** najbrža ruta (vrijeme je težina).
+* **Mreže:** routing protokoli (OSPF).
+* **Ekonomija:** minimizacija troškova transakcija.
 
 ---
 
-# Ključna razlika: BFS vs. Težinski grafovi
+# Ključna razlika: BFS vs. težinski grafovi
 
 <div class="twocols">
 
 Zašto ne koristimo BFS?
+
 1. **BFS (Breadth-First Search):**
    * Nalazi put s **najmanjim brojem bridova**.
    * Pretpostavlja da svaki brid ima težinu 1.
@@ -70,7 +74,7 @@ Koji algoritam odabrati?
 
 | Algoritam | Težine bridova | Složenost | Napomena |
 | :--- | :--- | :--- | :--- |
-| **Dijkstra** | **Samo ne-negativne** ($w \ge 0$) | $O(M \log N)$ | Standardni izbor. Vrlo brz. |
+| **Dijkstra** | **Samo nenegativne** ($w \ge 0$) | $O(M \log N)$ | Standardni izbor. Vrlo brz. |
 | **Bellman-Ford** | Mogu biti **negativne** | $O(N \cdot M)$ | Sporiji. Detektira negativne cikluse. |
 | **Floyd-Warshall** | Mogu biti **negativne** | $O(N^3)$ | Svi parovi čvorova. Samo za male grafove. |
 
@@ -80,11 +84,11 @@ Koji algoritam odabrati?
 
 # Dijkstrin algoritam
 
-## Najbrži algoritam za ne-negativne težine
+## Najbrži algoritam za nenegativne težine
 
 ---
 
-# Dijkstra: Intuicija (1/2)
+# Dijkstra: intuicija (1/2)
 
 Dijkstra je **pohlepni algoritam**.
 Princip rada sličan je širenju vala ili "kruga poznatog teritorija" iz izvora $S$.
@@ -99,7 +103,7 @@ Princip rada sličan je širenju vala ili "kruga poznatog teritorija" iz izvora 
 
 ---
 
-# Dijkstra: Intuicija (2/2)
+# Dijkstra: intuicija (2/2)
 
 ![w:550px center](/img/prsp/shortest-paths/dijkstra-animation.gif)
 
@@ -107,84 +111,82 @@ Izvor: [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorit
 
 ---
 
-# Dijkstra: Implementacija (C++)
+# Dijkstra: implementacija (C++)
 
 ```cpp
 const long long INF = 1e18;
+vector<long long> dist(n + 1, INF);  // Ne "distance": sudara se sa std::distance
 priority_queue<pair<long long, int>> q;
-distance[start] = 0;
+dist[start] = 0;
 q.push({0, start});
 
 while (!q.empty()) {
-    long long d = -q.top().first; // Vrati pozitivnu vrijednost
+    long long d = -q.top().first; // Vraćamo pozitivnu vrijednost
     int u = q.top().second;
     q.pop();
 
-    if (d > distance[u]) continue; // Već smo našli bolji put ranije
+    if (d > dist[u]) continue; // Već smo ranije našli bolji put
 
-    for (auto edge : adj[u]) {
-        int v = edge.first; int w = edge.second;
-        if (distance[u] + w < distance[v]) {
-            distance[v] = distance[u] + w;
-            q.push({-distance[v], v});
+    for (auto [v, w] : adj[u]) {
+        if (dist[u] + w < dist[v]) {
+            dist[v] = dist[u] + w;
+            q.push({-dist[v], v});
         }
     }
 }
 ```
 
-Koristimo `priority_queue` za brzo dohvaćanje najmanje udaljenosti.
-*Trik:* C++ `priority_queue` je Max-Heap, pa spremamo `{ -udaljenost, čvor }`.
+*Trik:* C++ `priority_queue` je max-heap, pa spremamo `{-udaljenost, čvor}`.
 
 ---
 
-# Dijkstra: Analiza složenosti
+# Dijkstra: analiza složenosti
 
-* Svaki brid procesiramo točno jednom (pri relaksaciji).
-* Svaki čvor dodajemo u prioritetni red najviše onoliko puta koliko ima ulaznih bridova (u najgorem slučaju).
+* Svaki čvor obrađujemo jednom (zbog provjere `d > dist[u]`), pa svaki brid relaksiramo jednom.
+* Svaki čvor dodajemo u prioritetni red najviše onoliko puta koliko ima ulaznih bridova.
 * Operacije s redom (`push`/`pop`) traju $O(\log N)$.
 
 **Ukupna složenost:**
 $$ O(M \log N) $$
-(Gdje je $N$ broj čvorova, a $M$ broj bridova).
+(gdje je $N$ broj čvorova, a $M$ broj bridova).
 
 ---
 
 <!-- _class: title -->
 
-# Bellman-Ford Algoritam
+# Bellman-Ford algoritam
 
 ## Rad s negativnim težinama i ciklusi
 
 ---
 
-# Bellman-Ford: Intuicija
+# Bellman-Ford: intuicija
 
 Što ako imamo negativne težine? Pohlepni pristup (Dijkstra) ne radi jer "skupi" put kasnije može postati "jeftin" prolaskom kroz negativni brid.
 
-**Ideja (Dinamičko programiranje):**
+**Ideja (dinamičko programiranje):**
 
 * Najkraći put bez ciklusa može imati najviše $N-1$ bridova.
-* U $i$-toj iteraciji nalazimo sve najkraće puteve koji koriste najviše $i$ bridova.
+* U $i$-toj iteraciji nalazimo sve najkraće putove koji koriste najviše $i$ bridova.
 
 **Algoritam:**
-Ponavljaj $N-1$ puta:
-   Prođi kroz **SVE bridove** $(u, v)$ u grafu i probaj ih relaksirati:
-   `dist[v] = min(dist[v], dist[u] + w)`
+Ponavljamo $N-1$ puta: prolazimo kroz **SVE bridove** $(u, v)$ u grafu i pokušavamo ih relaksirati:
+`dist[v] = min(dist[v], dist[u] + w)`
 
 ---
 
-# Detekcija Negativnih Ciklusa
+# Detekcija negativnih ciklusa
 
 <div class="twocols">
 
-**Negativni ciklus:** Ciklus čija je suma težina $< 0$.
+**Negativni ciklus:** ciklus čija je suma težina $< 0$.
 Ako postoji, možemo se vrtjeti u krug i smanjivati udaljenost do $-\infty$. Najkraći put nije definiran.
 
 **Kako ga detektirati?**
-Nakon $N-1$ iteracija, svi putevi bi trebali biti finalni.
+Nakon $N-1$ iteracija svi bi putovi trebali biti konačni.
 Pokrenemo **$N$-tu iteraciju**.
 
-* Ako se ijedna udaljenost **smanji**, znači da postoji negativni ciklus dostupan iz izvora.
+* Ako se ijedna udaljenost **smanji**, postoji negativni ciklus dostupan iz izvora.
 
 <p class="break"></p>
 
@@ -194,7 +196,7 @@ Pokrenemo **$N$-tu iteraciju**.
 
 ---
 
-# Bellman-Ford: Implementacija
+# Bellman-Ford: implementacija
 
 Koristimo listu bridova (`struct Edge { int a, b, w; }`).
 
@@ -212,9 +214,11 @@ for (int i = 0; i < n - 1; ++i) {
 }
 
 // 2. Detekcija negativnog ciklusa
+bool neg_cycle = false;
 for (auto e : edges) {
     if (dist[e.a] != INF && dist[e.a] + e.w < dist[e.b]) {
-        cout << "Postoji negativni ciklus!" << endl;
+        neg_cycle = true;
+        break;
     }
 }
 ```
@@ -225,18 +229,19 @@ for (auto e : edges) {
 
 # Zadaci za vježbu (CSES)
 
-1. **[Shortest Routes I (CSES)](https://cses.fi/problemset/task/1671)**
-   * Klasična Dijkstra. Pazi na `long long` za udaljenosti!
-2. **[Shortest Routes II (CSES)](https://cses.fi/problemset/task/1672)**
+1. **[Shortest Routes I](https://cses.fi/problemset/task/1671)**
+   * Klasična Dijkstra. Pazite na `long long` za udaljenosti!
+2. **[Shortest Routes II](https://cses.fi/problemset/task/1672)**
    * $N \le 500$, traže se svi parovi $\to$ Floyd-Warshall.
-3. **[High Score (CSES)](https://cses.fi/problemset/task/1673)**
+3. **[High Score](https://cses.fi/problemset/task/1673)**
    * Traži se **najduži** put.
-   * Trik: Pomnoži sve težine s $-1$ i traži najkraći put Bellman-Fordom.
-   * Pazi na pozitivne cikluse (koji postaju negativni u inverziji).
-4. **[Flight Discount (CSES)](https://cses.fi/problemset/task/1195)**
+   * Trik: sve težine pomnožimo s $-1$ i tražimo najkraći put Bellman-Fordom.
+   * Pazite na pozitivne cikluse (koji nakon množenja s $-1$ postaju negativni).
+4. **[Flight Discount](https://cses.fi/problemset/task/1195)**
    * Dijkstra na "state-space" grafu. Čvor nije samo `u`, već `(u, iskoristio_popust)`.
 
 ---
+
 <!-- _class: title -->
 
 # Zadaci za vježbu
@@ -247,12 +252,11 @@ for (auto e : edges) {
 
 # Shortest Routes I (CSES)
 
-## Problem
-
+**Problem:**
 Zadan je graf s $N$ gradova i $M$ letova (bridova). Svaki let ima određenu duljinu.
-Moramo pronaći najkraći put od grada 1 do svih ostalih gradova.
+Treba pronaći najkraći put od grada 1 do svih ostalih gradova.
 
-### Ograničenja
+**Ograničenja:**
 
 * $N \le 10^5$, $M \le 2 \cdot 10^5$.
 * Težine bridova su $\ge 0$.
@@ -260,25 +264,26 @@ Moramo pronaći najkraći put od grada 1 do svih ostalih gradova.
 
 ---
 
-# Shortest Routes I: Intuicija
+# Shortest Routes I: intuicija
 
-Budući da su težine **ne-negativne**, ovo je klasičan primjer za **Dijkstrin algoritam**.
+Budući da su težine **nenegativne**, ovo je klasičan primjer za **Dijkstrin algoritam**.
 
-## Ključne točke za implementaciju:
+**Ključne točke za implementaciju:**
 
-1. **Veliki brojevi:** Duljina puta može premašiti $2^{31}-1$. Obavezno koristi `long long` za udaljenosti.
+1. **Veliki brojevi:** duljina puta može premašiti $2^{31}-1$. Obavezno koristite `long long` za udaljenosti.
 2. **Prioritetni red:** C++ `priority_queue` po defaultu vadi najveći element.
-   * Opcija A: Koristi `priority_queue<pair<ll, int>, vector<...>, greater<...>>`.
-   * Opcija B (Trik): Ubacuj negativne udaljenosti `{-dist, u}` pa će najmanja udaljenost (koja je "najmanje negativna") biti na vrhu, ali zapravo želimo najveću negativnu vrijednost (-1 je veće od -100). *Najjednostavnije:* Ubacuj `{-dist, u}` i kod vađenja stavi `d = -q.top().first`.
+   * Opcija A: `priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>`.
+   * Opcija B (trik): ubacujemo `{-dist, u}`. Najmanja udaljenost postaje najveći (najmanje negativan) broj, pa je na vrhu heapa (npr. $-1 > -100$). Pri vađenju uzimamo `d = -q.top().first`.
 
 ---
 
-# Shortest Routes I: Kod
+# Shortest Routes I: kod
 
 ```cpp
-priority_queue<pair<long long, int>> q;
+vector<long long> dist(n + 1, INF);
+priority_queue<pair<long long, int>> q;  // { -udaljenost, čvor }
 dist[1] = 0;
-q.push({0, 1}); // { -udaljenost, čvor }
+q.push({0, 1});
 
 while (!q.empty()) {
     long long d = -q.top().first;
@@ -294,56 +299,59 @@ while (!q.empty()) {
         }
     }
 }
+
+for (int i = 1; i <= n; i++) cout << dist[i] << " ";
+cout << "\n";
 ```
 
 ---
 
 # Sažetak: Shortest Routes I
 
-1. **Tipovi podataka su bitni:** U grafovima s težinama, suma vrlo brzo pređe $2 \cdot 10^9$. Uvijek koristi `long long` za udaljenosti.
-2. **Priority Queue Trik:** Ubacivanje negativnih brojeva `{-dist, u}` je standardni trik u C++ natjecateljskom programiranju jer je `priority_queue` *max-heap*, a mi trebamo najmanju udaljenost.
-   * Alternativa je `greater<...>`, ali ovo je brže za napisati.
+1. **Tipovi podataka su bitni:** u grafovima s težinama suma vrlo brzo prijeđe $2 \cdot 10^9$. Za udaljenosti uvijek koristite `long long`.
+2. **Priority queue trik:** ubacivanje negativnih brojeva `{-dist, u}` standardni je trik u C++ natjecateljskom programiranju jer je `priority_queue` *max-heap*, a nama treba najmanja udaljenost.
+   * Alternativa je `greater<...>`, ali trik je brži za napisati.
 
 ---
 
 # Shortest Routes II (CSES)
 
 **Problem:**
-Zadan je graf s gradovima i cestama. Moramo odgovoriti na $Q$ upita.
-Svaki upit traži najkraću udaljenost između dva grada $(a, b)$.
+Zadan je graf s gradovima i (dvosmjernim) cestama. Treba odgovoriti na $Q$ upita.
+Svaki upit traži najkraću udaljenost između dva grada $(a, b)$, ili $-1$ ako put ne postoji.
 
 **Ograničenja:**
 
 * $N \le 500$, $M \le N^2$.
-* $Q \le 10^5$ (Puno upita!).
+* $Q \le 10^5$ (puno upita!).
 
 ---
 
-# Shortest Routes II: Intuicija (1/2)
+# Shortest Routes II: intuicija (1/2)
 
 1. **Zašto ne Dijkstra?**
-   Pokrenuti Dijkstru za svaki upit bi trajalo $Q \cdot O(M \log N)$.
-   $10^5 \cdot 500^2 \dots$ Previše sporo!
+   Pokretanje Dijkstre za svaki upit trajalo bi $Q \cdot O(M \log N)$.
+   $10^5 \cdot 500^2 \dots$ Presporo!
 
 2. **Floyd-Warshall:**
-   Budući da je $N$ malen ($500$), možemo izračunati udaljenosti između **svih parova** čvorova unaprijed u $O(N^3)$.
-   $500^3 = 1.25 \cdot 10^8$, što prolazi unutar vremenskog limita (C++ je brz).
-   Nakon toga, svaki upit rješavamo u $O(1)$ čitanjem iz matrice.
+   Budući da je $N$ malen ($500$), udaljenosti između **svih parova** čvorova možemo izračunati unaprijed u $O(N^3)$.
+   $500^3 = 1,25 \cdot 10^8$, što prolazi unutar vremenskog limita.
+   Nakon toga svaki upit rješavamo u $O(1)$ čitanjem iz matrice.
 
-**Pazi na:**
+**Pazite na:**
 
 * Inicijalizaciju matrice (INF, dijagonala 0).
-* Višestruke bridove između istih čvorova (uzmi minimum).
+* Višestruke bridove između istih čvorova (uzimamo minimum).
 
 ---
 
-# Shortest Routes II: Intuicija (2/2)
+# Shortest Routes II: intuicija (2/2)
 
 ![center](/img/prsp/shortest-paths/floyd-warshall-matrix.png)
 
 ---
 
-# Shortest Routes II: Inicijalizacija
+# Shortest Routes II: inicijalizacija
 
 ```cpp
 // 1. Inicijalizacija matrice
@@ -354,26 +362,33 @@ for (int i = 1; i <= n; i++) {
     }
 }
 
-// 2. Učitavanje (pazi na višestruke bridove!)
+// 2. Učitavanje (pazite na višestruke bridove!)
 for (int i = 0; i < m; i++) {
     int u, v; long long w; cin >> u >> v >> w;
     d[u][v] = min(d[u][v], w);
-    d[v][u] = min(d[v][u], w); // Ako je neusmjeren
+    d[v][u] = min(d[v][u], w); // Ceste su dvosmjerne
 }
 ```
+
 ---
 
-# Shortest Routes II: Kod (Floyd-Warshall)
+# Shortest Routes II: kod (Floyd-Warshall)
 
 ```cpp
 // 3. Algoritam (k je VANJSKA petlja!)
 for (int k = 1; k <= n; k++) {
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
-            if (d[i][k] < INF && d[k][j] < INF) // Pazi na overflow
+            if (d[i][k] < INF && d[k][j] < INF) // Pazimo na overflow
                 d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
         }
     }
+}
+
+// 4. Upiti
+while (q--) {
+    int a, b; cin >> a >> b;
+    cout << (d[a][b] == INF ? -1 : d[a][b]) << "\n";
 }
 ```
 
@@ -381,15 +396,15 @@ for (int k = 1; k <= n; k++) {
 
 # Sažetak: Shortest Routes II
 
-## Kako prepoznati Floyd-Warshall?
+**Kako prepoznati Floyd-Warshall?**
 
-Ključ nije u težini zadatka, već u **ograničenjima (Constraints)**.
+Ključ nije u težini zadatka, već u **ograničenjima (constraints)**.
 
-* Ako vidite **$N \le 500$**, to je ogroman signal za algoritam složenosti **$O(N^3)$**.
+* Ako vidite **$N \le 500$**, to je jak signal za algoritam složenosti **$O(N^3)$**.
 * Ako se traže udaljenosti između **svih parova** (All-Pairs Shortest Path).
-* Ako ima puno upita ($Q$) koji se moraju odgovoriti u $O(1)$.
+* Ako ima puno upita ($Q$) na koje treba odgovoriti u $O(1)$.
 
-> **Paziti:** Kod inicijalizacije matrice, ako postoje višestruki bridovi između dva grada, uvijek zadrži onaj s **minimalnom** težinom!
+> **Pazite:** ako pri inicijalizaciji matrice postoje višestruki bridovi između dva grada, uvijek zadržite onaj s **minimalnom** težinom!
 
 ---
 
@@ -398,81 +413,74 @@ Ključ nije u težini zadatka, već u **ograničenjima (Constraints)**.
 **Problem:**
 Želimo putovati od sobe 1 do sobe $N$. Svaki tunel povećava naš rezultat za $x$.
 Želimo postići **maksimalan** mogući rezultat.
-Možemo prolaziti kroz sobe više puta. Ispiši -1 ako možemo postići proizvoljno velik rezultat (pozitivni ciklus).
+Kroz sobe možemo prolaziti više puta. Ispisujemo $-1$ ako možemo postići proizvoljno velik rezultat (pozitivni ciklus).
 
 **Analiza:**
 
 * Tražimo **najduži put**.
 * Standardni algoritmi traže najkraći put.
-* **Trik:** Pomnoži sve težine s $-1$. Sada tražimo **najkraći put**.
-* "Beskonačno velik rezultat" u originalu $\Leftrightarrow$ "Beskonačno mali put" (negativni ciklus) u novom grafu.
+* **Trik:** sve težine pomnožimo s $-1$. Sada tražimo **najkraći put**.
+* "Beskonačno velik rezultat" u originalu $\Leftrightarrow$ "beskonačno mali put" (negativni ciklus) u novom grafu.
 
 ---
 
-# High Score: Strategija
+# High Score: strategija
 
-Koristimo **Bellman-Ford** algoritam jer tražimo najkraći put u grafu s negativnim težinama.
+Koristimo **Bellman-Ford** jer tražimo najkraći put u grafu s negativnim težinama.
 
 **Problem ciklusa:**
-Samo postojanje negativnog ciklusa nije dovoljno za ispisati -1.
-Taj ciklus mora biti:
+Samo postojanje negativnog ciklusa nije dovoljno da ispišemo $-1$.
+Taj ciklus mora:
 
-1. Dohvatljiv iz početnog čvora (1).
-2. Mora moći doseći ciljni čvor ($N$).
+1. Biti dohvatljiv iz početnog čvora (1).
+2. Moći doseći ciljni čvor ($N$).
 
 **Rješenje:**
 
-1. Pokreni Bellman-Ford $N-1$ puta.
-2. Pokreni ga još $N$ puta. Ako se u nekom koraku udaljenost do čvora $u$ smanji, postavi `dist[u] = -INF`.
-3. To `-INF` će se "proširiti" na sve čvorove do kojih taj ciklus može doći.
-4. Na kraju, ako je `dist[N] == -INF`, rješenje je -1.
+1. Pokrenemo Bellman-Ford $N-1$ puta.
+2. Pokrenemo još $N-1$ iteracija. Ako se u nekom koraku udaljenost do čvora $v$ smanji, postavimo `dist[v] = -INF`.
+3. Taj `-INF` "proširi" se na sve čvorove do kojih ciklus može doći.
+4. Na kraju, ako je `dist[N] == -INF`, rješenje je $-1$.
 
 ---
 
-# High Score: Kod
+# High Score: kod
 
 ```cpp
-// Pretvorba problema: w = -w
-vector<tuple<int,int,long long>> edges;
+// Pri učitavanju spremamo bridove kao (u, v, -x)
+vector<tuple<int, int, long long>> edges;
 
 vector<long long> dist(n + 1, INF);
 dist[1] = 0;
 
-// Prvih N-1 iteracija (Standardni Bellman-Ford)
-for (int i = 1; i < n; ++i) {
-    for (auto [u, v, w] : edges) {
-        if (dist[u] != INF && dist[u] + w < dist[v]) {
+// Prvih N-1 iteracija (standardni Bellman-Ford)
+for (int i = 1; i < n; ++i)
+    for (auto [u, v, w] : edges)
+        if (dist[u] != INF && dist[u] + w < dist[v])
             dist[v] = dist[u] + w;
-        }
-    }
-}
 
-// Dodatne iteracije za propagaciju negativnih ciklusa
-// Ako se nešto može smanjiti, to je dio ciklusa -> postavi na -INF
+// Dodatne iteracije: sve što se još može smanjiti dio je ciklusa -> -INF
 for (int i = 1; i < n; ++i) {
     for (auto [u, v, w] : edges) {
-        if (dist[u] != INF) {
-            if (dist[u] == -INF) dist[v] = -INF; // Propagiraj
-            else if (dist[u] + w < dist[v]) {
-                dist[v] = -INF; // Detektiran ciklus
-            }
-        }
+        if (dist[u] == INF) continue;
+        if (dist[u] == -INF) dist[v] = -INF;           // Propagacija
+        else if (dist[u] + w < dist[v]) dist[v] = -INF; // Detektiran ciklus
     }
 }
 
-if (dist[n] == -INF) cout << -1 << endl;
-else cout << -dist[n] << endl; // Vrati u pozitivno
+if (dist[n] == -INF) cout << -1 << "\n";
+else cout << -dist[n] << "\n"; // Vraćamo u pozitivno
 ```
 
 ---
 
 # Sažetak: High Score
 
-## Transformacija problema
+**Transformacija problema**
 
-Često se problemi "najdužeg puta" ili "maksimalnog profita" rješavaju pretvaranjem u **najkraći put s negativnim težinama** ($w' = -w$).
+Problemi "najduljeg puta" ili "maksimalnog profita" često se rješavaju pretvaranjem u **najkraći put s negativnim težinama** ($w' = -w$).
 
-## Zamka "Nedostižnog ciklusa"
+**Zamka "nedostižnog ciklusa"**
 
 Nije svaki negativni ciklus bitan!
 
@@ -485,75 +493,71 @@ Nije svaki negativni ciklus bitan!
 # 4. Flight Discount (CSES)
 
 **Problem:**
-Put od grada 1 do $N$. Imamo kupon za **50% popusta** na točno jedan let.
-Nađi minimalnu cijenu.
+Put od grada 1 do $N$. Imamo kupon za **50% popusta** (zaokruženo nadolje) na točno jedan let.
+Treba naći minimalnu cijenu.
 
-**Intuicija: Layered Graph (Slojeviti graf)**
-Možemo zamisliti da se nalazimo u dva moguća stanja:
+**Intuicija: slojeviti graf (layered graph)**
+Možemo zamisliti da se nalazimo u jednom od dva stanja:
 
-1. `State 0`: Još nismo iskoristili kupon.
-2. `State 1`: Iskoristili smo kupon.
+1. `stanje 0`: još nismo iskoristili kupon.
+2. `stanje 1`: iskoristili smo kupon.
 
 **Prijelazi:**
 
 * Iz `(u, 0)` u `(v, 0)`: cijena $w$ (ne koristimo kupon).
-* Iz `(u, 0)` u `(v, 1)`: cijena $w/2$ (koristimo kupon sada).
-* Iz `(u, 1)` u `(v, 1)`: cijena $w$ (već iskorišten).
+* Iz `(u, 0)` u `(v, 1)`: cijena $\lfloor w/2 \rfloor$ (koristimo kupon sada).
+* Iz `(u, 1)` u `(v, 1)`: cijena $w$ (kupon je već iskorišten).
 
 ---
 
-# Flight Discount: Implementacija
+# Flight Discount: implementacija
 
-Ovo je zapravo **Dijkstra** na grafu koji ima $2N$ čvorova.
-Udaljenosti pamtimo kao `dist[čvor][stanje]`.
+Ovo je **Dijkstra** na grafu s $2N$ čvorova. Udaljenosti pamtimo kao `dist[čvor][stanje]`.
 
 ```cpp
-priority_queue<tuple<long long, int, int>> q; // {-cijena, u, state}
+// dist[u][0] i dist[u][1] inicijalizirani na INF
+priority_queue<tuple<long long, int, int>> q; // {-cijena, u, stanje}
 dist[1][0] = 0;
-dist[1][1] = 0; // Oprez: u startu nismo iskoristili, ali tehnički dist[1][1] je nedostupno osim ako...
-// Zapravo inicijaliziraj sve na INF, a dist[1][0] = 0.
 q.push({0, 1, 0});
 
 while (!q.empty()) {
-    auto [d, u, state] = q.top(); q.pop(); d = -d;
-    
+    auto [d, u, state] = q.top(); q.pop();
+    d = -d;
     if (d > dist[u][state]) continue;
 
     for (auto [v, w] : adj[u]) {
-        // Opcija 1: Ne koristi kupon (zadrži stanje)
+        // Opcija 1: ne koristimo kupon (stanje ostaje isto)
         if (dist[u][state] + w < dist[v][state]) {
             dist[v][state] = dist[u][state] + w;
             q.push({-dist[v][state], v, state});
         }
-        
-        // Opcija 2: Iskoristi kupon (samo ako smo u state 0)
-        if (state == 0) {
-            if (dist[u][0] + w/2 < dist[v][1]) {
-                dist[v][1] = dist[u][0] + w/2;
-                q.push({-dist[v][1], v, 1});
-            }
+        // Opcija 2: koristimo kupon (samo iz stanja 0)
+        if (state == 0 && dist[u][0] + w / 2 < dist[v][1]) {
+            dist[v][1] = dist[u][0] + w / 2;
+            q.push({-dist[v][1], v, 1});
         }
     }
 }
-cout << dist[n][1] << endl; // Rezultat mora završiti u stanju 1? 
-// Zapravo min(dist[n][0], dist[n][1]) jer možda je najjeftinije ne iskoristiti kupon (teoretski)
+// Kupon nikad ne povećava cijenu, pa je dist[n][1] <= dist[n][0]
+cout << dist[n][1] << "\n";
 ```
 
 ---
 
 # Osvrt: Flight Discount
 
-## Tehnika: Proširenje prostora stanja (State-Space Expansion)
+**Tehnika: proširenje prostora stanja (State-Space Expansion)**
 
-Ovo je jedna od najvažnijih tehnika za teške grafovske zadatke.
+Ovo je jedna od najvažnijih tehnika za teže grafovske zadatke.
 
-Kada se pravila kretanja promijene (npr. "imaš 1 kupon", "možeš preskočiti 2 zida", "auto ima goriva za K km"), čvor više nije samo `u`.
+Kada se pravila kretanja promijene (npr. "imamo 1 kupon", "možemo preskočiti 2 zida", "auto ima goriva za K km"), čvor više nije samo `u`.
 **Čvor postaje `(u, stanje)`**.
 
-* Broj čvorova raste s $N$ na $N \times \text{broj\_stanja}$.
+* Broj čvorova raste s $N$ na $N \cdot S$, gdje je $S$ broj stanja.
 * Ako je broj stanja malen (ovdje 2), Dijkstra radi savršeno.
 
 ---
+
 <!-- _class: title -->
 
 # Zaključak
@@ -562,17 +566,17 @@ Kada se pravila kretanja promijene (npr. "imaš 1 kupon", "možeš preskočiti 2
 
 ---
 
-# Algoritam: Stablo odlučivanja
+# Algoritam: stablo odlučivanja
 
 Kada dobijete zadatak s grafom, postavite si ova pitanja redom:
 
 1. **Jesu li težine bridova 1 (ili ne postoje)?**
-   $\rightarrow$ Koristi **BFS** ($O(N+M)$).
+   $\rightarrow$ Koristite **BFS** ($O(N+M)$).
 2. **Jesu li težine bridova $\ge 0$?**
-   $\rightarrow$ Koristi **Dijkstru** ($O(M \log N)$).
-3. **Ima li negativnih težina (ali $N$ je velik)?**
-   $\rightarrow$ Koristi **Bellman-Ford** ($O(N \cdot M)$).
-4. **Je li $N$ malen ($N \le 500$) i trebaju nam svi parovi?**
-   $\rightarrow$ Koristi **Floyd-Warshall** ($O(N^3)$).
+   $\rightarrow$ Koristite **Dijkstru** ($O(M \log N)$).
+3. **Ima li negativnih težina (a $N$ je velik)?**
+   $\rightarrow$ Koristite **Bellman-Ford** ($O(N \cdot M)$).
+4. **Je li $N$ malen ($N \le 500$) i trebaju li nam svi parovi?**
+   $\rightarrow$ Koristite **Floyd-Warshall** ($O(N^3)$).
 5. **Postoje li posebna pravila (kuponi, gorivo, stanja)?**
-   $\rightarrow$ Modificiraj Dijkstru na **Slojevitom grafu**.
+   $\rightarrow$ Modificirajte Dijkstru na **slojevitom grafu**.

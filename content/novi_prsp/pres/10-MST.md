@@ -5,8 +5,10 @@ size: 16:9
 paginate: true
 math: mathjax
 header: "Minimalno razapinjuće stablo (MST)"
-footer: "Programiranje za rješavanje složenih problema | Vježbe 2025/26"
+footer: "Programiranje za rješavanje složenih problema | Vježbe"
 ---
+
+<!-- _paginate: false -->
 <!-- _class: title  -->
 # Minimalno razapinjuće stablo (MST)
 
@@ -25,18 +27,18 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 
 # Problem minimalnog razapinjućeg stabla (MST) (2/2)
 
-**Motivacija:** Povezivanje $n$ gradova uz **minimalan ukupan trošak**.
+**Motivacija:** povezivanje $n$ gradova uz **minimalan ukupan trošak**.
 
 **Definicija:**
 
-- **Ulaz:** Neusmjeren, težinski graf.
-- **Razapinjuće stablo:** Podgraf koji povezuje sve čvorove i nema ciklusa.
-- **MST:** Stablo čiji je zbroj težina bridova najmanji moguć.
+- **Ulaz:** neusmjeren, težinski graf.
+- **Razapinjuće stablo:** podgraf koji povezuje sve čvorove i nema ciklusa.
+- **MST:** razapinjuće stablo čiji je zbroj težina bridova najmanji moguć.
 
 **Algoritmi koje radimo:**
 
-1. **Kruskalov:** Dodaj najlakši brid koji ne stvara ciklus.
-2. **Primov:** Širi stablo od početnog čvora prema najbližim susjedima.
+1. **Kruskalov:** dodajemo najlakši brid koji ne stvara ciklus.
+2. **Primov:** širimo stablo od početnog čvora prema najbližim susjedima.
 
 ---
 
@@ -52,77 +54,77 @@ Izvor: [Discrete Mathematics - Spanning Trees](https://www.tutorialspoint.com/di
 
 <!-- _class: lead -->
 
-# Minimalno Razapinjuće Stablo (MST) (1/4)
+# Minimalno razapinjuće stablo (MST) (1/4)
 
 ## Kruskalov algoritam
 
 **Pohlepna strategija:**
-> "Na svakom koraku, dodaj najlakši brid u grafu koji ne stvara ciklus."
+> "Na svakom koraku dodajemo najlakši brid u grafu koji ne stvara ciklus."
 
 **Postupak:**
 
-1. Sortiraj sve bridove po težini (uzlazno).
-2. Iteriraj kroz bridove $(u, v)$:
-   - Ako su $u$ i $v$ već u istoj komponenti: preskoči (stvorio bi se ciklus).
-   - Inače: dodaj brid u MST i spoji komponente.
-3. Ponavljaj dok ne spojimo sve čvorove.
+1. Sortiramo sve bridove po težini (uzlazno).
+2. Iteriramo kroz bridove $(u, v)$:
+   - Ako su $u$ i $v$ već u istoj komponenti: preskačemo (stvorio bi se ciklus).
+   - Inače: dodajemo brid u MST i spajamo komponente.
+3. Ponavljamo dok ne spojimo sve čvorove.
 
 ---
 
-# Minimalno Razapinjuće Stablo (MST) (2/4)
+# Minimalno razapinjuće stablo (MST) (2/4)
 
-## Kruskalov algoritam
+**Kruskalov algoritam**
 
 ![w:350px center](../../../img/kruskal-algorithm-animation.gif)
-**Vizualizacija Krsukalova algoritma**
+**Vizualizacija Kruskalova algoritma**
 Izvor: [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
 
 ---
 
-# Minimalno Razapinjuće Stablo (MST) (3/4)
+# Minimalno razapinjuće stablo (MST) (3/4)
 
-## Izazov implementacije: Detekcija ciklusa
+**Izazov implementacije: detekcija ciklusa**
 
 Lako je reći "ako ne stvara ciklus", ali kako to efikasno provjeriti u kodu?
 
-### Opcija A: BFS/DFS pretraga
+**Opcija A: BFS/DFS pretraga**
 
-- Prije dodavanja brida $(u, v)$, pokrenemo BFS da vidimo postoji li već put od $u$ do $v$.
-- **Problem:** Presporo! Za svaki brid moramo prolaziti graf. Složenost bi bila $O(M \cdot N)$.
+- Prije dodavanja brida $(u, v)$ pokrenemo BFS da vidimo postoji li već put od $u$ do $v$.
+- **Problem:** presporo! Za svaki brid moramo prolaziti graf. Složenost bi bila $O(M \cdot N)$.
 
-### Opcija B: Praćenje skupova (DSU)
+**Opcija B: praćenje skupova (DSU)**
 
 - Pamtimo "skupove" povezanih čvorova.
 - Ako su $u$ i $v$ u istom skupu $\rightarrow$ imamo ciklus.
-- Ovo je **trenutna** provjera. Zato koristimo **Union-Find**.
+- Ovo je praktički **trenutna** provjera. Zato koristimo **Union-Find**.
 
 ---
 
-# Minimalno Razapinjuće Stablo (MST) (4/4)
+# Minimalno razapinjuće stablo (MST) (4/4)
 
-## Rješenje: Union-Find (DSU) struktura
+**Rješenje: Union-Find (DSU) struktura**
 
-Da bismo Kruskala učinili brzim, koristimo strukturu koja podržava dvije operacije:
+Da bi Kruskal bio brz, koristimo strukturu koja podržava dvije operacije:
 
-1. **`Find` (Pronađi):** Tko je "šef" komponente kojoj čvor pripada?
+1. **`Find` (pronađi):** Tko je "šef" komponente kojoj čvor pripada?
    - *Služi za provjeru:* `find(u) == find(v)` znači da su već povezani.
-2. **`Union` (Unija):** Spoji dvije komponente u jednu.
-   - *Služi za gradnju:* Kad dodamo brid, spajamo skupove.
+2. **`Union` (unija):** Spajanje dviju komponenata u jednu.
+   - *Služi za gradnju:* kad dodamo brid, spajamo skupove.
 
 ---
 
-# Union-Find: Intuicija (1/2)
+# Union-Find: intuicija (1/2)
 
-## Vizualizacija spajanja
+**Vizualizacija spajanja**
 
 ![w:280px center](../../../img/union-find-kruskal-animation.gif)
 Izvor: [Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
 
 ---
 
-# Union-Find: Intuicija (2/2)
+# Union-Find: intuicija (2/2)
 
-## "Tko je ovdje šef?"
+**"Tko je ovdje šef?"**
 
 Zamislite da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj šef.
 
@@ -131,8 +133,8 @@ Zamislite da je na početku svaki grad (čvor) zasebna "ekipa" i sam je svoj še
 
 **Optimizacije koje strukturu čine brzom ($O(\alpha(n))$):**
 
-1. **Path Compression:** Svi zaposlenici direktno pamte glavnog šefa.
-2. **Union by Size:** Manja ekipa se uvijek pripaja većoj.
+1. **Path compression:** svi zaposlenici direktno pamte glavnog šefa.
+2. **Union by size:** manja ekipa se uvijek pripaja većoj.
 
 ---
 
@@ -150,7 +152,7 @@ long long total_weight = 0;
 for (Edge e : edges) {
     if (find_set(e.u) != find_set(e.v)) { // Ako nisu u istoj komponenti
         total_weight += e.weight;
-        unite_sets(e.u, e.v);             // Spoji ih
+        unite_sets(e.u, e.v);             // Spajamo ih
     }
 }
 ```
@@ -159,28 +161,28 @@ for (Edge e : edges) {
 
 ---
 
-# Problem 2: Primov algoritam (1/2)
+# Primov algoritam (1/2)
 
 **Pohlepna strategija:**
-> "Gradi stablo počevši od jednog čvora, šireći se na najbliže susjede."
+> "Gradimo stablo počevši od jednog čvora, šireći se na najbliže susjede."
 
 **Sličnost s Dijkstrom:**
 
-- Koristi **Priority Queue**.
-- Razlika: Kod Dijkstre je ključ *ukupna udaljenost od starta*, kod Prima je ključ *težina brida* kojim se spajamo na postojeće stablo.
+- Koristi **priority queue**.
+- Razlika: kod Dijkstre je ključ *ukupna udaljenost od starta*, a kod Prima *težina brida* kojim se spajamo na postojeće stablo.
 
 **Algoritam:**
 
-1. Stavi proizvoljni čvor u PQ s cijenom 0.
-2. Dok PQ nije prazan: uzmi najjeftiniji čvor $u$.
-3. Ako $u$ nije posjećen: označi ga, dodaj cijenu u sumu, i dodaj sve njegove susjede u PQ.
+1. Proizvoljni čvor stavimo u PQ s cijenom 0.
+2. Dok PQ nije prazan: uzmemo najjeftiniji čvor $u$.
+3. Ako $u$ nije posjećen: označimo ga, dodamo cijenu u sumu i dodamo sve njegove susjede u PQ.
 
 ---
 
-# Problem 2: Primov algoritam (2/2)
+# Primov algoritam (2/2)
 
 ![w:350px center](../../../img/prim-algorithm-animation.gif)
-**Vizualizacija Primovog algoritam:**
+**Vizualizacija Primovog algoritma**
 Izvor: [Prim's algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
 
 ---
@@ -191,33 +193,33 @@ Izvor: [Prim's algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
 priority_queue<pair<long long, int>> q; // {-težina, čvor}
 vector<bool> visited(n + 1, false);
 
-q.push({0, 1}); // Počni od čvora 1
+q.push({0, 1}); // Počinjemo od čvora 1
 long long total_weight = 0;
 
 while (!q.empty()) {
-    int u = q.top().second;
     long long w = -q.top().first; // Vraćamo iz minusa u plus
+    int u = q.top().second;
     q.pop();
 
     if (visited[u]) continue;
     visited[u] = true;
     total_weight += w;
 
-    for (auto edge : adj[u]) {
-        if (!visited[edge.first]) {
-            // edge.second je težina, edge.first je susjed
-            // edge.second dodajemo kao negativnu vrijednost
-            q.push({-edge.second, edge.first});
+    for (auto [v, cost] : adj[u]) {   // adj[u] sadrži parove {susjed, težina}
+        if (!visited[v]) {
+            q.push({-cost, v});       // Težinu dodajemo kao negativnu vrijednost
         }
     }
 }
 ```
 
+**Složenost:** $O(M \log N)$, kao i Dijkstra.
+
 ---
 
 <!-- _class: lead -->
 
-#  Zadaci za vježbu
+# Zadaci za vježbu
 
 ## CSES Problem Set
 
@@ -236,24 +238,24 @@ while (!q.empty()) {
 
 ---
 
-# Analiza zadataka: Road Reparation (1/2)
+# Analiza zadatka: Road Reparation (1/2)
 
-## Definiranje problema: Road Reparation
+**Definiranje problema**
 
 Imamo $n$ gradova i $m$ cesta, svaka ima cijenu popravka.
-Cilj je odabrati skup cesta tako da su **svi gradovi povezani**, a ukupna cijena popravka bude **minimalna**.
+Cilj je odabrati skup cesta tako da su **svi gradovi povezani**, a ukupna cijena popravka **minimalna**.
 
-### Intuicija: Road Reparation
+**Intuicija**
 
 1. Moramo povezati $n$ čvorova.
 2. Najefikasniji način povezivanja $n$ čvorova bez suvišnih bridova je **stablo** ($n-1$ bridova).
 3. Tražimo stablo s najmanjom sumom težina.
 
-**Zaključak:** Ovo je klasičan primjer **MST (Minimalno Razapinjuće Stablo)** problema.
+**Zaključak:** ovo je klasičan primjer **MST** problema.
 
 ---
 
-# Analiza zadataka: Road Reparation (2/2)
+# Analiza zadatka: Road Reparation (2/2)
 
 ![w:500px center](../../../img/discarding-edge-kruskal.avif)
 **Odbacivanje brida**
@@ -265,12 +267,12 @@ Izvor: [Kruskal’s Algorithm: Key to Minimum Spanning Tree [MST]](https://www.s
 
 Za ovaj problem Kruskalov algoritam je vrlo intuitivan:
 
-1. **Sortiraj** sve ceste po cijeni (od najmanje do najveće).
-2. **Pohlepni pristup:** Uzimaj ceste redom.
-3. Ako cesta povezuje dva grada koji **već jesu povezani** (direktno ili indirektno), odbaci je (jer stvara ciklus i nepotreban trošak).
-4. Ako cesta povezuje dva nepovezana skupa gradova, **kupi je** i spoji skupove.
+1. **Sortiramo** sve ceste po cijeni (od najmanje do najveće).
+2. **Pohlepni pristup:** uzimamo ceste redom.
+3. Ako cesta povezuje dva grada koji **već jesu povezani** (direktno ili indirektno), odbacujemo je (stvara ciklus i nepotreban trošak).
+4. Ako cesta povezuje dva nepovezana skupa gradova, **kupujemo je** i spajamo skupove.
 
-## Struktura podataka
+**Struktura podataka**
 
 Za efikasnu provjeru jesu li gradovi već povezani koristimo **Union-Find (DSU)**.
 
@@ -278,22 +280,22 @@ Za efikasnu provjeru jesu li gradovi već povezani koristimo **Union-Find (DSU)*
 
 # Rubni slučajevi i zamke
 
-## 1. Nemoguće rješenje (ispis `IMPOSSIBLE`)
+**1. Nemoguće rješenje (ispis `IMPOSSIBLE`)**
 
-Što ako je graf nepovezan (npr. otok do kojeg ne vodi ni jedna cesta)?
+Što ako je graf nepovezan (npr. otok do kojeg ne vodi nijedna cesta)?
 
 - Ako nakon prolaska kroz sve ceste broj odabranih bridova nije $n-1$, rješenje ne postoji.
-- Alternativno: Provjeri je li veličina glavne komponente u DSU jednaka $n$.
+- Alternativno: provjerimo je li veličina glavne komponente u DSU-u jednaka $n$.
 
-### 2. Veliki brojevi
+**2. Veliki brojevi**
 
 - Cijena ceste $c$ može biti do $10^9$.
 - Ukupna cijena može biti $10^5 \times 10^9 = 10^{14}$.
-- Koristiti `long long` za sumu cijena.
+- Za sumu cijena koristite `long long`.
 
 ---
 
-# Implementacija: Strukture i usporediBridove
+# Implementacija: strukture i usporediBridove
 
 ```cpp
 #include <iostream>
@@ -309,7 +311,6 @@ struct Edge {
 bool usporediBridove(const Edge& a, const Edge& b) {
     return a.weight < b.weight;
 }
-
 ```
 
 ---
@@ -322,14 +323,14 @@ vector<int> parent, sz;
 
 int find_set(int v) {
     if (v == parent[v]) return v;
-    return parent[v] = find_set(parent[v]);
+    return parent[v] = find_set(parent[v]); // Path compression
 }
 
 void unite_sets(int a, int b) {
     a = find_set(a);
     b = find_set(b);
     if (a != b) {
-        if (sz[a] < sz[b]) swap(a, b);
+        if (sz[a] < sz[b]) swap(a, b);      // Union by size
         parent[b] = a;
         sz[a] += sz[b];
     }
@@ -338,7 +339,7 @@ void unite_sets(int a, int b) {
 
 ---
 
-# Implementacija: Glavni dio (1/2)
+# Implementacija: glavni dio (1/2)
 
 ```cpp
 int main() {
@@ -350,23 +351,23 @@ int main() {
         cin >> edges[i].u >> edges[i].v >> edges[i].weight;
     }
 
-    // sortiranje bridova
+    // Sortiranje bridova
     sort(edges.begin(), edges.end(), usporediBridove);
 
-    // inicijalizacija DSU
-    parent.resize(n + 1); // svako svoj 'sef'
-    sz.resize(n + 1, 1); // velicina svake komponente je 1
+    // Inicijalizacija DSU-a
+    parent.resize(n + 1);  // Svaki čvor je sam svoj šef
+    sz.resize(n + 1, 1);   // Veličina svake komponente je 1
     for (int i = 1; i <= n; i++) parent[i] = i;
-
 ```
 
 ---
 
-# Implementacija: Glavni dio (2/2)
+# Implementacija: glavni dio (2/2)
 
 ```cpp
     long long total_cost = 0;
     int edges_count = 0;
+
     // Kruskalov algoritam
     for (const auto& edge : edges) {
         if (find_set(edge.u) != find_set(edge.v)) {
@@ -375,16 +376,12 @@ int main() {
             edges_count++;
         }
     }
-    // provjera 
+
     // MST mora imati točno n-1 bridova da bi povezao n čvorova
-    if (edges_count == n - 1) {
-        cout << total_cost << endl;
-    } else {
-        // Poseban slučaj: n=1 traži 0 bridova, 
-        // ali za n > 1 ako nemamo n-1 bridova, graf je nepovezan.
-        if (n == 1) cout << 0 << endl; 
-        else cout << "IMPOSSIBLE" << endl;
-    }
+    // (za n = 1 to je 0 bridova, pa i taj slučaj prolazi)
+    if (edges_count == n - 1) cout << total_cost << "\n";
+    else cout << "IMPOSSIBLE\n";
+
     return 0;
 }
 ```
@@ -393,10 +390,10 @@ int main() {
 
 # Sažetak rješenja (Road Reparation)
 
-1. **Prepoznaj MST:** Ključne riječi "connect all cities", "minimum cost".
-2. **Kruskal:** Sortiraj bridove + Union-Find.
-3. **Pazi na tipove:** `long long` za cijenu.
-4. **Pazi na nepovezanost:** Provjeri jesu li spojeni svi čvorovi (broj bridova ili veličina komponente).
+1. **Prepoznajte MST:** ključne riječi "connect all cities", "minimum cost".
+2. **Kruskal:** sortiranje bridova + Union-Find.
+3. **Pazite na tipove:** `long long` za cijenu.
+4. **Pazite na nepovezanost:** provjerite jesu li spojeni svi čvorovi (broj bridova ili veličina komponente).
 
 ---
 
@@ -408,19 +405,19 @@ int main() {
 
 ---
 
-# Analiza zadatka: Road Construction (2/2)
+# Analiza zadatka: Road Construction
 
-## Definiranje problema: Road Construction
+**Definiranje problema**
 
 Imamo $n$ gradova i **nema cesta**. Svaki dan gradi se jedna nova cesta (ukupno $m$ dana).
 Nakon gradnje **svake** ceste moramo ispisati:
 
-1. **Broj komponenata:** Koliko ima odvojenih grupa gradova?
-2. **Veličinu najveće komponente:** Koliko gradova ima u najvećoj povezanoj grupi?
+1. **Broj komponenata:** koliko ima odvojenih grupa gradova?
+2. **Veličinu najveće komponente:** koliko gradova ima u najvećoj povezanoj grupi?
 
-### Zašto je ovo drugačije od prethodnog?
+**Zašto je ovo drugačije od prethodnog?**
 
-U "Road Reparation" (MST) nas je zanimalo konačno stanje.
+U "Road Reparation" (MST) zanimalo nas je konačno stanje.
 Ovdje nas zanima **stanje nakon svake promjene**. Ovo je problem **dinamičke povezanosti** (samo dodavanje bridova).
 
 ---
@@ -435,27 +432,29 @@ Počinjemo s $N$ izoliranih gradova.
 Kada dodamo cestu između grada $A$ i grada $B$:
 
 1. Provjerimo jesu li već povezani (`find(A) == find(B)`).
-   - Ako **JESU**: Ništa se ne mijenja. Broj komponenata i veličine ostaju isti.
+   - Ako **JESU**: ništa se ne mijenja. Broj komponenata i veličine ostaju isti.
 2. Ako **NISU**:
    - Spajamo ih (`unite`). Dvije grupe postaju jedna.
-   - **Broj komponenata:** Smanjuje se za 1.
-   - **Veličina:** Nova veličina je `size[A] + size[B]`. Provjerimo je li to novi rekord.
+   - **Broj komponenata:** smanjuje se za 1.
+   - **Veličina:** nova veličina je zbroj veličina obaju korijena, `sz[find(A)] + sz[find(B)]`. Provjerimo je li to novi rekord.
 
 ---
 
 # Prilagodba Union-Find (DSU) strukture
 
-Standardni DSU treba malo proširiti. Osim `parent` niza, treba nam:
+Niz `sz[]` već imamo zbog union by size: `sz[i]` pamti koliko čvorova ima u stablu čiji je korijen `i`.
+(Zovemo ga `sz`, a ne `size`, jer se `size` sudara sa `std::size`.)
 
-1. **`size[]` niz:** `size[i]` pamti koliko čvorova ima u podstablu čiji je korijen `i`. Inicijalno je `1` za sve.
-2. **`num_components` varijabla:** Inicijalno $N$. Smanjujemo je kad god uspješno spojimo dva različita skupa.
-3. **`max_component_size` varijabla:** Inicijalno 1. Ažuriramo je pri spajanju.
+Dodajemo samo dva brojača:
+
+1. **`num_components`:** inicijalno $N$. Smanjujemo ga kad god uspješno spojimo dva različita skupa.
+2. **`max_component_size`:** inicijalno 1. Ažuriramo ga pri spajanju.
 
 ---
 
 # Implementacija: varijable i inicijalizacija (1/2)
 
-## Varijable
+**Varijable**
 
 ```cpp
 #include <iostream>
@@ -474,10 +473,9 @@ int max_component_size = 1;
 
 # Implementacija: varijable i inicijalizacija (2/2)
 
-## Inicijalizacija
+**Inicijalizacija**
 
 ```cpp
-// Inicijalizacija
 void init_dsu(int n) {
     num_components = n;
     max_component_size = 1;
@@ -494,7 +492,7 @@ int find_set(int v) {
 
 ---
 
-# Implementacija: Logika spajanja (unite)
+# Implementacija: logika spajanja (unite)
 
 Ovo je glavni dio rješenja. Ovdje ažuriramo tražene vrijednosti.
 
@@ -504,13 +502,13 @@ void unite_sets(int a, int b) {
     b = find_set(b);
 
     if (a != b) {
-        // Union by size optimizacija: manje stablo ide pod veće
+        // Union by size: manje stablo ide pod veće
         if (sz[a] < sz[b]) swap(a, b);
-        
-        parent[b] = a; // Spajamo b pod a
+
+        parent[b] = a;  // Spajamo b pod a
         sz[a] += sz[b]; // Ažuriramo veličinu korijena a
-        
-        // Ažuriranje globalnih brojaca
+
+        // Ažuriranje globalnih brojača
         num_components--; // Jedna komponenta manje
         max_component_size = max(max_component_size, sz[a]);
     }
@@ -519,7 +517,7 @@ void unite_sets(int a, int b) {
 
 ---
 
-# Implementacija: Glavni program
+# Implementacija: glavni program
 
 ```cpp
 int main() {
@@ -534,11 +532,11 @@ int main() {
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        
+
         // Pokušamo spojiti i odmah ažuriramo stanja
         unite_sets(u, v);
 
-        // Nakon svake ceste ispisujemo trenutacno stanje
+        // Nakon svake ceste ispisujemo trenutačno stanje
         cout << num_components << " " << max_component_size << "\n";
     }
 
@@ -550,12 +548,12 @@ int main() {
 
 # Sažetak
 
-1. **Prepoznavanje:** Zadatak traži praćenje povezanosti i veličine skupova *nakon svakog dodavanja*.
-2. **Alat:** Union-Find (DSU) s praćenjem veličine (`size` array).
+1. **Prepoznavanje:** zadatak traži praćenje povezanosti i veličine skupova *nakon svakog dodavanja*.
+2. **Alat:** Union-Find (DSU) s praćenjem veličine (`sz` niz).
 3. **Logika:**
    - Spajanje različitih skupova $\rightarrow$ `komponente--`.
-   - Veličina nove grupe $\rightarrow$ `size[rootA] += size[rootB]`.
-4. **Složenost:** $O(M \cdot \alpha(N))$, što je praktički linearno. Vrlo efikasno.
+   - Veličina nove grupe $\rightarrow$ `sz[rootA] += sz[rootB]`.
+4. **Složenost:** $O(M \cdot \alpha(N))$, što je praktički linearno.
 
 ---
 
@@ -569,43 +567,44 @@ int main() {
 
 # Pregled algoritama
 
-## MST (Minimalno Razapinjuće Stablo)
+**MST (minimalno razapinjuće stablo)**
 
-- **Što radi:** Povezuje sve čvorove uz minimalnu cijenu.
+- **Što radi:** povezuje sve čvorove uz minimalnu cijenu.
 - **Algoritmi:**
-  - **Kruskal:** Sortiraj bridove + Union-Find.
-  - **Prim:** Priority Queue (slično Dijkstri).
+  - **Kruskal:** sortiranje bridova + Union-Find.
+  - **Prim:** priority queue (slično Dijkstri).
 - **Složenost:** $O(M \log M)$ ili $O(M \log N)$.
 
 ---
 
 # Union-Find (DSU)
 
-Naučili smo da je **DSU** (Disjoint Set Union) ključan alat za mnoge probleme s grafovima, ne samo za MST.
+**DSU** (Disjoint Set Union) ključan je alat za mnoge probleme s grafovima, ne samo za MST.
 
 **Primjene:**
 
-1. **Kruskalov algoritam:** Detekcija ciklusa pri gradnji stabla.
-2. **Praćenje komponenata:** Brojanje otoka, veličine grupa u stvarnom vremenu ("Road Construction").
-3. **Dinamička povezanost:** Brzo odgovaranje na upit "jesu li A i B povezani?".
+1. **Kruskalov algoritam:** detekcija ciklusa pri gradnji stabla.
+2. **Praćenje komponenata:** brojanje otoka, veličine grupa u stvarnom vremenu ("Road Construction").
+3. **Dinamička povezanost:** brz odgovor na upit "jesu li A i B povezani?".
 
 ---
 
 # Ključne napomene
 
-Prilikom rješavanja zadataka, obratite pažnju na sljedeće:
+Prilikom rješavanja zadataka obratite pažnju na sljedeće:
 
-1. **Tipovi podataka:** Suma težina u MST-u često prelazi `int`. Koristite **`long long`**!
+1. **Tipovi podataka:** suma težina u MST-u često prelazi `int`. Koristite **`long long`**!
 2. **Vrsta grafa:**
-   - **Neusmjeren:** Povezanost se lako provjerava BFS-om ili DSU-om.
+   - **Neusmjeren:** povezanost se lako provjerava BFS-om ili DSU-om.
+   - **Usmjeren:** MST je definiran za neusmjerene grafove. Kruskal i Prim na usmjerenom grafu ne daju ispravno rješenje.
 
 ---
 
-# 4. Zadaci za samostalnu vježbu
+# Zadaci za samostalnu vježbu
 
-## Codeforces
+**Codeforces**
 
-Do sada bi trebali moći riješiti većinu zadataka sa tagom `graphs` ili `dfs and similar` ili `shortest paths` do težine `1200`.
+Do sada biste trebali moći riješiti većinu zadataka s tagom `graphs`, `dfs and similar` ili `shortest paths` do težine `1200`.
 
-- **[DZY Loves Bridges](https://codeforces.com/problemset/problem/445/B)** (Problem 445B): Brojanje povezanih komponenata i primjena Kruskalovog principa za spajanje uz minimalan trošak.
-- **[Edgy Trees](https://codeforces.com/problemset/problem/1139/C)** (Problem 1131C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
+- **[DZY Loves Chemistry](https://codeforces.com/problemset/problem/445/B)** (445B): Brojanje povezanih komponenata. Odgovor je $2^{n-c}$, gdje je $c$ broj komponenata (koristite `long long`).
+- **[Edgy Trees](https://codeforces.com/problemset/problem/1139/C)** (1139C): Ne radi se direktno o MST-u, ali ideja spajanja komponenata i brojanja je slična.
