@@ -18,7 +18,7 @@ Dobrodši na vježbe iz predmeta **Programiranje za web**
 
 Izvedbeni plan:
 
-- [1. Postavljanje razvojnog okruženja i uvod u Django](../pw-sadrzaj/01-postavljanje-okruzenja.md)
+- [1. Postavljanje razvojnog okruženja i uvod u Django](../pw-sadrzaj/01-postavljanje-okruzenja)
 - [2. Stvaranje Django projekta i aplikacija](../pw-sadrzaj/02-projekti-i-aplikacije.md)
 - [3. Arhitektura Django aplikacija, URL usmjeravanje i pogledi](../pw-sadrzaj/03-arhitektura-url-pogledi.md)
 - [4. Baze podataka, modeli i objektno-relacijsko preslikavanje](../pw-sadrzaj/04-baze-modeli-orm.md)
