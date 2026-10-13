@@ -5,6 +5,7 @@ parent: PRSP
 has_toc: false
 has_children: true
 nav_order: 6
+nav_exclude: true
 ---
 
 # [Grafovi: uvod](https://cses.fi/book/book.pdf#chapter.11)

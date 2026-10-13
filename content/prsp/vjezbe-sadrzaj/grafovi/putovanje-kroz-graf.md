@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 layout: default
 title: Putovanje kroz graf
 parent: Grafovi

@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 layout: default
 title: Usmjereni graf
 parent: Grafovi

@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 layout: default
 title: Razapinjajuca stabla
 parent: Grafovi

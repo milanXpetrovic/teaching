@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 layout: default
 title: Staze i ciklusi
 parent: Grafovi

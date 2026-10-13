@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 layout: default
 title: Stabla
 parent: Grafovi
