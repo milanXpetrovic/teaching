@@ -85,7 +85,7 @@ int main() {
 
 # Ulaz i izlaz (I/O)
 
-Standardni `cin` i `cout` mogu biti spori.
+### Standardni `cin` i `cout` mogu biti spori.
 
 **Ključne optimizacije:**
 
@@ -98,7 +98,7 @@ Standardni `cin` i `cout` mogu biti spori.
 
 # Tipovi podataka
 
-Pazite na opsege varijabli!
+### Pazite na opsege varijabli!
 
 - **`int`**: 32-bitni, do $\approx 2 \cdot 10^9$.
 - **`long long`**: 64-bitni, do $\approx 9 \cdot 10^{18}$.
@@ -118,7 +118,7 @@ Pazite na opsege varijabli!
 
 # Vector (Dinamičko polje)
 
-Najčešće korištena struktura.
+### Najčešće korištena struktura.
 
 ```cpp
 vector<int> v;
@@ -140,7 +140,7 @@ sort(v.begin(), v.end()); // [2, 3, 5]
 
 # String
 
-C++ `string` je moćan i fleksibilan.
+### C++ `string` je fleksibilan.
 
 ```cpp
 string s = "algoritmi";
@@ -182,8 +182,8 @@ getline(cin, line);
 
 # Procjena složenosti
 
-Koliko operacija računalo može izvesti u 1 sekundi?
-$\approx 10^8$ (100 milijuna).
+- Koliko operacija računalo može izvesti u 1 sekundi?
+- Pretpostavimo da računalo može izvesti približno $10^8$ operacija u sekundi (100 milijuna).
 
 **Vodič za vrijeme 1s:**
 
@@ -193,7 +193,9 @@ $\approx 10^8$ (100 milijuna).
 | $N \le 20$ | $O(2^N)$ | Podskupovi (bitmask) |
 | $N \le 10^5$ | $O(N \log N)$ | Sortiranje, Set/Map |
 | $N \le 10^6$ | $O(N)$ | Linearna pretraga, Two pointers |
-| $N \le 10^{18}$ | $O(\log N)$ ili $O(1)$ | Binarno pretraživanje, Math |
+| $N \le 10^{18}$ | $O(\log N)$ ili $O(1)$ | Binarno pretraživanje, Matematičke formule |
+
+**Napomena:** Ovo su okvirne smjernice, a ne stroga pravila. Stvarno vrijeme izvođenja ovisi o računalu, implementaciji, programskom jeziku i konstantama algoritma.
 
 ---
 
@@ -287,7 +289,7 @@ int main() {
 
 1. **Pročitajte zadatak:** Pažljivo pročitajte tekst, ograničenja i primjere.
 2. **Analizirajte:** Razmislite o rubnim slučajevima i algoritmu.
-3. **Implementirajte:** Napišite kod u svojem editoru (VS Code, CLion...).
+3. **Implementirajte:** Napišite kod u svojem editoru (VS Code, CLion, notepad...).
 4. **Testirajte:** Provjerite radi li kod na primjerima iz zadatka.
 5. **Predajte (Submit):**
    - Odaberite jezik (npr. GNU C++17 ili C++20).
@@ -308,9 +310,9 @@ int main() {
 
 <!-- _class: title -->
 
-# Watermelon (Codeforces 4A)
+# Analiza i rješenje: Watermelon (Codeforces 4A)
 
-## Analiza i rješenje
+### Pveznica na zadatak: [Watermelon (Codeforces 4A)](https://codeforces.com/problemset/problem/4/A)
 
 ---
 
