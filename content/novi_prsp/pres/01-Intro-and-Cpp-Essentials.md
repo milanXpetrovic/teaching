@@ -1,4 +1,5 @@
 ---
+nav_exclude: false
 marp: true
 theme: uniri-beam
 size: 16:9
