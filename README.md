@@ -11,7 +11,7 @@ permalink: /
 **Preddiplomski studij:**
 
 - [Programiranje za Web](./content/pzw/pzw-start)
-- [Programiranje za rješavanje složenih problema](./content/prsp/prsp-start)
+- [Programiranje za rješavanje složenih problema](./content/novi_prsp/prsp-start)
 - [Sigurnost informacijskih i komunikacijskih sustava](./content/siks/siks-start)
 
 <!-- - [Analiza društvenih mreža](./sna/sna-start) -->
