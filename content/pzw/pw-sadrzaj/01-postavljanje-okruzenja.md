@@ -5,4 +5,4 @@ nav_order: 1
 ---
 
 
-# 01 Postavljanje okruženja
+# 01: Postavljanje okruženja
