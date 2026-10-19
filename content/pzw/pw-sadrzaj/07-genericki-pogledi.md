@@ -1,15 +1,15 @@
 ---
 author: Milan Petrović
-title: "3. Arhitektura Django aplikacija, URL usmjeravanje i pogledi"
+title: "7. Generički pogledi i dinamičko filtriranje"
 layout: default
 parent: PZW
-nav_order: 3
+nav_order: 7
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
-# Arhitektura Django aplikacija, URL usmjeravanje i pogledi
+# Generički pogledi i dinamičko filtriranje
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,131 +19,473 @@ nav_exclude: true
 {:toc}
 </details>
 
-## Paradigma model-view-controller (MVC)
+## Priprema i postavljanje projekta
 
-Django koristi paradigmu [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) koju naziva model-template-view (MTV). Gotovo svaka stranica izrađena u Djangu koristi ova tri dijela kako bi prikazala podatke.
-
-Korisnik posjeti URL, Django prema popisu URL-ova (`urls.py`) odabere odgovarajući pogled (`views.py`). Pogled po potrebi dohvati podatke iz modela (`models.py`) i preda ih predlošku (`templates/`) koji složi HTML. Ulogu kontrolera u Djangu dijele sam okvir (usmjeravanje URL-ova) i pogledi.
-
-Unutar Djanga koristi se djelomično izmijenjena terminologija, a od sada nadalje koristit ćemo Django terminologiju (model, template i view).
-
-| MVC naziv | Django naziv | Značenje |
-| --------- | ------------ | -------- |
-| Model | Model | Sloj podataka: Python klase (modeli) koje se preslikavaju na tablice u bazi podataka, zajedno s kodom koji radi s tim podacima. Modeli se mogu mijenjati i dopunjavati, a promjene se u bazi primjenjuju migracijama (vidi [poglavlje 4](04-baze-modeli-orm.md)). |
-| View | Template | Sloj prikaza: predlošci, tj. HTML datoteke s posebnim oznakama u koje se umeću podaci. Određuju **kako** se podaci prikazuju (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)). |
-| Controller | View | Sloj logike: funkcija ili klasa koja prima HTTP zahtjev i vraća HTTP odgovor. Određuje **koji** se podaci prikazuju: dohvaća ih iz modela, obrađuje obrasce i odabire predložak. Odgovor može biti HTML, preusmjeravanje, [statusni kod](https://http.cat/), JSON, slika i drugo. |
-
-## Tijek obrade zahtjeva
-
-Kada preglednik pošalje zahtjev, u Djangu se događa sljedeće:
-
-1. Web poslužitelj preda zahtjev Djangu preko WSGI ili ASGI sučelja (`wsgi.py` ili `asgi.py`).
-2. Django od zahtjeva napravi objekt `HttpRequest` i provuče ga kroz slojeve **middlewarea** (sesije, autentifikacija, CSRF zaštita...).
-3. Usmjerivač URL-ova čita modul naveden u `ROOT_URLCONF` (`mysite/urls.py`) i redom uspoređuje putanju zahtjeva s uzorcima u `urlpatterns`.
-4. Prvi uzorak koji odgovara određuje **pogled** koji se poziva. Ako nijedan ne odgovara, vraća se odgovor 404.
-5. Pogled po potrebi radi s modelima i predlošcima te vraća objekt `HttpResponse`.
-6. Odgovor ponovno prolazi kroz middleware (obrnutim redoslijedom) i šalje se pregledniku.
-
-## Uvod u Django: Hello world
-
-U nastavku je prikazano kako stvoriti stranicu koja prikazuje tekst na početnoj stranici. Za ovo nije potreban model, nego samo pogled u kojem je definiran tekst koji želimo prikazati.
+Od ovog poglavlja do kraja kolegija gradimo novi projekt: **knjižnicu** s izdavačima, autorima i knjigama.
 
 {: .zadatak }
-> Otvorite datoteku `mysite/mysite/urls.py` i provjerite što je u njoj zapisano.
+> Stvorite novi Django projekt `knjiznica` i unutar njega aplikaciju `main`. Povežite projekt i aplikaciju:
+> - dodajte aplikaciju `main` u `INSTALLED_APPS` u `knjiznica/settings.py`,
+> - u `knjiznica/urls.py` dodajte usmjeravanje na `main/urls.py`, a zatim stvorite `main/urls.py`.
 
-Za definiranje putanje na koju će Django primati HTTP zahtjeve koristi se funkcija `django.urls.path()` ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/urls/#path)). Zadani sadržaj usmjerava samo na administratorsko sučelje ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/contrib/admin/)).
+**Rješenje zadatka.**
 
-Datoteka `mysite/mysite/urls.py` ima sadržaj:
+``` shell
+$ django-admin startproject knjiznica
+$ cd knjiznica
+$ python manage.py startapp main
+```
+
+Datoteka `knjiznica/urls.py`:
 
 ``` python
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", include("main.urls")),
 ]
 ```
 
-Vidimo da imamo samo jedan URL, onaj za stranicu za administraciju, koji nam trenutno ne treba. Django web stranicu vidi kao kolekciju aplikacija, a datoteka `urls.py` projekta obično samo usmjerava zahtjeve prema URL-ovima pojedinih aplikacija.
-
-Aplikaciju `main` stvorili smo i registrirali u [prethodnom poglavlju](02-projekti-i-aplikacije.md#stvaranje-prve-aplikacije). Usmjerimo sada glavni dio projekta prema njoj. To radimo u `mysite/mysite/urls.py`:
-
-``` python
-from django.contrib import admin
-from django.urls import include, path  # uvozimo include
-
-urlpatterns = [
-    path("", include("main.urls")),  # dodajemo URL-ove aplikacije main
-    path("admin/", admin.site.urls),
-]
-```
-
-Ako pogledamo u direktorij aplikacije `main`, vidjet ćemo da datoteka `urls.py` ne postoji. Stvorimo datoteku `mysite/main/urls.py` sa sljedećim sadržajem:
+Datoteka `main/urls.py` zasad je prazna:
 
 ``` python
 from django.urls import path
 
 from . import views
 
-app_name = "main"  # imenski prostor (namespace) URL-ova aplikacije
+app_name = "main"
 
 urlpatterns = [
-    path("", views.homepage, name="homepage"),
 ]
 ```
 
-Prođimo ukratko kroz logiku rada programa. Za adresu `http://127.0.0.1:8000/` putanja je prazna, stoga odgovara uzorku `""` iz `path("", include("main.urls"))`. Django zato učitava `main.urls`, odnosno datoteku `mysite/main/urls.py`.
+### Model
 
-U njoj prazna putanja odgovara uzorku `path("", views.homepage, name="homepage")`. Time smo usmjerili Django da pozove funkciju `homepage()` iz `main/views.py`, koju moramo još napisati.
-
-Datoteka `mysite/main/views.py`:
+Datoteka `main/models.py`:
 
 ``` python
-from django.http import HttpResponse
+from django.db import models
+from django.urls import reverse
+
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=60)
+    country = models.CharField(max_length=50)
+    website = models.URLField(blank=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=60, blank=True)
+    country = models.CharField(max_length=50, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_death = models.DateField("Died", null=True, blank=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("main:author_detail", args=[self.pk])
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    abstract = models.TextField(blank=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+    publisher = models.ForeignKey(
+        Publisher, on_delete=models.SET_NULL, null=True, blank=True, related_name="books"
+    )
+    publication_date = models.DateField()
+
+    class Meta:
+        ordering = ["-publication_date"]
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("main:book_detail", args=[self.pk])
+```
+
+{: .napomena }
+> U stvarnosti knjiga može imati više autora, što bi se modeliralo vezom `ManyToManyField` (vidi [poglavlje 5](05-relacije-i-upiti.md#many-to-many)). Radi jednostavnosti ovdje svaka knjiga ima jednog autora.
+
+Metoda `get_absolute_url()` vraća kanonsku adresu objekta. Koriste je generički pogledi, administratorsko sučelje (gumb *View on site*) i predlošci.
+
+Nakon što je model stvoren, potrebno je provesti migraciju:
+
+``` shell
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
+
+Registrirajte modele u `main/admin.py`:
+
+``` python
+from django.contrib import admin
+
+from .models import Author, Book, Publisher
+
+admin.site.register([Author, Book, Publisher])
+```
+
+### Predlošci na razini projekta
+
+U ovom projektu sve predloške držimo u zajedničkom direktoriju `templates` u korijenskom direktoriju projekta. Unutar njega stvorite `templates/main/` za predloške aplikacije. U `settings.py` pod `TEMPLATES` postavite:
+
+``` python
+"DIRS": [BASE_DIR / "templates"],
+```
+
+Oba pristupa (predlošci u aplikaciji kao u [poglavlju 6](06-predlosci-dinamicki-sadrzaj.md) ili u zajedničkom direktoriju) su ispravna. Zajednički direktorij je praktičan kada su sve aplikacije dio istog projekta.
+
+Osnovni predložak `templates/base_generic.html`:
+
+{% raw %}
+``` django
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Knjižnica{% endblock %}</title>
+</head>
+<body>
+    <h1>Moja knjižnica</h1>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="{% url 'main:homepage' %}">Početna</a></li>
+            <li><a href="{% url 'main:book_list' %}">Knjige</a></li>
+            <li><a href="{% url 'main:author_list' %}">Autori</a></li>
+            <li><a href="{% url 'main:publisher_list' %}">Izdavači</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+```
+{% endraw %}
+
+{: .upozorenje }
+> Oznaka `url` javlja grešku `NoReverseMatch` ako URL zadanog imena ne postoji. Stavke izbornika za knjige, autore i izdavače zato dodajte tek kada u nastavku poglavlja napravite odgovarajuće poglede. HTML komentar `<!-- -->` tu ne pomaže jer Django oznake unutar njega i dalje izvršava.
+
+Početna stranica kao obična funkcija u `main/views.py`:
+
+``` python
+from django.shortcuts import render
+
+from .models import Author, Book, Publisher
 
 
 def homepage(request):
-    # primijetite da odgovor može sadržavati HTML
-    return HttpResponse("Welcome to homepage! <strong>#samoOIRI</strong>")
+    context = {
+        "num_books": Book.objects.count(),
+        "num_authors": Author.objects.count(),
+        "num_publishers": Publisher.objects.count(),
+    }
+    return render(request, "main/homepage.html", context)
 ```
 
-Svaki pogled kao prvi argument prima objekt `request` (zahtjev) i mora vratiti objekt odgovora.
+Datoteka `templates/main/homepage.html`:
+
+{% raw %}
+``` django
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Dobro došli</h2>
+<p>U knjižnici je {{ num_books }} knjiga od {{ num_authors }} autora i {{ num_publishers }} izdavača.</p>
+{% endblock %}
+```
+{% endraw %}
 
 {: .zadatak }
-> Osvježite stranicu `http://127.0.0.1:8000/` u pregledniku.
+> Stvorite administratora i kroz administratorsko sučelje dodajte 3 izdavača, 3 autora i barem 6 knjiga. Sve vrijednosti zadajte proizvoljno. (U [poglavlju 9](09-testni-podaci-i-sijanje.md) naučit ćemo podatke generirati automatski.)
 
-## Više pogleda
+## Zašto generički pogledi
+
+Velik dio web aplikacija svodi se na iste obrasce: prikaži popis objekata, prikaži detalje jednog objekta, stvori, uredi ili obriši objekt. Pogled za popis knjiga napisan kao funkcija izgleda ovako:
+
+``` python
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, "main/book_list.html", {"book_list": books})
+```
+
+Za autore, izdavače i sve ostale modele pisali bismo gotovo isti kod. **Generički pogledi** su gotove klase za takve česte zadatke. Isti pogled kao klasa:
+
+``` python
+from django.views.generic import ListView
+
+
+class BookList(ListView):
+    model = Book
+```
+
+Najčešće korišteni generički pogledi:
+
+| Pogled | Namjena |
+| ------ | ------- |
+| `TemplateView` | prikaz predloška bez podataka iz baze |
+| `ListView` | popis objekata |
+| `DetailView` | detalji jednog objekta |
+| `CreateView`, `UpdateView`, `DeleteView` | stvaranje, uređivanje i brisanje (vidi [poglavlje 8](08-obrasci-get-post-modelforms.md)) |
+| `RedirectView` | preusmjeravanje |
+
+## Pogled `ListView`
+
+Stvorimo prvi generički pogled nad modelom. U datoteku `main/views.py` dodajemo:
+
+``` python
+from django.views.generic import ListView
+
+from .models import Publisher
+
+
+class PublisherList(ListView):
+    model = Publisher
+```
+
+A zatim ga povežite u `main/urls.py`. Klasu pretvaramo u pogled metodom `as_view()`:
+
+``` python
+urlpatterns = [
+    path("", views.homepage, name="homepage"),
+    path("izdavaci/", views.PublisherList.as_view(), name="publisher_list"),
+]
+```
+
+Kada smo stvorili pogled i povezali ga u `urls.py`, potreban nam je predložak u kojem će se prikazati odgovor. `ListView` sam određuje ime predloška prema konvenciji `<aplikacija>/<model>_list.html`, dakle `main/publisher_list.html`.
+
+Datoteka `templates/main/publisher_list.html`:
+
+{% raw %}
+``` django
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>Izdavači</h2>
+    <ul>
+        {% for publisher in object_list %}
+            <li>
+                <a href="{% url 'main:publisher_books' publisher.name %}">{{ publisher.name }}</a><br>
+                Grad: {{ publisher.city }}
+            </li>
+        {% empty %}
+            <li>Nema izdavača.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+```
+{% endraw %}
+
+Poveznica na knjige izdavača (`main:publisher_books`) proradit će kada u nastavku dodamo taj pogled. Do tada privremeno uklonite oznaku `<a>` ili će stranica javiti grešku `NoReverseMatch`.
+
+`ListView` predlošku šalje popis objekata pod dva imena: `object_list` i `<model>_list` (ovdje `publisher_list`). Drugo ime je čitljivije pa ćemo ga koristiti u nastavku.
 
 {: .zadatak }
-> Izmijenite funkciju `homepage()` u `main/views.py` tako da vraća cijeli HTML dokument s naslovom i odlomkom teksta.
+> Provjerite ispis izdavača na adresi `http://127.0.0.1:8000/izdavaci/`.
+
+### Najčešći atributi
+
+| Atribut | Značenje | Primjer |
+| ------- | -------- | ------- |
+| `model` | model čiji se objekti prikazuju | `model = Book` |
+| `queryset` | upit umjesto `model.objects.all()` | `queryset = Book.objects.select_related("author")` |
+| `template_name` | predložak umjesto zadanog | `template_name = "main/knjige.html"` |
+| `context_object_name` | ime popisa u predlošku | `context_object_name = "knjige"` |
+| `ordering` | poredak | `ordering = ["title"]` |
+| `paginate_by` | broj objekata po stranici | `paginate_by = 10` |
+
+### Popis knjiga sa straničenjem
+
+``` python
+class BookList(ListView):
+    model = Book
+    paginate_by = 5
+    queryset = Book.objects.select_related("author", "publisher")
+```
+
+``` python
+path("knjige/", views.BookList.as_view(), name="book_list"),
+```
+
+Kada je postavljen `paginate_by`, predložak dobiva i varijable `page_obj` i `is_paginated`. Datoteka `templates/main/book_list.html`:
+
+{% raw %}
+``` django
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>{% if author %}Knjige autora {{ author.name }}{% else %}Knjige{% endif %}</h2>
+
+{% for book in book_list %}
+    <div class="book">
+        <h4><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h4>
+        <p>Autor: <a href="{% url 'main:author_books' book.author.pk %}">{{ book.author }}</a></p>
+        <p>{{ book.abstract|truncatewords:40 }}</p>
+    </div>
+{% empty %}
+    <p>Nema knjiga.</p>
+{% endfor %}
+
+{% if is_paginated %}
+<nav class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">&laquo; prethodna</a>
+    {% endif %}
+    Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">sljedeća &raquo;</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}
+```
+{% endraw %}
+
+Poveznica `main:author_books` definirana je u nastavku poglavlja.
+
+## Pogled `DetailView`
+
+`DetailView` prikazuje jedan objekt. Objekt pronalazi prema argumentu `pk` (ili `slug`) iz URL-a, a ako objekt ne postoji, sam vraća 404.
+
+``` python
+from django.views.generic import DetailView
+
+
+class BookDetail(DetailView):
+    model = Book
+```
+
+``` python
+path("knjige/<int:pk>/", views.BookDetail.as_view(), name="book_detail"),
+```
+
+Predložak se po konvenciji zove `main/book_detail.html`, a objekt je dostupan kao `object` i `book`. Datoteka `templates/main/book_detail.html`:
+
+{% raw %}
+``` django
+{% extends "base_generic.html" %}
+
+{% block title %}{{ book.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p>Autor: <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p>
+<p>Izdavač: {{ book.publisher|default:"nepoznat" }}</p>
+<p>Datum izdanja: {{ book.publication_date|date:"d.m.Y." }}</p>
+{{ book.abstract|linebreaks }}
+{% endblock %}
+```
+{% endraw %}
+
+## Dinamičko filtriranje
+
+U nastavku je prikazan način na koji se omogućava dinamička pretraga pomoću URL-a. Za zadani naziv izdavača vraćat će se sve knjige koje je taj izdavač objavio. Naziv izdavača neće biti statično zapisan u URL uzorku, nego će se uzimati iz adrese.
+
+Za početak potrebno je definirati pogled u `main/views.py` koji vraća sve knjige zadanog izdavača. Umjesto atributa `model` nadjačavamo metodu `get_queryset()`:
+
+``` python
+from django.shortcuts import get_object_or_404
+
+
+class PublisherBookList(ListView):
+    template_name = "main/books_by_publisher.html"
+
+    def get_queryset(self):
+        self.publisher = get_object_or_404(Publisher, name=self.kwargs["publisher"])
+        return Book.objects.filter(publisher=self.publisher)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["publisher"] = self.publisher
+        return context
+```
+
+Argumenti iz URL-a dostupni su u rječniku `self.kwargs`. Metodom `get_context_data()` predlošku šaljemo i samog izdavača, kako bismo mogli ispisati njegovo ime.
+
+Zatim u `main/urls.py` povezujemo pogled. Umjesto da svakog izdavača zadajemo pojedinačno, koristimo `<str:publisher>`:
+
+``` python
+path("izdavaci/<str:publisher>/", views.PublisherBookList.as_view(), name="publisher_books"),
+```
+
+{: .zadatak }
+> Stvorite `books_by_publisher.html` unutar `templates/main` koji ispisuje ime izdavača i naslove svih knjiga tog izdavača.
 
 **Rješenje zadatka.**
 
-``` python
-from django.http import HttpResponse
+{% raw %}
+``` django
+{% extends "base_generic.html" %}
 
-
-def homepage(request):
-    return HttpResponse(
-        "<html><body><h1>Homepage</h1>"
-        "<p><strong>Homepage</strong> i još neki tekst na homepage.</p>"
-        "</body></html>"
-    )
+{% block content %}
+    <h2>Knjige izdavača {{ publisher.name }}</h2>
+    <ul>
+        {% for book in book_list %}
+            <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+        {% empty %}
+            <li>Ovaj izdavač nema knjiga.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
 ```
+{% endraw %}
+
+Pokrenite poslužitelj i provjerite pretraživanje po izdavaču. Što se dogodi za nepostojećeg izdavača?
+
+{: .napomena }
+> Imena u URL-u su nespretna: razmaci, dijakritički znakovi i promjena imena mijenjaju adresu. Zato se u praksi koriste primarni ključ (`<int:pk>`) ili `SlugField` s kratkim imenom za URL (`<slug:slug>`), npr. `/izdavaci/skolska-knjiga/`.
+
+### Knjige zadanog autora
 
 {: .zadatak }
-> Definirajte funkciju `current_datetime()` u datoteci `main/views.py` koja vraća HTTP odgovor s trenutnim datumom i vremenom. Dodajte joj putanju `vrijeme/`.
+> - Napravite pogled `AuthorList` za popis svih autora i predložak `author_list.html`.
+> - Napravite pogled `AuthorBookList` koji prikazuje sve knjige autora čiji je primarni ključ zadan u URL-u (`autori/<int:pk>/knjige/`). Iskoristite postojeći predložak `book_list.html`.
+> - Ime svakog autora na popisu pretvorite u poveznicu na njegove knjige.
 
 **Rješenje zadatka.** U datoteci `main/views.py`:
 
 ``` python
-from django.utils import timezone
+class AuthorList(ListView):
+    model = Author
 
 
-def current_datetime(request):
-    now = timezone.localtime()
-    html = f"<html><body>Trenutno vrijeme: {now:%d.%m.%Y. %H:%M:%S}</body></html>"
-    return HttpResponse(html)
+class AuthorDetail(DetailView):
+    model = Author
+
+
+class AuthorBookList(ListView):
+    template_name = "main/book_list.html"
+
+    def get_queryset(self):
+        self.author = get_object_or_404(Author, pk=self.kwargs["pk"])
+        return Book.objects.filter(author=self.author).select_related("author")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["author"] = self.author
+        return context
 ```
 
 U datoteci `main/urls.py`:
@@ -151,207 +493,73 @@ U datoteci `main/urls.py`:
 ``` python
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("vrijeme/", views.current_datetime, name="current_datetime"),
+    path("izdavaci/", views.PublisherList.as_view(), name="publisher_list"),
+    path("izdavaci/<str:publisher>/", views.PublisherBookList.as_view(), name="publisher_books"),
+    path("knjige/", views.BookList.as_view(), name="book_list"),
+    path("knjige/<int:pk>/", views.BookDetail.as_view(), name="book_detail"),
+    path("autori/", views.AuthorList.as_view(), name="author_list"),
+    path("autori/<int:pk>/", views.AuthorDetail.as_view(), name="author_detail"),
+    path("autori/<int:pk>/knjige/", views.AuthorBookList.as_view(), name="author_books"),
 ]
 ```
 
-Koristimo `django.utils.timezone` umjesto modula `datetime` jer uvažava postavke `TIME_ZONE` i `USE_TZ`.
-
-### Vraćanje grešaka u odgovorima na zahtjeve
-
-{: .zadatak }
-> Definirajte funkciju `not_found()` u `main/views.py`. Funkcija neka vraća `HttpResponseNotFound` s proizvoljnim sadržajem. Dodajte joj putanju `nema/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
-
-``` python
-from django.http import HttpResponseNotFound
-
-
-def not_found(request):
-    return HttpResponseNotFound("<h1>Page not found</h1>")
-```
-
-Češći način vraćanja greške 404 je podizanje iznimke `Http404`. Django je tada sam pretvori u odgovor sa statusom 404:
-
-``` python
-from django.http import Http404
-
-
-def tajna(request):
-    raise Http404("Ova stranica ne postoji.")
-```
-
-## Dinamički dijelovi URL-a
-
-Do sada su putanje bile statične. Često želimo da dio URL-a bude parametar, npr. `/predmeti/7/` ili `/pozdrav/Ana/`. Takve dijelove pišemo u šiljastim zagradama, a Django ih predaje pogledu kao imenovane argumente.
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("pozdrav/<str:ime>/", views.pozdrav, name="pozdrav"),
-    path("zbroj/<int:a>/<int:b>/", views.zbroj, name="zbroj"),
-]
-```
-
-``` python
-def pozdrav(request, ime):
-    return HttpResponse(f"Pozdrav, {ime}!")
-
-
-def zbroj(request, a, b):
-    return HttpResponse(f"{a} + {b} = {a + b}")
-```
-
-Dio prije dvotočke je **pretvarač** (engl. *path converter*) koji određuje što se smije pojaviti na tom mjestu i u koji tip se vrijednost pretvara:
-
-| Pretvarač | Prihvaća | Tip u pogledu |
-| --------- | -------- | ------------- |
-| `str` | bilo koji niz znakova osim `/` (zadano) | `str` |
-| `int` | nula ili pozitivan cijeli broj | `int` |
-| `slug` | slova, brojke, `-` i `_`, npr. `uvod-u-django` | `str` |
-| `uuid` | UUID, npr. `075194d3-6885-417e-a8a8-6c931e272f00` | `uuid.UUID` |
-| `path` | bilo koji niz znakova uključujući `/` | `str` |
-
-Ako vrijednost ne odgovara pretvaraču (npr. `/zbroj/dva/tri/`), uzorak se ne podudara i Django vraća 404, a pogled se uopće ne poziva.
-
-{: .zadatak }
-> Dodajte putanju `kvadrat/<int:broj>/` koja ispisuje kvadrat zadanog broja. Isprobajte `/kvadrat/12/` i `/kvadrat/-3/` te objasnite rezultat.
-
-### Regularni izrazi u URL-ovima
-
-Za složenija pravila postoji funkcija `re_path()` koja prima regularni izraz:
-
-``` python
-from django.urls import re_path
-
-urlpatterns = [
-    re_path(r"^arhiva/(?P<godina>[0-9]{4})/$", views.arhiva, name="arhiva"),
-]
-```
-
-U većini slučajeva pretvarači iz `path()` su dovoljni i čitljiviji.
-
-{: .upozorenje }
-> Ako trebate osvježiti znanje regularnih izraza, pogledajte gradivo kolegija Operacijski sustavi te dokumentaciju [Regularni izrazi i Python](https://docs.python.org/3/library/re.html#module-re).
-
-## Imenovani URL-ovi i funkcija `reverse()`
-
-Svaki uzorak smo imenovali argumentom `name`, a aplikaciji smo zadali imenski prostor s `app_name = "main"`. Zahvaljujući tome adrese u kodu nikad ne pišemo ručno, nego ih Django složi iz imena:
-
-``` python
-from django.urls import reverse
-
-reverse("main:homepage")                 # '/'
-reverse("main:pozdrav", args=["Ana"])     # '/pozdrav/Ana/'
-reverse("main:zbroj", kwargs={"a": 2, "b": 3})  # '/zbroj/2/3/'
-```
-
-Ako kasnije promijenimo `pozdrav/` u `hello/`, sve poveznice nastavljaju raditi jer se izračunavaju iz imena. U predlošcima isto radi oznaka `url` (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)):
+Datoteka `templates/main/author_list.html`:
 
 {% raw %}
 ``` django
-<a href="{% url 'main:pozdrav' 'Ana' %}">Pozdravi Anu</a>
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Autori</h2>
+{% for author in author_list %}
+    <div class="author">
+        <h4><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></h4>
+        <p>Grad: {{ author.city|default:"-" }}</p>
+        <p>Država: {{ author.country|default:"-" }}</p>
+        <p><a href="{% url 'main:author_books' author.pk %}">Sve knjige autora {{ author.name }}</a></p>
+    </div>
+{% empty %}
+    <p>Nema autora.</p>
+{% endfor %}
+{% endblock %}
 ```
 {% endraw %}
 
-### Preusmjeravanje
-
-Funkcija `redirect()` vraća odgovor koji preglednik upućuje na drugu adresu. Prima ime URL-a, objekt ili adresu:
-
-``` python
-from django.shortcuts import redirect
-
-
-def stara_adresa(request):
-    return redirect("main:homepage")
-```
-
-## Objekt `HttpRequest`
-
-Pogled preko argumenta `request` ima pristup svim podacima o zahtjevu:
-
-| Atribut | Sadržaj |
-| ------- | ------- |
-| `request.method` | HTTP metoda: `"GET"`, `"POST"`... |
-| `request.path` | putanja, npr. `/pozdrav/Ana/` |
-| `request.GET` | parametri iz URL-a nakon `?`, npr. za `?ime=Ana&dob=20` |
-| `request.POST` | podaci poslani obrascem metodom POST |
-| `request.headers` | zaglavlja zahtjeva, npr. `request.headers["User-Agent"]` |
-| `request.COOKIES` | kolačići |
-| `request.user` | prijavljeni korisnik (vidi [poglavlje 12](12-autentifikacija-autorizacija.md)) |
-
-``` python
-def info(request):
-    ime = request.GET.get("ime", "neznanče")
-    preglednik = request.headers.get("User-Agent", "nepoznat")
-    return HttpResponse(
-        f"<p>Bok, {ime}!</p>"
-        f"<p>Metoda: {request.method}, putanja: {request.path}</p>"
-        f"<p>Preglednik: {preglednik}</p>"
-    )
-```
+Predložak `book_list.html` od ranije već provjerava postoji li varijabla `author` i prema tome mijenja naslov.
 
 {: .zadatak }
-> Dodajte pogled `info` na putanju `info/` i posjetite `http://127.0.0.1:8000/info/?ime=Ana`. Što se dogodi ako izostavite parametar `ime`?
+> Napravite predložak `author_detail.html` koji prikazuje podatke o autoru i popis njegovih knjiga koristeći `author.books.all`.
 
-{: .upozorenje }
-> Ovdje podatke od korisnika izravno umećemo u HTML samo radi jednostavnosti primjera. U stvarnim aplikacijama to otvara mogućnost XSS napada. Predlošci (poglavlje 6) takve vrijednosti automatski zaštićuju, a detalji su u [poglavlju 13](13-sigurnost.md).
+## Pogled `TemplateView`
 
-## Vrste odgovora i statusni kodovi
-
-| Klasa ili funkcija | Statusni kod | Namjena |
-| ------------------ | ------------ | ------- |
-| `HttpResponse` | 200 (ili zadani `status=`) | općeniti odgovor |
-| `JsonResponse` | 200 | odgovor u formatu JSON |
-| `redirect()`, `HttpResponseRedirect` | 302 | privremeno preusmjeravanje |
-| `HttpResponsePermanentRedirect` | 301 | trajno preusmjeravanje |
-| `HttpResponseBadRequest` | 400 | neispravan zahtjev |
-| `HttpResponseForbidden` | 403 | zabranjen pristup |
-| `HttpResponseNotFound`, `raise Http404` | 404 | resurs ne postoji |
-| `HttpResponseNotAllowed` | 405 | metoda nije dopuštena |
-
-Primjer odgovora u formatu JSON, koji je temelj za REST API (vidi [poglavlje 11](11-rest-api.md)):
+Za statične stranice ne trebamo pisati klasu. Dovoljno je u `urls.py` zadati predložak:
 
 ``` python
-from django.http import JsonResponse
+from django.views.generic import TemplateView
 
-
-def api_vrijeme(request):
-    return JsonResponse({"vrijeme": timezone.localtime().isoformat()})
+urlpatterns = [
+    # ...
+    path("o-nama/", TemplateView.as_view(template_name="main/about.html"), name="about"),
+]
 ```
 
-Dopuštene HTTP metode možemo ograničiti dekoratorima:
+## Kako radi generički pogled
 
-``` python
-from django.views.decorators.http import require_GET
+Generički pogled je klasa čije metode Django poziva određenim redoslijedom. Za `ListView` to je pojednostavljeno:
 
+1. `as_view()` stvara funkciju-pogled koju Django poziva za svaki zahtjev.
+2. `dispatch()` prema HTTP metodi poziva `get()`, `post()` itd.
+3. `get()` poziva `get_queryset()` kako bi dohvatio objekte.
+4. `get_context_data()` slaže kontekst (popis, straničenje, dodatne varijable).
+5. `get_template_names()` određuje predložak.
+6. `render_to_response()` vraća odgovor.
 
-@require_GET
-def samo_citanje(request):
-    return HttpResponse("Ovaj pogled prihvaća samo GET.")
-```
+Mi nadjačavamo samo korake koji nam trebaju, kao što smo učinili s `get_queryset()` i `get_context_data()`. Ovo je primjer uzorka dizajna *Template Method* (vidi [poglavlje 14](14-testiranje-i-uzorci-dizajna.md)). Izvorni kod i sve metode svakog generičkog pogleda pregledno su prikazani na stranici [Classy Class-Based Views](https://ccbv.co.uk/).
 
-## Pogledi kao funkcije i kao klase
-
-Pogledi mogu biti funkcije (engl. *function-based views*) ili klase (engl. *class-based views*). Isti pogled napisan kao klasa:
-
-``` python
-from django.views import View
-
-
-class PozdravView(View):
-    def get(self, request, ime):
-        return HttpResponse(f"Pozdrav, {ime}!")
-```
-
-``` python
-path("pozdrav-klasa/<str:ime>/", views.PozdravView.as_view(), name="pozdrav_klasa"),
-```
-
-Klasa za svaku HTTP metodu ima zasebnu metodu (`get`, `post`...), a nedopuštene metode automatski odbija statusom 405. Prava snaga klasa su **generički pogledi** za česte zadatke poput popisa i detalja objekata, opisani u [poglavlju 7](07-genericki-pogledi.md).
+## Zadaci za vježbu
 
 {: .zadatak }
-> - Napišite pogled `kalkulator` na putanji `kalkulator/<int:a>/<str:operacija>/<int:b>/` koji podržava operacije `plus`, `minus`, `puta` i `kroz`. Za nepoznatu operaciju vratite `HttpResponseBadRequest`, a za dijeljenje nulom podignite `Http404` s odgovarajućom porukom.
-> - Napišite pogled koji vraća `JsonResponse` s rezultatom kalkulatora.
-> - Napišite pogled `/stara-pocetna/` koji preusmjerava na početnu stranicu koristeći ime URL-a.
+> - Dodajte straničenje i na popis autora (3 autora po stranici).
+> - Na stranici s detaljima knjige dodajte poveznicu na ostale knjige istog izdavača.
+> - Napravite pogled `RecentBookList` na putanji `knjige/nove/` koji prikazuje 5 najnovijih knjiga, i pogled na putanji `izdavaci/hrvatski/` koji prikazuje samo izdavače iz Hrvatske. Objasnite zašto `izdavaci/hrvatski/` mora biti u `urls.py` ispred `izdavaci/<str:publisher>/`, a za `knjige/nove/` i `knjige/<int:pk>/` redoslijed nije bitan.
+> - Na početnu stranicu dodajte popis 3 izdavača s najviše knjiga (koristite `annotate` i `Count`).

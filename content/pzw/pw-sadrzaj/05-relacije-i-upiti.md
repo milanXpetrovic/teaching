@@ -1,15 +1,15 @@
 ---
 author: Milan Petrović
-title: "3. Arhitektura Django aplikacija, URL usmjeravanje i pogledi"
+title: "5. Relacije među modelima i dohvaćanje podataka"
 layout: default
 parent: PZW
-nav_order: 3
+nav_order: 5
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
-# Arhitektura Django aplikacija, URL usmjeravanje i pogledi
+# Relacije među modelima i dohvaćanje podataka
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,339 +19,457 @@ nav_exclude: true
 {:toc}
 </details>
 
-## Paradigma model-view-controller (MVC)
+## Relacije među modelima
 
-Django koristi paradigmu [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) koju naziva model-template-view (MTV). Gotovo svaka stranica izrađena u Djangu koristi ova tri dijela kako bi prikazala podatke.
+Podaci u stvarnosti su povezani: predmet ima nositelja, student upisuje više predmeta, svaki student piše jedan završni rad. Django podržava tri vrste veza, detaljno opisane u [Djangovoj dokumentaciji](https://docs.djangoproject.com/en/6.1/topics/db/examples/):
 
-Korisnik posjeti URL, Django prema popisu URL-ova (`urls.py`) odabere odgovarajući pogled (`views.py`). Pogled po potrebi dohvati podatke iz modela (`models.py`) i preda ih predlošku (`templates/`) koji složi HTML. Ulogu kontrolera u Djangu dijele sam okvir (usmjeravanje URL-ova) i pogledi.
+| Veza | Polje u Djangu | Primjer |
+| ---- | -------------- | ------- |
+| [Many-to-one](https://docs.djangoproject.com/en/6.1/topics/db/examples/many_to_one/) (više-prema-jedan) | `ForeignKey` | više predmeta ima istog nositelja |
+| [Many-to-many](https://docs.djangoproject.com/en/6.1/topics/db/examples/many_to_many/) (više-prema-više) | `ManyToManyField` | student upisuje više predmeta, predmet ima više studenata |
+| [One-to-one](https://docs.djangoproject.com/en/6.1/topics/db/examples/one_to_one/) (jedan-prema-jedan) | `OneToOneField` | student ima jedan završni rad |
 
-Unutar Djanga koristi se djelomično izmijenjena terminologija, a od sada nadalje koristit ćemo Django terminologiju (model, template i view).
+Nastavljamo s projektom `mysite` i modelom `Predmet` iz [prethodnog poglavlja](04-baze-modeli-orm.md).
 
-| MVC naziv | Django naziv | Značenje |
-| --------- | ------------ | -------- |
-| Model | Model | Sloj podataka: Python klase (modeli) koje se preslikavaju na tablice u bazi podataka, zajedno s kodom koji radi s tim podacima. Modeli se mogu mijenjati i dopunjavati, a promjene se u bazi primjenjuju migracijama (vidi [poglavlje 4](04-baze-modeli-orm.md)). |
-| View | Template | Sloj prikaza: predlošci, tj. HTML datoteke s posebnim oznakama u koje se umeću podaci. Određuju **kako** se podaci prikazuju (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)). |
-| Controller | View | Sloj logike: funkcija ili klasa koja prima HTTP zahtjev i vraća HTTP odgovor. Određuje **koji** se podaci prikazuju: dohvaća ih iz modela, obrađuje obrasce i odabire predložak. Odgovor može biti HTML, preusmjeravanje, [statusni kod](https://http.cat/), JSON, slika i drugo. |
-
-## Tijek obrade zahtjeva
-
-Kada preglednik pošalje zahtjev, u Djangu se događa sljedeće:
-
-1. Web poslužitelj preda zahtjev Djangu preko WSGI ili ASGI sučelja (`wsgi.py` ili `asgi.py`).
-2. Django od zahtjeva napravi objekt `HttpRequest` i provuče ga kroz slojeve **middlewarea** (sesije, autentifikacija, CSRF zaštita...).
-3. Usmjerivač URL-ova čita modul naveden u `ROOT_URLCONF` (`mysite/urls.py`) i redom uspoređuje putanju zahtjeva s uzorcima u `urlpatterns`.
-4. Prvi uzorak koji odgovara određuje **pogled** koji se poziva. Ako nijedan ne odgovara, vraća se odgovor 404.
-5. Pogled po potrebi radi s modelima i predlošcima te vraća objekt `HttpResponse`.
-6. Odgovor ponovno prolazi kroz middleware (obrnutim redoslijedom) i šalje se pregledniku.
-
-## Uvod u Django: Hello world
-
-U nastavku je prikazano kako stvoriti stranicu koja prikazuje tekst na početnoj stranici. Za ovo nije potreban model, nego samo pogled u kojem je definiran tekst koji želimo prikazati.
+## Many-to-one
 
 {: .zadatak }
-> Otvorite datoteku `mysite/mysite/urls.py` i provjerite što je u njoj zapisano.
+> Definirajte klasu `Profesor` koja sadrži polja `prof_ime` i `prof_prezime` tipa `CharField` duljine 30 te `prof_email` tipa `EmailField`. Unutar klase definirajte metodu `__str__()` koja vraća e-mail adresu profesora. Registrirajte model u administratorskom sučelju te pokrenite `makemigrations` i `migrate`.
 
-Za definiranje putanje na koju će Django primati HTTP zahtjeve koristi se funkcija `django.urls.path()` ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/urls/#path)). Zadani sadržaj usmjerava samo na administratorsko sučelje ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/contrib/admin/)).
+**Rješenje zadatka.** U datoteci `main/models.py` (klasu `Profesor` pišemo **iznad** klase `Predmet` jer će je `Predmet` referencirati):
 
-Datoteka `mysite/mysite/urls.py` ima sadržaj:
+``` python
+class Profesor(models.Model):
+    prof_ime = models.CharField(max_length=30)
+    prof_prezime = models.CharField(max_length=30)
+    prof_email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.prof_email
+```
+
+{: .zadatak }
+> Izmijenite klasu `Predmet` tako da joj dodate nositelja: polje `predmet_nositelj` neka bude veza many-to-one s modelom `Profesor`. Za definiranje veze koristite `ForeignKey`. Pokrenite `makemigrations` i `migrate`.
+
+**Rješenje zadatka.** U datoteci `main/models.py`:
+
+``` python
+class Predmet(models.Model):
+    predmet_naslov = models.CharField(max_length=100)
+    predmet_sadrzaj = models.TextField()
+    predmet_vrijeme_objave = models.DateTimeField("datum objave")
+    predmet_nositelj = models.ForeignKey(
+        Profesor,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="predmeti",
+    )
+
+    def __str__(self):
+        return self.predmet_naslov
+```
+
+U bazi se stvara stupac `predmet_nositelj_id` koji sadrži primarni ključ profesora.
+
+{: .napomena }
+> U tablici `main_predmet` već postoje retci. Kada bi novo polje bilo obavezno (bez `null=True`), `makemigrations` bi nas pitao koju vrijednost upisati u postojeće retke. Zato vezu dodanu naknadno činimo neobaveznom ili joj zadajemo `default`.
+
+Argument `on_delete` je obavezan i određuje što se događa s predmetima kada se obriše profesor:
+
+| Vrijednost | Ponašanje |
+| ---------- | --------- |
+| `models.CASCADE` | brišu se i svi povezani predmeti |
+| `models.PROTECT` | brisanje profesora nije dopušteno dok ima predmete (`ProtectedError`) |
+| `models.RESTRICT` | slično kao `PROTECT`, ali dopušta brisanje ako se predmeti brišu u istoj kaskadi |
+| `models.SET_NULL` | nositelj se postavlja na `NULL` (zahtijeva `null=True`) |
+| `models.SET_DEFAULT` | nositelj se postavlja na zadanu vrijednost |
+| `models.DO_NOTHING` | Django ne radi ništa, brigu preuzima baza |
+
+Izbor ovisi o značenju podataka: predmet ne treba nestati jer je profesor otišao, pa koristimo `SET_NULL`. Od Djanga 6.1 postoje i varijante koje brisanje prepuštaju samoj bazi podataka (vidi [bilješke izdanja](https://docs.djangoproject.com/en/6.1/releases/6.1/)).
+
+## Many-to-many
+
+{: .zadatak }
+> - Dopunite `main/models.py` novom klasom `Student`. Klasa sadrži polja `student_ime` (`CharField` duljine 25), `student_prezime` (`CharField` duljine 50) i `student_broj_xice` (`CharField` duljine 10, jedinstven).
+> - Dodajte polje `student_predmeti` koje je s klasom `Predmet` povezano vezom many-to-many.
+> - U klasi `Predmet` izmijenite polje `predmet_vrijeme_objave` tako da mu zadana vrijednost bude trenutno vrijeme (`timezone.now`).
+> - Definirajte metodu `__str__()` koja vraća `student_broj_xice` i registrirajte model u administratorskom sučelju.
+> - Pokrenite `makemigrations` i `migrate`.
+
+**Rješenje zadatka.** Datoteka `main/models.py`:
+
+``` python
+from django.db import models
+from django.utils import timezone
+
+
+class Predmet(models.Model):
+    predmet_naslov = models.CharField(max_length=100)
+    predmet_sadrzaj = models.TextField()
+    predmet_vrijeme_objave = models.DateTimeField("datum objave", default=timezone.now)
+    # ... predmet_nositelj kao gore ...
+
+
+class Student(models.Model):
+    student_ime = models.CharField(max_length=25)
+    student_prezime = models.CharField(max_length=50)
+    student_broj_xice = models.CharField(max_length=10, unique=True)
+    student_predmeti = models.ManyToManyField(Predmet, related_name="studenti", blank=True)
+
+    def __str__(self):
+        return self.student_broj_xice
+```
+
+{: .upozorenje }
+> Primijetite da pišemo `default=timezone.now`, **bez zagrada**. Tako predajemo funkciju koja se poziva pri svakom stvaranju objekta. S `timezone.now()` bi se vrijeme izračunalo jednom, pri učitavanju modula, i svi bi predmeti dobili isto vrijeme.
+
+Za vezu many-to-many Django stvara pomoćnu tablicu `main_student_student_predmeti` s parovima (student, predmet). Takvu vezu nije bitno na kojoj strani definiramo.
+
+U datoteci `main/admin.py` možemo registrirati više modela odjednom:
 
 ``` python
 from django.contrib import admin
-from django.urls import path
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+from .models import Predmet, Profesor, Student
+
+admin.site.register([Predmet, Profesor, Student])
 ```
 
-Vidimo da imamo samo jedan URL, onaj za stranicu za administraciju, koji nam trenutno ne treba. Django web stranicu vidi kao kolekciju aplikacija, a datoteka `urls.py` projekta obično samo usmjerava zahtjeve prema URL-ovima pojedinih aplikacija.
+Provjerite radi li sve posjetom `http://127.0.0.1:8000/admin/`.
 
-Aplikaciju `main` stvorili smo i registrirali u [prethodnom poglavlju](02-projekti-i-aplikacije.md#stvaranje-prve-aplikacije). Usmjerimo sada glavni dio projekta prema njoj. To radimo u `mysite/mysite/urls.py`:
+## One-to-one
 
-``` python
-from django.contrib import admin
-from django.urls import include, path  # uvozimo include
-
-urlpatterns = [
-    path("", include("main.urls")),  # dodajemo URL-ove aplikacije main
-    path("admin/", admin.site.urls),
-]
-```
-
-Ako pogledamo u direktorij aplikacije `main`, vidjet ćemo da datoteka `urls.py` ne postoji. Stvorimo datoteku `mysite/main/urls.py` sa sljedećim sadržajem:
-
-``` python
-from django.urls import path
-
-from . import views
-
-app_name = "main"  # imenski prostor (namespace) URL-ova aplikacije
-
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-]
-```
-
-Prođimo ukratko kroz logiku rada programa. Za adresu `http://127.0.0.1:8000/` putanja je prazna, stoga odgovara uzorku `""` iz `path("", include("main.urls"))`. Django zato učitava `main.urls`, odnosno datoteku `mysite/main/urls.py`.
-
-U njoj prazna putanja odgovara uzorku `path("", views.homepage, name="homepage")`. Time smo usmjerili Django da pozove funkciju `homepage()` iz `main/views.py`, koju moramo još napisati.
-
-Datoteka `mysite/main/views.py`:
-
-``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    # primijetite da odgovor može sadržavati HTML
-    return HttpResponse("Welcome to homepage! <strong>#samoOIRI</strong>")
-```
-
-Svaki pogled kao prvi argument prima objekt `request` (zahtjev) i mora vratiti objekt odgovora.
+Studenta i profesora povezat ćemo modelom `ZavrsniRad`: svaki završni rad piše jedan student, a mentor mu je profesor.
 
 {: .zadatak }
-> Osvježite stranicu `http://127.0.0.1:8000/` u pregledniku.
+> - Definirajte klasu `ZavrsniRad`. Klasa je s modelom `Student` povezana vezom one-to-one koja je ujedno i primarni ključ (`primary_key=True`), uz `on_delete=models.CASCADE`.
+> - Dodajte polje `mentor` povezano s modelom `Profesor`. Razmislite koja je vrsta veze ispravna.
+> - Dodajte polja `rad_naslov` (`CharField` duljine 200), `rad_zadatak` (`TextField`) i `rad_prvi_upis` (`BooleanField` sa zadanom vrijednošću `True`).
+> - Definirajte metodu `__str__()` koja vraća tekst s brojem X-ice studenta i registrirajte model.
+> - Pokrenite `makemigrations` i `migrate`.
 
-## Više pogleda
+**Rješenje zadatka.** U datoteci `main/models.py`:
+
+``` python
+class ZavrsniRad(models.Model):
+    student = models.OneToOneField(
+        Student,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name="zavrsni_rad",
+    )
+    mentor = models.ForeignKey(
+        Profesor,
+        on_delete=models.PROTECT,
+        related_name="mentorstva",
+    )
+    rad_naslov = models.CharField(max_length=200)
+    rad_zadatak = models.TextField()
+    rad_prvi_upis = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Završni rad studenta s brojem X-ice {self.student.student_broj_xice}"
+```
+
+{: .napomena }
+> Za mentora je ispravna veza `ForeignKey`, a ne `OneToOneField`. Veza one-to-one značila bi da jedan profesor može biti mentor samo jednom radu. Kod modeliranja uvijek postavite pitanje u oba smjera: "koliko radova ima jedan student?" (jedan) i "koliko radova može mentorirati jedan profesor?" (više).
+
+U `main/admin.py` dopunjavamo popis modela:
+
+``` python
+admin.site.register([Predmet, Profesor, Student, ZavrsniRad])
+```
+
+## Pristup povezanim objektima
+
+Veze se mogu koristiti u oba smjera. Smjer "unatrag" dobiva ime iz argumenta `related_name` (bez njega bi Django koristio `<model>_set`, npr. `profesor.predmet_set`).
+
+| Iz objekta | Izraz | Rezultat |
+| ---------- | ----- | -------- |
+| predmet | `predmet.predmet_nositelj` | jedan `Profesor` ili `None` |
+| profesor | `profesor.predmeti.all()` | svi predmeti kojima je nositelj |
+| student | `student.student_predmeti.all()` | svi upisani predmeti |
+| predmet | `predmet.studenti.all()` | svi studenti koji su ga upisali |
+| student | `student.zavrsni_rad` | jedan `ZavrsniRad` (ili iznimka `RelatedObjectDoesNotExist`) |
+| profesor | `profesor.mentorstva.all()` | svi radovi koje mentorira |
+
+Za rad s vezom many-to-many koristimo metode `add()`, `remove()`, `set()` i `clear()`.
+
+## Upiti
+
+Naredba za pokretanje Python ljuske s učitanim projektom:
+
+``` shell
+$ python manage.py shell
+```
+
+### Stvaranje povezanih objekata
+
+``` python
+>>> from main.models import Predmet, Profesor, Student, ZavrsniRad
+>>> profesor = Profesor.objects.create(
+...     prof_ime="Pero", prof_prezime="Perić", prof_email="pero@uniri.hr"
+... )
+>>> predmet1 = Predmet.objects.create(
+...     predmet_naslov="Programiranje za web", predmet_sadrzaj="Django", predmet_nositelj=profesor
+... )
+>>> predmet2 = Predmet.objects.create(predmet_naslov="Baze podataka", predmet_sadrzaj="SQL")
+>>> predmet2.predmet_nositelj = profesor   # povezivanje preko vanjskog ključa
+>>> predmet2.save()
+```
+
+Studentu možemo dodati *n* predmeta, ali tek **nakon** što je student spremljen, jer veza many-to-many zahtijeva da oba objekta imaju primarni ključ:
+
+``` python
+>>> student = Student.objects.create(
+...     student_ime="Ana", student_prezime="Anić", student_broj_xice="0036000001"
+... )
+>>> student.student_predmeti.add(predmet1, predmet2)
+>>> student.student_predmeti.all()
+<QuerySet [<Predmet: Programiranje za web>, <Predmet: Baze podataka>]>
+```
+
+Stvaranje završnog rada s vezama one-to-one i many-to-one:
+
+``` python
+>>> zr = ZavrsniRad(student=student, mentor=profesor, rad_naslov="Web aplikacija u Djangu",
+...                 rad_zadatak="Izraditi aplikaciju za evidenciju predmeta.")
+>>> zr.save()
+>>> student.zavrsni_rad
+<ZavrsniRad: Završni rad studenta s brojem X-ice 0036000001>
+```
+
+### Osnovni upiti
+
+Upit koji vraća sve objekte tražene klase:
+
+``` python
+>>> profesori = Profesor.objects.all()
+```
+
+Dohvat **jednog** objekta po zadanoj vrijednosti:
+
+``` python
+>>> profesor = Profesor.objects.get(prof_email="pero@uniri.hr")
+```
+
+{: .upozorenje }
+> `get()` podiže iznimku `Profesor.DoesNotExist` ako objekt ne postoji, odnosno `Profesor.MultipleObjectsReturned` ako ih je pronađeno više. Koristite ga samo za jedinstvene vrijednosti, npr. primarni ključ ili jedinstvenu e-mail adresu.
+
+Pretraga svih objekata čije ime sadrži zadani tekst:
+
+``` python
+>>> Profesor.objects.filter(prof_ime__contains="Pero")
+```
+
+Isključivanje objekata:
+
+``` python
+>>> Predmet.objects.exclude(predmet_nositelj=None)
+```
+
+Uzimanje prvih 5 zapisa (u SQL-u postaje `LIMIT 5`):
+
+``` python
+>>> Profesor.objects.all()[:5]
+```
+
+Sortiranje i dohvaćanje prvog u nizu (znak minus znači silazni poredak):
+
+``` python
+>>> Profesor.objects.order_by("prof_prezime", "prof_ime").first()
+>>> Predmet.objects.order_by("-predmet_vrijeme_objave")[:3]
+```
+
+Ostale korisne metode:
+
+``` python
+>>> Student.objects.count()
+>>> Student.objects.filter(student_ime="Ana").exists()
+>>> Predmet.objects.values_list("predmet_naslov", flat=True)
+>>> Profesor.objects.values("prof_ime", "prof_prezime")
+```
+
+Metode se mogu ulančavati jer svaka vraća novi `QuerySet`:
+
+``` python
+>>> Predmet.objects.filter(predmet_naslov__icontains="web").exclude(predmet_nositelj=None).order_by("predmet_naslov")
+```
+
+### Pretraživanje po poljima (lookups)
+
+Uvjet se piše kao `polje__operator=vrijednost` (dvije podvlake):
+
+| Operator | Značenje | Primjer |
+| -------- | -------- | ------- |
+| `exact` (zadano) | točno jednako | `prof_ime="Pero"` |
+| `iexact` | jednako, bez obzira na velika i mala slova | `prof_ime__iexact="pero"` |
+| `contains`, `icontains` | sadrži | `predmet_naslov__icontains="web"` |
+| `startswith`, `endswith` | počinje, završava s | `student_broj_xice__startswith="0036"` |
+| `gt`, `gte`, `lt`, `lte` | veće, veće ili jednako, manje, manje ili jednako | `predmet_ects__gte=6` |
+| `in` | nalazi se u popisu | `id__in=[1, 3, 5]` |
+| `range` | u rasponu | `predmet_ects__range=(4, 6)` |
+| `isnull` | je li `NULL` | `predmet_nositelj__isnull=True` |
+| `year`, `month`, `day` | dio datuma | `predmet_vrijeme_objave__year=2026` |
+
+### Upiti preko veza
+
+Dvostruke podvlake služe i za "skakanje" preko veza. Django sam složi potrebni `JOIN`:
+
+``` python
+>>> Predmet.objects.filter(predmet_nositelj__prof_prezime="Perić")
+>>> Student.objects.filter(student_predmeti__predmet_naslov__icontains="web")
+>>> Profesor.objects.filter(predmeti__studenti__student_ime="Ana").distinct()
+```
+
+### Složeni uvjeti: objekti `Q` i `F`
+
+Više argumenata u `filter()` spaja se operatorom AND. Za OR i NOT koristimo objekte `Q`:
+
+``` python
+>>> from django.db.models import Q
+>>> Student.objects.filter(Q(student_ime="Ana") | Q(student_ime="Ivan"))
+>>> Student.objects.filter(~Q(student_prezime__startswith="A"))
+```
+
+Objekt `F` predstavlja vrijednost polja u bazi, pa njime uspoređujemo polja ili mijenjamo vrijednosti bez dohvaćanja u Python:
+
+``` python
+>>> from django.db.models import F
+>>> Predmet.objects.update(predmet_ects=F("predmet_ects") + 1)
+```
+
+### Agregacija i anotacija
+
+``` python
+>>> from django.db.models import Avg, Count
+>>> Predmet.objects.aggregate(prosjek_ects=Avg("predmet_ects"))
+{'prosjek_ects': 5.5}
+>>> for p in Predmet.objects.annotate(broj_studenata=Count("studenti")):
+...     print(p.predmet_naslov, p.broj_studenata)
+```
+
+`aggregate()` vraća rječnik s jednom vrijednošću za cijeli skup, a `annotate()` svakom objektu dodaje izračunato polje.
+
+### Lijeno izvršavanje i problem N+1
+
+`QuerySet` je **lijen**: stvaranje i ulančavanje ne šalje upit bazi. Upit se izvršava tek kada podatke stvarno trebamo (iteracija, `list()`, `len()`, ispis). SQL upit možete vidjeti s `print(qs.query)`.
+
+Česta zamka je problem N+1 upita:
+
+``` python
+>>> for p in Predmet.objects.all():             # 1 upit
+...     print(p.predmet_nositelj)               # + 1 upit za svaki predmet
+```
+
+Rješenje je unaprijed dohvatiti povezane objekte:
+
+``` python
+>>> Predmet.objects.select_related("predmet_nositelj")   # ForeignKey, OneToOne: JOIN
+>>> Student.objects.prefetch_related("student_predmeti")  # ManyToMany, unatrag: dodatni upit
+```
+
+### Grupne izmjene i brisanje
+
+``` python
+>>> Predmet.objects.filter(predmet_nositelj=None).update(predmet_sadrzaj="Nositelj nije određen.")
+>>> Student.objects.filter(student_ime="Test").delete()
+```
+
+## Korištenje naredbe `manage.py` za upravljanje bazom
+
+- Nakon svake promjene modela pokrenite `python manage.py makemigrations` i `python manage.py migrate`.
+- Naredbom `python manage.py flush` brišu se svi podaci iz baze (tablice ostaju).
+- Naredba `python manage.py dbshell` otvara klijent baze u kojem možete pisati SQL, npr. `SELECT * FROM main_predmet;`.
+
+{: .upozorenje }
+> Ne mijenjajte strukturu tablica ručno kroz `dbshell` (npr. `ALTER TABLE`). Django tada više ne zna kakva je baza i sljedeća migracija može završiti greškom. Sve promjene sheme radite kroz modele i migracije.
+
+## Zadaci za vježbu
 
 {: .zadatak }
-> Izmijenite funkciju `homepage()` u `main/views.py` tako da vraća cijeli HTML dokument s naslovom i odlomkom teksta.
+> - Kroz administratorsko sučelje dodajte 5 studenata. Od 5 studenata, 3 neka imaju isto ime, primjerice: Marko, Marko, Marko, Ivan i Ana. Prezime i broj X-ice zadajte proizvoljno.
+> - Dodajte 3 profesora i 4 predmeta te studentima upišite po nekoliko predmeta.
+> - U ljusci napišite upite koji dohvaćaju:
+>   1. sve studente koji se zovu Marko,
+>   2. broj studenata koji se ne zovu Marko,
+>   3. sve predmete nekog profesora (na dva načina: preko `filter()` i preko `related_name`),
+>   4. sve studente koji su upisali predmet čiji naslov sadrži riječ "web",
+>   5. predmete poredane po broju upisanih studenata, od najvećeg.
 
 **Rješenje zadatka.**
 
 ``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    return HttpResponse(
-        "<html><body><h1>Homepage</h1>"
-        "<p><strong>Homepage</strong> i još neki tekst na homepage.</p>"
-        "</body></html>"
-    )
+>>> Student.objects.filter(student_ime="Marko")
+>>> Student.objects.exclude(student_ime="Marko").count()
+>>> p = Profesor.objects.first()
+>>> Predmet.objects.filter(predmet_nositelj=p)
+>>> p.predmeti.all()
+>>> Student.objects.filter(student_predmeti__predmet_naslov__icontains="web").distinct()
+>>> Predmet.objects.annotate(n=Count("studenti")).order_by("-n")
 ```
 
-{: .zadatak }
-> Definirajte funkciju `current_datetime()` u datoteci `main/views.py` koja vraća HTTP odgovor s trenutnim datumom i vremenom. Dodajte joj putanju `vrijeme/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
+## Cjelovit kod modela
 
 ``` python
+from django.db import models
 from django.utils import timezone
 
 
-def current_datetime(request):
-    now = timezone.localtime()
-    html = f"<html><body>Trenutno vrijeme: {now:%d.%m.%Y. %H:%M:%S}</body></html>"
-    return HttpResponse(html)
-```
+class Profesor(models.Model):
+    prof_ime = models.CharField(max_length=30)
+    prof_prezime = models.CharField(max_length=30)
+    prof_email = models.EmailField(unique=True)
 
-U datoteci `main/urls.py`:
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("vrijeme/", views.current_datetime, name="current_datetime"),
-]
-```
-
-Koristimo `django.utils.timezone` umjesto modula `datetime` jer uvažava postavke `TIME_ZONE` i `USE_TZ`.
-
-### Vraćanje grešaka u odgovorima na zahtjeve
-
-{: .zadatak }
-> Definirajte funkciju `not_found()` u `main/views.py`. Funkcija neka vraća `HttpResponseNotFound` s proizvoljnim sadržajem. Dodajte joj putanju `nema/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
-
-``` python
-from django.http import HttpResponseNotFound
+    def __str__(self):
+        return self.prof_email
 
 
-def not_found(request):
-    return HttpResponseNotFound("<h1>Page not found</h1>")
-```
-
-Češći način vraćanja greške 404 je podizanje iznimke `Http404`. Django je tada sam pretvori u odgovor sa statusom 404:
-
-``` python
-from django.http import Http404
-
-
-def tajna(request):
-    raise Http404("Ova stranica ne postoji.")
-```
-
-## Dinamički dijelovi URL-a
-
-Do sada su putanje bile statične. Često želimo da dio URL-a bude parametar, npr. `/predmeti/7/` ili `/pozdrav/Ana/`. Takve dijelove pišemo u šiljastim zagradama, a Django ih predaje pogledu kao imenovane argumente.
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("pozdrav/<str:ime>/", views.pozdrav, name="pozdrav"),
-    path("zbroj/<int:a>/<int:b>/", views.zbroj, name="zbroj"),
-]
-```
-
-``` python
-def pozdrav(request, ime):
-    return HttpResponse(f"Pozdrav, {ime}!")
-
-
-def zbroj(request, a, b):
-    return HttpResponse(f"{a} + {b} = {a + b}")
-```
-
-Dio prije dvotočke je **pretvarač** (engl. *path converter*) koji određuje što se smije pojaviti na tom mjestu i u koji tip se vrijednost pretvara:
-
-| Pretvarač | Prihvaća | Tip u pogledu |
-| --------- | -------- | ------------- |
-| `str` | bilo koji niz znakova osim `/` (zadano) | `str` |
-| `int` | nula ili pozitivan cijeli broj | `int` |
-| `slug` | slova, brojke, `-` i `_`, npr. `uvod-u-django` | `str` |
-| `uuid` | UUID, npr. `075194d3-6885-417e-a8a8-6c931e272f00` | `uuid.UUID` |
-| `path` | bilo koji niz znakova uključujući `/` | `str` |
-
-Ako vrijednost ne odgovara pretvaraču (npr. `/zbroj/dva/tri/`), uzorak se ne podudara i Django vraća 404, a pogled se uopće ne poziva.
-
-{: .zadatak }
-> Dodajte putanju `kvadrat/<int:broj>/` koja ispisuje kvadrat zadanog broja. Isprobajte `/kvadrat/12/` i `/kvadrat/-3/` te objasnite rezultat.
-
-### Regularni izrazi u URL-ovima
-
-Za složenija pravila postoji funkcija `re_path()` koja prima regularni izraz:
-
-``` python
-from django.urls import re_path
-
-urlpatterns = [
-    re_path(r"^arhiva/(?P<godina>[0-9]{4})/$", views.arhiva, name="arhiva"),
-]
-```
-
-U većini slučajeva pretvarači iz `path()` su dovoljni i čitljiviji.
-
-{: .upozorenje }
-> Ako trebate osvježiti znanje regularnih izraza, pogledajte gradivo kolegija Operacijski sustavi te dokumentaciju [Regularni izrazi i Python](https://docs.python.org/3/library/re.html#module-re).
-
-## Imenovani URL-ovi i funkcija `reverse()`
-
-Svaki uzorak smo imenovali argumentom `name`, a aplikaciji smo zadali imenski prostor s `app_name = "main"`. Zahvaljujući tome adrese u kodu nikad ne pišemo ručno, nego ih Django složi iz imena:
-
-``` python
-from django.urls import reverse
-
-reverse("main:homepage")                 # '/'
-reverse("main:pozdrav", args=["Ana"])     # '/pozdrav/Ana/'
-reverse("main:zbroj", kwargs={"a": 2, "b": 3})  # '/zbroj/2/3/'
-```
-
-Ako kasnije promijenimo `pozdrav/` u `hello/`, sve poveznice nastavljaju raditi jer se izračunavaju iz imena. U predlošcima isto radi oznaka `url` (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)):
-
-{% raw %}
-``` django
-<a href="{% url 'main:pozdrav' 'Ana' %}">Pozdravi Anu</a>
-```
-{% endraw %}
-
-### Preusmjeravanje
-
-Funkcija `redirect()` vraća odgovor koji preglednik upućuje na drugu adresu. Prima ime URL-a, objekt ili adresu:
-
-``` python
-from django.shortcuts import redirect
-
-
-def stara_adresa(request):
-    return redirect("main:homepage")
-```
-
-## Objekt `HttpRequest`
-
-Pogled preko argumenta `request` ima pristup svim podacima o zahtjevu:
-
-| Atribut | Sadržaj |
-| ------- | ------- |
-| `request.method` | HTTP metoda: `"GET"`, `"POST"`... |
-| `request.path` | putanja, npr. `/pozdrav/Ana/` |
-| `request.GET` | parametri iz URL-a nakon `?`, npr. za `?ime=Ana&dob=20` |
-| `request.POST` | podaci poslani obrascem metodom POST |
-| `request.headers` | zaglavlja zahtjeva, npr. `request.headers["User-Agent"]` |
-| `request.COOKIES` | kolačići |
-| `request.user` | prijavljeni korisnik (vidi [poglavlje 12](12-autentifikacija-autorizacija.md)) |
-
-``` python
-def info(request):
-    ime = request.GET.get("ime", "neznanče")
-    preglednik = request.headers.get("User-Agent", "nepoznat")
-    return HttpResponse(
-        f"<p>Bok, {ime}!</p>"
-        f"<p>Metoda: {request.method}, putanja: {request.path}</p>"
-        f"<p>Preglednik: {preglednik}</p>"
+class Predmet(models.Model):
+    predmet_naslov = models.CharField(max_length=100)
+    predmet_sadrzaj = models.TextField()
+    predmet_vrijeme_objave = models.DateTimeField("datum objave", default=timezone.now)
+    predmet_nositelj = models.ForeignKey(
+        Profesor,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="predmeti",
     )
+
+    def __str__(self):
+        return self.predmet_naslov
+
+
+class Student(models.Model):
+    student_ime = models.CharField(max_length=25)
+    student_prezime = models.CharField(max_length=50)
+    student_broj_xice = models.CharField(max_length=10, unique=True)
+    student_predmeti = models.ManyToManyField(Predmet, related_name="studenti", blank=True)
+
+    def __str__(self):
+        return self.student_broj_xice
+
+
+class ZavrsniRad(models.Model):
+    student = models.OneToOneField(
+        Student,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name="zavrsni_rad",
+    )
+    mentor = models.ForeignKey(
+        Profesor,
+        on_delete=models.PROTECT,
+        related_name="mentorstva",
+    )
+    rad_naslov = models.CharField(max_length=200)
+    rad_zadatak = models.TextField()
+    rad_prvi_upis = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Završni rad studenta s brojem X-ice {self.student.student_broj_xice}"
 ```
 
-{: .zadatak }
-> Dodajte pogled `info` na putanju `info/` i posjetite `http://127.0.0.1:8000/info/?ime=Ana`. Što se dogodi ako izostavite parametar `ime`?
-
-{: .upozorenje }
-> Ovdje podatke od korisnika izravno umećemo u HTML samo radi jednostavnosti primjera. U stvarnim aplikacijama to otvara mogućnost XSS napada. Predlošci (poglavlje 6) takve vrijednosti automatski zaštićuju, a detalji su u [poglavlju 13](13-sigurnost.md).
-
-## Vrste odgovora i statusni kodovi
-
-| Klasa ili funkcija | Statusni kod | Namjena |
-| ------------------ | ------------ | ------- |
-| `HttpResponse` | 200 (ili zadani `status=`) | općeniti odgovor |
-| `JsonResponse` | 200 | odgovor u formatu JSON |
-| `redirect()`, `HttpResponseRedirect` | 302 | privremeno preusmjeravanje |
-| `HttpResponsePermanentRedirect` | 301 | trajno preusmjeravanje |
-| `HttpResponseBadRequest` | 400 | neispravan zahtjev |
-| `HttpResponseForbidden` | 403 | zabranjen pristup |
-| `HttpResponseNotFound`, `raise Http404` | 404 | resurs ne postoji |
-| `HttpResponseNotAllowed` | 405 | metoda nije dopuštena |
-
-Primjer odgovora u formatu JSON, koji je temelj za REST API (vidi [poglavlje 11](11-rest-api.md)):
-
-``` python
-from django.http import JsonResponse
-
-
-def api_vrijeme(request):
-    return JsonResponse({"vrijeme": timezone.localtime().isoformat()})
-```
-
-Dopuštene HTTP metode možemo ograničiti dekoratorima:
-
-``` python
-from django.views.decorators.http import require_GET
-
-
-@require_GET
-def samo_citanje(request):
-    return HttpResponse("Ovaj pogled prihvaća samo GET.")
-```
-
-## Pogledi kao funkcije i kao klase
-
-Pogledi mogu biti funkcije (engl. *function-based views*) ili klase (engl. *class-based views*). Isti pogled napisan kao klasa:
-
-``` python
-from django.views import View
-
-
-class PozdravView(View):
-    def get(self, request, ime):
-        return HttpResponse(f"Pozdrav, {ime}!")
-```
-
-``` python
-path("pozdrav-klasa/<str:ime>/", views.PozdravView.as_view(), name="pozdrav_klasa"),
-```
-
-Klasa za svaku HTTP metodu ima zasebnu metodu (`get`, `post`...), a nedopuštene metode automatski odbija statusom 405. Prava snaga klasa su **generički pogledi** za česte zadatke poput popisa i detalja objekata, opisani u [poglavlju 7](07-genericki-pogledi.md).
-
-{: .zadatak }
-> - Napišite pogled `kalkulator` na putanji `kalkulator/<int:a>/<str:operacija>/<int:b>/` koji podržava operacije `plus`, `minus`, `puta` i `kroz`. Za nepoznatu operaciju vratite `HttpResponseBadRequest`, a za dijeljenje nulom podignite `Http404` s odgovarajućom porukom.
-> - Napišite pogled koji vraća `JsonResponse` s rezultatom kalkulatora.
-> - Napišite pogled `/stara-pocetna/` koji preusmjerava na početnu stranicu koristeći ime URL-a.
+Polja `predmet_ects` i `predmet_semestar` iz zadataka [poglavlja 4](04-baze-modeli-orm.md) ovdje nisu prikazana, ali ih ostavite u modelu ako ste ih dodali.

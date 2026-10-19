@@ -5,8 +5,8 @@ layout: default
 parent: PZW
 nav_order: 13
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
 # Sigurnost Django web aplikacija

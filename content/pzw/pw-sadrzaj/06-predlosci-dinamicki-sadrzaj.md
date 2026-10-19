@@ -1,15 +1,15 @@
 ---
 author: Milan Petrović
-title: "3. Arhitektura Django aplikacija, URL usmjeravanje i pogledi"
+title: "6. Django predlošci i dinamički prikaz sadržaja"
 layout: default
 parent: PZW
-nav_order: 3
+nav_order: 6
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
-# Arhitektura Django aplikacija, URL usmjeravanje i pogledi
+# Django predlošci i dinamički prikaz sadržaja
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,339 +19,473 @@ nav_exclude: true
 {:toc}
 </details>
 
-## Paradigma model-view-controller (MVC)
+## Zašto predlošci
 
-Django koristi paradigmu [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) koju naziva model-template-view (MTV). Gotovo svaka stranica izrađena u Djangu koristi ova tri dijela kako bi prikazala podatke.
+U [poglavlju 3](03-arhitektura-url-pogledi.md) pogledi su vraćali HTML zapisan izravno u Python kodu. To brzo postaje nepregledno, a dizajneri i programeri si smetaju u istim datotekama. **Predlošci** (engl. *templates*) odvajaju prikaz od logike: pogled pripremi podatke (kontekst), a predložak odredi kako se prikazuju.
 
-Korisnik posjeti URL, Django prema popisu URL-ova (`urls.py`) odabere odgovarajući pogled (`views.py`). Pogled po potrebi dohvati podatke iz modela (`models.py`) i preda ih predlošku (`templates/`) koji složi HTML. Ulogu kontrolera u Djangu dijele sam okvir (usmjeravanje URL-ova) i pogledi.
+Django koristi vlastiti jezik predložaka (Django Template Language, DTL). Namjerno je ograničen: u predlošku se ne pišu proizvoljne Python naredbe, nego samo varijable, oznake i filteri. Logika pripada pogledima i modelima.
 
-Unutar Djanga koristi se djelomično izmijenjena terminologija, a od sada nadalje koristit ćemo Django terminologiju (model, template i view).
+Nastavljamo s projektom `mysite` i modelima iz [poglavlja 5](05-relacije-i-upiti.md).
 
-| MVC naziv | Django naziv | Značenje |
-| --------- | ------------ | -------- |
-| Model | Model | Sloj podataka: Python klase (modeli) koje se preslikavaju na tablice u bazi podataka, zajedno s kodom koji radi s tim podacima. Modeli se mogu mijenjati i dopunjavati, a promjene se u bazi primjenjuju migracijama (vidi [poglavlje 4](04-baze-modeli-orm.md)). |
-| View | Template | Sloj prikaza: predlošci, tj. HTML datoteke s posebnim oznakama u koje se umeću podaci. Određuju **kako** se podaci prikazuju (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)). |
-| Controller | View | Sloj logike: funkcija ili klasa koja prima HTTP zahtjev i vraća HTTP odgovor. Određuje **koji** se podaci prikazuju: dohvaća ih iz modela, obrađuje obrasce i odabire predložak. Odgovor može biti HTML, preusmjeravanje, [statusni kod](https://http.cat/), JSON, slika i drugo. |
+## Gdje Django traži predloške
 
-## Tijek obrade zahtjeva
-
-Kada preglednik pošalje zahtjev, u Djangu se događa sljedeće:
-
-1. Web poslužitelj preda zahtjev Djangu preko WSGI ili ASGI sučelja (`wsgi.py` ili `asgi.py`).
-2. Django od zahtjeva napravi objekt `HttpRequest` i provuče ga kroz slojeve **middlewarea** (sesije, autentifikacija, CSRF zaštita...).
-3. Usmjerivač URL-ova čita modul naveden u `ROOT_URLCONF` (`mysite/urls.py`) i redom uspoređuje putanju zahtjeva s uzorcima u `urlpatterns`.
-4. Prvi uzorak koji odgovara određuje **pogled** koji se poziva. Ako nijedan ne odgovara, vraća se odgovor 404.
-5. Pogled po potrebi radi s modelima i predlošcima te vraća objekt `HttpResponse`.
-6. Odgovor ponovno prolazi kroz middleware (obrnutim redoslijedom) i šalje se pregledniku.
-
-## Uvod u Django: Hello world
-
-U nastavku je prikazano kako stvoriti stranicu koja prikazuje tekst na početnoj stranici. Za ovo nije potreban model, nego samo pogled u kojem je definiran tekst koji želimo prikazati.
-
-{: .zadatak }
-> Otvorite datoteku `mysite/mysite/urls.py` i provjerite što je u njoj zapisano.
-
-Za definiranje putanje na koju će Django primati HTTP zahtjeve koristi se funkcija `django.urls.path()` ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/urls/#path)). Zadani sadržaj usmjerava samo na administratorsko sučelje ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/contrib/admin/)).
-
-Datoteka `mysite/mysite/urls.py` ima sadržaj:
+Postavke su u `settings.py` pod `TEMPLATES`:
 
 ``` python
-from django.contrib import admin
-from django.urls import path
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],  # zajednički predlošci projekta
+        "APP_DIRS": True,                   # traži i u <aplikacija>/templates/
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
 ]
 ```
 
-Vidimo da imamo samo jedan URL, onaj za stranicu za administraciju, koji nam trenutno ne treba. Django web stranicu vidi kao kolekciju aplikacija, a datoteka `urls.py` projekta obično samo usmjerava zahtjeve prema URL-ovima pojedinih aplikacija.
+Django traži predložak redom: najprije u direktorijima iz `DIRS`, zatim u direktoriju `templates/` svake aplikacije iz `INSTALLED_APPS`. Prvi pronađeni se koristi.
 
-Aplikaciju `main` stvorili smo i registrirali u [prethodnom poglavlju](02-projekti-i-aplikacije.md#stvaranje-prve-aplikacije). Usmjerimo sada glavni dio projekta prema njoj. To radimo u `mysite/mysite/urls.py`:
+{: .napomena }
+> Predloške aplikacije spremamo u `main/templates/main/`, a ne izravno u `main/templates/`. Dodatni direktorij s imenom aplikacije je **imenski prostor**: kada bi dvije aplikacije imale predložak `index.html`, Django ne bi znao koji želimo. Ovako ih razlikujemo kao `main/index.html` i `blog/index.html`.
 
-``` python
-from django.contrib import admin
-from django.urls import include, path  # uvozimo include
+Stvorite direktorije:
 
-urlpatterns = [
-    path("", include("main.urls")),  # dodajemo URL-ove aplikacije main
-    path("admin/", admin.site.urls),
-]
+``` shell
+$ mkdir templates
+$ mkdir -p main/templates/main
 ```
 
-Ako pogledamo u direktorij aplikacije `main`, vidjet ćemo da datoteka `urls.py` ne postoji. Stvorimo datoteku `mysite/main/urls.py` sa sljedećim sadržajem:
+Na Windowsima umjesto `mkdir -p main/templates/main` koristite `mkdir main\templates\main`.
 
-``` python
-from django.urls import path
+## Funkcija `render()`
 
-from . import views
-
-app_name = "main"  # imenski prostor (namespace) URL-ova aplikacije
-
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-]
-```
-
-Prođimo ukratko kroz logiku rada programa. Za adresu `http://127.0.0.1:8000/` putanja je prazna, stoga odgovara uzorku `""` iz `path("", include("main.urls"))`. Django zato učitava `main.urls`, odnosno datoteku `mysite/main/urls.py`.
-
-U njoj prazna putanja odgovara uzorku `path("", views.homepage, name="homepage")`. Time smo usmjerili Django da pozove funkciju `homepage()` iz `main/views.py`, koju moramo još napisati.
-
-Datoteka `mysite/main/views.py`:
-
-``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    # primijetite da odgovor može sadržavati HTML
-    return HttpResponse("Welcome to homepage! <strong>#samoOIRI</strong>")
-```
-
-Svaki pogled kao prvi argument prima objekt `request` (zahtjev) i mora vratiti objekt odgovora.
+Funkcija `render(request, predlozak, kontekst)` učita predložak, popuni ga podacima iz konteksta (rječnika) i vrati `HttpResponse`.
 
 {: .zadatak }
-> Osvježite stranicu `http://127.0.0.1:8000/` u pregledniku.
-
-## Više pogleda
-
-{: .zadatak }
-> Izmijenite funkciju `homepage()` u `main/views.py` tako da vraća cijeli HTML dokument s naslovom i odlomkom teksta.
-
-**Rješenje zadatka.**
-
-``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    return HttpResponse(
-        "<html><body><h1>Homepage</h1>"
-        "<p><strong>Homepage</strong> i još neki tekst na homepage.</p>"
-        "</body></html>"
-    )
-```
-
-{: .zadatak }
-> Definirajte funkciju `current_datetime()` u datoteci `main/views.py` koja vraća HTTP odgovor s trenutnim datumom i vremenom. Dodajte joj putanju `vrijeme/`.
+> Definirajte pogled koji u bazi pronalazi sve studente zadanog imena. Ime neka se prenosi kroz URL (`studenti/ime/<str:ime>/`). Popis pronađenih studenata proslijedite funkciji `render` i prikažite u predlošku `main/studenti.html`.
 
 **Rješenje zadatka.** U datoteci `main/views.py`:
 
 ``` python
-from django.utils import timezone
+from django.shortcuts import render
+
+from .models import Student
 
 
-def current_datetime(request):
-    now = timezone.localtime()
-    html = f"<html><body>Trenutno vrijeme: {now:%d.%m.%Y. %H:%M:%S}</body></html>"
-    return HttpResponse(html)
+def studenti_po_imenu(request, ime):
+    studenti = Student.objects.filter(student_ime__iexact=ime)
+    context = {"ime": ime, "studenti": studenti}
+    return render(request, "main/studenti.html", context)
 ```
+
+Koristimo `iexact` kako bi `/studenti/ime/marko/` pronašao i "Marko".
+
+U datoteci `main/urls.py`:
+
+``` python
+path("studenti/ime/<str:ime>/", views.studenti_po_imenu, name="studenti_po_imenu"),
+```
+
+Datoteka `main/templates/main/studenti.html`:
+
+{% raw %}
+``` django
+<h2>Studenti imena {{ ime }}</h2>
+<ul>
+    {% for s in studenti %}
+        <li>
+            Ime: {{ s.student_ime }}<br>
+            Prezime: {{ s.student_prezime }}<br>
+            Broj X-ice: {{ s.student_broj_xice }}
+        </li>
+    {% empty %}
+        <li>Nema studenata tog imena.</li>
+    {% endfor %}
+</ul>
+```
+{% endraw %}
+
+{: .zadatak }
+> Posjetite `http://127.0.0.1:8000/studenti/ime/Marko/` i `http://127.0.0.1:8000/studenti/ime/Zvonimir/`.
+
+### Početna stranica s brojem zapisa
+
+{: .zadatak }
+> Izmijenite pogled `homepage` tako da u bazi prebroji studente, predmete i profesore te brojeve proslijedi predlošku `main/index.html`.
+
+**Rješenje zadatka.** U datoteci `main/views.py`:
+
+``` python
+from .models import Predmet, Profesor, Student
+
+
+def homepage(request):
+    context = {
+        "broj_studenata": Student.objects.count(),
+        "broj_predmeta": Predmet.objects.count(),
+        "broj_profesora": Profesor.objects.count(),
+    }
+    return render(request, "main/index.html", context)
+```
+
+Datoteka `main/templates/main/index.html`:
+
+{% raw %}
+``` django
+<h1>Dobro došli na UNIRI</h1>
+
+<p>Na fakultetu je upisano:</p>
+<ul>
+    <li><strong>Studenata:</strong> {{ broj_studenata }}</li>
+    <li><strong>Predmeta:</strong> {{ broj_predmeta }}</li>
+    <li><strong>Profesora:</strong> {{ broj_profesora }}</li>
+</ul>
+```
+{% endraw %}
+
+{: .napomena }
+> Metoda `count()` nikad ne podiže iznimku `DoesNotExist`: ako zapisa nema, jednostavno vraća 0. Iznimka se javlja samo kod dohvata jednog objekta metodom `get()`, a za taj slučaj postoji prečac `get_object_or_404()` (vidi u nastavku).
+
+## Sintaksa predložaka
+
+### Varijable
+
+Pomoću varijabli ispisujemo sadržaj proslijeđen kroz kontekst. Kontekst je Python rječnik u kojem su podaci mapirani kao parovi ključ-vrijednost.
+
+{% raw %}
+Varijable pišemo unutar dvostrukih vitičastih zagrada, `{{ varijabla }}`:
+
+``` django
+<p>Ime: {{ first_name }}, Prezime: {{ last_name }}.</p>
+```
+
+Što će iz konteksta `{'first_name': 'Ivo', 'last_name': 'Ivić'}` biti prikazano kao:
+
+``` html
+<p>Ime: Ivo, Prezime: Ivić.</p>
+```
+
+Točkom pristupamo dijelovima varijable. Django redom pokušava pristup ključu rječnika, atributu, metodi bez argumenata i indeksu popisa. Tako `{{ student.student_ime }}` čita atribut, `{{ predmet.studenti.count }}` poziva metodu, a `{{ popis.0 }}` uzima prvi element.
+
+Ako varijabla ne postoji, Django ispisuje prazan niz umjesto da javi grešku.
+{% endraw %}
+
+### Oznake
+
+{% raw %}
+Oznake se pišu unutar `{% %}` i predstavljaju logiku unutar predloška: petlje, uvjete, nasljeđivanje, poveznice i slično. Neke oznake imaju i završnu oznaku:
+
+``` django
+{% tag %} ... sadržaj ... {% endtag %}
+```
+{% endraw %}
+
+### Filteri
+
+Filtere koristimo za transformaciju vrijednosti varijabli. Pišu se iza okomite crte, a neki primaju i argument iza dvotočke:
+
+{% raw %}
+- `{{ ime|upper }}`: pretvaranje u velika slova (`lower` u mala, `title` prvo slovo svake riječi veliko)
+- `{{ studenti|length }}`: duljina popisa ili niza znakova
+- `{{ opis|default:"Nema opisa." }}`: zamjena ako je vrijednost prazna
+- `{{ predmet.predmet_sadrzaj|truncatewords:30 }}`: prvih 30 riječi
+- `{{ predmet.predmet_vrijeme_objave|date:"d.m.Y. H:i" }}`: formatiranje datuma, npr. `19.10.2026. 14:05`
+- `{{ tekst|linebreaks }}`: prijelomi redaka postaju `<p>` i `<br>`
+- `{{ popis|join:", " }}`: spajanje elemenata popisa
+- `{{ n }} book{{ n|pluralize }}`: množina dodavanjem nastavka, prikladna za engleski ("1 book", "2 books"), ali ne i za hrvatsku množinu
+{% endraw %}
+
+Popis svih ugrađenih oznaka i filtera nalazi se u [dokumentaciji](https://docs.djangoproject.com/en/6.1/ref/templates/builtins/).
+
+### Komentari
+
+{% raw %}
+Jednoredni komentar pišemo kao `{# Ovo neće biti prikazano #}`, a višeredni unutar `{% comment %} ... {% endcomment %}`. Za razliku od HTML komentara, ovi se ne šalju pregledniku.
+{% endraw %}
+
+### Petlje
+
+Primjer korištenja petlje `for` s oznakom `empty` za slučaj praznog popisa:
+
+{% raw %}
+``` django
+<ul>
+{% for predmet in predmeti %}
+    <li>{{ forloop.counter }}. {{ predmet.predmet_naslov }}</li>
+{% empty %}
+    <li>Nema predmeta.</li>
+{% endfor %}
+</ul>
+```
+{% endraw %}
+
+{% raw %}
+Unutar petlje dostupna je varijabla `forloop` s atributima `counter` (od 1), `counter0` (od 0), `first`, `last` i `revcounter`.
+{% endraw %}
+
+### Uvjeti
+
+Primjer provjere je li korisnik prijavljen (detaljnije u [poglavlju 12](12-autentifikacija-autorizacija.md)):
+
+{% raw %}
+``` django
+{% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}.</p>
+{% endif %}
+```
+{% endraw %}
+
+Primjer naredbi `if`, `elif` i `else`:
+
+{% raw %}
+``` django
+{% if studenti|length > 10 %}
+    Velika grupa: {{ studenti|length }} studenata.
+{% elif studenti %}
+    Broj studenata: {{ studenti|length }}
+{% else %}
+    Nema studenata.
+{% endif %}
+```
+{% endraw %}
+
+U uvjetima se mogu koristiti operatori `==`, `!=`, `<`, `>`, `<=`, `>=`, `in`, `not`, `and` i `or`.
+
+## Nasljeđivanje predložaka
+
+Sve stranice obično dijele isto zaglavlje, izbornik i podnožje. Da ih ne bismo kopirali u svaki predložak, stvaramo **osnovni predložak** s blokovima koje podređeni predlošci mogu nadjačati.
+
+{: .zadatak }
+> Stvorite osnovni predložak `templates/base.html` s naslovom stranice, izbornikom i blokom za sadržaj. Provjerite da je u `settings.py` pod `DIRS` navedena putanja `BASE_DIR / "templates"`.
+
+**Rješenje zadatka.** Datoteka `templates/base.html`:
+
+{% raw %}
+``` django
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Fakultet{% endblock %}</title>
+</head>
+<body>
+    <h1>Fakultet</h1>
+    <nav id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="{% url 'main:homepage' %}">Početna</a></li>
+            <li><a href="{% url 'main:predmeti' %}">Predmeti</a></li>
+        </ul>
+        {% endblock %}
+    </nav>
+
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
+```
+{% endraw %}
+
+{: .upozorenje }
+> Oznaka `url` javlja grešku `NoReverseMatch` ako URL zadanog imena ne postoji. Stavku izbornika "Predmeti" dodajte tek kada u nastavku poglavlja napravite pogled `predmeti`.
+
+Podređeni predložak počinje oznakom `extends` i definira samo blokove koje mijenja. Izmijenimo `main/templates/main/index.html`:
+
+{% raw %}
+``` django
+{% extends "base.html" %}
+
+{% block title %}Početna | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>Dobro došli na UNIRI</h2>
+<ul>
+    <li><strong>Studenata:</strong> {{ broj_studenata }}</li>
+    <li><strong>Predmeta:</strong> {{ broj_predmeta }}</li>
+    <li><strong>Profesora:</strong> {{ broj_profesora }}</li>
+</ul>
+{% endblock %}
+```
+{% endraw %}
+
+{% raw %}
+Oznaka `extends` mora biti prva oznaka u predlošku. Izraz `{{ block.super }}` umeće sadržaj istog bloka iz roditeljskog predloška, ovdje naslov "Fakultet".
+{% endraw %}
+
+### Uključivanje dijelova predložaka
+
+Ponavljajuće dijelove (npr. karticu predmeta) izdvajamo u zasebnu datoteku i uključujemo oznakom `include`:
+
+{% raw %}
+``` django
+{% for p in predmeti %}
+    {% include "main/_predmet_kartica.html" with predmet=p %}
+{% endfor %}
+```
+{% endraw %}
+
+Podvlaka na početku imena datoteke je konvencija koja označava da predložak nije cijela stranica. Od Djanga 6.0 postoje i *template partials*, imenovani dijelovi unutar istog predloška ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/templates/language/)).
+
+## Poveznice s oznakom `url`
+
+{% raw %}
+Adrese u predlošcima ne pišemo ručno, nego ih slažemo iz imena URL-a, isto kao funkcijom `reverse()` u [poglavlju 3](03-arhitektura-url-pogledi.md#imenovani-url-ovi-i-funkcija-reverse). Argumenti se navode iza imena:
+
+``` django
+<a href="{% url 'main:predmet_detalj' predmet.pk %}">{{ predmet.predmet_naslov }}</a>
+```
+{% endraw %}
+
+## Popis i detalji predmeta
+
+{: .zadatak }
+> Napravite pogled `predmeti` koji prikazuje sve predmete s nositeljem i brojem upisanih studenata. Svaki predmet neka bude poveznica na stranicu s detaljima predmeta na kojoj se prikazuju opis, nositelj i popis studenata.
+
+**Rješenje zadatka.** U datoteci `main/views.py`:
+
+``` python
+from django.db.models import Count
+from django.shortcuts import get_object_or_404, render
+
+from .models import Predmet
+
+
+def predmeti(request):
+    predmeti = (
+        Predmet.objects.select_related("predmet_nositelj")
+        .annotate(broj_studenata=Count("studenti"))
+        .order_by("predmet_naslov")
+    )
+    return render(request, "main/predmeti.html", {"predmeti": predmeti})
+
+
+def predmet_detalj(request, pk):
+    predmet = get_object_or_404(Predmet, pk=pk)
+    return render(request, "main/predmet_detalj.html", {"predmet": predmet})
+```
+
+Funkcija `get_object_or_404()` pokušava dohvatiti objekt i, ako on ne postoji, podiže `Http404`. Bez nje bismo za nepostojeći predmet dobili grešku 500 umjesto 404.
 
 U datoteci `main/urls.py`:
 
 ``` python
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("vrijeme/", views.current_datetime, name="current_datetime"),
+    path("studenti/ime/<str:ime>/", views.studenti_po_imenu, name="studenti_po_imenu"),
+    path("predmeti/", views.predmeti, name="predmeti"),
+    path("predmeti/<int:pk>/", views.predmet_detalj, name="predmet_detalj"),
 ]
 ```
 
-Koristimo `django.utils.timezone` umjesto modula `datetime` jer uvažava postavke `TIME_ZONE` i `USE_TZ`.
-
-### Vraćanje grešaka u odgovorima na zahtjeve
-
-{: .zadatak }
-> Definirajte funkciju `not_found()` u `main/views.py`. Funkcija neka vraća `HttpResponseNotFound` s proizvoljnim sadržajem. Dodajte joj putanju `nema/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
-
-``` python
-from django.http import HttpResponseNotFound
-
-
-def not_found(request):
-    return HttpResponseNotFound("<h1>Page not found</h1>")
-```
-
-Češći način vraćanja greške 404 je podizanje iznimke `Http404`. Django je tada sam pretvori u odgovor sa statusom 404:
-
-``` python
-from django.http import Http404
-
-
-def tajna(request):
-    raise Http404("Ova stranica ne postoji.")
-```
-
-## Dinamički dijelovi URL-a
-
-Do sada su putanje bile statične. Često želimo da dio URL-a bude parametar, npr. `/predmeti/7/` ili `/pozdrav/Ana/`. Takve dijelove pišemo u šiljastim zagradama, a Django ih predaje pogledu kao imenovane argumente.
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("pozdrav/<str:ime>/", views.pozdrav, name="pozdrav"),
-    path("zbroj/<int:a>/<int:b>/", views.zbroj, name="zbroj"),
-]
-```
-
-``` python
-def pozdrav(request, ime):
-    return HttpResponse(f"Pozdrav, {ime}!")
-
-
-def zbroj(request, a, b):
-    return HttpResponse(f"{a} + {b} = {a + b}")
-```
-
-Dio prije dvotočke je **pretvarač** (engl. *path converter*) koji određuje što se smije pojaviti na tom mjestu i u koji tip se vrijednost pretvara:
-
-| Pretvarač | Prihvaća | Tip u pogledu |
-| --------- | -------- | ------------- |
-| `str` | bilo koji niz znakova osim `/` (zadano) | `str` |
-| `int` | nula ili pozitivan cijeli broj | `int` |
-| `slug` | slova, brojke, `-` i `_`, npr. `uvod-u-django` | `str` |
-| `uuid` | UUID, npr. `075194d3-6885-417e-a8a8-6c931e272f00` | `uuid.UUID` |
-| `path` | bilo koji niz znakova uključujući `/` | `str` |
-
-Ako vrijednost ne odgovara pretvaraču (npr. `/zbroj/dva/tri/`), uzorak se ne podudara i Django vraća 404, a pogled se uopće ne poziva.
-
-{: .zadatak }
-> Dodajte putanju `kvadrat/<int:broj>/` koja ispisuje kvadrat zadanog broja. Isprobajte `/kvadrat/12/` i `/kvadrat/-3/` te objasnite rezultat.
-
-### Regularni izrazi u URL-ovima
-
-Za složenija pravila postoji funkcija `re_path()` koja prima regularni izraz:
-
-``` python
-from django.urls import re_path
-
-urlpatterns = [
-    re_path(r"^arhiva/(?P<godina>[0-9]{4})/$", views.arhiva, name="arhiva"),
-]
-```
-
-U većini slučajeva pretvarači iz `path()` su dovoljni i čitljiviji.
-
-{: .upozorenje }
-> Ako trebate osvježiti znanje regularnih izraza, pogledajte gradivo kolegija Operacijski sustavi te dokumentaciju [Regularni izrazi i Python](https://docs.python.org/3/library/re.html#module-re).
-
-## Imenovani URL-ovi i funkcija `reverse()`
-
-Svaki uzorak smo imenovali argumentom `name`, a aplikaciji smo zadali imenski prostor s `app_name = "main"`. Zahvaljujući tome adrese u kodu nikad ne pišemo ručno, nego ih Django složi iz imena:
-
-``` python
-from django.urls import reverse
-
-reverse("main:homepage")                 # '/'
-reverse("main:pozdrav", args=["Ana"])     # '/pozdrav/Ana/'
-reverse("main:zbroj", kwargs={"a": 2, "b": 3})  # '/zbroj/2/3/'
-```
-
-Ako kasnije promijenimo `pozdrav/` u `hello/`, sve poveznice nastavljaju raditi jer se izračunavaju iz imena. U predlošcima isto radi oznaka `url` (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)):
+Datoteka `main/templates/main/predmeti.html`:
 
 {% raw %}
 ``` django
-<a href="{% url 'main:pozdrav' 'Ana' %}">Pozdravi Anu</a>
+{% extends "base.html" %}
+
+{% block title %}Predmeti | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>Predmeti</h2>
+<ul>
+    {% for predmet in predmeti %}
+        <li>
+            <a href="{% url 'main:predmet_detalj' predmet.pk %}">{{ predmet.predmet_naslov }}</a>
+            ({{ predmet.predmet_nositelj|default:"nositelj nije određen" }},
+            broj studenata: {{ predmet.broj_studenata }})
+        </li>
+    {% empty %}
+        <li>Nema predmeta.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
 ```
 {% endraw %}
 
-### Preusmjeravanje
+Datoteka `main/templates/main/predmet_detalj.html`:
 
-Funkcija `redirect()` vraća odgovor koji preglednik upućuje na drugu adresu. Prima ime URL-a, objekt ili adresu:
+{% raw %}
+``` django
+{% extends "base.html" %}
+
+{% block title %}{{ predmet.predmet_naslov }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>{{ predmet.predmet_naslov }}</h2>
+<p>Objavljeno: {{ predmet.predmet_vrijeme_objave|date:"d.m.Y." }}</p>
+<p>Nositelj:
+    {% if predmet.predmet_nositelj %}
+        {{ predmet.predmet_nositelj.prof_ime }} {{ predmet.predmet_nositelj.prof_prezime }}
+    {% else %}
+        nije određen
+    {% endif %}
+</p>
+
+{{ predmet.predmet_sadrzaj|linebreaks }}
+
+<h3>Upisani studenti ({{ predmet.studenti.count }})</h3>
+<ul>
+    {% for s in predmet.studenti.all %}
+        <li>{{ s.student_ime }} {{ s.student_prezime }} ({{ s.student_broj_xice }})</li>
+    {% empty %}
+        <li>Nitko nije upisao ovaj predmet.</li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'main:predmeti' %}">Natrag na popis predmeta</a></p>
+{% endblock %}
+```
+{% endraw %}
+
+{% raw %}
+Primijetite da se u predlošku metode pozivaju bez zagrada: `predmet.studenti.all`, a ne `predmet.studenti.all()`.
+{% endraw %}
+
+## Automatsko zaštićivanje (autoescape)
+
+{% raw %}
+Django sve varijable prije ispisa automatski zaštićuje (engl. *escape*): znakovi `<`, `>`, `&`, `'` i `"` pretvaraju se u HTML entitete. Ako student upiše ime `<script>alert(1)</script>`, predložak će ga prikazati kao tekst, a ne izvršiti kao skriptu. To je zaštita od XSS napada.
+
+Filter `safe` isključuje zaštitu za pojedinu varijablu, npr. `{{ html_sadrzaj|safe }}`. Koristite ga **samo** za sadržaj koji ste sami generirali i kojem vjerujete, nikad za unos korisnika. Više u [poglavlju 13](13-sigurnost.md).
+{% endraw %}
+
+## Kontekstni procesori
+
+{% raw %}
+Neke varijable dostupne su u svim predlošcima bez da ih pogled izričito šalje. Dodaju ih kontekstni procesori iz postavke `context_processors`: `request` (trenutni zahtjev), `user` i `perms` (prijavljeni korisnik i njegove ovlasti) te `messages` (poruke korisniku). Primjerice, `{{ request.path }}` možemo iskoristiti za isticanje aktivne stavke izbornika.
+{% endraw %}
+
+## Vlastiti filteri (za one koji žele znati više)
+
+Vlastite filtere pišemo u paketu `templatetags` unutar aplikacije. Stvorite `main/templatetags/__init__.py` (prazna datoteka) i `main/templatetags/main_extras.py`:
 
 ``` python
-from django.shortcuts import redirect
+from django import template
+
+register = template.Library()
 
 
-def stara_adresa(request):
-    return redirect("main:homepage")
+@register.filter
+def inicijali(student):
+    return f"{student.student_ime[:1]}. {student.student_prezime[:1]}."
 ```
 
-## Objekt `HttpRequest`
+{% raw %}
+U predlošku ih učitavamo oznakom `load`: `{% load main_extras %}`, a zatim koristimo kao `{{ s|inicijali }}`. Nakon stvaranja direktorija `templatetags` ponovno pokrenite razvojni poslužitelj.
+{% endraw %}
 
-Pogled preko argumenta `request` ima pristup svim podacima o zahtjevu:
-
-| Atribut | Sadržaj |
-| ------- | ------- |
-| `request.method` | HTTP metoda: `"GET"`, `"POST"`... |
-| `request.path` | putanja, npr. `/pozdrav/Ana/` |
-| `request.GET` | parametri iz URL-a nakon `?`, npr. za `?ime=Ana&dob=20` |
-| `request.POST` | podaci poslani obrascem metodom POST |
-| `request.headers` | zaglavlja zahtjeva, npr. `request.headers["User-Agent"]` |
-| `request.COOKIES` | kolačići |
-| `request.user` | prijavljeni korisnik (vidi [poglavlje 12](12-autentifikacija-autorizacija.md)) |
-
-``` python
-def info(request):
-    ime = request.GET.get("ime", "neznanče")
-    preglednik = request.headers.get("User-Agent", "nepoznat")
-    return HttpResponse(
-        f"<p>Bok, {ime}!</p>"
-        f"<p>Metoda: {request.method}, putanja: {request.path}</p>"
-        f"<p>Preglednik: {preglednik}</p>"
-    )
-```
+## Zadaci za vježbu
 
 {: .zadatak }
-> Dodajte pogled `info` na putanju `info/` i posjetite `http://127.0.0.1:8000/info/?ime=Ana`. Što se dogodi ako izostavite parametar `ime`?
-
-{: .upozorenje }
-> Ovdje podatke od korisnika izravno umećemo u HTML samo radi jednostavnosti primjera. U stvarnim aplikacijama to otvara mogućnost XSS napada. Predlošci (poglavlje 6) takve vrijednosti automatski zaštićuju, a detalji su u [poglavlju 13](13-sigurnost.md).
-
-## Vrste odgovora i statusni kodovi
-
-| Klasa ili funkcija | Statusni kod | Namjena |
-| ------------------ | ------------ | ------- |
-| `HttpResponse` | 200 (ili zadani `status=`) | općeniti odgovor |
-| `JsonResponse` | 200 | odgovor u formatu JSON |
-| `redirect()`, `HttpResponseRedirect` | 302 | privremeno preusmjeravanje |
-| `HttpResponsePermanentRedirect` | 301 | trajno preusmjeravanje |
-| `HttpResponseBadRequest` | 400 | neispravan zahtjev |
-| `HttpResponseForbidden` | 403 | zabranjen pristup |
-| `HttpResponseNotFound`, `raise Http404` | 404 | resurs ne postoji |
-| `HttpResponseNotAllowed` | 405 | metoda nije dopuštena |
-
-Primjer odgovora u formatu JSON, koji je temelj za REST API (vidi [poglavlje 11](11-rest-api.md)):
-
-``` python
-from django.http import JsonResponse
-
-
-def api_vrijeme(request):
-    return JsonResponse({"vrijeme": timezone.localtime().isoformat()})
-```
-
-Dopuštene HTTP metode možemo ograničiti dekoratorima:
-
-``` python
-from django.views.decorators.http import require_GET
-
-
-@require_GET
-def samo_citanje(request):
-    return HttpResponse("Ovaj pogled prihvaća samo GET.")
-```
-
-## Pogledi kao funkcije i kao klase
-
-Pogledi mogu biti funkcije (engl. *function-based views*) ili klase (engl. *class-based views*). Isti pogled napisan kao klasa:
-
-``` python
-from django.views import View
-
-
-class PozdravView(View):
-    def get(self, request, ime):
-        return HttpResponse(f"Pozdrav, {ime}!")
-```
-
-``` python
-path("pozdrav-klasa/<str:ime>/", views.PozdravView.as_view(), name="pozdrav_klasa"),
-```
-
-Klasa za svaku HTTP metodu ima zasebnu metodu (`get`, `post`...), a nedopuštene metode automatski odbija statusom 405. Prava snaga klasa su **generički pogledi** za česte zadatke poput popisa i detalja objekata, opisani u [poglavlju 7](07-genericki-pogledi.md).
-
-{: .zadatak }
-> - Napišite pogled `kalkulator` na putanji `kalkulator/<int:a>/<str:operacija>/<int:b>/` koji podržava operacije `plus`, `minus`, `puta` i `kroz`. Za nepoznatu operaciju vratite `HttpResponseBadRequest`, a za dijeljenje nulom podignite `Http404` s odgovarajućom porukom.
-> - Napišite pogled koji vraća `JsonResponse` s rezultatom kalkulatora.
-> - Napišite pogled `/stara-pocetna/` koji preusmjerava na početnu stranicu koristeći ime URL-a.
+> - Napravite stranicu `profesori/` koja prikazuje sve profesore i za svakog popis predmeta kojima je nositelj. Koristite `related_name` iz modela i `prefetch_related` u pogledu.
+> - Napravite stranicu s detaljima studenta (`studenti/<int:pk>/`) s popisom upisanih predmeta i naslovom završnog rada, ako ga student ima.
+> - Na stranici s detaljima predmeta svakog studenta pretvorite u poveznicu na njegovu stranicu s detaljima.
+> - Dodajte u izbornik osnovnog predloška poveznicu na popis profesora.
+> - Posjetite `/predmeti/9999/` i provjerite da dobivate odgovor 404.

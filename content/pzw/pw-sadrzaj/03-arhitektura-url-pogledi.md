@@ -5,8 +5,8 @@ layout: default
 parent: PZW
 nav_order: 3
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
 # Arhitektura Django aplikacija, URL usmjeravanje i pogledi

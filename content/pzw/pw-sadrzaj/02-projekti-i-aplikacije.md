@@ -5,8 +5,8 @@ layout: default
 parent: PZW
 nav_order: 2
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
 # Stvaranje Django projekta i aplikacija

@@ -1,15 +1,15 @@
 ---
 author: Milan Petrović
-title: "3. Arhitektura Django aplikacija, URL usmjeravanje i pogledi"
+title: "11. Razvoj REST API-ja pomoću Django REST frameworka"
 layout: default
 parent: PZW
-nav_order: 3
+nav_order: 11
 has_children: false
-has_toc: true
-nav_exclude: true
+has_toc: false
+nav_exclude: false
 ---
 
-# Arhitektura Django aplikacija, URL usmjeravanje i pogledi
+# Razvoj REST API-ja pomoću Django REST frameworka
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,339 +19,370 @@ nav_exclude: true
 {:toc}
 </details>
 
-## Paradigma model-view-controller (MVC)
+## Što je REST API
 
-Django koristi paradigmu [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) koju naziva model-template-view (MTV). Gotovo svaka stranica izrađena u Djangu koristi ova tri dijela kako bi prikazala podatke.
+Do sada je naša aplikacija vraćala HTML namijenjen ljudima u pregledniku. Mobilne aplikacije, JavaScript sučelja (React, Vue...) i drugi sustavi trebaju podatke u strojno čitljivom obliku, najčešće JSON-u. Sučelje preko kojeg ih dobivaju zove se **API** (engl. *Application Programming Interface*).
 
-Korisnik posjeti URL, Django prema popisu URL-ova (`urls.py`) odabere odgovarajući pogled (`views.py`). Pogled po potrebi dohvati podatke iz modela (`models.py`) i preda ih predlošku (`templates/`) koji složi HTML. Ulogu kontrolera u Djangu dijele sam okvir (usmjeravanje URL-ova) i pogledi.
+**REST** (engl. *Representational State Transfer*) je stil oblikovanja API-ja nad HTTP-om s nekoliko načela:
 
-Unutar Djanga koristi se djelomično izmijenjena terminologija, a od sada nadalje koristit ćemo Django terminologiju (model, template i view).
+- Podaci su organizirani kao **resursi** s vlastitim adresama: `/api/books/` je kolekcija knjiga, `/api/books/7/` jedna knjiga.
+- **HTTP metoda** određuje radnju nad resursom.
+- **Statusni kod** govori kako je zahtjev završio.
+- Poslužitelj ne pamti stanje klijenta između zahtjeva (engl. *stateless*): svaki zahtjev nosi sve potrebno, uključujući podatke za autentifikaciju.
 
-| MVC naziv | Django naziv | Značenje |
-| --------- | ------------ | -------- |
-| Model | Model | Sloj podataka: Python klase (modeli) koje se preslikavaju na tablice u bazi podataka, zajedno s kodom koji radi s tim podacima. Modeli se mogu mijenjati i dopunjavati, a promjene se u bazi primjenjuju migracijama (vidi [poglavlje 4](04-baze-modeli-orm.md)). |
-| View | Template | Sloj prikaza: predlošci, tj. HTML datoteke s posebnim oznakama u koje se umeću podaci. Određuju **kako** se podaci prikazuju (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)). |
-| Controller | View | Sloj logike: funkcija ili klasa koja prima HTTP zahtjev i vraća HTTP odgovor. Određuje **koji** se podaci prikazuju: dohvaća ih iz modela, obrađuje obrasce i odabire predložak. Odgovor može biti HTML, preusmjeravanje, [statusni kod](https://http.cat/), JSON, slika i drugo. |
+| Metoda | Adresa | Radnja | Uspješan odgovor |
+| ------ | ------ | ------ | ---------------- |
+| `GET` | `/api/books/` | popis knjiga | `200 OK` |
+| `POST` | `/api/books/` | stvaranje knjige | `201 Created` |
+| `GET` | `/api/books/7/` | detalji knjige | `200 OK` |
+| `PUT` | `/api/books/7/` | zamjena svih podataka knjige | `200 OK` |
+| `PATCH` | `/api/books/7/` | izmjena dijela podataka | `200 OK` |
+| `DELETE` | `/api/books/7/` | brisanje knjige | `204 No Content` |
 
-## Tijek obrade zahtjeva
+Česti kodovi greške su `400 Bad Request` (neispravni podaci), `401 Unauthorized` (niste prijavljeni), `403 Forbidden` (nemate ovlast) i `404 Not Found`.
 
-Kada preglednik pošalje zahtjev, u Djangu se događa sljedeće:
+## API bez dodatnih paketa
 
-1. Web poslužitelj preda zahtjev Djangu preko WSGI ili ASGI sučelja (`wsgi.py` ili `asgi.py`).
-2. Django od zahtjeva napravi objekt `HttpRequest` i provuče ga kroz slojeve **middlewarea** (sesije, autentifikacija, CSRF zaštita...).
-3. Usmjerivač URL-ova čita modul naveden u `ROOT_URLCONF` (`mysite/urls.py`) i redom uspoređuje putanju zahtjeva s uzorcima u `urlpatterns`.
-4. Prvi uzorak koji odgovara određuje **pogled** koji se poziva. Ako nijedan ne odgovara, vraća se odgovor 404.
-5. Pogled po potrebi radi s modelima i predlošcima te vraća objekt `HttpResponse`.
-6. Odgovor ponovno prolazi kroz middleware (obrnutim redoslijedom) i šalje se pregledniku.
-
-## Uvod u Django: Hello world
-
-U nastavku je prikazano kako stvoriti stranicu koja prikazuje tekst na početnoj stranici. Za ovo nije potreban model, nego samo pogled u kojem je definiran tekst koji želimo prikazati.
-
-{: .zadatak }
-> Otvorite datoteku `mysite/mysite/urls.py` i provjerite što je u njoj zapisano.
-
-Za definiranje putanje na koju će Django primati HTTP zahtjeve koristi se funkcija `django.urls.path()` ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/urls/#path)). Zadani sadržaj usmjerava samo na administratorsko sučelje ([dokumentacija](https://docs.djangoproject.com/en/6.1/ref/contrib/admin/)).
-
-Datoteka `mysite/mysite/urls.py` ima sadržaj:
-
-``` python
-from django.contrib import admin
-from django.urls import path
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
-```
-
-Vidimo da imamo samo jedan URL, onaj za stranicu za administraciju, koji nam trenutno ne treba. Django web stranicu vidi kao kolekciju aplikacija, a datoteka `urls.py` projekta obično samo usmjerava zahtjeve prema URL-ovima pojedinih aplikacija.
-
-Aplikaciju `main` stvorili smo i registrirali u [prethodnom poglavlju](02-projekti-i-aplikacije.md#stvaranje-prve-aplikacije). Usmjerimo sada glavni dio projekta prema njoj. To radimo u `mysite/mysite/urls.py`:
-
-``` python
-from django.contrib import admin
-from django.urls import include, path  # uvozimo include
-
-urlpatterns = [
-    path("", include("main.urls")),  # dodajemo URL-ove aplikacije main
-    path("admin/", admin.site.urls),
-]
-```
-
-Ako pogledamo u direktorij aplikacije `main`, vidjet ćemo da datoteka `urls.py` ne postoji. Stvorimo datoteku `mysite/main/urls.py` sa sljedećim sadržajem:
-
-``` python
-from django.urls import path
-
-from . import views
-
-app_name = "main"  # imenski prostor (namespace) URL-ova aplikacije
-
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-]
-```
-
-Prođimo ukratko kroz logiku rada programa. Za adresu `http://127.0.0.1:8000/` putanja je prazna, stoga odgovara uzorku `""` iz `path("", include("main.urls"))`. Django zato učitava `main.urls`, odnosno datoteku `mysite/main/urls.py`.
-
-U njoj prazna putanja odgovara uzorku `path("", views.homepage, name="homepage")`. Time smo usmjerili Django da pozove funkciju `homepage()` iz `main/views.py`, koju moramo još napisati.
-
-Datoteka `mysite/main/views.py`:
-
-``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    # primijetite da odgovor može sadržavati HTML
-    return HttpResponse("Welcome to homepage! <strong>#samoOIRI</strong>")
-```
-
-Svaki pogled kao prvi argument prima objekt `request` (zahtjev) i mora vratiti objekt odgovora.
-
-{: .zadatak }
-> Osvježite stranicu `http://127.0.0.1:8000/` u pregledniku.
-
-## Više pogleda
-
-{: .zadatak }
-> Izmijenite funkciju `homepage()` u `main/views.py` tako da vraća cijeli HTML dokument s naslovom i odlomkom teksta.
-
-**Rješenje zadatka.**
-
-``` python
-from django.http import HttpResponse
-
-
-def homepage(request):
-    return HttpResponse(
-        "<html><body><h1>Homepage</h1>"
-        "<p><strong>Homepage</strong> i još neki tekst na homepage.</p>"
-        "</body></html>"
-    )
-```
-
-{: .zadatak }
-> Definirajte funkciju `current_datetime()` u datoteci `main/views.py` koja vraća HTTP odgovor s trenutnim datumom i vremenom. Dodajte joj putanju `vrijeme/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
-
-``` python
-from django.utils import timezone
-
-
-def current_datetime(request):
-    now = timezone.localtime()
-    html = f"<html><body>Trenutno vrijeme: {now:%d.%m.%Y. %H:%M:%S}</body></html>"
-    return HttpResponse(html)
-```
-
-U datoteci `main/urls.py`:
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("vrijeme/", views.current_datetime, name="current_datetime"),
-]
-```
-
-Koristimo `django.utils.timezone` umjesto modula `datetime` jer uvažava postavke `TIME_ZONE` i `USE_TZ`.
-
-### Vraćanje grešaka u odgovorima na zahtjeve
-
-{: .zadatak }
-> Definirajte funkciju `not_found()` u `main/views.py`. Funkcija neka vraća `HttpResponseNotFound` s proizvoljnim sadržajem. Dodajte joj putanju `nema/`.
-
-**Rješenje zadatka.** U datoteci `main/views.py`:
-
-``` python
-from django.http import HttpResponseNotFound
-
-
-def not_found(request):
-    return HttpResponseNotFound("<h1>Page not found</h1>")
-```
-
-Češći način vraćanja greške 404 je podizanje iznimke `Http404`. Django je tada sam pretvori u odgovor sa statusom 404:
-
-``` python
-from django.http import Http404
-
-
-def tajna(request):
-    raise Http404("Ova stranica ne postoji.")
-```
-
-## Dinamički dijelovi URL-a
-
-Do sada su putanje bile statične. Često želimo da dio URL-a bude parametar, npr. `/predmeti/7/` ili `/pozdrav/Ana/`. Takve dijelove pišemo u šiljastim zagradama, a Django ih predaje pogledu kao imenovane argumente.
-
-``` python
-urlpatterns = [
-    path("", views.homepage, name="homepage"),
-    path("pozdrav/<str:ime>/", views.pozdrav, name="pozdrav"),
-    path("zbroj/<int:a>/<int:b>/", views.zbroj, name="zbroj"),
-]
-```
-
-``` python
-def pozdrav(request, ime):
-    return HttpResponse(f"Pozdrav, {ime}!")
-
-
-def zbroj(request, a, b):
-    return HttpResponse(f"{a} + {b} = {a + b}")
-```
-
-Dio prije dvotočke je **pretvarač** (engl. *path converter*) koji određuje što se smije pojaviti na tom mjestu i u koji tip se vrijednost pretvara:
-
-| Pretvarač | Prihvaća | Tip u pogledu |
-| --------- | -------- | ------------- |
-| `str` | bilo koji niz znakova osim `/` (zadano) | `str` |
-| `int` | nula ili pozitivan cijeli broj | `int` |
-| `slug` | slova, brojke, `-` i `_`, npr. `uvod-u-django` | `str` |
-| `uuid` | UUID, npr. `075194d3-6885-417e-a8a8-6c931e272f00` | `uuid.UUID` |
-| `path` | bilo koji niz znakova uključujući `/` | `str` |
-
-Ako vrijednost ne odgovara pretvaraču (npr. `/zbroj/dva/tri/`), uzorak se ne podudara i Django vraća 404, a pogled se uopće ne poziva.
-
-{: .zadatak }
-> Dodajte putanju `kvadrat/<int:broj>/` koja ispisuje kvadrat zadanog broja. Isprobajte `/kvadrat/12/` i `/kvadrat/-3/` te objasnite rezultat.
-
-### Regularni izrazi u URL-ovima
-
-Za složenija pravila postoji funkcija `re_path()` koja prima regularni izraz:
-
-``` python
-from django.urls import re_path
-
-urlpatterns = [
-    re_path(r"^arhiva/(?P<godina>[0-9]{4})/$", views.arhiva, name="arhiva"),
-]
-```
-
-U većini slučajeva pretvarači iz `path()` su dovoljni i čitljiviji.
-
-{: .upozorenje }
-> Ako trebate osvježiti znanje regularnih izraza, pogledajte gradivo kolegija Operacijski sustavi te dokumentaciju [Regularni izrazi i Python](https://docs.python.org/3/library/re.html#module-re).
-
-## Imenovani URL-ovi i funkcija `reverse()`
-
-Svaki uzorak smo imenovali argumentom `name`, a aplikaciji smo zadali imenski prostor s `app_name = "main"`. Zahvaljujući tome adrese u kodu nikad ne pišemo ručno, nego ih Django složi iz imena:
-
-``` python
-from django.urls import reverse
-
-reverse("main:homepage")                 # '/'
-reverse("main:pozdrav", args=["Ana"])     # '/pozdrav/Ana/'
-reverse("main:zbroj", kwargs={"a": 2, "b": 3})  # '/zbroj/2/3/'
-```
-
-Ako kasnije promijenimo `pozdrav/` u `hello/`, sve poveznice nastavljaju raditi jer se izračunavaju iz imena. U predlošcima isto radi oznaka `url` (vidi [poglavlje 6](06-predlosci-dinamicki-sadrzaj.md)):
-
-{% raw %}
-``` django
-<a href="{% url 'main:pozdrav' 'Ana' %}">Pozdravi Anu</a>
-```
-{% endraw %}
-
-### Preusmjeravanje
-
-Funkcija `redirect()` vraća odgovor koji preglednik upućuje na drugu adresu. Prima ime URL-a, objekt ili adresu:
-
-``` python
-from django.shortcuts import redirect
-
-
-def stara_adresa(request):
-    return redirect("main:homepage")
-```
-
-## Objekt `HttpRequest`
-
-Pogled preko argumenta `request` ima pristup svim podacima o zahtjevu:
-
-| Atribut | Sadržaj |
-| ------- | ------- |
-| `request.method` | HTTP metoda: `"GET"`, `"POST"`... |
-| `request.path` | putanja, npr. `/pozdrav/Ana/` |
-| `request.GET` | parametri iz URL-a nakon `?`, npr. za `?ime=Ana&dob=20` |
-| `request.POST` | podaci poslani obrascem metodom POST |
-| `request.headers` | zaglavlja zahtjeva, npr. `request.headers["User-Agent"]` |
-| `request.COOKIES` | kolačići |
-| `request.user` | prijavljeni korisnik (vidi [poglavlje 12](12-autentifikacija-autorizacija.md)) |
-
-``` python
-def info(request):
-    ime = request.GET.get("ime", "neznanče")
-    preglednik = request.headers.get("User-Agent", "nepoznat")
-    return HttpResponse(
-        f"<p>Bok, {ime}!</p>"
-        f"<p>Metoda: {request.method}, putanja: {request.path}</p>"
-        f"<p>Preglednik: {preglednik}</p>"
-    )
-```
-
-{: .zadatak }
-> Dodajte pogled `info` na putanju `info/` i posjetite `http://127.0.0.1:8000/info/?ime=Ana`. Što se dogodi ako izostavite parametar `ime`?
-
-{: .upozorenje }
-> Ovdje podatke od korisnika izravno umećemo u HTML samo radi jednostavnosti primjera. U stvarnim aplikacijama to otvara mogućnost XSS napada. Predlošci (poglavlje 6) takve vrijednosti automatski zaštićuju, a detalji su u [poglavlju 13](13-sigurnost.md).
-
-## Vrste odgovora i statusni kodovi
-
-| Klasa ili funkcija | Statusni kod | Namjena |
-| ------------------ | ------------ | ------- |
-| `HttpResponse` | 200 (ili zadani `status=`) | općeniti odgovor |
-| `JsonResponse` | 200 | odgovor u formatu JSON |
-| `redirect()`, `HttpResponseRedirect` | 302 | privremeno preusmjeravanje |
-| `HttpResponsePermanentRedirect` | 301 | trajno preusmjeravanje |
-| `HttpResponseBadRequest` | 400 | neispravan zahtjev |
-| `HttpResponseForbidden` | 403 | zabranjen pristup |
-| `HttpResponseNotFound`, `raise Http404` | 404 | resurs ne postoji |
-| `HttpResponseNotAllowed` | 405 | metoda nije dopuštena |
-
-Primjer odgovora u formatu JSON, koji je temelj za REST API (vidi [poglavlje 11](11-rest-api.md)):
+Jednostavan API možemo napraviti i samim Djangom pomoću `JsonResponse`:
 
 ``` python
 from django.http import JsonResponse
 
+from main.models import Book
 
-def api_vrijeme(request):
-    return JsonResponse({"vrijeme": timezone.localtime().isoformat()})
+
+def api_books(request):
+    books = Book.objects.select_related("author").values("id", "title", "author__name")
+    return JsonResponse({"results": list(books)})
 ```
 
-Dopuštene HTTP metode možemo ograničiti dekoratorima:
+Za čitanje je to dovoljno, ali za pravi API trebali bismo ručno pisati provjeru ulaznih podataka, pretvorbu u model i natrag, autentifikaciju, ovlasti, straničenje i dokumentaciju. Sve to nudi **Django REST framework** (DRF).
+
+## Instalacija i postavljanje
+
+Nastavljamo s projektom `knjiznica`. API ćemo smjestiti u zasebnu aplikaciju `api`, a ona će koristiti modele iz aplikacije `main`.
+
+``` shell
+$ python -m pip install djangorestframework
+$ python manage.py startapp api
+```
+
+DRF 3.18 podržava Django 5.2, 6.0 i 6.1. U `settings.py`:
 
 ``` python
-from django.views.decorators.http import require_GET
-
-
-@require_GET
-def samo_citanje(request):
-    return HttpResponse("Ovaj pogled prihvaća samo GET.")
+INSTALLED_APPS = [
+    # ...
+    "rest_framework",
+    "main",
+    "api",
+]
 ```
 
-## Pogledi kao funkcije i kao klase
+## Serializatori
 
-Pogledi mogu biti funkcije (engl. *function-based views*) ili klase (engl. *class-based views*). Isti pogled napisan kao klasa:
+**Serializator** pretvara objekte modela u Python rječnike (a zatim u JSON) i obrnuto: iz primljenog JSON-a provjerava podatke i stvara ili mijenja objekte. Ulogom je sličan `ModelForm` obrascu iz [poglavlja 8](08-obrasci-get-post-modelforms.md).
+
+Datoteka `api/serializers.py`:
 
 ``` python
-from django.views import View
+from django.utils import timezone
+from rest_framework import serializers
+
+from main.models import Author, Book, Publisher
 
 
-class PozdravView(View):
-    def get(self, request, ime):
-        return HttpResponse(f"Pozdrav, {ime}!")
+class PublisherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publisher
+        fields = ["id", "name", "city", "country", "website"]
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ["id", "name", "city", "country", "date_of_birth", "date_of_death"]
+
+
+class BookSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source="author.name", read_only=True)
+
+    class Meta:
+        model = Book
+        fields = ["id", "title", "abstract", "author", "author_name", "publisher", "publication_date"]
+
+    def validate_publication_date(self, value):
+        if value > timezone.localdate():
+            raise serializers.ValidationError("Datum izdanja ne može biti u budućnosti.")
+        return value
+```
+
+Polje `author` serijalizira se kao primarni ključ autora, a dodatno polje `author_name` samo za čitanje prikazuje i ime. Metoda `validate_<polje>()` odgovara metodi `clean_<polje>()` u obrascima.
+
+Isprobajmo serializator u ljusci:
+
+``` python
+>>> from api.serializers import BookSerializer
+>>> from main.models import Book
+>>> s = BookSerializer(Book.objects.first())
+>>> s.data
+{'id': 1, 'title': '...', 'abstract': '...', 'author': 3, 'author_name': '...', 'publisher': 2, 'publication_date': '2011-05-03'}
+>>> BookSerializer(Book.objects.all()[:3], many=True).data   # više objekata
+```
+
+I u drugom smjeru, iz podataka u objekt:
+
+``` python
+>>> s = BookSerializer(data={"title": "Nova knjiga", "author": 1, "publication_date": "2100-01-01"})
+>>> s.is_valid()
+False
+>>> s.errors
+{'publication_date': [ErrorDetail(string='Datum izdanja ne može biti u budućnosti.', code='invalid')]}
+>>> s = BookSerializer(data={"title": "Nova knjiga", "author": 1, "publication_date": "2020-01-01"})
+>>> s.is_valid()
+True
+>>> s.save()
+<Book: Nova knjiga>
+```
+
+## Pogledi za API
+
+DRF nudi više razina apstrakcije, od funkcija do potpuno automatskih skupova pogleda. Pogledat ćemo sve tri, a u projektu koristiti posljednju.
+
+### Funkcijski pogled s dekoratorom `@api_view`
+
+``` python
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from main.models import Book
+
+from .serializers import BookSerializer
+
+
+@api_view(["GET", "POST"])
+def book_list(request):
+    if request.method == "GET":
+        books = Book.objects.select_related("author")
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data)
+
+    serializer = BookSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)   # neispravni podaci: odgovor 400
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+```
+
+`request.data` sadrži tijelo zahtjeva bez obzira je li poslano kao JSON ili obrazac, a `Response` sam odabire format odgovora.
+
+### Generički pogledi
+
+Isto kao generički pogledi u [poglavlju 7](07-genericki-pogledi.md), samo za API:
+
+``` python
+from rest_framework import generics
+
+
+class BookListCreate(generics.ListCreateAPIView):
+    queryset = Book.objects.select_related("author")
+    serializer_class = BookSerializer
+
+
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.select_related("author")
+    serializer_class = BookSerializer
 ```
 
 ``` python
-path("pozdrav-klasa/<str:ime>/", views.PozdravView.as_view(), name="pozdrav_klasa"),
+path("books/", views.BookListCreate.as_view()),
+path("books/<int:pk>/", views.BookDetail.as_view()),
 ```
 
-Klasa za svaku HTTP metodu ima zasebnu metodu (`get`, `post`...), a nedopuštene metode automatski odbija statusom 405. Prava snaga klasa su **generički pogledi** za česte zadatke poput popisa i detalja objekata, opisani u [poglavlju 7](07-genericki-pogledi.md).
+### Skupovi pogleda (ViewSets) i usmjerivači
+
+`ModelViewSet` u jednoj klasi objedinjuje sve radnje (popis, stvaranje, detalji, izmjena, brisanje), a **usmjerivač** (engl. *router*) sam stvara URL-ove. Datoteka `api/views.py`:
+
+``` python
+from rest_framework import filters, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+from main.models import Author, Book, Publisher
+
+from .serializers import AuthorSerializer, BookSerializer, PublisherSerializer
+
+
+class PublisherViewSet(viewsets.ModelViewSet):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+    @action(detail=True)
+    def books(self, request, pk=None):
+        """Sve knjige zadanog autora: /api/authors/<pk>/books/"""
+        author = self.get_object()
+        serializer = BookSerializer(author.books.all(), many=True)
+        return Response(serializer.data)
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.select_related("author", "publisher")
+    serializer_class = BookSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["title", "author__name"]
+    ordering_fields = ["title", "publication_date"]
+```
+
+Datoteka `api/urls.py`:
+
+``` python
+from rest_framework.routers import DefaultRouter
+
+from . import views
+
+router = DefaultRouter()
+router.register("publishers", views.PublisherViewSet)
+router.register("authors", views.AuthorViewSet)
+router.register("books", views.BookViewSet)
+
+urlpatterns = router.urls
+```
+
+U `knjiznica/urls.py` dodajemo:
+
+``` python
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
+    path("api-auth/", include("rest_framework.urls")),  # prijava za preglednik API-ja
+    path("", include("main.urls")),
+]
+```
+
+Usmjerivač je stvorio sljedeće adrese:
+
+| Adresa | Metode |
+| ------ | ------ |
+| `/api/` | `GET`: popis svih resursa |
+| `/api/books/` | `GET`, `POST` |
+| `/api/books/<pk>/` | `GET`, `PUT`, `PATCH`, `DELETE` |
+| `/api/authors/<pk>/books/` | `GET` (dodatna radnja `@action`) |
+
+Isto vrijedi za `authors` i `publishers`.
+
+## Preglednik API-ja
 
 {: .zadatak }
-> - Napišite pogled `kalkulator` na putanji `kalkulator/<int:a>/<str:operacija>/<int:b>/` koji podržava operacije `plus`, `minus`, `puta` i `kroz`. Za nepoznatu operaciju vratite `HttpResponseBadRequest`, a za dijeljenje nulom podignite `Http404` s odgovarajućom porukom.
-> - Napišite pogled koji vraća `JsonResponse` s rezultatom kalkulatora.
-> - Napišite pogled `/stara-pocetna/` koji preusmjerava na početnu stranicu koristeći ime URL-a.
+> Posjetite `http://127.0.0.1:8000/api/` u pregledniku. Kliknite na `books`, isprobajte pretragu `?search=` i poredak `?ordering=-publication_date`, otvorite detalje jedne knjige.
+
+DRF pri pristupu iz preglednika prikazuje HTML sučelje (engl. *browsable API*) s obrascima za slanje zahtjeva. Programi koji šalju zaglavlje `Accept: application/json` dobivaju čisti JSON. Isto možete vidjeti dodavanjem `?format=json` na adresu.
+
+## Ovlasti i autentifikacija
+
+Trenutno svatko može brisati knjige. U `settings.py` postavljamo zadana pravila za cijeli API:
+
+``` python
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
+```
+
+`IsAuthenticatedOrReadOnly` svima dopušta čitanje (`GET`, `HEAD`, `OPTIONS`), a izmjene samo prijavljenim korisnicima. Ostale ugrađene klase su `AllowAny`, `IsAuthenticated`, `IsAdminUser` i `DjangoModelPermissions` (koristi ovlasti iz [poglavlja 12](12-autentifikacija-autorizacija.md)).
+
+Ovlasti se mogu zadati i za pojedini pogled, a možemo napisati i vlastite:
+
+``` python
+from rest_framework import permissions
+
+
+class IsStaffOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.is_staff
+
+
+class PublisherViewSet(viewsets.ModelViewSet):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer
+    permission_classes = [IsStaffOrReadOnly]
+```
+
+### Autentifikacija tokenom
+
+`SessionAuthentication` koristi kolačić sesije, što radi u pregledniku nakon prijave na `/api-auth/login/`. Ostali klijenti (mobilne aplikacije, skripte) uz svaki zahtjev šalju **token**. Dodajemo aplikaciju i adresu za dobivanje tokena:
+
+``` python
+INSTALLED_APPS = [
+    # ...
+    "rest_framework",
+    "rest_framework.authtoken",
+]
+```
+
+``` shell
+$ python manage.py migrate
+```
+
+``` python
+from rest_framework.authtoken.views import obtain_auth_token
+
+urlpatterns = [
+    # ...
+    path("api/token/", obtain_auth_token),
+]
+```
+
+## Isprobavanje API-ja iz terminala
+
+``` shell
+$ curl http://127.0.0.1:8000/api/books/
+$ curl "http://127.0.0.1:8000/api/books/?search=rat&ordering=title"
+
+$ curl -X POST http://127.0.0.1:8000/api/token/ -d "username=admin&password=lozinka"
+{"token":"9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"}
+
+$ curl -X POST http://127.0.0.1:8000/api/books/ \
+    -H "Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b" \
+    -H "Content-Type: application/json" \
+    -d '{"title": "Nova knjiga", "author": 1, "publication_date": "2024-05-01"}'
+
+$ curl -X DELETE http://127.0.0.1:8000/api/books/5/ \
+    -H "Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+```
+
+{: .napomena }
+> U Windows PowerShellu `curl` može biti zamjenski naziv za `Invoke-WebRequest`. Koristite `curl.exe` ili alate s grafičkim sučeljem poput Postmana ili Bruna, a za jednostavne provjere dovoljan je i preglednik API-ja.
+
+{: .zadatak }
+> - Bez tokena pokušajte stvoriti knjigu metodom `POST`. Koji statusni kod dobivate?
+> - Dobijte token za svog administratora i stvorite novu knjigu.
+> - Pošaljite knjigu s datumom izdanja u budućnosti i pročitajte odgovor.
+> - Izmijenite samo naslov knjige metodom `PATCH`.
+
+## Dokumentacija i ostale teme
+
+- **Dokumentacija API-ja**: paket [drf-spectacular](https://drf-spectacular.readthedocs.io/) iz pogleda i serializatora generira OpenAPI shemu i interaktivno sučelje Swagger UI.
+- **CORS**: ako se API poziva iz JavaScripta s druge domene (npr. React aplikacija na `localhost:5173`), preglednik to blokira dok poslužitelj izričito ne dopusti. Za to se koristi paket `django-cors-headers`.
+- **Filtriranje po poljima**: paket `django-filter` omogućuje upite poput `/api/books/?author=3&publisher=2`.
+- **Verzioniranje**: kada se API mijenja na nekompatibilan način, uvodi se nova verzija, npr. `/api/v2/`.
+
+## Zadaci za vježbu
+
+{: .zadatak }
+> - Dodajte `@action` na `PublisherViewSet` koja vraća sve knjige izdavača (`/api/publishers/<pk>/books/`).
+> - Dodajte na `BookViewSet` radnju `recent` (`detail=False`) koja vraća 5 najnovijih knjiga.
+> - Napišite `AuthorDetailSerializer` koji uz podatke o autoru sadrži i ugniježđeni popis njegovih knjiga (`books = BookSerializer(many=True, read_only=True)`) i koristite ga samo za detalje autora (nadjačajte `get_serializer_class()`).
+> - Dopustite izmjene autora samo korisnicima s `is_staff`, a izmjene knjiga svim prijavljenim korisnicima.
