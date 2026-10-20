@@ -40,7 +40,238 @@ U [poglavlju 3](03-arhitektura-url-pogledi.md) pogledi su vraćali HTML zapisan 
 
 Django koristi vlastiti jezik predložaka (Django Template Language, DTL). Namjerno je ograničen: u predlošku se ne pišu proizvoljne Python naredbe, nego samo varijable, oznake i filteri. Logika pripada pogledima i modelima.
 
-Nastavljamo s projektom `mysite` i modelima iz [poglavlja 5](05-relacije-i-upiti.md).
+## Priprema projekta
+
+Ovo poglavlje nastavlja se na projekt `mysite` iz poglavlja 2 do 5. Ako ste ih radili i u bazi imate nekoliko profesora, predmeta i studenata, ovaj odjeljak možete preskočiti.
+
+Ako krećete od ovog poglavlja, otvorite upute u nastavku. Za desetak minuta imat ćete projekt s modelima i podacima na kojima rade svi primjeri i zadaci.
+
+<details class="priprema" markdown="block">
+<summary>Postavljanje projekta od početka</summary>
+
+### 1. Projekt i aplikacija
+{: .no_toc }
+
+Detaljno objašnjenje ovih koraka nalazi se u [poglavlju 1](01-postavljanje-okruzenja.md) i [poglavlju 2](02-projekti-i-aplikacije.md).
+
+``` shell
+$ mkdir moja_prva_stranica
+$ cd moja_prva_stranica
+$ python3 -m venv .venv
+$ source .venv/bin/activate          # Windows: .venv\Scripts\activate
+$ python -m pip install "Django>=6.1,<6.2"
+$ django-admin startproject mysite
+$ cd mysite
+$ python manage.py startapp main
+```
+
+### 2. Postavke
+{: .no_toc }
+
+U `mysite/settings.py` dodajte aplikaciju u `INSTALLED_APPS` te postavite jezik i vremensku zonu:
+
+`mysite/settings.py`
+{: .datoteka }
+
+``` python
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "main",
+]
+
+LANGUAGE_CODE = "hr"
+TIME_ZONE = "Europe/Zagreb"
+```
+
+### 3. Modeli
+{: .no_toc }
+
+Modeli i veze među njima objašnjeni su u [poglavlju 4](04-baze-modeli-orm.md) i [poglavlju 5](05-relacije-i-upiti.md). Profesor je nositelj predmeta (veza many-to-one), student upisuje predmete (many-to-many) i piše jedan završni rad (one-to-one).
+
+`main/models.py`
+{: .datoteka }
+
+``` python
+from django.db import models
+from django.utils import timezone
+
+
+class Profesor(models.Model):
+    prof_ime = models.CharField(max_length=30)
+    prof_prezime = models.CharField(max_length=30)
+    prof_email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.prof_email
+
+
+class Predmet(models.Model):
+    predmet_naslov = models.CharField(max_length=100)
+    predmet_sadrzaj = models.TextField()
+    predmet_vrijeme_objave = models.DateTimeField("datum objave", default=timezone.now)
+    predmet_nositelj = models.ForeignKey(
+        Profesor,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="predmeti",
+    )
+
+    def __str__(self):
+        return self.predmet_naslov
+
+
+class Student(models.Model):
+    student_ime = models.CharField(max_length=25)
+    student_prezime = models.CharField(max_length=50)
+    student_broj_xice = models.CharField(max_length=10, unique=True)
+    student_predmeti = models.ManyToManyField(Predmet, related_name="studenti", blank=True)
+
+    def __str__(self):
+        return self.student_broj_xice
+
+
+class ZavrsniRad(models.Model):
+    student = models.OneToOneField(
+        Student,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name="zavrsni_rad",
+    )
+    mentor = models.ForeignKey(
+        Profesor,
+        on_delete=models.PROTECT,
+        related_name="mentorstva",
+    )
+    rad_naslov = models.CharField(max_length=200)
+    rad_zadatak = models.TextField()
+    rad_prvi_upis = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Završni rad studenta s brojem X-ice {self.student.student_broj_xice}"
+```
+
+`main/admin.py`
+{: .datoteka }
+
+``` python
+from django.contrib import admin
+
+from .models import Predmet, Profesor, Student, ZavrsniRad
+
+admin.site.register([Predmet, Profesor, Student, ZavrsniRad])
+```
+
+### 4. URL-ovi i početni pogled
+{: .no_toc }
+
+`mysite/urls.py`
+{: .datoteka }
+
+``` python
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("", include("main.urls")),
+    path("admin/", admin.site.urls),
+]
+```
+
+`main/urls.py`
+{: .datoteka }
+
+``` python
+from django.urls import path
+
+from . import views
+
+app_name = "main"
+
+urlpatterns = [
+    path("", views.homepage, name="homepage"),
+]
+```
+
+`main/views.py`
+{: .datoteka }
+
+``` python
+from django.http import HttpResponse
+
+
+def homepage(request):
+    return HttpResponse("Dobro došli!")
+```
+
+### 5. Baza i početni podaci
+{: .no_toc }
+
+Stvorite tablice u bazi:
+
+``` shell
+$ python manage.py makemigrations main
+$ python manage.py migrate
+```
+
+Početne podatke učitat ćemo iz takozvanog *fixturea*, JSON datoteke sa zapisima (detaljnije u [poglavlju 9](09-testni-podaci-i-sijanje.md)). Stvorite direktorij `main/fixtures` i u njemu datoteku:
+
+`main/fixtures/pocetni_podaci.json`
+{: .datoteka }
+
+``` json
+[
+  {"model": "main.profesor", "pk": 1, "fields": {"prof_ime": "Ivana", "prof_prezime": "Horvat", "prof_email": "ivana.horvat@uniri.hr"}},
+  {"model": "main.profesor", "pk": 2, "fields": {"prof_ime": "Petar", "prof_prezime": "Babić", "prof_email": "petar.babic@uniri.hr"}},
+  {"model": "main.profesor", "pk": 3, "fields": {"prof_ime": "Ana", "prof_prezime": "Marić", "prof_email": "ana.maric@uniri.hr"}},
+
+  {"model": "main.predmet", "pk": 1, "fields": {"predmet_naslov": "Programiranje za web", "predmet_sadrzaj": "Izrada web aplikacija u Djangu.", "predmet_vrijeme_objave": "2026-09-01T08:00:00Z", "predmet_nositelj": 1}},
+  {"model": "main.predmet", "pk": 2, "fields": {"predmet_naslov": "Baze podataka", "predmet_sadrzaj": "Relacijski model, SQL i normalizacija.", "predmet_vrijeme_objave": "2026-09-01T08:00:00Z", "predmet_nositelj": 2}},
+  {"model": "main.predmet", "pk": 3, "fields": {"predmet_naslov": "Operacijski sustavi", "predmet_sadrzaj": "Procesi, memorija i datotečni sustavi.", "predmet_vrijeme_objave": "2026-09-01T08:00:00Z", "predmet_nositelj": 2}},
+  {"model": "main.predmet", "pk": 4, "fields": {"predmet_naslov": "Računalne mreže", "predmet_sadrzaj": "Mrežni slojevi i protokoli.", "predmet_vrijeme_objave": "2026-09-01T08:00:00Z", "predmet_nositelj": null}},
+
+  {"model": "main.student", "pk": 1, "fields": {"student_ime": "Marko", "student_prezime": "Jurić", "student_broj_xice": "0036000001", "student_predmeti": [1, 2]}},
+  {"model": "main.student", "pk": 2, "fields": {"student_ime": "Marko", "student_prezime": "Novak", "student_broj_xice": "0036000002", "student_predmeti": [1, 3]}},
+  {"model": "main.student", "pk": 3, "fields": {"student_ime": "Marko", "student_prezime": "Knežević", "student_broj_xice": "0036000003", "student_predmeti": [2]}},
+  {"model": "main.student", "pk": 4, "fields": {"student_ime": "Ivan", "student_prezime": "Pavić", "student_broj_xice": "0036000004", "student_predmeti": [1, 2, 3]}},
+  {"model": "main.student", "pk": 5, "fields": {"student_ime": "Ana", "student_prezime": "Vuković", "student_broj_xice": "0036000005", "student_predmeti": [1]}},
+  {"model": "main.student", "pk": 6, "fields": {"student_ime": "Petra", "student_prezime": "Tomić", "student_broj_xice": "0036000006", "student_predmeti": []}},
+
+  {"model": "main.zavrsnirad", "pk": 4, "fields": {"mentor": 1, "rad_naslov": "Web aplikacija za evidenciju studenata u Djangu", "rad_zadatak": "Izraditi web aplikaciju za evidenciju predmeta i studenata.", "rad_prvi_upis": true}},
+  {"model": "main.zavrsnirad", "pk": 5, "fields": {"mentor": 2, "rad_naslov": "Optimizacija upita u relacijskim bazama podataka", "rad_zadatak": "Usporediti strategije indeksiranja na stvarnom skupu podataka.", "rad_prvi_upis": true}}
+]
+```
+
+Učitajte podatke:
+
+``` shell
+$ python manage.py loaddata pocetni_podaci
+Installed 15 object(s) from 1 fixture(s)
+```
+
+U bazi su sada 3 profesora, 4 predmeta (jedan bez nositelja), 6 studenata (od kojih se trojica zovu Marko, a jedna studentica nema upisanih predmeta) i 2 završna rada.
+
+{: .upozorenje }
+> Naredba `loaddata` prepisuje postojeće zapise s istim primarnim ključem. Na projektu u kojem već imate vlastite podatke nemojte je pokretati.
+
+### 6. Provjera
+{: .no_toc }
+
+Stvorite administratora i pokrenite poslužitelj:
+
+``` shell
+$ python manage.py createsuperuser
+$ python manage.py runserver
+```
+
+Na adresi `http://127.0.0.1:8000/` treba pisati "Dobro došli!", a na `http://127.0.0.1:8000/admin/` treba vidjeti učitane profesore, predmete, studente i završne radove.
+
+</details>
 
 ## Gdje Django traži predloške
 
