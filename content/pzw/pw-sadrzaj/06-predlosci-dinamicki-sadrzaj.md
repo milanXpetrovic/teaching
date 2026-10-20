@@ -12,10 +12,6 @@ nav_exclude: true
 # Django predlošci i dinamički prikaz sadržaja
 {: .no_toc }
 
-<span class="label label-purple">Poglavlje 6</span>
-<span class="label label-blue">Projekt mysite</span>
-<span class="label">Predznanje: poglavlja 3–5</span>
-
 Pogledi pripremaju podatke, a predlošci određuju kako će ih korisnik vidjeti. U ovom poglavlju aplikaciji za evidenciju predmeta i studenata dajemo pravo HTML sučelje.
 {: .fs-6 .fw-300 }
 
@@ -106,8 +102,6 @@ Funkcija `render(request, predlozak, kontekst)` učita predložak, popuni ga pod
 {: .zadatak-title }
 > Zadatak 6.1 · Studenti zadanog imena
 >
-> <span class="label label-green">Osnovno</span>
->
 > 1. Definirajte pogled koji u bazi pronalazi sve studente zadanog imena. Ime neka se prenosi kroz URL (`studenti/ime/<str:ime>/`).
 > 2. Popis pronađenih studenata proslijedite funkciji `render` i prikažite u predlošku `main/studenti.html`. Ako nema nijednog studenta, ispišite poruku.
 > 3. Posjetite `/studenti/ime/Marko/` i `/studenti/ime/Zvonimir/`.
@@ -163,8 +157,6 @@ path("studenti/ime/<str:ime>/", views.studenti_po_imenu, name="studenti_po_imenu
 
 {: .zadatak-title }
 > Zadatak 6.2 · Početna stranica s brojem zapisa
->
-> <span class="label label-green">Osnovno</span>
 >
 > Izmijenite pogled `homepage` tako da u bazi prebroji studente, predmete i profesore te brojeve proslijedi predlošku `main/index.html`.
 
@@ -319,8 +311,6 @@ Sve stranice obično dijele isto zaglavlje, izbornik i podnožje. Da ih ne bismo
 {: .zadatak-title }
 > Zadatak 6.3 · Osnovni predložak
 >
-> <span class="label label-green">Osnovno</span>
->
 > 1. Stvorite osnovni predložak `templates/base.html` s naslovom stranice, izbornikom i blokom za sadržaj.
 > 2. Provjerite da je u `settings.py` pod `DIRS` navedena putanja `BASE_DIR / "templates"`.
 > 3. Izmijenite `main/index.html` tako da nasljeđuje osnovni predložak.
@@ -418,8 +408,6 @@ Ako se adresa u `urls.py` promijeni, sve poveznice u predlošcima nastavljaju ra
 
 {: .zadatak-title }
 > Zadatak 6.4 · Popis i detalji predmeta
->
-> <span class="label label-yellow">Srednje</span>
 >
 > 1. Napravite pogled `predmeti` koji prikazuje sve predmete s nositeljem i brojem upisanih studenata.
 > 2. Svaki predmet neka bude poveznica na stranicu s detaljima predmeta (`predmeti/<int:pk>/`).
@@ -609,8 +597,6 @@ U predlošku ih učitavamo oznakom `load`: `{% load main_extras %}`, a zatim kor
 {: .zadatak-title }
 > Zadatak 6.5 · Nepostojeći predmet
 >
-> <span class="label label-green">Osnovno</span>
->
 > Posjetite `/predmeti/9999/` i provjerite da dobivate odgovor 404. Što prikazuje stranica s greškom i zašto?
 
 <details class="rjesenje" markdown="block">
@@ -622,8 +608,6 @@ Pogled `predmet_detalj` koristi `get_object_or_404()`, koja za nepostojeći pred
 
 {: .zadatak-title }
 > Zadatak 6.6 · Popis profesora
->
-> <span class="label label-yellow">Srednje</span>
 >
 > 1. Napravite stranicu `profesori/` koja prikazuje sve profesore i za svakog popis predmeta kojima je nositelj.
 > 2. Koristite `related_name` iz modela i `prefetch_related` u pogledu.
@@ -693,8 +677,6 @@ Zahvaljujući `prefetch_related` stranica izvršava samo dva upita, bez obzira n
 {: .zadatak-title }
 > Zadatak 6.7 · Detalji studenta
 >
-> <span class="label label-yellow">Srednje</span>
->
 > Napravite stranicu s detaljima studenta (`studenti/<int:pk>/`) s popisom upisanih predmeta i naslovom završnog rada, ako ga student ima.
 
 <details class="rjesenje" markdown="block">
@@ -760,8 +742,6 @@ path("studenti/<int:pk>/", views.student_detalj, name="student_detalj"),
 {: .zadatak-title }
 > Zadatak 6.8 · Poveznice na studente
 >
-> <span class="label label-green">Osnovno</span>
->
 > Na stranici s detaljima predmeta svakog studenta pretvorite u poveznicu na njegovu stranicu s detaljima iz zadatka 6.7.
 
 <details class="rjesenje" markdown="block">
@@ -782,8 +762,6 @@ U `main/templates/main/predmet_detalj.html` stavku popisa studenata zamijenite s
 
 {: .zadatak-title }
 > Zadatak 6.9 · Aktivna stavka izbornika
->
-> <span class="label label-red">Izazov</span>
 >
 > Istaknite (npr. podebljajte) stavku izbornika koja odgovara trenutnoj stranici. Stavka "Predmeti" neka bude istaknuta i na popisu predmeta i na stranici s detaljima predmeta.
 
