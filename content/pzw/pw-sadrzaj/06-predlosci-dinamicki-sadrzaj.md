@@ -13,7 +13,6 @@ nav_exclude: true
 {: .no_toc }
 
 Pogledi pripremaju podatke, a predlošci određuju kako će ih korisnik vidjeti. U ovom poglavlju aplikaciji za evidenciju predmeta i studenata dajemo pravo HTML sučelje.
-{: .fs-6 .fw-300 }
 
 {: .savjet-title }
 > Ciljevi poglavlja
