@@ -25,13 +25,6 @@ Do sada smo svaki pogled pisali kao funkciju. Popisi objekata i stranice s detal
 > - prikazati statičnu stranicu pogledom `TemplateView`,
 > - opisati redoslijed metoda koje generički pogled poziva pri obradi zahtjeva.
 
-<details open markdown="block">
-  <summary>Sadržaj</summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
 ---
 
 ## Priprema projekta
