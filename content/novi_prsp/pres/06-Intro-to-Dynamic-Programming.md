@@ -112,6 +112,106 @@ for (int i = 2; i <= n; i++) dp[i] = dp[i-1] + dp[i-2];
 
 Obje verzije su $O(n)$. (`long long` drži $F(n)$ do $n = 92$.)
 
+
+---
+
+---
+
+# Tabulacija korak po korak
+
+Bazni slučajevi `dp[0] = 0`, `dp[1] = 1`, zatim `dp[i] = dp[i-1] + dp[i-2]` za `i = 2..n`.
+
+<style scoped>
+.dp-fib { margin-top: 1.2em; }
+.dp-fib .row { display: flex; gap: 8px; }
+.dp-fib .cell { width: 78px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.dp-fib .idx { font-size: 16px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.dp-fib .val { font-size: 30px; height: 48px; line-height: 48px; font-weight: bold; }
+.dp-fib .cell.src { background: #f5db7e; }
+.dp-fib .cell.cur { background: var(--main); color: #fff; }
+.dp-fib .cell.cur .idx { color: #fff; }
+.dp-fib .formula { font-family: monospace; font-size: 28px; margin-top: 1em; min-height: 1.5em; }
+.dp-fib .ctrl { margin-top: 1em; }
+.dp-fib button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.dp-fib button:hover { background: var(--main); color: #fff; }
+.dp-fib .hint { font-size: 16px; color: #6e6e6e; }
+</style>
+
+<div class="dp-fib" data-n="10">
+  <div class="row"></div>
+  <div class="formula"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz tablicu, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll('.dp-fib').forEach(function (root) {
+    var n = parseInt(root.dataset.n, 10);
+    var row = root.querySelector('.row');
+    var formula = root.querySelector('.formula');
+    var slide = root.closest('svg');
+    var cells = [], F = [0, 1];
+    for (var k = 2; k <= n; k++) F[k] = F[k - 1] + F[k - 2];
+    for (var k = 0; k <= n; k++) {
+      var c = document.createElement('div');
+      c.className = 'cell';
+      c.innerHTML = '<div class="idx">' + k + '</div><div class="val"></div>';
+      row.appendChild(c);
+      cells.push(c);
+    }
+    var step = 1;      // zadnji popunjeni indeks; 1 = samo bazni slučajevi
+    var timer = null;
+
+    function render() {
+      cells.forEach(function (c, k) {
+        c.className = 'cell';
+        c.lastChild.textContent = k <= step ? F[k] : '';
+      });
+      if (step < 2) {
+        formula.textContent = 'Bazni slučajevi: dp[0] = 0, dp[1] = 1';
+        return;
+      }
+      cells[step - 1].classList.add('src');
+      cells[step - 2].classList.add('src');
+      cells[step].classList.add('cur');
+      formula.textContent = 'dp[' + step + '] = dp[' + (step - 1) + '] + dp[' + (step - 2) + '] = '
+        + F[step - 1] + ' + ' + F[step - 2] + ' = ' + F[step];
+      if (step === n) formula.textContent += '   ✓';
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step < n) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step > 1) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 1; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 700); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz tablicu, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ';
+      var back = e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp';
+      if ((fwd && next()) || (back && prev())) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
+
 ---
 
 # Koraci u rješavanju DP problema
