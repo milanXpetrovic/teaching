@@ -112,9 +112,6 @@ for (int i = 2; i <= n; i++) dp[i] = dp[i-1] + dp[i-2];
 
 Obje verzije su $O(n)$. (`long long` drži $F(n)$ do $n = 92$.)
 
-
----
-
 ---
 
 # Tabulacija korak po korak
@@ -148,19 +145,29 @@ Bazni slučajevi `dp[0] = 0`, `dp[1] = 1`, zatim `dp[i] = dp[i-1] + dp[i-2]` za 
 
 <script>
 (function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
   document.querySelectorAll('.dp-fib').forEach(function (root) {
     var n = parseInt(root.dataset.n, 10);
     var row = root.querySelector('.row');
     var formula = root.querySelector('.formula');
     var slide = root.closest('svg');
-    var cells = [], F = [0, 1];
-    for (var k = 2; k <= n; k++) F[k] = F[k - 1] + F[k - 2];
-    for (var k = 0; k <= n; k++) {
+    var F = [0, 1];
+    while (F.length !== n + 1) F.push(F[F.length - 1] + F[F.length - 2]);
+    var cells = [], vals = [];
+    for (var k = 0; k !== n + 1; k++) {
       var c = document.createElement('div');
+      var idx = document.createElement('div');
+      var val = document.createElement('div');
       c.className = 'cell';
-      c.innerHTML = '<div class="idx">' + k + '</div><div class="val"></div>';
+      idx.className = 'idx';
+      val.className = 'val';
+      idx.textContent = k;
+      c.appendChild(idx);
+      c.appendChild(val);
       row.appendChild(c);
       cells.push(c);
+      vals.push(val);
     }
     var step = 1;      // zadnji popunjeni indeks; 1 = samo bazni slučajevi
     var timer = null;
@@ -168,9 +175,9 @@ Bazni slučajevi `dp[0] = 0`, `dp[1] = 1`, zatim `dp[i] = dp[i-1] + dp[i-2]` za 
     function render() {
       cells.forEach(function (c, k) {
         c.className = 'cell';
-        c.lastChild.textContent = k <= step ? F[k] : '';
+        vals[k].textContent = Math.max(k, step) === step ? F[k] : '';
       });
-      if (step < 2) {
+      if (step === 1) {
         formula.textContent = 'Bazni slučajevi: dp[0] = 0, dp[1] = 1';
         return;
       }
@@ -182,8 +189,8 @@ Bazni slučajevi `dp[0] = 0`, `dp[1] = 1`, zatim `dp[i] = dp[i-1] + dp[i-2]` za 
       if (step === n) formula.textContent += '   ✓';
     }
     function stopAuto() { clearInterval(timer); timer = null; }
-    function next() { if (step < n) { step++; render(); return true; } stopAuto(); return false; }
-    function prev() { if (step > 1) { step--; render(); return true; } return false; }
+    function next() { if (step !== n) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 1) { step--; render(); return true; } return false; }
     function reset() { stopAuto(); step = 1; render(); }
     var actions = {
       next: next, prev: prev, reset: reset,
@@ -199,9 +206,12 @@ Bazni slučajevi `dp[0] = 0`, `dp[1] = 1`, zatim `dp[i] = dp[i-1] + dp[i-2]` za 
     // Strelice / razmaknica / klikač prvo koračaju kroz tablicu, a tek na kraju mijenjaju slajd
     window.addEventListener('keydown', function (e) {
       if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
-      var fwd = e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ';
-      var back = e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp';
-      if ((fwd && next()) || (back && prev())) {
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
         e.preventDefault();
         e.stopImmediatePropagation();
       }
