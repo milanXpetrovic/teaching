@@ -27,14 +27,14 @@ Prijedlozi za slike (dodati ručno u prezentaciju):
 # Sadržaj
 
 1. **Uvod i reprezentacija grafa**
-   * Modeliranje i lista susjedstva
+   - Modeliranje i lista susjedstva
 2. **Osnovne strategije**
-   * DFS (Depth-First Search)
-   * BFS (Breadth-First Search)
+   - DFS (Depth-First Search)
+   - BFS (Breadth-First Search)
 3. **Primjeri i algoritmi**
-   * Najkraći put u labirintu (BFS)
-   * Povezane komponente (DFS)
-   * Detekcija ciklusa (DFS)
+   - Najkraći put u labirintu (BFS)
+   - Povezane komponente (DFS)
+   - Detekcija ciklusa (DFS)
 4. **Zadaci za vježbu**
 
 ---
@@ -45,9 +45,9 @@ Grafovi su moćna apstrakcija. Čvorovi su objekti, bridovi su veze.
 
 **Primjeri iz stvarnog svijeta:**
 
-* **Mreže cesta:** gradovi (čvorovi) i ceste (bridovi).
-* **Društvene mreže:** ljudi (čvorovi) i prijateljstva (bridovi).
-* **Ovisnosti:** zadaci (čvorovi) i redoslijed izvršavanja (usmjereni bridovi).
+- **Mreže cesta:** gradovi (čvorovi) i ceste (bridovi).
+- **Društvene mreže:** ljudi (čvorovi) i prijateljstva (bridovi).
+- **Ovisnosti:** zadaci (čvorovi) i redoslijed izvršavanja (usmjereni bridovi).
 
 > Pretraživanje grafa je temelj za otkrivanje strukture i odnosa.
 
@@ -80,15 +80,15 @@ int main() {
 
 **1. DFS (Depth-First Search): dubina**
 
-* **Intuicija:** istražujemo jedan put do kraja ("udarimo u zid"), pa se vraćamo (backtrack).
-* **Implementacija:** rekurzija (stog).
-* **Primjene:** povezane komponente, detekcija ciklusa, topološko sortiranje.
+- **Intuicija:** istražujemo jedan put do kraja ("udarimo u zid"), pa se vraćamo (backtrack).
+- **Implementacija:** rekurzija (stog).
+- **Primjene:** povezane komponente, detekcija ciklusa, topološko sortiranje.
 
 **2. BFS (Breadth-First Search): širina**
 
-* **Intuicija:** širimo se u slojevima (valovi u vodi). Prvo posjetimo sve susjede, pa susjede susjeda.
-* **Implementacija:** red (queue).
-* **Primjene:** **najkraći put** u grafu bez težina.
+- **Intuicija:** širimo se u slojevima (valovi u vodi). Prvo posjetimo sve susjede, pa susjede susjeda.
+- **Implementacija:** red (queue).
+- **Primjene:** **najkraći put** u grafu bez težina.
 
 ---
 
@@ -338,9 +338,9 @@ Graf je bez težina (svaki korak košta 1). BFS jamči pronalazak najkraćeg put
 
 1. Stavimo početak `A` u red (`queue`), uz `dist[A] = 0`.
 2. Dok red nije prazan:
-   * Uzmemo polje `(r, c)`.
-   * Za svakog susjeda (gore, dolje, lijevo, desno):
-     * Ako je slobodan i neposjećen: `dist[novi] = dist[stari] + 1` i dodamo ga u red.
+   - Uzmemo polje `(r, c)`.
+   - Za svakog susjeda (gore, dolje, lijevo, desno):
+     - Ako je slobodan i neposjećen: `dist[novi] = dist[stari] + 1` i dodamo ga u red.
 
 ---
 
@@ -602,9 +602,9 @@ Koliko ima povezanih komponenata u grafu?
 
 1. Postavimo sve `visited` na false i `brojac = 0`.
 2. Za svaki `i` od 1 do $N$:
-   * Ako `i` nije posjećen:
-     * `brojac++`
-     * Pokrenemo `dfs(i)` $\to$ to će označiti cijelu komponentu kao posjećenu.
+   - Ako `i` nije posjećen:
+     - `brojac++`
+     - Pokrenemo `dfs(i)` $\to$ to će označiti cijelu komponentu kao posjećenu.
 
 ---
 
@@ -1140,15 +1140,15 @@ Kao i kod komponenata, `dfs_cycle` pokrećemo iz svakog neposjećenog čvora.
 # Zadaci za vježbu (CSES)
 
 1. **[Counting Rooms](https://cses.fi/problemset/task/1192)**
-   * Primjena DFS/BFS na 2D mreži za brojanje komponenata.
+   - Primjena DFS/BFS na 2D mreži za brojanje komponenata.
 2. **[Labyrinth](https://cses.fi/problemset/task/1193)**
-   * BFS za najkraći put + rekonstrukcija puta (pamtimo `parent` polje).
+   - BFS za najkraći put + rekonstrukcija puta (pamtimo `parent` polje).
 3. **[Building Teams](https://cses.fi/problemset/task/1668)**
-   * Provjera je li graf bipartitan (2-bojanje grafa).
+   - Provjera je li graf bipartitan (2-bojanje grafa).
 4. **[Message Route](https://cses.fi/problemset/task/1667)**
-   * Klasičan BFS na grafu (ne na mreži).
+   - Klasičan BFS na grafu (ne na mreži).
 5. **[Round Trip](https://cses.fi/problemset/task/1669)**
-   * Detekcija ciklusa iz Problema 3, uz ispis samog ciklusa.
+   - Detekcija ciklusa iz Problema 3, uz ispis samog ciklusa.
 
 ---
 
