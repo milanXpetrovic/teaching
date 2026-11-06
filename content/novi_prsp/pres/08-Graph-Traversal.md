@@ -1139,78 +1139,108 @@ Kao i kod komponenata, `dfs_cycle` pokrećemo iz svakog neposjećenog čvora.
 })();
 </script>
 
+
 ---
 
-# Zadaci za vježbu (CSES)
+# Zadaci za vježbu
 
-1. **[Counting Rooms](https://cses.fi/problemset/task/1192)**
-   - Primjena DFS/BFS na 2D mreži za brojanje komponenata.
-2. **[Labyrinth](https://cses.fi/problemset/task/1193)**
-   - BFS za najkraći put + rekonstrukcija puta (pamtimo `parent` polje).
-3. **[Building Teams](https://cses.fi/problemset/task/1668)**
-   - Provjera je li graf bipartitan (2-bojanje grafa).
-4. **[Message Route](https://cses.fi/problemset/task/1667)**
-   - Klasičan BFS na grafu (ne na mreži).
-5. **[Round Trip](https://cses.fi/problemset/task/1669)**
-   - Detekcija ciklusa iz Problema 3, uz ispis samog ciklusa.
+Svaki zadatak ima pitanja za početak i tri hinta. Hint otvaramo tek kad zapnete.
+
+<div class="twocols">
+
+**Uz današnje primjere**
+
+1. [Counting Rooms](https://cses.fi/problemset/task/1192) (CSES)
+2. [Building Roads](https://cses.fi/problemset/task/1666) (CSES)
+3. [Labyrinth](https://cses.fi/problemset/task/1193) (CSES)
+4. [Building Teams](https://cses.fi/problemset/task/1668) (CSES)
+5. [Mahmoud and Ehab and the bipartiteness](https://codeforces.com/problemset/problem/862/B) (CF)
+6. [Message Route](https://cses.fi/problemset/task/1667) (CSES)
+7. [Two Buttons](https://codeforces.com/problemset/problem/520/B) (CF)
+
+<p class="break"></p>
+
+**Miješani zadaci**
+
+8. [Round Trip](https://cses.fi/problemset/task/1669) (CSES)
+9. [New Year Transportation](https://codeforces.com/problemset/problem/500/A) (CF)
+10. [Monsters](https://cses.fi/problemset/task/1194) (CSES) ★
+
+</div>
 
 ---
 
 <!-- _class: title -->
-# 1. Counting Rooms (CSES)
+# Vježba 1: Counting Rooms (CSES)
 
-## Brojanje povezanih komponenata na mreži
-
----
-
-# Analiza: Counting Rooms
-
-**Problem:**
-Zadan je tlocrt zgrade veličine $N \times M$. Neka polja su zidovi (`#`), a neka pod (`.`).
-Želimo prebrojati koliko ima "soba". Soba je skup podnih polja povezanih horizontalno ili vertikalno.
-
-**Intuicija:**
-Ovo je klasičan problem **brojanja povezanih komponenata**, ali na implicitnom grafu (mreži).
-Svako polje `.` je čvor, a susjedna polja `.` povezana su bridom.
-
-**Algoritam:**
-Prolazimo kroz svako polje $(i, j)$ u mreži:
-
-1. Ako je polje zid (`#`) ili već posjećeno $\to$ preskačemo ga.
-2. Ako je polje pod (`.`) i nije posjećeno $\to$ pronašli smo novu sobu!
-   - Povećamo brojač soba.
-   - Pokrenemo DFS/BFS od tog polja da označimo cijelu sobu kao posjećenu.
+## Samostalni zadatak: graf na mreži
 
 ---
 
-# Implementacija: Counting Rooms
+# Zadatak: Counting Rooms
 
-```cpp
-int n, m;
-vector<string> grid;
-vector<vector<bool>> visited;
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+Zadan je tlocrt zgrade veličine $n \times m$: `#` je zid, a `.` pod.
+**Soba** je skup podnih polja povezanih horizontalno ili vertikalno. Koliko soba ima zgrada?
 
-void dfs(int x, int y) {
-    visited[x][y] = true;
-    for (int i = 0; i < 4; ++i) {
-        int nx = x + dx[i], ny = y + dy[i];
-        if (nx >= 0 && nx < n && ny >= 0 && ny < m &&
-            grid[nx][ny] == '.' && !visited[nx][ny]) {
-            dfs(nx, ny);
-        }
-    }
-}
+**Ograničenja:** $n, m \le 1000$
 
-// U main-u:
-int rooms = 0;
-for (int i = 0; i < n; ++i)
-    for (int j = 0; j < m; ++j)
-        if (grid[i][j] == '.' && !visited[i][j]) { rooms++; dfs(i, j); }
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+5 8
+########
+#..#...#
+####.#.#
+#..#...#
+########
 ```
 
-**Oprez:** rekurzija na mreži $1000 \times 1000$ može ići u dubinu do $10^6$. Lokalno (posebno na Windowsima) to može srušiti program zbog malog stacka, pa je BFS sigurniji izbor.
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+3
+```
+
+</div>
+
+Predaja: [Counting Rooms](https://cses.fi/problemset/task/1192)
+
+---
+
+# Counting Rooms: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Ovdje graf nije zadan listom bridova. Što su čvorovi, a što bridovi?
+2. Koliko čvorova može imati taj graf? Koju složenost dopuštaju ograničenja?
+3. Na koji problem s današnjih vježbi vas „soba” podsjeća?
+4. Koliko duboko može ići rekurzivni DFS na takvoj mreži?
+
+---
+
+# Counting Rooms: Hint 1: opažanje
+
+Svako podno polje je **čvor**, a dva susjedna podna polja (gore, dolje, lijevo, desno) povezana su **bridom**.
+
+Soba je tada upravo **povezana komponenta** tog grafa.
+
+---
+
+# Counting Rooms: Hint 2: tehnika
+
+Brojanje komponenata kao u **Problemu 2**, samo što vanjska petlja ide po svim poljima $(i, j)$, a susjede dobivamo pomacima `dx`, `dy` u četiri smjera.
+
+---
+
+# Counting Rooms: Hint 3: skica rješenja
+
+Za svako polje koje je pod i još nije posjećeno: `rooms++` i pretraga iz njega označi cijelu sobu. Složenost je $O(nm)$.
+
+**Oprez:** rekurzija na mreži $1000 \times 1000$ može ići u dubinu do $10^6$, što lokalno (posebno na Windowsima) zna srušiti program. BFS je sigurniji izbor.
 
 ---
 
@@ -1406,75 +1436,154 @@ Skeniramo polja redom. Svako neposjećeno podno polje pokreće `dfs` koji oboji 
 ---
 
 <!-- _class: title -->
-# 2. Labyrinth (CSES)
+# Vježba 2: Building Roads (CSES)
 
-## Najkraći put i rekonstrukcija
-
----
-
-# Analiza: Labyrinth
-
-**Problem:**
-Treba naći najkraći put od `A` do `B` u labirintu. Ako postoji, ispisujemo `YES`, duljinu i sam put (niz znakova `L`, `R`, `U`, `D`).
-
-**Intuicija:**
-Najkraći put u grafu bez težina $\to$ **BFS**.
-Da bismo ispisali put, nije dovoljno pamtiti samo udaljenost. Moramo pamtiti **odakle smo došli**.
-
-**Struktura za rekonstrukciju:**
-Koristimo 2D polje `parent[N][M]` koje za svako polje pamti smjer kojim smo došli do njega.
-Kada BFS dođe do `B`, krećemo od `B` i pratimo `parent` unatrag sve do `A`.
+## Samostalni zadatak: povezane komponente
 
 ---
 
-# Implementacija: Labyrinth (BFS)
+# Zadatak: Building Roads
 
-```cpp
-// Smjerovi: 0 = U, 1 = D, 2 = L, 3 = R
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+Imamo $n$ gradova i $m$ dvosmjernih cesta. Treba izgraditi **najmanji broj novih cesta** tako da se iz svakog grada može doći u svaki drugi.
+Ispisujemo broj novih cesta $k$, a zatim same ceste (bilo koje ispravno rješenje se prihvaća).
 
-queue<pair<int, int>> q;
-q.push({sr, sc});
-visited[sr][sc] = true;
+**Ograničenja:** $n \le 10^5$, $m \le 2 \cdot 10^5$
 
-while (!q.empty()) {
-    auto [x, y] = q.front(); q.pop();
-    if (x == er && y == ec) break; // Našli smo B
+<div class="twocols">
 
-    for (int i = 0; i < 4; ++i) {
-        int nx = x + dx[i], ny = y + dy[i];
-        // isValid provjerava granice i zid
-        if (isValid(nx, ny) && !visited[nx][ny]) {
-            visited[nx][ny] = true;
-            parent[nx][ny] = i; // Pamtimo indeks smjera
-            q.push({nx, ny});
-        }
-    }
-}
+**Primjer ulaza:**
+
+```text
+4 2
+1 2
+3 4
 ```
 
----
+<p class="break"></p>
 
-# Labyrinth: rekonstrukcija puta
+**Primjer izlaza:**
 
-Ako je `visited[er][ec]` true, idemo od `B` unatrag prema `A`:
-
-```cpp
-string path;
-int x = er, y = ec;
-while (x != sr || y != sc) {
-    int d = parent[x][y];
-    path += "UDLR"[d];   // Slovo za smjer kojim smo došli
-    x -= dx[d];          // Pomak u suprotnom smjeru
-    y -= dy[d];
-}
-reverse(path.begin(), path.end()); // Išli smo od kraja prema početku
-
-cout << "YES\n" << path.size() << "\n" << path << "\n";
+```text
+1
+2 3
 ```
 
-Ako `B` nije posjećen, ispisujemo `NO`.
+</div>
+
+Predaja: [Building Roads](https://cses.fi/problemset/task/1666)
+
+---
+
+# Building Roads: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Što su čvorovi, a što bridovi?
+2. Kako izgleda graf u kojem se iz svakog grada može doći u svaki drugi?
+3. Koji vam je riješeni primjer s današnjih vježbi najsličniji?
+4. Koju složenost dopuštaju ograničenja?
+
+---
+
+# Building Roads: Hint 1: opažanje
+
+Gradovi koji su već međusobno povezani ponašaju se kao **jedan veliki grad**.
+
+Ako graf ima $k$ povezanih komponenata, koliko je najmanje novih cesta potrebno da ih sve spojimo?
+
+---
+
+# Building Roads: Hint 2: tehnika
+
+Prebrojite komponente točno kao u **Problemu 2**: vanjska petlja po čvorovima i `dfs` (ili BFS) iz svakog neposjećenog.
+
+Iz svake komponente zapamtite **jednog predstavnika**: čvor `i` iz kojeg ste pokrenuli pretragu.
+
+---
+
+# Building Roads: Hint 3: skica rješenja
+
+Ako su predstavnici $r_1, r_2, \dots, r_k$, dovoljno je izgraditi ceste
+
+$$ r_1 - r_2, \quad r_2 - r_3, \quad \dots, \quad r_{k-1} - r_k $$
+
+Ispis: $k - 1$, zatim te ceste. Složenost je $O(n + m)$.
+
+---
+
+<!-- _class: title -->
+# Vježba 3: Labyrinth (CSES)
+
+## Samostalni zadatak: najkraći put s ispisom puta
+
+---
+
+# Zadatak: Labyrinth
+
+Zadan je labirint $n \times m$: `#` je zid, `.` pod, `A` početak i `B` cilj. Krećemo se gore, dolje, lijevo i desno.
+Ako postoji put od `A` do `B`, ispisujemo `YES`, duljinu **najkraćeg** puta i sam put kao niz znakova `L`, `R`, `U`, `D`. Inače ispisujemo `NO`.
+
+**Ograničenja:** $n, m \le 1000$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+5 8
+########
+#.A#...#
+#.##.#B#
+#......#
+########
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+YES
+9
+LDDRRRRRU
+```
+
+</div>
+
+Predaja: [Labyrinth](https://cses.fi/problemset/task/1193)
+
+---
+
+# Labyrinth: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Koji algoritam daje najkraći put kad svaki korak košta isto?
+2. Što još treba pamtiti da bismo na kraju ispisali **put**, a ne samo njegovu duljinu?
+3. Kojim redom ćemo dobiti slova puta ako ga slažemo od `B` prema `A`?
+4. Što ispisujemo ako `B` nije dostižan?
+
+---
+
+# Labyrinth: Hint 1: opažanje
+
+Najkraći put u mreži u kojoj svaki korak košta 1 je posao za **BFS**, kao u **Problemu 1**.
+
+Ali `dist` sam po sebi ne govori kojim smo putem došli.
+
+---
+
+# Labyrinth: Hint 2: tehnika
+
+Za svako polje pamtite **smjer kojim ste u njega ušli**, npr. `parent[x][y]` = indeks smjera (0 = `U`, 1 = `D`, 2 = `L`, 3 = `R`).
+
+---
+
+# Labyrinth: Hint 3: skica rješenja
+
+Kad BFS dođe do `B`, vraćajte se od `B` prema `A`: dodajte slovo zapamćenog smjera i pomaknite se u **suprotnom** smjeru.
+
+Slova tako dobivate od kraja prema početku, pa string na kraju okrenite (`reverse`). Ako `B` nije posjećen, ispis je `NO`.
 
 ---
 
@@ -1702,58 +1811,79 @@ BFS pamti smjer kojim je ušao u polje (strelica). Nakon što nađe `B`, put rek
 ---
 
 <!-- _class: title -->
-# 3. Building Teams (CSES)
+# Vježba 4: Building Teams (CSES)
 
-## Bipartitnost grafa (2-bojanje)
-
----
-
-# Analiza: Building Teams
-
-**Problem:**
-Treba podijeliti učenike u dva tima tako da nijedan par prijatelja nije u istom timu.
-
-**Intuicija:**
-Ovo je problem provjere je li graf **bipartitan**.
-Graf je bipartitan ako se njegovi čvorovi mogu obojiti s 2 boje tako da svaki brid spaja čvorove različitih boja.
-
-**Algoritam (BFS ili DFS):**
-
-1. Prvi neobojani čvor obojimo bojom 1.
-2. Sve njegove susjede obojimo bojom 2.
-3. Sve susjede susjeda obojimo bojom 1...
-4. Ako naiđemo na susjeda koji je već obojan **istom** bojom kao trenutni čvor $\to$ **IMPOSSIBLE** (postoji neparan ciklus).
+## Samostalni zadatak: podjela u dva tima
 
 ---
 
-# Implementacija: Building Teams
+# Zadatak: Building Teams
 
-```cpp
-vector<int> color(n + 1, 0); // 0: neobojano, 1: tim 1, 2: tim 2
-bool possible = true;
+U razredu je $n$ učenika i $m$ parova prijatelja. Učenike treba podijeliti u **dva tima** tako da nijedan par prijatelja nije u istom timu.
+Ispisujemo za svakog učenika tim (1 ili 2), a ako podjela nije moguća, `IMPOSSIBLE`. Prihvaća se bilo koja ispravna podjela.
 
-for (int i = 1; i <= n; ++i) {
-    if (color[i] == 0) { // Nova komponenta
-        queue<int> q;
-        q.push(i);
-        color[i] = 1;
+**Ograničenja:** $n \le 10^5$, $m \le 2 \cdot 10^5$
 
-        while (!q.empty()) {
-            int u = q.front(); q.pop();
-            for (int v : adj[u]) {
-                if (color[v] == 0) {
-                    color[v] = (color[u] == 1) ? 2 : 1; // Suprotna boja
-                    q.push(v);
-                } else if (color[v] == color[u]) {
-                    possible = false; // Konflikt!
-                }
-            }
-        }
-    }
-}
-if (!possible) cout << "IMPOSSIBLE\n";
-else { for (int i = 1; i <= n; ++i) cout << color[i] << " "; cout << "\n"; }
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+5 3
+1 2
+1 3
+4 5
 ```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+1 2 2 1 2
+```
+
+</div>
+
+Predaja: [Building Teams](https://cses.fi/problemset/task/1668)
+
+---
+
+# Building Teams: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Kako uvjet „prijatelji nisu u istom timu” izgleda na grafu?
+2. Ako znamo tim jednog učenika, što znamo o njegovim prijateljima? A o prijateljima prijatelja?
+3. Nacrtajte najmanji primjer u kojem podjela **nije** moguća. Kakav je to graf?
+4. Što s učenicima koji nisu povezani s ostalima?
+
+---
+
+# Building Teams: Hint 1: opažanje
+
+Tim jednog učenika određuje tim svih njegovih prijatelja (suprotni), a time i prijatelja njihovih prijatelja...
+
+Podjela ne postoji točno onda kad graf ima **ciklus neparne duljine** (najmanji je trokut).
+
+---
+
+# Building Teams: Hint 2: tehnika
+
+Ovo je **2-bojanje** grafa (provjera bipartitnosti). Prvi neobojani čvor dobije boju 1, a njegovi susjedi suprotnu boju, BFS-om ili DFS-om.
+
+Graf ne mora biti povezan, pa bojanje pokrećemo iz svakog neobojanog čvora.
+
+---
+
+# Building Teams: Hint 3: skica rješenja
+
+Pri obradi brida $u - v$:
+
+- ako $v$ još nije obojan, dobiva suprotnu boju od $u$ i ide u red,
+- ako $v$ ima **istu** boju kao $u$, podjela nije moguća (`IMPOSSIBLE`).
+
+Ako konflikta nema, ispisujemo boje redom. Složenost $O(n + m)$.
 
 ---
 
@@ -1984,60 +2114,154 @@ Plavo = tim 1, narančasto = tim 2. Brid između dvaju čvorova iste boje je kon
 ---
 
 <!-- _class: title -->
-# 4. Message Route (CSES)
+# Vježba 5: Mahmoud and Ehab and the bipartiteness (Codeforces)
 
-## Najkraći put u općem grafu
-
----
-
-# Analiza: Message Route
-
-**Problem:**
-Mreža računala. Treba naći najkraći put (minimalan broj konekcija) od računala 1 do računala $N$.
-
-**Sličnost s Labyrinthom:**
-Isti princip (BFS za najkraći put + rekonstrukcija), ali struktura je **graf** (lista susjedstva), a ne 2D mreža.
-
-**Struktura:**
-
-- `adj[N]`: lista susjedstva.
-- `dist[N]`: udaljenost od izvora (inicijalno $-1$, tj. neposjećen).
-- `parent[N]`: prethodni čvor na putu (za rekonstrukciju).
+## Samostalni zadatak: 2-bojanje
 
 ---
 
-# Implementacija: Message Route
+# Zadatak: Mahmoud and Ehab and the bipartiteness
 
-```cpp
-vector<int> dist(n + 1, -1), parent(n + 1, 0);
-queue<int> q;
-q.push(1);
-dist[1] = 0;
+Zadano je **stablo** s $n$ čvorova. Želimo dodati **što više bridova** tako da graf ostane **bipartitan** i jednostavan (bez petlji i bez višestrukih bridova).
+Koliko najviše bridova možemo dodati?
 
-while (!q.empty()) {
-    int u = q.front(); q.pop();
-    if (u == n) break; // Stigli smo do cilja
+**Ograničenja:** $n \le 10^5$
 
-    for (int v : adj[u]) {
-        if (dist[v] == -1) { // Ako nije posjećen
-            dist[v] = dist[u] + 1;
-            parent[v] = u;   // Pamtimo odakle smo došli
-            q.push(v);
-        }
-    }
-}
+<div class="twocols">
 
-if (dist[n] == -1) { cout << "IMPOSSIBLE\n"; return 0; }
+**Primjer ulaza:**
 
-// Rekonstrukcija od n do 1 (parent[1] = 0 označava početak)
-vector<int> path;
-for (int curr = n; curr != 0; curr = parent[curr]) path.push_back(curr);
-reverse(path.begin(), path.end());
-
-cout << path.size() << "\n";
-for (int x : path) cout << x << " ";
-cout << "\n";
+```text
+5
+1 2
+2 3
+3 4
+4 5
 ```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+2
+```
+
+</div>
+
+Predaja: [Mahmoud and Ehab and the bipartiteness](https://codeforces.com/problemset/problem/862/B)
+
+---
+
+# Mahmoud and Ehab and the bipartiteness: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Je li stablo uvijek bipartitno? Zašto?
+2. Između kojih parova čvorova smijemo dodati brid, a da graf ostane bipartitan?
+3. Koliko najviše može biti rezultat za $n = 10^5$? Stane li u `int`?
+4. Koji riješeni primjer koristi istu ideju?
+
+---
+
+# Mahmoud and Ehab and the bipartiteness: Hint 1: opažanje
+
+Stablo nema ciklusa, pa nema ni neparnih ciklusa: **uvijek** se može obojiti s dvije boje.
+
+Obojite ga kao u **Building Teams**.
+
+---
+
+# Mahmoud and Ehab and the bipartiteness: Hint 2: tehnika
+
+Neka je $c_1$ čvorova boje 1 i $c_2$ čvorova boje 2.
+
+U bipartitnom grafu brid smije spajati samo čvorove **različitih** boja, pa graf može imati najviše $c_1 \cdot c_2$ bridova.
+
+---
+
+# Mahmoud and Ehab and the bipartiteness: Hint 3: skica rješenja
+
+Neki od tih bridova već postoje: stablo ima $n - 1$ bridova. Odgovor je
+
+$$ c_1 \cdot c_2 - (n - 1) $$
+
+Pazite: $c_1 \cdot c_2$ može biti oko $2,5 \cdot 10^9$, pa je potreban `long long`.
+
+---
+
+<!-- _class: title -->
+# Vježba 6: Message Route (CSES)
+
+## Samostalni zadatak: najkraći put u općem grafu
+
+---
+
+# Zadatak: Message Route
+
+Mreža ima $n$ računala i $m$ veza. Poruku treba poslati s računala 1 na računalo $n$ preko **što manje računala**.
+Ispisujemo broj računala na putu i sam put, ili `IMPOSSIBLE` ako put ne postoji.
+
+**Ograničenja:** $n \le 10^5$, $m \le 2 \cdot 10^5$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+5 5
+1 2
+1 3
+1 4
+2 3
+5 4
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+3
+1 4 5
+```
+
+</div>
+
+Predaja: [Message Route](https://cses.fi/problemset/task/1667)
+
+---
+
+# Message Route: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Koji je ovo problem u jeziku grafova? Na koji zadatak s današnjih vježbi je najsličniji?
+2. Što je ovdje drugačije nego u labirintu: kako dohvaćamo susjede?
+3. Što pamtimo da bismo mogli ispisati put?
+4. Kako ćemo znati da put ne postoji?
+
+---
+
+# Message Route: Hint 1: opažanje
+
+Ovo je isti zadatak kao **Labyrinth**: najkraći put u grafu bez težina i ispis tog puta.
+
+Razlika je samo u tome što je graf zadan **listom susjedstva**, a ne mrežom.
+
+---
+
+# Message Route: Hint 2: tehnika
+
+BFS iz čvora 1 uz dva niza: `dist` (−1 znači neposjećen) i `parent[v] = u`, čvor iz kojeg smo prvi put došli u $v$.
+
+---
+
+# Message Route: Hint 3: skica rješenja
+
+Ako je `dist[n] == -1`, ispis je `IMPOSSIBLE`.
+
+Inače krenemo od $n$ i pratimo `parent` dok ne dođemo do 1, okrenemo dobiveni niz i ispišemo njegovu duljinu i čvorove.
 
 ---
 
@@ -2278,6 +2502,312 @@ Ispod čvora je `dist`, plavi bridovi su `parent` veze. Kad skinemo čvor N, put
 })();
 </script>
 
+---
+
+<!-- _class: title -->
+# Vježba 7: Two Buttons (Codeforces)
+
+## Samostalni zadatak: BFS na implicitnom grafu
+
+---
+
+# Zadatak: Two Buttons
+
+Uređaj prikazuje broj $n$. **Crveni** gumb udvostručuje broj, a **plavi** oduzima 1. Ako broj postane nepozitivan, uređaj se kvari.
+Koliko je najmanje pritisaka potrebno da na zaslonu dobijemo broj $m$?
+
+**Ograničenja:** $1 \le n, m \le 10^4$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+4 6
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+2
+```
+
+</div>
+
+Predaja: [Two Buttons](https://codeforces.com/problemset/problem/520/B)
+
+---
+
+# Two Buttons: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Ovdje nema zadanog grafa. Što bi mogli biti čvorovi, a što bridovi?
+2. Imaju li svi „koraci” istu cijenu? Što to govori o izboru algoritma?
+3. Koliko velik broj ikad ima smisla posjetiti?
+4. Može li se zadatak riješiti i unatrag, od $m$ prema $n$?
+
+---
+
+# Two Buttons: Hint 1: opažanje
+
+Svaki broj je **čvor**. Iz broja $x$ vode dva brida: prema $2x$ i prema $x - 1$.
+
+Svaki pritisak košta 1, pa je najmanji broj pritisaka **najkraći put u grafu bez težina**.
+
+---
+
+# Two Buttons: Hint 2: tehnika
+
+BFS iz $n$, kao u **Message Route**, samo što susjede računamo u hodu umjesto da ih čitamo iz `adj`.
+
+Nema smisla ići ispod 1 ni puno iznad $2 \cdot 10^4$, pa `dist` niz te veličine pokriva sve što nam treba.
+
+---
+
+# Two Buttons: Hint 3: skica rješenja
+
+`dist[n] = 0`, u redu je $n$. Za svaki $x$ iz reda probamo $2x$ i $x - 1$ (ako su u granicama i neposjećeni). Odgovor je `dist[m]`.
+
+*Bonus:* postoji i kraće rješenje unatrag od $m$: dok je $m > n$, ako je $m$ neparan dodamo 1, inače podijelimo s 2. Zašto je to ispravno?
+
+---
+
+<!-- _class: title -->
+# Miješani zadaci
+
+## Ovaj put ne kažemo koja je tehnika
+
+---
+
+# Kako pristupiti nepoznatom zadatku
+
+1. **Pročitajte ograničenja:** koju složenost dopuštaju?
+2. **Modelirajte:** što su čvorovi, a što bridovi? Je li graf zadan ili ga tek treba zamisliti?
+3. **Prepoznajte obrazac:** komponente, najkraći put, bojanje, ciklus... ili nešto jednostavnije?
+4. **Brute force:** koje je najjednostavnije ispravno rješenje i je li dovoljno brzo?
+5. **Rubni slučajevi:** nepovezan graf, $n = 1$, rješenje ne postoji...
+
+---
+
+<!-- _class: title -->
+# Vježba 8: Round Trip (CSES)
+
+## Miješani zadatak
+
+---
+
+# Zadatak: Round Trip
+
+Imamo $n$ gradova i $m$ dvosmjernih cesta. Treba pronaći **kružno putovanje**: krenuti iz nekog grada, posjetiti barem još dva grada i vratiti se na početak, a da nijedan grad (osim početnog) ne posjetimo dvaput.
+Ispisujemo broj gradova na putu (početni se broji dvaput) i same gradove, ili `IMPOSSIBLE`. Prihvaća se bilo koji ispravni ciklus.
+
+**Ograničenja:** $n \le 10^5$, $m \le 2 \cdot 10^5$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+4 4
+1 2
+2 3
+3 1
+3 4
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+4
+1 2 3 1
+```
+
+</div>
+
+Predaja: [Round Trip](https://cses.fi/problemset/task/1669)
+
+---
+
+# Round Trip: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Kako se „kružno putovanje” zove u jeziku grafova?
+2. Što od ovoga već zna kod iz Problema 3, a što još ne zna?
+3. Koje dodatne podatke treba pamtiti da bismo ciklus mogli i ispisati?
+4. Što ako graf nije povezan?
+
+---
+
+# Round Trip: Hint 1: opažanje
+
+Kad DFS iz **Problema 3** naiđe na povratni brid $u - v$, ciklus je upravo
+
+$$ v \to \dots \to u \to v $$
+
+gdje je $v \to \dots \to u$ dio DFS stabla.
+
+---
+
+# Round Trip: Hint 2: tehnika
+
+Za svaki čvor pamtite `parent[x]`. Od $u$ se penjite po roditeljima dok ne dođete do $v$: to su svi čvorovi ciklusa.
+
+---
+
+# Round Trip: Hint 3: skica rješenja
+
+DFS pokrećite iz svakog neposjećenog čvora, jer graf ne mora biti povezan.
+
+Ispis: čvorovi $u, parent[u], \dots, v$, pa još jednom $u$ na kraju. Smjer obilaska nije bitan.
+
+---
+
+<!-- _class: title -->
+# Vježba 9: New Year Transportation (Codeforces)
+
+## Miješani zadatak
+
+---
+
+# Zadatak: New Year Transportation
+
+Imamo $n$ ćelija u nizu. Za svaki $i$ od 1 do $n - 1$ postoji **jednosmjerni** portal iz ćelije $i$ u ćeliju $i + a_i$, gdje je $1 \le a_i \le n - i$.
+Krećemo iz ćelije 1. Možemo li stići do ćelije $t$?
+
+**Ograničenja:** $n \le 3 \cdot 10^4$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+8 4
+1 2 1 2 1 2 1
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+YES
+```
+
+</div>
+
+Predaja: [New Year Transportation](https://codeforces.com/problemset/problem/500/A)
+
+---
+
+# New Year Transportation: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Kako izgleda ovaj graf? Koliko izlaznih bridova ima svaki čvor?
+2. Treba li nam uopće BFS ili DFS?
+3. Može li se put ikad vratiti ulijevo?
+
+---
+
+# New Year Transportation: Hint 1: opažanje
+
+Iz svake ćelije vodi **točno jedan** portal i on uvijek ide udesno.
+
+Put iz ćelije 1 je zato potpuno određen: nema nikakvog izbora.
+
+---
+
+# New Year Transportation: Hint 2: tehnika
+
+Kad nema izbora, nema ni pretrage. Dovoljno je **simulirati** skokove od ćelije 1.
+
+---
+
+# New Year Transportation: Hint 3: skica rješenja
+
+`cur = 1;` pa dok je `cur < t`: `cur += a[cur]`. Odgovor je `YES` ako je na kraju `cur == t`.
+
+Pouka: prije nego što napišete BFS, provjerite treba li vam uopće.
+
+---
+
+<!-- _class: title -->
+# Vježba 10: Monsters (CSES) ★
+
+## Izazov: za one koji žele više
+
+---
+
+# Zadatak: Monsters
+
+Labirint $n \times m$: `#` je zid, `.` pod, `A` naša pozicija, `M` čudovišta. Želimo doći do bilo kojeg **rubnog** polja.
+U svakom potezu pomičemo se mi i sva čudovišta; čudovišta se kreću optimalno i unaprijed znaju naš put.
+Ako postoji siguran put, ispisujemo `YES`, njegovu duljinu i put (`L`, `R`, `U`, `D`), inače `NO`.
+
+**Ograničenja:** $n, m \le 1000$
+
+<div class="twocols">
+
+**Primjer ulaza:**
+
+```text
+3 5
+#####
+#M.A.
+#####
+```
+
+<p class="break"></p>
+
+**Primjer izlaza:**
+
+```text
+YES
+1
+R
+```
+
+</div>
+
+Predaja: [Monsters](https://cses.fi/problemset/task/1194)
+
+---
+
+# Monsters: prije nego što krenete
+
+Odgovorite na papiru, prije pisanja koda:
+
+1. Kada je polje „sigurno” za nas? Usporedite naše vrijeme dolaska s vremenom dolaska čudovišta.
+2. Kako za svako polje izračunati kada do njega prvo stigne **bilo koje** čudovište, bez posebnog BFS-a iz svakog čudovišta?
+3. Koji dio rješenja već znate iz Labyrintha?
+
+---
+
+# Monsters: Hint 1: opažanje
+
+Za svako polje izračunajte najranije vrijeme dolaska čudovišta. Polje je sigurno ako mi stignemo **strogo prije** njih.
+
+---
+
+# Monsters: Hint 2: tehnika
+
+**Multi-source BFS:** na početku u red stavite **sva** čudovišta s udaljenošću 0.
+
+Jedan BFS tada daje udaljenost do najbližeg čudovišta za svako polje, u $O(nm)$.
+
+---
+
+# Monsters: Hint 3: skica rješenja
+
+Drugi BFS kreće iz `A` i ulazi u polje samo ako je naše vrijeme dolaska manje od vremena čudovišta.
+
+Prvo rubno polje koje dosegnemo je cilj, a put rekonstruiramo kao u **Labyrinthu**. Pazite: ako je `A` već na rubu, odgovor je `YES` s putem duljine 0.
 ---
 
 # Zadaci za vježbu (Codeforces)
