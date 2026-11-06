@@ -94,60 +94,58 @@ int main() {
 
 # BFS vs. DFS na istom grafu
 
-Isti graf, isti početni čvor 1, susjedi se obilaze uzlazno. Broj ispod čvora je redoslijed posjeta.
+Početni čvor je 1, susjedi se obilaze uzlazno, a broj ispod čvora je redoslijed posjeta.
 
 <style scoped>
-.gr-strat { margin-top: 0.4em; }
-.gr-strat .chips { font-size: 20px; margin-bottom: 0.5em; }
-.gr-strat .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin-left: 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; }
-.gr-strat .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
-.gr-strat .row { display: flex; gap: 8px; }
-.gr-strat .cell { width: 78px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
-.gr-strat .idx { font-size: 16px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
-.gr-strat .val { font-size: 30px; height: 46px; line-height: 46px; font-weight: bold; }
-.gr-strat .cell.todo .val { color: #b5b5b5; }
-.gr-strat .cell.src { background: #f5db7e; }
-.gr-strat .cell.best { background: #9fdc9f; }
-.gr-strat .cell.cur { background: var(--main); color: #fff; }
-.gr-strat .cell.cur .idx, .gr-strat .cell.cur .val { color: #fff; }
-.gr-strat .line1, .gr-strat .line2 { font-family: monospace; font-size: 22px; min-height: 1.4em; }
-.gr-strat .line1 { margin-top: 0.7em; }
-.gr-strat .line2 { font-weight: bold; }
-.gr-strat .ctrl { margin-top: 0.7em; }
+.gr-strat { margin-top: 0.2em; }
+.gr-strat .panels { display: flex; }
+.gr-strat .pan { flex: 1; padding: 0 20px; }
+.gr-strat .pan + .pan { border-left: 2px solid #d0d0d0; }
+.gr-strat .ptitle { font-weight: bold; font-size: 24px; color: var(--main); }
+.gr-strat .gwrap { display: flex; justify-content: center; }
+.gr-strat .st { font-family: monospace; font-size: 20px; min-height: 1.4em; }
+.gr-strat .ds { display: flex; align-items: center; min-height: 40px; font-size: 20px; }
+.gr-strat .dsl { width: 64px; color: #6e6e6e; }
+.gr-strat .chip { display: inline-block; min-width: 26px; text-align: center; padding: 2px 8px; margin-right: 6px; border: 2px solid #141414; border-radius: 8px; font-weight: bold; }
+.gr-strat .chip.new { background: #f5db7e; }
+.gr-strat .chip.top { background: var(--main); border-color: var(--main); color: #fff; }
+.gr-strat .empty { color: #b5b5b5; font-style: italic; }
+.gr-strat .ord { font-size: 20px; min-height: 1.4em; }
+.gr-strat .ord b { color: var(--main); }
+.gr-strat .ctrl { margin-top: 0.5em; }
 .gr-strat button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
 .gr-strat button:hover { background: var(--main); color: #fff; }
 .gr-strat .hint { font-size: 16px; color: #6e6e6e; }
-.gr-strat .gwrap { display: flex; justify-content: center; }
 .gr-strat svg .edge { stroke: #a0a0a0; stroke-width: 3; transition: stroke .25s; }
 .gr-strat svg .edge.tree { stroke: var(--main); stroke-width: 5; }
-.gr-strat svg .edge.chk { stroke: #e0a800; stroke-width: 6; }
 .gr-strat svg .edge.path { stroke: #2e9e44; stroke-width: 7; }
-.gr-strat svg .edge.back { stroke: #d62828; stroke-width: 7; }
 .gr-strat svg .node circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
 .gr-strat svg .node .lbl { font-size: 20px; font-weight: bold; fill: #141414; }
 .gr-strat svg .node .sub { font-size: 16px; font-weight: bold; fill: #6e6e6e; }
 .gr-strat svg .node.vis circle { fill: #f5db7e; }
-.gr-strat svg .node.c1 circle { fill: #a9c5ff; }
-.gr-strat svg .node.c2 circle { fill: #ffc58f; }
-.gr-strat svg .node.c3 circle { fill: #a8e0a8; }
-.gr-strat svg .node.c4 circle { fill: #e3b3ff; }
 .gr-strat svg .node.path circle { fill: #9fdc9f; }
 .gr-strat svg .node.front circle { stroke: var(--main); stroke-width: 5; stroke-dasharray: 6 4; }
-.gr-strat svg .node.bad circle { stroke: #d62828; stroke-width: 5; }
 .gr-strat svg .node.cur circle { fill: var(--main); stroke: var(--main); }
 .gr-strat svg .node.cur .lbl { fill: #fff; }
-.gr-strat .panels { display: flex; gap: 30px; }
-.gr-strat .ptitle { font-weight: bold; font-size: 22px; margin-bottom: 4px; }
-.gr-strat .line1, .gr-strat .line2 { margin-top: 0.3em; }
 </style>
 
-<div class="gr-strat" data-pos="1:250,35;2:130,115;3:370,115;4:60,200;5:190,200;6:310,200;7:440,200;8:190,280" data-edges="1-2,1-3,2-4,2-5,3-6,3-7,5-8">
+<div class="gr-strat" data-pos="1:250,30;2:130,105;3:370,105;4:60,180;5:190,180;6:310,180;7:440,180;8:250,255" data-edges="1-2,1-3,2-4,2-5,3-6,3-7,5-6,5-8">
   <div class="panels">
-    <div class="pan"><div class="ptitle">BFS (red)</div><div class="g1"></div></div>
-    <div class="pan"><div class="ptitle">DFS (rekurzija / stog)</div><div class="g2"></div></div>
+    <div class="pan">
+      <div class="ptitle">BFS: red (prvi ušao, prvi izlazi)</div>
+      <div class="gwrap g1"></div>
+      <div class="st s1"></div>
+      <div class="ds"><span class="dsl">red:</span><span class="q1"></span></div>
+      <div class="ord o1"></div>
+    </div>
+    <div class="pan">
+      <div class="ptitle">DFS: rekurzija (stog poziva)</div>
+      <div class="gwrap g2"></div>
+      <div class="st s2"></div>
+      <div class="ds"><span class="dsl">stog:</span><span class="q2"></span></div>
+      <div class="ord o2"></div>
+    </div>
   </div>
-  <div class="line1"></div>
-  <div class="line2"></div>
   <div class="ctrl">
     <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
     <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
@@ -160,36 +158,18 @@ Isti graf, isti početni čvor 1, susjedi se obilaze uzlazno. Broj ispod čvora 
   // jer ih build pretvara u HTML entitete i ruši skriptu.
   document.querySelectorAll('.gr-strat').forEach(function (root) {
     var slide = root.closest('svg');
-    var line1 = root.querySelector('.line1');
-    var line2 = root.querySelector('.line2');
     function mk(tag, cls, text) {
       var e = document.createElement(tag);
       if (cls) e.className = cls;
       if (text !== undefined) e.textContent = text;
       return e;
     }
-    function show(v) { return v === Infinity ? '∞' : String(v); }
-    function makeRow(box, count) {
-      var cells = [], vals = [];
-      for (var k = 0; k !== count; k++) {
-        var cell = mk('div', 'cell');
-        cell.appendChild(mk('div', 'idx', k));
-        var v = mk('div', 'val');
-        cell.appendChild(v);
-        box.appendChild(cell);
-        cells.push(cell);
-        vals.push(v);
-      }
-      return { cells: cells, vals: vals };
-    }
-
     var SVGNS = 'http://www.w3.org/2000/svg';
     function svgEl(tag, attrs) {
       var e = document.createElementNS(SVGNS, tag);
       for (var k in attrs) e.setAttribute(k, attrs[k]);
       return e;
     }
-    function cp(o) { return JSON.parse(JSON.stringify(o)); }
     function makeGraph(box, posStr, edgeStr, W, H, scale) {
       var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W * scale, height: H * scale });
       box.appendChild(svg);
@@ -224,12 +204,7 @@ Isti graf, isti početni čvor 1, susjedi se obilaze uzlazno. Broj ispod čvora 
         svg.appendChild(g);
         nodes[id] = { g: g, sub: sub };
       });
-      function edgeKey(a, b) {
-        var r = null;
-        edges.forEach(function (e) { if (e.a === a ? e.b === b : (e.a === b ? e.b === a : false)) r = e; });
-        return r;
-      }
-      return { ids: ids, adj: adj, edges: edges, nodes: nodes, edge: edgeKey };
+      return { ids: ids, adj: adj, edges: edges, nodes: nodes };
     }
     function has(list, x) { return list.indexOf(x) !== -1; }
     function hasEdge(list, a, b) {
@@ -238,65 +213,94 @@ Isti graf, isti početni čvor 1, susjedi se obilaze uzlazno. Broj ispod čvora 
       return r;
     }
 
-    var G1 = makeGraph(root.querySelector('.g1'), root.dataset.pos, root.dataset.edges, 500, 330, 0.9);
-    var G2 = makeGraph(root.querySelector('.g2'), root.dataset.pos, root.dataset.edges, 500, 330, 0.9);
+    var G1 = makeGraph(root.querySelector('.g1'), root.dataset.pos, root.dataset.edges, 500, 305, 0.9);
+    var G2 = makeGraph(root.querySelector('.g2'), root.dataset.pos, root.dataset.edges, 500, 305, 0.9);
     var adj = G1.adj, start = G1.ids[0];
+    function treeOf(par, ord) { return ord.slice(1).map(function (x) { return [par[x], x]; }); }
+    function pathTo(par, x) { var p = [x]; while (x !== start) { x = par[x]; p.unshift(x); } return p; }
+    function pathEdges(p) { return p.slice(1).map(function (x, k) { return [p[k], x]; }); }
 
-    var B = [], vis = {}, order = [], q = [start];
-    vis[start] = true;
+    // BFS: jedan korak = vadimo čvor iz reda i dodajemo njegove neposjećene susjede
+    var B = [], bvis = {}, bpar = {}, bord = [], q = [start];
+    bvis[start] = true;
+    B.push({ cur: -1, order: [], front: [start], hi: [start], tree: [], st: 'Početak: stavljamo ' + start + ' u red' });
     while (q.length) {
-      var u = q.shift();
-      order.push(u);
-      adj[u].forEach(function (v) { if (!vis[v]) { vis[v] = true; q.push(v); } });
-      B.push({ cur: u, order: order.slice(), front: q.slice() });
+      var u = q.shift(), added = [];
+      bord.push(u);
+      adj[u].forEach(function (v) { if (!bvis[v]) { bvis[v] = true; bpar[v] = u; q.push(v); added.push(v); } });
+      B.push({ cur: u, order: bord.slice(), front: q.slice(), hi: added, tree: treeOf(bpar, bord),
+        st: 'Vadimo ' + u + (added.length ? ', dodajemo ' + added.join(', ') : ', nema novih') });
     }
-    var D = [], dvis = {}, dord = [], stack = [];
-    function dfs(u) {
+
+    // DFS: jedan korak = ulazak u novi čvor (poziv dfs)
+    var D = [], dvis = {}, dpar = {}, dord = [], stack = [], last = -1;
+    D.push({ cur: -1, order: [], front: [], hi: [], tree: [], st: 'Početak: pozivamo dfs(' + start + ')' });
+    function dfs(u, p) {
       dvis[u] = true;
       dord.push(u);
       stack.push(u);
-      D.push({ cur: u, order: dord.slice(), front: stack.slice() });
-      adj[u].forEach(function (v) { if (!dvis[v]) dfs(v); });
+      var txt = 'dfs(' + u + '): početni čvor';
+      if (p !== -1) txt = p === last ? 'dfs(' + u + '): dublje iz ' + p : 'Natrag do ' + p + ', pa dfs(' + u + ')';
+      D.push({ cur: u, order: dord.slice(), front: stack.slice(), hi: [u], tree: treeOf(dpar, dord), st: txt });
+      last = u;
+      adj[u].forEach(function (v) { if (!dvis[v]) { dpar[v] = u; dfs(v, u); } });
       stack.pop();
     }
-    dfs(start);
+    dfs(start, -1);
 
-    var snaps = [{ b: { cur: -1, order: [], front: [start] }, d: { cur: -1, order: [], front: [] },
-      l1: 'BFS: red = [' + start + ']', l2: 'DFS: stog = [ ]' }];
-    B.forEach(function (b, k) {
-      var d = D[k];
-      snaps.push({ b: b, d: d,
-        l1: 'BFS posjet ' + (k + 1) + ': čvor ' + b.cur + '   red = [' + b.front.join(', ') + ']',
-        l2: 'DFS posjet ' + (k + 1) + ': čvor ' + d.cur + '   stog = [' + d.front.join(' → ') + ']' });
+    // Završni korak: čvor do kojeg DFS stablo ima najdulji put u odnosu na BFS
+    var target = start, bestDiff = 0;
+    G1.ids.forEach(function (x) {
+      var diff = pathTo(dpar, x).length - pathTo(bpar, x).length;
+      if (diff !== bestDiff ? Math.max(diff, bestDiff) === diff : false) { bestDiff = diff; target = x; }
     });
+    var bp = pathTo(bpar, target), dp = pathTo(dpar, target);
+    B.push({ cur: -1, order: bord.slice(), front: [], hi: [], tree: treeOf(bpar, bord), path: bp,
+      st: 'Gotovo. Put do ' + target + ': ' + bp.join(' → ') });
+    D.push({ cur: -1, order: dord.slice(), front: [], hi: [], tree: treeOf(dpar, dord), path: dp,
+      st: 'Gotovo. Put do ' + target + ': ' + dp.join(' → ') });
 
-    function paint(G, st) {
-      G.ids.forEach(function (id) {
+    var P1 = { G: G1, st: root.querySelector('.s1'), ds: root.querySelector('.q1'), ord: root.querySelector('.o1') };
+    var P2 = { G: G2, st: root.querySelector('.s2'), ds: root.querySelector('.q2'), ord: root.querySelector('.o2') };
+
+    function paint(P, s, hiCls) {
+      var path = s.path || [], pe = pathEdges(path);
+      P.G.ids.forEach(function (id) {
         var cls = 'node';
-        var oi = st.order.indexOf(id);
+        var oi = s.order.indexOf(id);
         if (oi !== -1) cls += ' vis';
-        if (has(st.front, id)) cls += ' front';
-        if (id === st.cur) cls += ' cur';
-        G.nodes[id].g.setAttribute('class', cls);
-        G.nodes[id].sub.textContent = oi === -1 ? '' : '#' + (oi + 1);
+        if (has(path, id)) cls += ' path';
+        if (has(s.front, id)) cls += ' front';
+        if (id === s.cur) cls += ' cur';
+        P.G.nodes[id].g.setAttribute('class', cls);
+        P.G.nodes[id].sub.textContent = oi === -1 ? '' : '#' + (oi + 1);
       });
+      P.G.edges.forEach(function (e) {
+        var cls = 'edge';
+        if (hasEdge(s.tree, e.a, e.b)) cls += ' tree';
+        if (hasEdge(pe, e.a, e.b)) cls += ' path';
+        e.el.setAttribute('class', cls);
+      });
+      P.st.textContent = s.st;
+      P.ds.textContent = '';
+      if (!s.front.length) P.ds.appendChild(mk('span', 'empty', 'prazan'));
+      s.front.forEach(function (x) { P.ds.appendChild(mk('span', has(s.hi, x) ? 'chip ' + hiCls : 'chip', x)); });
+      P.ord.textContent = 'Redoslijed: ';
+      P.ord.appendChild(mk('b', '', s.order.length ? s.order.join(', ') : '-'));
     }
-    function draw(s) { paint(G1, s.b); paint(G2, s.d); }
+
+    var snaps = B.map(function (b, k) { return { b: b, d: D[k] }; });
+    function draw(s) { paint(P1, s.b, 'new'); paint(P2, s.d, 'top'); }
 
     var step = 0, timer = null, lastStep = snaps.length - 1;
-    function render() {
-      var s = snaps[step];
-      draw(s);
-      line1.textContent = s.l1;
-      line2.textContent = s.l2;
-    }
+    function render() { draw(snaps[step]); }
     function stopAuto() { clearInterval(timer); timer = null; }
     function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
     function prev() { if (step !== 0) { step--; render(); return true; } return false; }
     function reset() { stopAuto(); step = 0; render(); }
     var actions = {
       next: next, prev: prev, reset: reset,
-      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 1100); }
     };
 
     root.querySelectorAll('button').forEach(function (b) {

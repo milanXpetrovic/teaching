@@ -20,14 +20,14 @@ footer: "Programiranje za rješavanje složenih problema | Vježbe"
 # Sadržaj
 
 1. **Uvod i motivacija**
-   * Problem najkraćeg puta vs. BFS
-   * Pregled algoritama
+   - Problem najkraćeg puta vs. BFS
+   - Pregled algoritama
 2. **Dijkstrin algoritam**
-   * Princip rada (pohlepni pristup)
-   * Implementacija (priority queue)
+   - Princip rada (pohlepni pristup)
+   - Implementacija (priority queue)
 3. **Bellman-Ford algoritam**
-   * Rad s negativnim težinama
-   * Detekcija negativnih ciklusa
+   - Rad s negativnim težinama
+   - Detekcija negativnih ciklusa
 4. **Floyd-Warshall algoritam** (kroz zadatak Shortest Routes II)
 5. **Zadaci za vježbu**
 
@@ -40,9 +40,9 @@ Cilj: pronaći put minimalne ukupne težine od izvora $s$ do cilja $t$.
 
 **Primjene:**
 
-* **GPS navigacija:** najbrža ruta (vrijeme je težina).
-* **Mreže:** routing protokoli (OSPF).
-* **Ekonomija:** minimizacija troškova transakcija.
+- **GPS navigacija:** najbrža ruta (vrijeme je težina).
+- **Mreže:** routing protokoli (OSPF).
+- **Ekonomija:** minimizacija troškova transakcija.
 
 ---
 
@@ -53,12 +53,12 @@ Cilj: pronaći put minimalne ukupne težine od izvora $s$ do cilja $t$.
 Zašto ne koristimo BFS?
 
 1. **BFS (Breadth-First Search):**
-   * Nalazi put s **najmanjim brojem bridova**.
-   * Pretpostavlja da svaki brid ima težinu 1.
+   - Nalazi put s **najmanjim brojem bridova**.
+   - Pretpostavlja da svaki brid ima težinu 1.
 
 2. **Težinski algoritmi (Dijkstra/Bellman-Ford):**
-   * Nalaze put s **najmanjom sumom težina**.
-   * Put s više bridova može biti "jeftiniji" od puta s jednim bridom.
+   - Nalaze put s **najmanjom sumom težina**.
+   - Put s više bridova može biti "jeftiniji" od puta s jednim bridom.
 
 <p class="break"></p>
 
@@ -99,7 +99,7 @@ Princip rada sličan je širenju vala ili "kruga poznatog teritorija" iz izvora 
 2. U svakom koraku biramo **neobrađeni** čvor $U$ s **najmanjom** trenutnom udaljenosti.
 3. Fiksiramo udaljenost do $U$ (ona se više neće mijenjati).
 4. **Relaksiramo** sve susjede čvora $U$:
-   * Ako je `dist[U] + w(U, V) < dist[V]`, ažuriramo `dist[V]`.
+   - Ako je `dist[U] + w(U, V) < dist[V]`, ažuriramo `dist[V]`.
 
 ---
 
@@ -423,9 +423,9 @@ Iz reda uvijek vadimo par s najmanjom udaljenosti. Zeleni čvorovi su gotovi, pr
 
 # Dijkstra: analiza složenosti
 
-* Svaki čvor obrađujemo jednom (zbog provjere `d > dist[u]`), pa svaki brid relaksiramo jednom.
-* Svaki čvor dodajemo u prioritetni red najviše onoliko puta koliko ima ulaznih bridova.
-* Operacije s redom (`push`/`pop`) traju $O(\log N)$.
+- Svaki čvor obrađujemo jednom (zbog provjere `d > dist[u]`), pa svaki brid relaksiramo jednom.
+- Svaki čvor dodajemo u prioritetni red najviše onoliko puta koliko ima ulaznih bridova.
+- Operacije s redom (`push`/`pop`) traju $O(\log N)$.
 
 **Ukupna složenost:**
 $$ O(M \log N) $$
@@ -447,8 +447,8 @@ $$ O(M \log N) $$
 
 **Ideja (dinamičko programiranje):**
 
-* Najkraći put bez ciklusa može imati najviše $N-1$ bridova.
-* U $i$-toj iteraciji nalazimo sve najkraće putove koji koriste najviše $i$ bridova.
+- Najkraći put bez ciklusa može imati najviše $N-1$ bridova.
+- U $i$-toj iteraciji nalazimo sve najkraće putove koji koriste najviše $i$ bridova.
 
 **Algoritam:**
 Ponavljamo $N-1$ puta: prolazimo kroz **SVE bridove** $(u, v)$ u grafu i pokušavamo ih relaksirati:
@@ -467,7 +467,7 @@ Ako postoji, možemo se vrtjeti u krug i smanjivati udaljenost do $-\infty$. Naj
 Nakon $N-1$ iteracija svi bi putovi trebali biti konačni.
 Pokrenemo **$N$-tu iteraciju**.
 
-* Ako se ijedna udaljenost **smanji**, postoji negativni ciklus dostupan iz izvora.
+- Ako se ijedna udaljenost **smanji**, postoji negativni ciklus dostupan iz izvora.
 
 <p class="break"></p>
 
@@ -794,15 +794,15 @@ Svaka iteracija prolazi kroz sve bridove istim redom. Zadnji prolaz samo provjer
 # Zadaci za vježbu (CSES)
 
 1. **[Shortest Routes I](https://cses.fi/problemset/task/1671)**
-   * Klasična Dijkstra. Pazite na `long long` za udaljenosti!
+   - Klasična Dijkstra. Pazite na `long long` za udaljenosti!
 2. **[Shortest Routes II](https://cses.fi/problemset/task/1672)**
-   * $N \le 500$, traže se svi parovi $\to$ Floyd-Warshall.
+   - $N \le 500$, traže se svi parovi $\to$ Floyd-Warshall.
 3. **[High Score](https://cses.fi/problemset/task/1673)**
-   * Traži se **najduži** put.
-   * Trik: sve težine pomnožimo s $-1$ i tražimo najkraći put Bellman-Fordom.
-   * Pazite na pozitivne cikluse (koji nakon množenja s $-1$ postaju negativni).
+   - Traži se **najduži** put.
+   - Trik: sve težine pomnožimo s $-1$ i tražimo najkraći put Bellman-Fordom.
+   - Pazite na pozitivne cikluse (koji nakon množenja s $-1$ postaju negativni).
 4. **[Flight Discount](https://cses.fi/problemset/task/1195)**
-   * Dijkstra na "state-space" grafu. Čvor nije samo `u`, već `(u, iskoristio_popust)`.
+   - Dijkstra na "state-space" grafu. Čvor nije samo `u`, već `(u, iskoristio_popust)`.
 
 ---
 
@@ -822,9 +822,9 @@ Treba pronaći najkraći put od grada 1 do svih ostalih gradova.
 
 **Ograničenja:**
 
-* $N \le 10^5$, $M \le 2 \cdot 10^5$.
-* Težine bridova su $\ge 0$.
-* Graf je usmjeren.
+- $N \le 10^5$, $M \le 2 \cdot 10^5$.
+- Težine bridova su $\ge 0$.
+- Graf je usmjeren.
 
 ---
 
@@ -836,8 +836,8 @@ Budući da su težine **nenegativne**, ovo je klasičan primjer za **Dijkstrin a
 
 1. **Veliki brojevi:** duljina puta može premašiti $2^{31}-1$. Obavezno koristite `long long` za udaljenosti.
 2. **Prioritetni red:** C++ `priority_queue` po defaultu vadi najveći element.
-   * Opcija A: `priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>`.
-   * Opcija B (trik): ubacujemo `{-dist, u}`. Najmanja udaljenost postaje najveći (najmanje negativan) broj, pa je na vrhu heapa (npr. $-1 > -100$). Pri vađenju uzimamo `d = -q.top().first`.
+   - Opcija A: `priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>`.
+   - Opcija B (trik): ubacujemo `{-dist, u}`. Najmanja udaljenost postaje najveći (najmanje negativan) broj, pa je na vrhu heapa (npr. $-1 > -100$). Pri vađenju uzimamo `d = -q.top().first`.
 
 ---
 
@@ -874,7 +874,7 @@ cout << "\n";
 
 1. **Tipovi podataka su bitni:** u grafovima s težinama suma vrlo brzo prijeđe $2 \cdot 10^9$. Za udaljenosti uvijek koristite `long long`.
 2. **Priority queue trik:** ubacivanje negativnih brojeva `{-dist, u}` standardni je trik u C++ natjecateljskom programiranju jer je `priority_queue` *max-heap*, a nama treba najmanja udaljenost.
-   * Alternativa je `greater<...>`, ali trik je brži za napisati.
+   - Alternativa je `greater<...>`, ali trik je brži za napisati.
 
 ---
 
@@ -886,8 +886,8 @@ Svaki upit traži najkraću udaljenost između dva grada $(a, b)$, ili $-1$ ako 
 
 **Ograničenja:**
 
-* $N \le 500$, $M \le N^2$.
-* $Q \le 10^5$ (puno upita!).
+- $N \le 500$, $M \le N^2$.
+- $Q \le 10^5$ (puno upita!).
 
 ---
 
@@ -904,8 +904,8 @@ Svaki upit traži najkraću udaljenost između dva grada $(a, b)$, ili $-1$ ako 
 
 **Pazite na:**
 
-* Inicijalizaciju matrice (INF, dijagonala 0).
-* Višestruke bridove između istih čvorova (uzimamo minimum).
+- Inicijalizaciju matrice (INF, dijagonala 0).
+- Višestruke bridove između istih čvorova (uzimamo minimum).
 
 ---
 
@@ -1236,9 +1236,9 @@ while (q--) {
 
 Ključ nije u težini zadatka, već u **ograničenjima (constraints)**.
 
-* Ako vidite **$N \le 500$**, to je jak signal za algoritam složenosti **$O(N^3)$**.
-* Ako se traže udaljenosti između **svih parova** (All-Pairs Shortest Path).
-* Ako ima puno upita ($Q$) na koje treba odgovoriti u $O(1)$.
+- Ako vidite **$N \le 500$**, to je jak signal za algoritam složenosti **$O(N^3)$**.
+- Ako se traže udaljenosti između **svih parova** (All-Pairs Shortest Path).
+- Ako ima puno upita ($Q$) na koje treba odgovoriti u $O(1)$.
 
 > **Pazite:** ako pri inicijalizaciji matrice postoje višestruki bridovi između dva grada, uvijek zadržite onaj s **minimalnom** težinom!
 
@@ -1253,10 +1253,10 @@ Kroz sobe možemo prolaziti više puta. Ispisujemo $-1$ ako možemo postići pro
 
 **Analiza:**
 
-* Tražimo **najduži put**.
-* Standardni algoritmi traže najkraći put.
-* **Trik:** sve težine pomnožimo s $-1$. Sada tražimo **najkraći put**.
-* "Beskonačno velik rezultat" u originalu $\Leftrightarrow$ "beskonačno mali put" (negativni ciklus) u novom grafu.
+- Tražimo **najduži put**.
+- Standardni algoritmi traže najkraći put.
+- **Trik:** sve težine pomnožimo s $-1$. Sada tražimo **najkraći put**.
+- "Beskonačno velik rezultat" u originalu $\Leftrightarrow$ "beskonačno mali put" (negativni ciklus) u novom grafu.
 
 ---
 
@@ -1320,9 +1320,9 @@ Problemi "najduljeg puta" ili "maksimalnog profita" često se rješavaju pretvar
 
 Nije svaki negativni ciklus bitan!
 
-* Ako postoji negativni ciklus, ali do njega **ne možemo doći** iz starta $\to$ ne utječe na rješenje.
-* Ako postoji negativni ciklus, ali iz njega **ne možemo doći** do cilja $\to$ ne utječe na rješenje.
-* Zato u kodu provjeravamo dostižnost (propagaciju `-INF`).
+- Ako postoji negativni ciklus, ali do njega **ne možemo doći** iz starta $\to$ ne utječe na rješenje.
+- Ako postoji negativni ciklus, ali iz njega **ne možemo doći** do cilja $\to$ ne utječe na rješenje.
+- Zato u kodu provjeravamo dostižnost (propagaciju `-INF`).
 
 ---
 
@@ -1340,9 +1340,9 @@ Možemo zamisliti da se nalazimo u jednom od dva stanja:
 
 **Prijelazi:**
 
-* Iz `(u, 0)` u `(v, 0)`: cijena $w$ (ne koristimo kupon).
-* Iz `(u, 0)` u `(v, 1)`: cijena $\lfloor w/2 \rfloor$ (koristimo kupon sada).
-* Iz `(u, 1)` u `(v, 1)`: cijena $w$ (kupon je već iskorišten).
+- Iz `(u, 0)` u `(v, 0)`: cijena $w$ (ne koristimo kupon).
+- Iz `(u, 0)` u `(v, 1)`: cijena $\lfloor w/2 \rfloor$ (koristimo kupon sada).
+- Iz `(u, 1)` u `(v, 1)`: cijena $w$ (kupon je već iskorišten).
 
 ---
 
@@ -1676,8 +1676,8 @@ Ovo je jedna od najvažnijih tehnika za teže grafovske zadatke.
 Kada se pravila kretanja promijene (npr. "imamo 1 kupon", "možemo preskočiti 2 zida", "auto ima goriva za K km"), čvor više nije samo `u`.
 **Čvor postaje `(u, stanje)`**.
 
-* Broj čvorova raste s $N$ na $N \cdot S$, gdje je $S$ broj stanja.
-* Ako je broj stanja malen (ovdje 2), Dijkstra radi savršeno.
+- Broj čvorova raste s $N$ na $N \cdot S$, gdje je $S$ broj stanja.
+- Ako je broj stanja malen (ovdje 2), Dijkstra radi savršeno.
 
 ---
 
