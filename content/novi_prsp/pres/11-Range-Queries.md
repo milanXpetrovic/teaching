@@ -79,6 +79,255 @@ $$ \text{sum}(L, R) = P[R+1] - P[L] $$
 
 ---
 
+# Prefiksne sume korak po korak
+
+Prvo gradimo `P` jednim prolazom, a zatim svaki upit rješavamo jednim oduzimanjem (indeksi od 0, raspon `[L, R]` uključivo).
+
+<style scoped>
+.rq-prefix { margin-top: 0.3em; }
+.rq-prefix .chips { font-size: 20px; margin-bottom: 0.4em; }
+.rq-prefix .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin: 0 0 6px 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; font-size: 18px; }
+.rq-prefix .chip.take { background: #9fdc9f; }
+.rq-prefix .chip.skip, .rq-prefix .chip.stale { color: #b5b5b5; border-color: #ccc; text-decoration: line-through; }
+.rq-prefix .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
+.rq-prefix .muted { color: #6e6e6e; font-style: italic; margin-left: 6px; }
+.rq-prefix .row { display: flex; gap: 6px; }
+.rq-prefix .cell { width: 62px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-prefix .idx { font-size: 15px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.rq-prefix .val { font-size: 24px; height: 38px; line-height: 38px; font-weight: bold; }
+.rq-prefix .cell.todo .val { color: #b5b5b5; }
+.rq-prefix .cell.rng { background: #d6e6f5; }
+.rq-prefix .cell.best { background: #9fdc9f; }
+.rq-prefix .cell.src { background: #f5db7e; }
+.rq-prefix .cell.cur { background: var(--main); color: #fff; }
+.rq-prefix .cell.cur .idx, .rq-prefix .cell.cur .val { color: #fff; }
+.rq-prefix .lbl { font-size: 18px; font-weight: bold; color: #6e6e6e; margin: 0.4em 0 0.2em; }
+.rq-prefix .wrap { display: flex; gap: 28px; align-items: flex-start; }
+.rq-prefix .side { padding-top: 6px; }
+.rq-prefix .gsvg { display: block; overflow: visible; }
+.rq-prefix .e line { stroke: #9a9a9a; stroke-width: 3; transition: stroke .25s; }
+.rq-prefix .e polygon { fill: #9a9a9a; }
+.rq-prefix .e .w { font-size: 19px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-prefix .e.tree line { stroke: #2f9e44; stroke-width: 6; }
+.rq-prefix .e.tree polygon { fill: #2f9e44; }
+.rq-prefix .e.off line { stroke: #d5d5d5; stroke-dasharray: 6 6; }
+.rq-prefix .e.off polygon { fill: #d5d5d5; }
+.rq-prefix .e.off .w { fill: #b5b5b5; }
+.rq-prefix .e.hid { opacity: 0; }
+.rq-prefix .e.bad line { stroke: #e03131; stroke-width: 6; }
+.rq-prefix .e.bad polygon { fill: #e03131; }
+.rq-prefix .e.on line { stroke: var(--main); stroke-width: 6; }
+.rq-prefix .e.on polygon { fill: var(--main); }
+.rq-prefix .n circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
+.rq-prefix .n .id { font-size: 21px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #141414; }
+.rq-prefix .n .sub { font-size: 19px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: var(--main); paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-prefix .n.c1 circle { fill: #ffd8a8; } .rq-prefix .n.c2 circle { fill: #a5d8ff; } .rq-prefix .n.c3 circle { fill: #b2f2bb; }
+.rq-prefix .n.c4 circle { fill: #fcc2d7; } .rq-prefix .n.c5 circle { fill: #d0bfff; } .rq-prefix .n.c6 circle { fill: #ffec99; }
+.rq-prefix .n.done circle { fill: #9fdc9f; }
+.rq-prefix .n.src circle { fill: #f5db7e; }
+.rq-prefix .n.cur circle { fill: var(--main); stroke: var(--main); }
+.rq-prefix .n.cur .id { fill: #fff; }
+.rq-prefix .tbl { display: grid; gap: 5px; }
+.rq-prefix .th { height: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: bold; color: #6e6e6e; border-radius: 6px; }
+.rq-prefix .th.hl { background: var(--main); color: #fff; }
+.rq-prefix .tc { height: 40px; line-height: 36px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-prefix .tc.none { border-color: transparent; }
+.rq-prefix .tc.k { background: #e3ecf6; }
+.rq-prefix .tc.best { background: #9fdc9f; }
+.rq-prefix .tc.src { background: #f5db7e; }
+.rq-prefix .tc.cur { background: var(--main); color: #fff; }
+.rq-prefix .line1, .rq-prefix .line2 { font-family: monospace; font-size: 21px; min-height: 1.35em; }
+.rq-prefix .line1 { margin-top: 0.5em; }
+.rq-prefix .line2 { font-weight: bold; }
+.rq-prefix .ctrl { margin-top: 0.5em; }
+.rq-prefix button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.rq-prefix button:hover { background: var(--main); color: #fff; }
+.rq-prefix .hint { font-size: 16px; color: #6e6e6e; }
+.rq-prefix .tc.k2 { background: #ffe0b8; }
+.rq-prefix .tc.both { background: #d9c8ef; }
+</style>
+
+<div class="rq-prefix" data-arr="3,1,4,1,5,9,2,6" data-q="2-5,0-3,4-7">
+  <div class="tbl"></div>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
+  document.querySelectorAll('.rq-prefix').forEach(function (root) {
+    var slide = root.closest('svg');
+    var line1 = root.querySelector('.line1');
+    var line2 = root.querySelector('.line2');
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function sv(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function setc(el, cls) { el.setAttribute('class', cls); }
+    function show(v) { return v === Infinity ? '∞' : (v === -Infinity ? '−∞' : String(v)); }
+    function lt(a, b) { return a !== b ? Math.min(a, b) === a : false; }
+    function le(a, b) { return Math.min(a, b) === a; }
+    function fw(w) { return lt(w, 0) ? '(' + w + ')' : String(w); }
+    function makeRow(box, count, base) {
+      var cells = [], vals = [];
+      for (var k = 0; k !== count; k++) {
+        var cell = mk('div', 'cell');
+        cell.appendChild(mk('div', 'idx', k + (base || 0)));
+        var v = mk('div', 'val');
+        cell.appendChild(v);
+        box.appendChild(cell);
+        cells.push(cell);
+        vals.push(v);
+      }
+      return { cells: cells, vals: vals };
+    }
+    function parsePos(s) {
+      return s.trim().split(/\s+/).map(function (p) {
+        var q = p.split(',').map(Number);
+        return { x: q[0], y: q[1] };
+      });
+    }
+    function parseEdges(s) {
+      return s.split(',').map(function (t) {
+        var q = t.trim().split(':'), ab = q[0].split('-');
+        return { a: Number(ab[0]), b: Number(ab[1]), w: q.length === 2 ? Number(q[1]) : 0 };
+      });
+    }
+    // Crta graf u SVG-u: čvorovi su numerirani od 1, bridovi su {a, b, w}
+    function drawGraph(box, pos, edges, opt) {
+      var R = opt.r || 22;
+      var svg = sv('svg', { viewBox: '0 0 ' + opt.w + ' ' + opt.h, width: opt.w, height: opt.h, 'class': 'gsvg' }, box);
+      var gE = sv('g', {}, svg), gN = sv('g', {}, svg);
+      var E = edges.map(function (e) {
+        var A = pos[e.a - 1], B = pos[e.b - 1];
+        var dx = B.x - A.x, dy = B.y - A.y, L = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / L, uy = dy / L;
+        var x1 = A.x + ux * R, y1 = A.y + uy * R, x2 = B.x - ux * R, y2 = B.y - uy * R;
+        var g = sv('g', { 'class': 'e' }, gE);
+        sv('line', { x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+        if (opt.directed) {
+          var bx = x2 - ux * 15, by = y2 - uy * 15;
+          sv('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * 7) + ',' + (by + ux * 7) + ' ' + (bx + uy * 7) + ',' + (by - ux * 7) }, g);
+        }
+        if (opt.weights) {
+          var t = sv('text', { x: (A.x + B.x) / 2 - uy * 15, y: (A.y + B.y) / 2 + ux * 15, 'class': 'w' }, g);
+          t.textContent = e.w;
+        }
+        return { g: g };
+      });
+      var N = pos.map(function (p, i) {
+        var g = sv('g', { 'class': 'n' }, gN);
+        sv('circle', { cx: p.x, cy: p.y, r: R }, g);
+        var t = sv('text', { x: p.x, y: p.y, 'class': 'id' }, g);
+        t.textContent = i + 1;
+        var sub = sv('text', { x: p.x + (opt.subdx || 0), y: p.y + (opt.subdy === undefined ? -R - 13 : opt.subdy), 'class': 'sub' }, g);
+        return { g: g, sub: sub };
+      });
+      return { E: E, N: N, svg: svg };
+    }
+
+    var a = root.dataset.arr.split(',').map(Number);
+    var n = a.length;
+    var Q = parseEdges(root.dataset.q);
+    var tbl = root.querySelector('.tbl');
+    tbl.style.gridTemplateColumns = '60px repeat(' + (n + 1) + ', 62px)';
+    tbl.appendChild(mk('div', 'th', 'i'));
+    for (var c0 = 0; c0 !== n + 1; c0++) tbl.appendChild(mk('div', 'th idxh', c0));
+    tbl.appendChild(mk('div', 'th', 'a'));
+    var A = [], P = [];
+    for (var c1 = 0; c1 !== n + 1; c1++) A.push(tbl.appendChild(mk('div', c1 === n ? 'tc none' : 'tc')));
+    tbl.appendChild(mk('div', 'th', 'P'));
+    for (var c2 = 0; c2 !== n + 1; c2++) P.push(tbl.appendChild(mk('div', 'tc')));
+    var pre = [0];
+    a.forEach(function (x) { pre.push(pre[pre.length - 1] + x); });
+    var snaps = [{ upto: 0, ar: [], as: [], pc: -1, ps: [], l1: 'P[0] = 0 (zbroj praznog prefiksa)', l2: 'P[i] = zbroj prvih i elemenata: a[0] + … + a[i − 1]' }];
+    for (var i = 0; i !== n; i++) {
+      snaps.push({ upto: i + 1, ar: [], as: [i], pc: i + 1, ps: [i],
+        l1: 'P[' + (i + 1) + '] = P[' + i + '] + a[' + i + '] = ' + pre[i] + ' + ' + a[i] + ' = ' + pre[i + 1],
+        l2: i === n - 1 ? 'Izgradnja gotova u O(N)   ✓' : '' });
+    }
+    Q.forEach(function (q) {
+      var L = q.a, Rr = q.b, ar = [];
+      for (var k = L; k !== Rr + 1; k++) ar.push(k);
+      snaps.push({ upto: n, ar: ar, as: [], pc: Rr + 1, ps: [L],
+        l1: 'sum(' + L + ', ' + Rr + ') = P[' + (Rr + 1) + '] − P[' + L + '] = ' + pre[Rr + 1] + ' − ' + pre[L] + ' = ' + (pre[Rr + 1] - pre[L]),
+        l2: 'Provjera: ' + ar.map(function (k) { return a[k]; }).join(' + ') + ' = ' + (pre[Rr + 1] - pre[L]) + '   ✓  (jedno oduzimanje, O(1))' });
+    });
+    function draw(s) {
+      for (var k = 0; k !== n; k++) {
+        var c = 'tc';
+        if (s.ar.indexOf(k) !== -1) c += ' k';
+        if (s.as.indexOf(k) !== -1) c += ' src';
+        setc(A[k], c);
+        A[k].textContent = a[k];
+      }
+      for (var j = 0; j !== n + 1; j++) {
+        var d = 'tc';
+        if (s.ps.indexOf(j) !== -1) d += ' src';
+        if (j === s.pc) d += ' cur';
+        setc(P[j], d);
+        P[j].textContent = Math.max(j, s.upto) === s.upto ? pre[j] : '';
+      }
+    }
+
+    var step = 0, timer = null, lastStep = snaps.length - 1;
+    function render() {
+      var s = snaps[step];
+      draw(s);
+      line1.textContent = s.l1;
+      line2.textContent = s.l2;
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 0) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 0; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz animaciju, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
+
+---
+
 # Dinamički upiti: motivacija
 
 Što ako se vrijednosti u nizu **mijenjaju**?
@@ -176,6 +425,328 @@ Koristimo princip oduzimanja prefiksa: $Suma(L, R) = Suma(1, R) - Suma(1, L-1)$
 > $\text{Suma}_B = \text{tree}[4]$
 
 **3. korak: oduzimanje.** `Rezultat` = $\text{Suma}_A - \text{Suma}_B$: od sume prvih 13 brojeva "odrezali" smo prva 4. Ostaje točno suma od 5 do 13.
+
+---
+
+# Fenwick stablo korak po korak
+
+Svaka traka je jedan `bit[i]` i pokriva blok elemenata iznad kojih stoji. Upit se spušta prema 0, a update se penje prema N.
+
+<style scoped>
+.rq-fenwick { margin-top: 0.3em; }
+.rq-fenwick .chips { font-size: 20px; margin-bottom: 0.4em; }
+.rq-fenwick .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin: 0 0 6px 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; font-size: 18px; }
+.rq-fenwick .chip.take { background: #9fdc9f; }
+.rq-fenwick .chip.skip, .rq-fenwick .chip.stale { color: #b5b5b5; border-color: #ccc; text-decoration: line-through; }
+.rq-fenwick .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
+.rq-fenwick .muted { color: #6e6e6e; font-style: italic; margin-left: 6px; }
+.rq-fenwick .row { display: flex; gap: 6px; }
+.rq-fenwick .cell { width: 62px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-fenwick .idx { font-size: 15px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.rq-fenwick .val { font-size: 24px; height: 38px; line-height: 38px; font-weight: bold; }
+.rq-fenwick .cell.todo .val { color: #b5b5b5; }
+.rq-fenwick .cell.rng { background: #d6e6f5; }
+.rq-fenwick .cell.best { background: #9fdc9f; }
+.rq-fenwick .cell.src { background: #f5db7e; }
+.rq-fenwick .cell.cur { background: var(--main); color: #fff; }
+.rq-fenwick .cell.cur .idx, .rq-fenwick .cell.cur .val { color: #fff; }
+.rq-fenwick .lbl { font-size: 18px; font-weight: bold; color: #6e6e6e; margin: 0.4em 0 0.2em; }
+.rq-fenwick .wrap { display: flex; gap: 28px; align-items: flex-start; }
+.rq-fenwick .side { padding-top: 6px; }
+.rq-fenwick .gsvg { display: block; overflow: visible; }
+.rq-fenwick .e line { stroke: #9a9a9a; stroke-width: 3; transition: stroke .25s; }
+.rq-fenwick .e polygon { fill: #9a9a9a; }
+.rq-fenwick .e .w { font-size: 19px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-fenwick .e.tree line { stroke: #2f9e44; stroke-width: 6; }
+.rq-fenwick .e.tree polygon { fill: #2f9e44; }
+.rq-fenwick .e.off line { stroke: #d5d5d5; stroke-dasharray: 6 6; }
+.rq-fenwick .e.off polygon { fill: #d5d5d5; }
+.rq-fenwick .e.off .w { fill: #b5b5b5; }
+.rq-fenwick .e.hid { opacity: 0; }
+.rq-fenwick .e.bad line { stroke: #e03131; stroke-width: 6; }
+.rq-fenwick .e.bad polygon { fill: #e03131; }
+.rq-fenwick .e.on line { stroke: var(--main); stroke-width: 6; }
+.rq-fenwick .e.on polygon { fill: var(--main); }
+.rq-fenwick .n circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
+.rq-fenwick .n .id { font-size: 21px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #141414; }
+.rq-fenwick .n .sub { font-size: 19px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: var(--main); paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-fenwick .n.c1 circle { fill: #ffd8a8; } .rq-fenwick .n.c2 circle { fill: #a5d8ff; } .rq-fenwick .n.c3 circle { fill: #b2f2bb; }
+.rq-fenwick .n.c4 circle { fill: #fcc2d7; } .rq-fenwick .n.c5 circle { fill: #d0bfff; } .rq-fenwick .n.c6 circle { fill: #ffec99; }
+.rq-fenwick .n.done circle { fill: #9fdc9f; }
+.rq-fenwick .n.src circle { fill: #f5db7e; }
+.rq-fenwick .n.cur circle { fill: var(--main); stroke: var(--main); }
+.rq-fenwick .n.cur .id { fill: #fff; }
+.rq-fenwick .tbl { display: grid; gap: 5px; }
+.rq-fenwick .th { height: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: bold; color: #6e6e6e; border-radius: 6px; }
+.rq-fenwick .th.hl { background: var(--main); color: #fff; }
+.rq-fenwick .tc { height: 40px; line-height: 36px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-fenwick .tc.none { border-color: transparent; }
+.rq-fenwick .tc.k { background: #e3ecf6; }
+.rq-fenwick .tc.best { background: #9fdc9f; }
+.rq-fenwick .tc.src { background: #f5db7e; }
+.rq-fenwick .tc.cur { background: var(--main); color: #fff; }
+.rq-fenwick .line1, .rq-fenwick .line2 { font-family: monospace; font-size: 21px; min-height: 1.35em; }
+.rq-fenwick .line1 { margin-top: 0.5em; }
+.rq-fenwick .line2 { font-weight: bold; }
+.rq-fenwick .ctrl { margin-top: 0.5em; }
+.rq-fenwick button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.rq-fenwick button:hover { background: var(--main); color: #fff; }
+.rq-fenwick .hint { font-size: 16px; color: #6e6e6e; }
+.rq-fenwick .tc.k2 { background: #ffe0b8; }
+.rq-fenwick .tc.both { background: #d9c8ef; }
+.rq-fenwick .fw { display: grid; gap: 4px; grid-auto-rows: 34px; }
+.rq-fenwick .flab { font-size: 15px; font-weight: bold; color: #6e6e6e; text-align: right; padding-right: 8px; line-height: 34px; }
+.rq-fenwick .bar { border: 2px solid #141414; border-radius: 5px; background: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background-color .25s, color .25s; }
+.rq-fenwick .bar .bi { font-size: 12px; color: #6e6e6e; }
+.rq-fenwick .bar .bv { font-size: 19px; font-weight: bold; }
+.rq-fenwick .bar.src2 { background: #ffe0b8; }
+.rq-fenwick .bar.src { background: #f5db7e; }
+.rq-fenwick .bar.cur { background: var(--main); color: #fff; }
+.rq-fenwick .bar.cur .bi { color: #fff; }
+.rq-fenwick .fidx { text-align: center; font-size: 17px; font-weight: bold; line-height: 1.05; padding-top: 1px; }
+.rq-fenwick .fbin { font-size: 11px; font-family: monospace; color: #6e6e6e; font-weight: normal; }
+.rq-fenwick .fw .tc { height: 34px; line-height: 30px; font-size: 19px; }
+.rq-fenwick .line1 { margin-top: 0.3em; }
+</style>
+
+<div class="rq-fenwick" data-arr="5,2,9,1,7,3,8,4,6,2,5,7,1,9,3,4" data-ops="q5-13,u5:3,q5-13">
+  <div class="fw"></div>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
+  document.querySelectorAll('.rq-fenwick').forEach(function (root) {
+    var slide = root.closest('svg');
+    var line1 = root.querySelector('.line1');
+    var line2 = root.querySelector('.line2');
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function sv(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function setc(el, cls) { el.setAttribute('class', cls); }
+    function show(v) { return v === Infinity ? '∞' : (v === -Infinity ? '−∞' : String(v)); }
+    function lt(a, b) { return a !== b ? Math.min(a, b) === a : false; }
+    function le(a, b) { return Math.min(a, b) === a; }
+    function fw(w) { return lt(w, 0) ? '(' + w + ')' : String(w); }
+    function makeRow(box, count, base) {
+      var cells = [], vals = [];
+      for (var k = 0; k !== count; k++) {
+        var cell = mk('div', 'cell');
+        cell.appendChild(mk('div', 'idx', k + (base || 0)));
+        var v = mk('div', 'val');
+        cell.appendChild(v);
+        box.appendChild(cell);
+        cells.push(cell);
+        vals.push(v);
+      }
+      return { cells: cells, vals: vals };
+    }
+    function parsePos(s) {
+      return s.trim().split(/\s+/).map(function (p) {
+        var q = p.split(',').map(Number);
+        return { x: q[0], y: q[1] };
+      });
+    }
+    function parseEdges(s) {
+      return s.split(',').map(function (t) {
+        var q = t.trim().split(':'), ab = q[0].split('-');
+        return { a: Number(ab[0]), b: Number(ab[1]), w: q.length === 2 ? Number(q[1]) : 0 };
+      });
+    }
+    // Crta graf u SVG-u: čvorovi su numerirani od 1, bridovi su {a, b, w}
+    function drawGraph(box, pos, edges, opt) {
+      var R = opt.r || 22;
+      var svg = sv('svg', { viewBox: '0 0 ' + opt.w + ' ' + opt.h, width: opt.w, height: opt.h, 'class': 'gsvg' }, box);
+      var gE = sv('g', {}, svg), gN = sv('g', {}, svg);
+      var E = edges.map(function (e) {
+        var A = pos[e.a - 1], B = pos[e.b - 1];
+        var dx = B.x - A.x, dy = B.y - A.y, L = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / L, uy = dy / L;
+        var x1 = A.x + ux * R, y1 = A.y + uy * R, x2 = B.x - ux * R, y2 = B.y - uy * R;
+        var g = sv('g', { 'class': 'e' }, gE);
+        sv('line', { x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+        if (opt.directed) {
+          var bx = x2 - ux * 15, by = y2 - uy * 15;
+          sv('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * 7) + ',' + (by + ux * 7) + ' ' + (bx + uy * 7) + ',' + (by - ux * 7) }, g);
+        }
+        if (opt.weights) {
+          var t = sv('text', { x: (A.x + B.x) / 2 - uy * 15, y: (A.y + B.y) / 2 + ux * 15, 'class': 'w' }, g);
+          t.textContent = e.w;
+        }
+        return { g: g };
+      });
+      var N = pos.map(function (p, i) {
+        var g = sv('g', { 'class': 'n' }, gN);
+        sv('circle', { cx: p.x, cy: p.y, r: R }, g);
+        var t = sv('text', { x: p.x, y: p.y, 'class': 'id' }, g);
+        t.textContent = i + 1;
+        var sub = sv('text', { x: p.x + (opt.subdx || 0), y: p.y + (opt.subdy === undefined ? -R - 13 : opt.subdy), 'class': 'sub' }, g);
+        return { g: g, sub: sub };
+      });
+      return { E: E, N: N, svg: svg };
+    }
+
+    var a = [0].concat(root.dataset.arr.split(',').map(Number));
+    var n = a.length - 1;
+    function lsb(i) { var p = 1; while (i % (2 * p) === 0) p *= 2; return p; }
+    var bits = n.toString(2).length;
+    function bin(i) { var s = i.toString(2); while (s.length !== bits) s = '0' + s; return s; }
+    var bit = [0];
+    for (var i = 1; i !== n + 1; i++) { var s0 = 0; for (var j = i - lsb(i) + 1; j !== i + 1; j++) s0 += a[j]; bit.push(s0); }
+    var grid = root.querySelector('.fw');
+    grid.style.gridTemplateColumns = '80px repeat(' + n + ', 50px)';
+    var levels = bits;
+    for (var L = levels - 1; L !== -1; L--) {
+      var lab = mk('div', 'flab', 'LSB ' + Math.pow(2, L));
+      lab.style.gridRow = String(levels - L); lab.style.gridColumn = '1';
+      grid.appendChild(lab);
+    }
+    var B = [null];
+    for (var i2 = 1; i2 !== n + 1; i2++) {
+      var Lv = Math.round(Math.log(lsb(i2)) / Math.LN2);
+      var bar = mk('div', 'bar');
+      bar.style.gridRow = String(levels - Lv);
+      bar.style.gridColumn = (i2 - lsb(i2) + 2) + ' / ' + (i2 + 2);
+      bar.appendChild(mk('span', 'bi', i2));
+      var bv = mk('span', 'bv');
+      bar.appendChild(bv);
+      grid.appendChild(bar);
+      B.push({ el: bar, v: bv });
+    }
+    function rowLab(text, r) { var e = mk('div', 'flab', text); e.style.gridRow = String(r); e.style.gridColumn = '1'; grid.appendChild(e); }
+    rowLab('i', levels + 1); rowLab('a[i]', levels + 2);
+    var IX = [null], AV = [null];
+    for (var i3 = 1; i3 !== n + 1; i3++) {
+      var ix = mk('div', 'fidx');
+      ix.appendChild(mk('div', '', i3));
+      ix.appendChild(mk('div', 'fbin', bin(i3)));
+      ix.style.gridRow = String(levels + 1); ix.style.gridColumn = String(i3 + 1);
+      grid.appendChild(ix); IX.push(ix);
+      var av = mk('div', 'tc');
+      av.style.gridRow = String(levels + 2); av.style.gridColumn = String(i3 + 1);
+      grid.appendChild(av); AV.push(av);
+    }
+
+    var snaps = [];
+    function snap(o) {
+      var s = { bit: bit.slice(), a: a.slice(), cur: -1, v1: [], v2: [], r1: [], r2: [], l1: '', l2: '' };
+      Object.keys(o).forEach(function (k) { s[k] = o[k]; });
+      snaps.push(s);
+    }
+    function cover(list) { var r = []; list.forEach(function (i) { for (var j = i - lsb(i) + 1; j !== i + 1; j++) r.push(j); }); return r; }
+    snap({ l1: 'Svaki bit[i] čuva zbroj bloka [i − LSB(i) + 1, i]; duljina bloka je najniži bit jedinice u i', l2: 'Npr. 12 = 1100₂ pa bit[12] pokriva 4 elementa: [9, 12]' });
+    function query(idx, key, other, head) {
+      var res = 0, vis = [], start = idx;
+      while (idx !== 0) {
+        var p = lsb(idx);
+        res += bit[idx]; vis.push(idx);
+        var o = { cur: idx, l2: head + ':  res = ' + res };
+        o[key] = vis.slice(); o[key === 'v1' ? 'r1' : 'r2'] = cover(vis);
+        Object.keys(other).forEach(function (k) { o[k] = other[k]; });
+        o.l1 = 'idx = ' + idx + ' = ' + bin(idx) + '₂, LSB = ' + p + ':  res += bit[' + idx + '] = ' + bit[idx] + '  → idx = ' + idx + ' − ' + p + ' = ' + (idx - p);
+        snap(o);
+        idx -= p;
+      }
+      return { res: res, vis: vis };
+    }
+    var ops = root.dataset.ops.split(',');
+    ops.forEach(function (op) {
+      if (op[0] === 'q') {
+        var lr = op.slice(1).split('-').map(Number), Lq = lr[0], Rq = lr[1];
+        var A1 = query(Rq, 'v1', {}, 'query(' + Rq + ')');
+        var A2 = query(Lq - 1, 'v2', { v1: A1.vis, r1: cover(A1.vis) }, 'query(' + (Lq - 1) + ')');
+        var rng = []; for (var k = Lq; k !== Rq + 1; k++) rng.push(k);
+        snap({ v1: A1.vis, v2: A2.vis, r1: rng,
+          l1: 'sum(' + Lq + ', ' + Rq + ') = query(' + Rq + ') − query(' + (Lq - 1) + ') = ' + A1.res + ' − ' + A2.res + ' = ' + (A1.res - A2.res),
+          l2: 'Samo ' + (A1.vis.length + A2.vis.length) + ' čitanja umjesto ' + (Rq - Lq + 1) + ' zbrajanja   ✓' });
+      } else {
+        var pd = op.slice(1).split(':').map(Number), idx = pd[0], delta = pd[1], vis = [], pos0 = idx;
+        a[pos0] += delta;
+        while (le(idx, n)) {
+          var p = lsb(idx);
+          bit[idx] += delta; vis.push(idx);
+          snap({ cur: idx, v1: vis.slice(),
+            l1: 'idx = ' + idx + ' = ' + bin(idx) + '₂, LSB = ' + p + ':  bit[' + idx + '] += ' + delta + ' → ' + bit[idx] + '  → idx = ' + idx + ' + ' + p + ' = ' + (idx + p),
+            l2: 'update(' + pos0 + ', +' + delta + '): penjemo se prema većim blokovima koji sadrže a[' + pos0 + ']' });
+          idx += p;
+        }
+        snap({ v1: vis, l1: 'idx = ' + idx + ' je veće od n = ' + n + ', kraj', l2: 'Promijenili smo ' + vis.length + ' bloka   ✓' });
+      }
+    });
+    function draw(s) {
+      for (var i = 1; i !== n + 1; i++) {
+        var c = 'bar';
+        if (s.v2.indexOf(i) !== -1) c += ' src2';
+        if (s.v1.indexOf(i) !== -1) c += ' src';
+        if (i === s.cur) c += ' cur';
+        setc(B[i].el, c);
+        B[i].v.textContent = s.bit[i];
+        var d = 'tc';
+        var in1 = s.r1.indexOf(i) !== -1, in2 = s.r2.indexOf(i) !== -1;
+        if (in1) d += in2 ? ' both' : ' k';
+        else if (in2) d += ' k2';
+        setc(AV[i], d);
+        AV[i].textContent = s.a[i];
+      }
+    }
+
+    var step = 0, timer = null, lastStep = snaps.length - 1;
+    function render() {
+      var s = snaps[step];
+      draw(s);
+      line1.textContent = s.l1;
+      line2.textContent = s.l2;
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 0) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 0; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz animaciju, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
 
 ---
 
@@ -380,6 +951,307 @@ Upit: **suma od 2 do 6** (`[2, 6]`). Očekujemo $3+4+5+6+7 = 25$.
 # Segmentno stablo: vizualizacija upita
 
 ![w:900px center](../../../img/prsp/range-queries/segment-tree-query-decomposition.png)
+
+---
+
+# Segmentno stablo korak po korak
+
+Rekurzija za `query(2, 6)` i `update(3, 10)`: zeleno je potpuno unutar, crveno izvan, žuto djelomično, a obrub je trenutni čvor.
+
+<style scoped>
+.rq-segtree { margin-top: 0.3em; }
+.rq-segtree .chips { font-size: 20px; margin-bottom: 0.4em; }
+.rq-segtree .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin: 0 0 6px 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; font-size: 18px; }
+.rq-segtree .chip.take { background: #9fdc9f; }
+.rq-segtree .chip.skip, .rq-segtree .chip.stale { color: #b5b5b5; border-color: #ccc; text-decoration: line-through; }
+.rq-segtree .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
+.rq-segtree .muted { color: #6e6e6e; font-style: italic; margin-left: 6px; }
+.rq-segtree .row { display: flex; gap: 6px; }
+.rq-segtree .cell { width: 62px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-segtree .idx { font-size: 15px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.rq-segtree .val { font-size: 24px; height: 38px; line-height: 38px; font-weight: bold; }
+.rq-segtree .cell.todo .val { color: #b5b5b5; }
+.rq-segtree .cell.rng { background: #d6e6f5; }
+.rq-segtree .cell.best { background: #9fdc9f; }
+.rq-segtree .cell.src { background: #f5db7e; }
+.rq-segtree .cell.cur { background: var(--main); color: #fff; }
+.rq-segtree .cell.cur .idx, .rq-segtree .cell.cur .val { color: #fff; }
+.rq-segtree .lbl { font-size: 18px; font-weight: bold; color: #6e6e6e; margin: 0.4em 0 0.2em; }
+.rq-segtree .wrap { display: flex; gap: 28px; align-items: flex-start; }
+.rq-segtree .side { padding-top: 6px; }
+.rq-segtree .gsvg { display: block; overflow: visible; }
+.rq-segtree .e line { stroke: #9a9a9a; stroke-width: 3; transition: stroke .25s; }
+.rq-segtree .e polygon { fill: #9a9a9a; }
+.rq-segtree .e .w { font-size: 19px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-segtree .e.tree line { stroke: #2f9e44; stroke-width: 6; }
+.rq-segtree .e.tree polygon { fill: #2f9e44; }
+.rq-segtree .e.off line { stroke: #d5d5d5; stroke-dasharray: 6 6; }
+.rq-segtree .e.off polygon { fill: #d5d5d5; }
+.rq-segtree .e.off .w { fill: #b5b5b5; }
+.rq-segtree .e.hid { opacity: 0; }
+.rq-segtree .e.bad line { stroke: #e03131; stroke-width: 6; }
+.rq-segtree .e.bad polygon { fill: #e03131; }
+.rq-segtree .e.on line { stroke: var(--main); stroke-width: 6; }
+.rq-segtree .e.on polygon { fill: var(--main); }
+.rq-segtree .n circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
+.rq-segtree .n .id { font-size: 21px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #141414; }
+.rq-segtree .n .sub { font-size: 19px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: var(--main); paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-segtree .n.c1 circle { fill: #ffd8a8; } .rq-segtree .n.c2 circle { fill: #a5d8ff; } .rq-segtree .n.c3 circle { fill: #b2f2bb; }
+.rq-segtree .n.c4 circle { fill: #fcc2d7; } .rq-segtree .n.c5 circle { fill: #d0bfff; } .rq-segtree .n.c6 circle { fill: #ffec99; }
+.rq-segtree .n.done circle { fill: #9fdc9f; }
+.rq-segtree .n.src circle { fill: #f5db7e; }
+.rq-segtree .n.cur circle { fill: var(--main); stroke: var(--main); }
+.rq-segtree .n.cur .id { fill: #fff; }
+.rq-segtree .tbl { display: grid; gap: 5px; }
+.rq-segtree .th { height: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: bold; color: #6e6e6e; border-radius: 6px; }
+.rq-segtree .th.hl { background: var(--main); color: #fff; }
+.rq-segtree .tc { height: 40px; line-height: 36px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-segtree .tc.none { border-color: transparent; }
+.rq-segtree .tc.k { background: #e3ecf6; }
+.rq-segtree .tc.best { background: #9fdc9f; }
+.rq-segtree .tc.src { background: #f5db7e; }
+.rq-segtree .tc.cur { background: var(--main); color: #fff; }
+.rq-segtree .line1, .rq-segtree .line2 { font-family: monospace; font-size: 21px; min-height: 1.35em; }
+.rq-segtree .line1 { margin-top: 0.5em; }
+.rq-segtree .line2 { font-weight: bold; }
+.rq-segtree .ctrl { margin-top: 0.5em; }
+.rq-segtree button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.rq-segtree button:hover { background: var(--main); color: #fff; }
+.rq-segtree .hint { font-size: 16px; color: #6e6e6e; }
+.rq-segtree .sl { stroke: #9a9a9a; stroke-width: 2; }
+.rq-segtree .sn rect { fill: #fff; stroke: #141414; stroke-width: 2; transition: fill .25s; }
+.rq-segtree .sn .rg { font-size: 14px; fill: #6e6e6e; text-anchor: middle; dominant-baseline: central; }
+.rq-segtree .sn .sv { font-size: 21px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; }
+.rq-segtree .sn.out rect { fill: #ffc9c9; }
+.rq-segtree .sn.full rect { fill: #9fdc9f; }
+.rq-segtree .sn.part rect { fill: #ffec99; }
+.rq-segtree .sn.cur rect { stroke: var(--main); stroke-width: 5; }
+</style>
+
+<div class="rq-segtree" data-arr="1,2,3,4,5,6,7,8" data-ops="q2-6,u3:10,q2-6">
+  <div class="graph"></div>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
+  document.querySelectorAll('.rq-segtree').forEach(function (root) {
+    var slide = root.closest('svg');
+    var line1 = root.querySelector('.line1');
+    var line2 = root.querySelector('.line2');
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function sv(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function setc(el, cls) { el.setAttribute('class', cls); }
+    function show(v) { return v === Infinity ? '∞' : (v === -Infinity ? '−∞' : String(v)); }
+    function lt(a, b) { return a !== b ? Math.min(a, b) === a : false; }
+    function le(a, b) { return Math.min(a, b) === a; }
+    function fw(w) { return lt(w, 0) ? '(' + w + ')' : String(w); }
+    function makeRow(box, count, base) {
+      var cells = [], vals = [];
+      for (var k = 0; k !== count; k++) {
+        var cell = mk('div', 'cell');
+        cell.appendChild(mk('div', 'idx', k + (base || 0)));
+        var v = mk('div', 'val');
+        cell.appendChild(v);
+        box.appendChild(cell);
+        cells.push(cell);
+        vals.push(v);
+      }
+      return { cells: cells, vals: vals };
+    }
+    function parsePos(s) {
+      return s.trim().split(/\s+/).map(function (p) {
+        var q = p.split(',').map(Number);
+        return { x: q[0], y: q[1] };
+      });
+    }
+    function parseEdges(s) {
+      return s.split(',').map(function (t) {
+        var q = t.trim().split(':'), ab = q[0].split('-');
+        return { a: Number(ab[0]), b: Number(ab[1]), w: q.length === 2 ? Number(q[1]) : 0 };
+      });
+    }
+    // Crta graf u SVG-u: čvorovi su numerirani od 1, bridovi su {a, b, w}
+    function drawGraph(box, pos, edges, opt) {
+      var R = opt.r || 22;
+      var svg = sv('svg', { viewBox: '0 0 ' + opt.w + ' ' + opt.h, width: opt.w, height: opt.h, 'class': 'gsvg' }, box);
+      var gE = sv('g', {}, svg), gN = sv('g', {}, svg);
+      var E = edges.map(function (e) {
+        var A = pos[e.a - 1], B = pos[e.b - 1];
+        var dx = B.x - A.x, dy = B.y - A.y, L = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / L, uy = dy / L;
+        var x1 = A.x + ux * R, y1 = A.y + uy * R, x2 = B.x - ux * R, y2 = B.y - uy * R;
+        var g = sv('g', { 'class': 'e' }, gE);
+        sv('line', { x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+        if (opt.directed) {
+          var bx = x2 - ux * 15, by = y2 - uy * 15;
+          sv('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * 7) + ',' + (by + ux * 7) + ' ' + (bx + uy * 7) + ',' + (by - ux * 7) }, g);
+        }
+        if (opt.weights) {
+          var t = sv('text', { x: (A.x + B.x) / 2 - uy * 15, y: (A.y + B.y) / 2 + ux * 15, 'class': 'w' }, g);
+          t.textContent = e.w;
+        }
+        return { g: g };
+      });
+      var N = pos.map(function (p, i) {
+        var g = sv('g', { 'class': 'n' }, gN);
+        sv('circle', { cx: p.x, cy: p.y, r: R }, g);
+        var t = sv('text', { x: p.x, y: p.y, 'class': 'id' }, g);
+        t.textContent = i + 1;
+        var sub = sv('text', { x: p.x + (opt.subdx || 0), y: p.y + (opt.subdy === undefined ? -R - 13 : opt.subdy), 'class': 'sub' }, g);
+        return { g: g, sub: sub };
+      });
+      return { E: E, N: N, svg: svg };
+    }
+
+    var arr = root.dataset.arr.split(',').map(Number);
+    var n = arr.length, base = 0, W = 940;
+    var tree = {};
+    function build(v, l, r) {
+      if (l === r) { tree[v] = arr[l]; return; }
+      var m = Math.floor((l + r) / 2);
+      build(2 * v, l, m); build(2 * v + 1, m + 1, r);
+      tree[v] = tree[2 * v] + tree[2 * v + 1];
+    }
+    build(1, 0, n - 1);
+
+    var TN = {};
+    function lay(v, l, r, d) {
+      TN[v] = { l: l, r: r, d: d };
+      if (l === r) TN[v].x = (l - base + 0.5) * W / n;
+      else {
+        var m = Math.floor((l + r) / 2);
+        lay(2 * v, l, m, d + 1); lay(2 * v + 1, m + 1, r, d + 1);
+        TN[v].x = (TN[2 * v].x + TN[2 * v + 1].x) / 2;
+      }
+      TN[v].y = 30 + d * 74;
+    }
+    lay(1, base, base + n - 1, 0);
+    var depth = 0;
+    Object.keys(TN).forEach(function (k) { depth = Math.max(depth, TN[k].d); });
+    var H = 60 + depth * 74;
+    var svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, 'class': 'gsvg' }, root.querySelector('.graph'));
+    var gl = sv('g', {}, svg);
+    Object.keys(TN).forEach(function (k) {
+      var v = Number(k);
+      if (TN[2 * v]) [2 * v, 2 * v + 1].forEach(function (c) {
+        sv('line', { x1: TN[v].x, y1: TN[v].y + 24, x2: TN[c].x, y2: TN[c].y - 24, 'class': 'sl' }, gl);
+      });
+    });
+    Object.keys(TN).forEach(function (k) {
+      var t = TN[k], bw = Math.min(96, W / n - 12);
+      t.g = sv('g', { 'class': 'sn' }, svg);
+      sv('rect', { x: t.x - bw / 2, y: t.y - 24, width: bw, height: 48, rx: 6 }, t.g);
+      sv('text', { x: t.x, y: t.y - 11, 'class': 'rg' }, t.g).textContent = t.l === t.r ? '[' + t.l + ']' : '[' + t.l + ', ' + t.r + ']';
+      t.val = sv('text', { x: t.x, y: t.y + 10, 'class': 'sv' }, t.g);
+    });
+    function drawTree(s) {
+      Object.keys(TN).forEach(function (k) {
+        var c = 'sn';
+        if (s.cls[k]) c += ' ' + s.cls[k];
+        if (Number(k) === s.cur) c += ' cur';
+        setc(TN[k].g, c);
+        TN[k].val.textContent = s.tree[k];
+      });
+    }
+
+    var snaps = [], cls = {}, head = '';
+    function push(v, l1, l2) { snaps.push({ tree: Object.assign({}, tree), cls: Object.assign({}, cls), cur: v, l1: l1, l2: l2 === undefined ? head : l2 }); }
+    function rg(l, r) { return l === r ? '[' + l + ']' : '[' + l + ', ' + r + ']'; }
+    push(-1, 'Listovi su elementi niza, svaki unutarnji čvor je zbroj svoje djece', 'Korijen [0, ' + (n - 1) + '] = zbroj cijelog niza = ' + tree[1]);
+    function q(v, tl, tr, l, r) {
+      if (lt(r, tl) ? true : lt(tr, l)) { cls[v] = 'out'; push(v, 'Čvor ' + rg(tl, tr) + ': potpuno izvan  → vraća 0'); return 0; }
+      if (le(l, tl) ? le(tr, r) : false) { cls[v] = 'full'; push(v, 'Čvor ' + rg(tl, tr) + ': potpuno unutar  → vraća ' + tree[v] + ', ne idemo dublje'); return tree[v]; }
+      cls[v] = 'part';
+      push(v, 'Čvor ' + rg(tl, tr) + ': djelomično preklapanje  → pitamo lijevo i desno dijete');
+      var m = Math.floor((tl + tr) / 2);
+      var p1 = q(2 * v, tl, m, l, r), p2 = q(2 * v + 1, m + 1, tr, l, r);
+      push(v, 'Čvor ' + rg(tl, tr) + ': vraća ' + p1 + ' + ' + p2 + ' = ' + (p1 + p2));
+      return p1 + p2;
+    }
+    function upd(v, tl, tr, idx, val) {
+      cls[v] = 'part';
+      if (tl === tr) { tree[v] = val; cls[v] = 'full'; push(v, 'List [' + tl + ']: nova vrijednost ' + val); return; }
+      var m = Math.floor((tl + tr) / 2), left = le(idx, m);
+      push(v, 'Čvor ' + rg(tl, tr) + ': indeks ' + idx + (left ? ' je lijevo (≤ ' + m + ')' : ' je desno (veći od ' + m + ')'));
+      if (left) upd(2 * v, tl, m, idx, val); else upd(2 * v + 1, m + 1, tr, idx, val);
+      tree[v] = tree[2 * v] + tree[2 * v + 1];
+      push(v, 'Čvor ' + rg(tl, tr) + ': ponovno računamo ' + tree[2 * v] + ' + ' + tree[2 * v + 1] + ' = ' + tree[v]);
+    }
+    root.dataset.ops.split(',').forEach(function (op) {
+      cls = {};
+      if (op[0] === 'q') {
+        var lr = op.slice(1).split('-').map(Number);
+        head = 'query(' + lr[0] + ', ' + lr[1] + ')';
+        var res = q(1, 0, n - 1, lr[0], lr[1]);
+        push(-1, 'Zbrojili smo samo zelene čvorove; crveni su izvan, žuti djelomični', head + ' = ' + res + '   ✓');
+      } else {
+        var iv = op.slice(1).split(':').map(Number);
+        head = 'update(' + iv[0] + ', ' + iv[1] + ')';
+        upd(1, 0, n - 1, iv[0], iv[1]);
+        push(-1, 'Promijenili smo samo čvorove na putu od lista do korijena: O(log N)', head + ' gotov   ✓');
+      }
+    });
+    function draw(s) { drawTree(s); }
+
+    var step = 0, timer = null, lastStep = snaps.length - 1;
+    function render() {
+      var s = snaps[step];
+      draw(s);
+      line1.textContent = s.l1;
+      line2.textContent = s.l2;
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 0) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 0; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz animaciju, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
 
 ---
 
@@ -616,6 +1488,276 @@ $$ \min(st[L][k], \quad st[R - 2^k + 1][k]) $$
 # Kako odgovoriti na upit u $O(1)$? (2/2)
 
 ![w:900px center](../../../img/prsp/range-queries/sparse_table_overlap.png)
+
+---
+
+# Sparse Table korak po korak
+
+Svaki redak udvostručuje duljinu raspona. Upit pokrivamo s dva bloka iste duljine (plavi i narančasti, preklop je ljubičast).
+
+<style scoped>
+.rq-sparse { margin-top: 0.3em; }
+.rq-sparse .chips { font-size: 20px; margin-bottom: 0.4em; }
+.rq-sparse .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin: 0 0 6px 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; font-size: 18px; }
+.rq-sparse .chip.take { background: #9fdc9f; }
+.rq-sparse .chip.skip, .rq-sparse .chip.stale { color: #b5b5b5; border-color: #ccc; text-decoration: line-through; }
+.rq-sparse .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
+.rq-sparse .muted { color: #6e6e6e; font-style: italic; margin-left: 6px; }
+.rq-sparse .row { display: flex; gap: 6px; }
+.rq-sparse .cell { width: 62px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-sparse .idx { font-size: 15px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.rq-sparse .val { font-size: 24px; height: 38px; line-height: 38px; font-weight: bold; }
+.rq-sparse .cell.todo .val { color: #b5b5b5; }
+.rq-sparse .cell.rng { background: #d6e6f5; }
+.rq-sparse .cell.best { background: #9fdc9f; }
+.rq-sparse .cell.src { background: #f5db7e; }
+.rq-sparse .cell.cur { background: var(--main); color: #fff; }
+.rq-sparse .cell.cur .idx, .rq-sparse .cell.cur .val { color: #fff; }
+.rq-sparse .lbl { font-size: 18px; font-weight: bold; color: #6e6e6e; margin: 0.4em 0 0.2em; }
+.rq-sparse .wrap { display: flex; gap: 28px; align-items: flex-start; }
+.rq-sparse .side { padding-top: 6px; }
+.rq-sparse .gsvg { display: block; overflow: visible; }
+.rq-sparse .e line { stroke: #9a9a9a; stroke-width: 3; transition: stroke .25s; }
+.rq-sparse .e polygon { fill: #9a9a9a; }
+.rq-sparse .e .w { font-size: 19px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-sparse .e.tree line { stroke: #2f9e44; stroke-width: 6; }
+.rq-sparse .e.tree polygon { fill: #2f9e44; }
+.rq-sparse .e.off line { stroke: #d5d5d5; stroke-dasharray: 6 6; }
+.rq-sparse .e.off polygon { fill: #d5d5d5; }
+.rq-sparse .e.off .w { fill: #b5b5b5; }
+.rq-sparse .e.hid { opacity: 0; }
+.rq-sparse .e.bad line { stroke: #e03131; stroke-width: 6; }
+.rq-sparse .e.bad polygon { fill: #e03131; }
+.rq-sparse .e.on line { stroke: var(--main); stroke-width: 6; }
+.rq-sparse .e.on polygon { fill: var(--main); }
+.rq-sparse .n circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
+.rq-sparse .n .id { font-size: 21px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #141414; }
+.rq-sparse .n .sub { font-size: 19px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: var(--main); paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-sparse .n.c1 circle { fill: #ffd8a8; } .rq-sparse .n.c2 circle { fill: #a5d8ff; } .rq-sparse .n.c3 circle { fill: #b2f2bb; }
+.rq-sparse .n.c4 circle { fill: #fcc2d7; } .rq-sparse .n.c5 circle { fill: #d0bfff; } .rq-sparse .n.c6 circle { fill: #ffec99; }
+.rq-sparse .n.done circle { fill: #9fdc9f; }
+.rq-sparse .n.src circle { fill: #f5db7e; }
+.rq-sparse .n.cur circle { fill: var(--main); stroke: var(--main); }
+.rq-sparse .n.cur .id { fill: #fff; }
+.rq-sparse .tbl { display: grid; gap: 5px; }
+.rq-sparse .th { height: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: bold; color: #6e6e6e; border-radius: 6px; }
+.rq-sparse .th.hl { background: var(--main); color: #fff; }
+.rq-sparse .tc { height: 40px; line-height: 36px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-sparse .tc.none { border-color: transparent; }
+.rq-sparse .tc.k { background: #e3ecf6; }
+.rq-sparse .tc.best { background: #9fdc9f; }
+.rq-sparse .tc.src { background: #f5db7e; }
+.rq-sparse .tc.cur { background: var(--main); color: #fff; }
+.rq-sparse .line1, .rq-sparse .line2 { font-family: monospace; font-size: 21px; min-height: 1.35em; }
+.rq-sparse .line1 { margin-top: 0.5em; }
+.rq-sparse .line2 { font-weight: bold; }
+.rq-sparse .ctrl { margin-top: 0.5em; }
+.rq-sparse button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.rq-sparse button:hover { background: var(--main); color: #fff; }
+.rq-sparse .hint { font-size: 16px; color: #6e6e6e; }
+.rq-sparse .tc.k2 { background: #ffe0b8; }
+.rq-sparse .tc.both { background: #d9c8ef; }
+</style>
+
+<div class="rq-sparse" data-arr="4,6,1,5,7,3,8,2" data-q="1-6,3-4">
+  <div class="tbl"></div>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
+  document.querySelectorAll('.rq-sparse').forEach(function (root) {
+    var slide = root.closest('svg');
+    var line1 = root.querySelector('.line1');
+    var line2 = root.querySelector('.line2');
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function sv(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function setc(el, cls) { el.setAttribute('class', cls); }
+    function show(v) { return v === Infinity ? '∞' : (v === -Infinity ? '−∞' : String(v)); }
+    function lt(a, b) { return a !== b ? Math.min(a, b) === a : false; }
+    function le(a, b) { return Math.min(a, b) === a; }
+    function fw(w) { return lt(w, 0) ? '(' + w + ')' : String(w); }
+    function makeRow(box, count, base) {
+      var cells = [], vals = [];
+      for (var k = 0; k !== count; k++) {
+        var cell = mk('div', 'cell');
+        cell.appendChild(mk('div', 'idx', k + (base || 0)));
+        var v = mk('div', 'val');
+        cell.appendChild(v);
+        box.appendChild(cell);
+        cells.push(cell);
+        vals.push(v);
+      }
+      return { cells: cells, vals: vals };
+    }
+    function parsePos(s) {
+      return s.trim().split(/\s+/).map(function (p) {
+        var q = p.split(',').map(Number);
+        return { x: q[0], y: q[1] };
+      });
+    }
+    function parseEdges(s) {
+      return s.split(',').map(function (t) {
+        var q = t.trim().split(':'), ab = q[0].split('-');
+        return { a: Number(ab[0]), b: Number(ab[1]), w: q.length === 2 ? Number(q[1]) : 0 };
+      });
+    }
+    // Crta graf u SVG-u: čvorovi su numerirani od 1, bridovi su {a, b, w}
+    function drawGraph(box, pos, edges, opt) {
+      var R = opt.r || 22;
+      var svg = sv('svg', { viewBox: '0 0 ' + opt.w + ' ' + opt.h, width: opt.w, height: opt.h, 'class': 'gsvg' }, box);
+      var gE = sv('g', {}, svg), gN = sv('g', {}, svg);
+      var E = edges.map(function (e) {
+        var A = pos[e.a - 1], B = pos[e.b - 1];
+        var dx = B.x - A.x, dy = B.y - A.y, L = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / L, uy = dy / L;
+        var x1 = A.x + ux * R, y1 = A.y + uy * R, x2 = B.x - ux * R, y2 = B.y - uy * R;
+        var g = sv('g', { 'class': 'e' }, gE);
+        sv('line', { x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+        if (opt.directed) {
+          var bx = x2 - ux * 15, by = y2 - uy * 15;
+          sv('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * 7) + ',' + (by + ux * 7) + ' ' + (bx + uy * 7) + ',' + (by - ux * 7) }, g);
+        }
+        if (opt.weights) {
+          var t = sv('text', { x: (A.x + B.x) / 2 - uy * 15, y: (A.y + B.y) / 2 + ux * 15, 'class': 'w' }, g);
+          t.textContent = e.w;
+        }
+        return { g: g };
+      });
+      var N = pos.map(function (p, i) {
+        var g = sv('g', { 'class': 'n' }, gN);
+        sv('circle', { cx: p.x, cy: p.y, r: R }, g);
+        var t = sv('text', { x: p.x, y: p.y, 'class': 'id' }, g);
+        t.textContent = i + 1;
+        var sub = sv('text', { x: p.x + (opt.subdx || 0), y: p.y + (opt.subdy === undefined ? -R - 13 : opt.subdy), 'class': 'sub' }, g);
+        return { g: g, sub: sub };
+      });
+      return { E: E, N: N, svg: svg };
+    }
+
+    var a = root.dataset.arr.split(',').map(Number);
+    var n = a.length;
+    var K = 1; while (le(Math.pow(2, K), n)) K++;
+    var Q = parseEdges(root.dataset.q);
+    var tbl = root.querySelector('.tbl');
+    tbl.style.gridTemplateColumns = '120px repeat(' + n + ', 62px)';
+    tbl.appendChild(mk('div', 'th', 'i'));
+    for (var c0 = 0; c0 !== n; c0++) tbl.appendChild(mk('div', 'th', c0));
+    var T = [];
+    for (var j = 0; j !== K; j++) {
+      tbl.appendChild(mk('div', 'th', 'j = ' + j + ' (' + Math.pow(2, j) + ')'));
+      var row = [];
+      for (var i = 0; i !== n; i++) row.push(tbl.appendChild(mk('div', 'tc')));
+      T.push(row);
+    }
+    var st = [];
+    for (var j1 = 0; j1 !== K; j1++) { var r1 = []; for (var i1 = 0; i1 !== n; i1++) r1.push(null); st.push(r1); }
+    var snaps = [];
+    function snap(o) {
+      var s = { st: st.map(function (r) { return r.slice(); }), cur: null, src: [], ra: [], rb: [], l1: '', l2: '' };
+      Object.keys(o).forEach(function (k) { s[k] = o[k]; });
+      snaps.push(s);
+    }
+    function span(i, j) { var r = []; for (var x = i; x !== i + Math.pow(2, j); x++) r.push(x); return r; }
+    for (var i2 = 0; i2 !== n; i2++) st[0][i2] = a[i2];
+    snap({ l1: 'Razina j = 0: st[i][0] = a[i] (rasponi duljine 1)', l2: 'st[i][j] = minimum raspona [i, i + 2^j − 1]' });
+    for (var j2 = 1; j2 !== K; j2++) {
+      var h = Math.pow(2, j2 - 1);
+      for (var i3 = 0; le(i3 + 2 * h, n); i3++) {
+        st[j2][i3] = Math.min(st[j2 - 1][i3], st[j2 - 1][i3 + h]);
+        snap({ cur: [j2, i3], src: [[j2 - 1, i3], [j2 - 1, i3 + h]], ra: span(i3, j2),
+          l1: 'st[' + i3 + '][' + j2 + '] = min(st[' + i3 + '][' + (j2 - 1) + '], st[' + (i3 + h) + '][' + (j2 - 1) + ']) = min(' + st[j2 - 1][i3] + ', ' + st[j2 - 1][i3 + h] + ') = ' + st[j2][i3],
+          l2: 'Pokriva [' + i3 + ', ' + (i3 + 2 * h - 1) + ']: dvije polovice duljine ' + h });
+      }
+    }
+    Q.forEach(function (q) {
+      var L = q.a, R = q.b, len = R - L + 1, k = 0;
+      while (le(Math.pow(2, k + 1), len)) k++;
+      var p = Math.pow(2, k), x = st[k][L], y = st[k][R - p + 1];
+      var hd = 'Upit min[' + L + ', ' + R + ']: len = ' + len + ', k = ' + k + ' jer je 2^' + k + ' = ' + p + ' najveća potencija ≤ ' + len;
+      snap({ l1: hd, l2: 'Raspon pokrivamo s dva bloka duljine ' + p + ' koja se smiju preklapati' });
+      snap({ src: [[k, L]], ra: span(L, k), l1: 'Prvi blok počinje na L: st[' + L + '][' + k + '] = ' + x + '  pokriva [' + L + ', ' + (L + p - 1) + ']', l2: hd });
+      snap({ src: [[k, L], [k, R - p + 1]], ra: span(L, k), rb: span(R - p + 1, k),
+        l1: 'Drugi blok završava na R: st[' + (R - p + 1) + '][' + k + '] = ' + y + '  pokriva [' + (R - p + 1) + ', ' + R + ']',
+        l2: 'min(' + x + ', ' + y + ') = ' + Math.min(x, y) + '   ✓  (preklapanje ne smeta jer je min(A, A) = A)' });
+    });
+    function draw(s) {
+      for (var j = 0; j !== K; j++) {
+        for (var i = 0; i !== n; i++) {
+          var c = 'tc', v = s.st[j][i];
+          if (le(i + Math.pow(2, j), n)) {
+            if (j === 0) {
+              var ia = s.ra.indexOf(i) !== -1, ib = s.rb.indexOf(i) !== -1;
+              if (ia) c += ib ? ' both' : ' k';
+              else if (ib) c += ' k2';
+            }
+            s.src.forEach(function (p) { if (p[0] === j ? p[1] === i : false) c += ' src'; });
+            if (s.cur ? (s.cur[0] === j ? s.cur[1] === i : false) : false) c += ' cur';
+          } else c += ' none';
+          setc(T[j][i], c);
+          T[j][i].textContent = v === null ? '' : v;
+        }
+      }
+    }
+
+    var step = 0, timer = null, lastStep = snaps.length - 1;
+    function render() {
+      var s = snaps[step];
+      draw(s);
+      line1.textContent = s.l1;
+      line2.textContent = s.l2;
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 0) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 0; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz animaciju, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
 
 ---
 
@@ -1194,6 +2336,308 @@ int find_first(int v, int tl, int tr, int r) {
     return find_first(2*v+1, tm+1, tr, r);
 }
 ```
+
+---
+
+# Hotel Queries korak po korak
+
+Primjer iz CSES-a. Spuštamo se lijevo kad god lijevo dijete ima dovoljno soba, inače desno; nakon dodjele ažuriramo maksimume.
+
+<style scoped>
+.rq-hotel { margin-top: 0.3em; }
+.rq-hotel .chips { font-size: 20px; margin-bottom: 0.4em; }
+.rq-hotel .chip { display: inline-block; min-width: 32px; text-align: center; padding: 2px 10px; margin: 0 0 6px 6px; border: 2px solid #141414; border-radius: 16px; font-weight: bold; font-size: 18px; }
+.rq-hotel .chip.take { background: #9fdc9f; }
+.rq-hotel .chip.skip, .rq-hotel .chip.stale { color: #b5b5b5; border-color: #ccc; text-decoration: line-through; }
+.rq-hotel .chip.on { background: var(--main); border-color: var(--main); color: #fff; }
+.rq-hotel .muted { color: #6e6e6e; font-style: italic; margin-left: 6px; }
+.rq-hotel .row { display: flex; gap: 6px; }
+.rq-hotel .cell { width: 62px; text-align: center; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-hotel .idx { font-size: 15px; color: #6e6e6e; border-bottom: 1px solid #ccc; }
+.rq-hotel .val { font-size: 24px; height: 38px; line-height: 38px; font-weight: bold; }
+.rq-hotel .cell.todo .val { color: #b5b5b5; }
+.rq-hotel .cell.rng { background: #d6e6f5; }
+.rq-hotel .cell.best { background: #9fdc9f; }
+.rq-hotel .cell.src { background: #f5db7e; }
+.rq-hotel .cell.cur { background: var(--main); color: #fff; }
+.rq-hotel .cell.cur .idx, .rq-hotel .cell.cur .val { color: #fff; }
+.rq-hotel .lbl { font-size: 18px; font-weight: bold; color: #6e6e6e; margin: 0.4em 0 0.2em; }
+.rq-hotel .wrap { display: flex; gap: 28px; align-items: flex-start; }
+.rq-hotel .side { padding-top: 6px; }
+.rq-hotel .gsvg { display: block; overflow: visible; }
+.rq-hotel .e line { stroke: #9a9a9a; stroke-width: 3; transition: stroke .25s; }
+.rq-hotel .e polygon { fill: #9a9a9a; }
+.rq-hotel .e .w { font-size: 19px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-hotel .e.tree line { stroke: #2f9e44; stroke-width: 6; }
+.rq-hotel .e.tree polygon { fill: #2f9e44; }
+.rq-hotel .e.off line { stroke: #d5d5d5; stroke-dasharray: 6 6; }
+.rq-hotel .e.off polygon { fill: #d5d5d5; }
+.rq-hotel .e.off .w { fill: #b5b5b5; }
+.rq-hotel .e.hid { opacity: 0; }
+.rq-hotel .e.bad line { stroke: #e03131; stroke-width: 6; }
+.rq-hotel .e.bad polygon { fill: #e03131; }
+.rq-hotel .e.on line { stroke: var(--main); stroke-width: 6; }
+.rq-hotel .e.on polygon { fill: var(--main); }
+.rq-hotel .n circle { fill: #fff; stroke: #141414; stroke-width: 2.5; transition: fill .25s; }
+.rq-hotel .n .id { font-size: 21px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #141414; }
+.rq-hotel .n .sub { font-size: 19px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: var(--main); paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+.rq-hotel .n.c1 circle { fill: #ffd8a8; } .rq-hotel .n.c2 circle { fill: #a5d8ff; } .rq-hotel .n.c3 circle { fill: #b2f2bb; }
+.rq-hotel .n.c4 circle { fill: #fcc2d7; } .rq-hotel .n.c5 circle { fill: #d0bfff; } .rq-hotel .n.c6 circle { fill: #ffec99; }
+.rq-hotel .n.done circle { fill: #9fdc9f; }
+.rq-hotel .n.src circle { fill: #f5db7e; }
+.rq-hotel .n.cur circle { fill: var(--main); stroke: var(--main); }
+.rq-hotel .n.cur .id { fill: #fff; }
+.rq-hotel .tbl { display: grid; gap: 5px; }
+.rq-hotel .th { height: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: bold; color: #6e6e6e; border-radius: 6px; }
+.rq-hotel .th.hl { background: var(--main); color: #fff; }
+.rq-hotel .tc { height: 40px; line-height: 36px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #141414; border-radius: 6px; transition: background-color .25s, color .25s; }
+.rq-hotel .tc.none { border-color: transparent; }
+.rq-hotel .tc.k { background: #e3ecf6; }
+.rq-hotel .tc.best { background: #9fdc9f; }
+.rq-hotel .tc.src { background: #f5db7e; }
+.rq-hotel .tc.cur { background: var(--main); color: #fff; }
+.rq-hotel .line1, .rq-hotel .line2 { font-family: monospace; font-size: 21px; min-height: 1.35em; }
+.rq-hotel .line1 { margin-top: 0.5em; }
+.rq-hotel .line2 { font-weight: bold; }
+.rq-hotel .ctrl { margin-top: 0.5em; }
+.rq-hotel button { font: inherit; font-size: 18px; padding: 4px 14px; margin-right: 8px; border: 2px solid var(--main); border-radius: 6px; background: #fff; color: var(--main); cursor: pointer; }
+.rq-hotel button:hover { background: var(--main); color: #fff; }
+.rq-hotel .hint { font-size: 16px; color: #6e6e6e; }
+.rq-hotel .sl { stroke: #9a9a9a; stroke-width: 2; }
+.rq-hotel .sn rect { fill: #fff; stroke: #141414; stroke-width: 2; transition: fill .25s; }
+.rq-hotel .sn .rg { font-size: 14px; fill: #6e6e6e; text-anchor: middle; dominant-baseline: central; }
+.rq-hotel .sn .sv { font-size: 21px; font-weight: bold; fill: #141414; text-anchor: middle; dominant-baseline: central; }
+.rq-hotel .sn.out rect { fill: #ffc9c9; }
+.rq-hotel .sn.full rect { fill: #9fdc9f; }
+.rq-hotel .sn.part rect { fill: #ffec99; }
+.rq-hotel .sn.cur rect { stroke: var(--main); stroke-width: 5; }
+</style>
+
+<div class="rq-hotel" data-h="3,2,4,1,5,5,2,6" data-r="4,4,7,1,1">
+  <div class="graph"></div>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="ctrl">
+    <button data-act="prev">← Korak</button><button data-act="next">Korak →</button><button data-act="auto">Auto</button><button data-act="reset">Reset</button>
+    <span class="hint">← / → koračaju kroz animaciju, Shift + ← / → mijenja slajd</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Ovaj blok namjerno ne sadrži znakove manje-od, veće-od ni ampersand,
+  // jer ih build pretvara u HTML entitete i ruši skriptu.
+  document.querySelectorAll('.rq-hotel').forEach(function (root) {
+    var slide = root.closest('svg');
+    var line1 = root.querySelector('.line1');
+    var line2 = root.querySelector('.line2');
+    var NS = 'http://www.w3.org/2000/svg';
+    function mk(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function sv(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function setc(el, cls) { el.setAttribute('class', cls); }
+    function show(v) { return v === Infinity ? '∞' : (v === -Infinity ? '−∞' : String(v)); }
+    function lt(a, b) { return a !== b ? Math.min(a, b) === a : false; }
+    function le(a, b) { return Math.min(a, b) === a; }
+    function fw(w) { return lt(w, 0) ? '(' + w + ')' : String(w); }
+    function makeRow(box, count, base) {
+      var cells = [], vals = [];
+      for (var k = 0; k !== count; k++) {
+        var cell = mk('div', 'cell');
+        cell.appendChild(mk('div', 'idx', k + (base || 0)));
+        var v = mk('div', 'val');
+        cell.appendChild(v);
+        box.appendChild(cell);
+        cells.push(cell);
+        vals.push(v);
+      }
+      return { cells: cells, vals: vals };
+    }
+    function parsePos(s) {
+      return s.trim().split(/\s+/).map(function (p) {
+        var q = p.split(',').map(Number);
+        return { x: q[0], y: q[1] };
+      });
+    }
+    function parseEdges(s) {
+      return s.split(',').map(function (t) {
+        var q = t.trim().split(':'), ab = q[0].split('-');
+        return { a: Number(ab[0]), b: Number(ab[1]), w: q.length === 2 ? Number(q[1]) : 0 };
+      });
+    }
+    // Crta graf u SVG-u: čvorovi su numerirani od 1, bridovi su {a, b, w}
+    function drawGraph(box, pos, edges, opt) {
+      var R = opt.r || 22;
+      var svg = sv('svg', { viewBox: '0 0 ' + opt.w + ' ' + opt.h, width: opt.w, height: opt.h, 'class': 'gsvg' }, box);
+      var gE = sv('g', {}, svg), gN = sv('g', {}, svg);
+      var E = edges.map(function (e) {
+        var A = pos[e.a - 1], B = pos[e.b - 1];
+        var dx = B.x - A.x, dy = B.y - A.y, L = Math.sqrt(dx * dx + dy * dy);
+        var ux = dx / L, uy = dy / L;
+        var x1 = A.x + ux * R, y1 = A.y + uy * R, x2 = B.x - ux * R, y2 = B.y - uy * R;
+        var g = sv('g', { 'class': 'e' }, gE);
+        sv('line', { x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+        if (opt.directed) {
+          var bx = x2 - ux * 15, by = y2 - uy * 15;
+          sv('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * 7) + ',' + (by + ux * 7) + ' ' + (bx + uy * 7) + ',' + (by - ux * 7) }, g);
+        }
+        if (opt.weights) {
+          var t = sv('text', { x: (A.x + B.x) / 2 - uy * 15, y: (A.y + B.y) / 2 + ux * 15, 'class': 'w' }, g);
+          t.textContent = e.w;
+        }
+        return { g: g };
+      });
+      var N = pos.map(function (p, i) {
+        var g = sv('g', { 'class': 'n' }, gN);
+        sv('circle', { cx: p.x, cy: p.y, r: R }, g);
+        var t = sv('text', { x: p.x, y: p.y, 'class': 'id' }, g);
+        t.textContent = i + 1;
+        var sub = sv('text', { x: p.x + (opt.subdx || 0), y: p.y + (opt.subdy === undefined ? -R - 13 : opt.subdy), 'class': 'sub' }, g);
+        return { g: g, sub: sub };
+      });
+      return { E: E, N: N, svg: svg };
+    }
+
+    var arr = root.dataset.h.split(',').map(Number);
+    var groups = root.dataset.r.split(',').map(Number);
+    var n = arr.length, base = 1, W = 940;
+    arr.unshift(0);
+    var tree = {};
+    function build(v, l, r) {
+      if (l === r) { tree[v] = arr[l]; return; }
+      var m = Math.floor((l + r) / 2);
+      build(2 * v, l, m); build(2 * v + 1, m + 1, r);
+      tree[v] = Math.max(tree[2 * v], tree[2 * v + 1]);
+    }
+    build(1, 1, n);
+
+    var TN = {};
+    function lay(v, l, r, d) {
+      TN[v] = { l: l, r: r, d: d };
+      if (l === r) TN[v].x = (l - base + 0.5) * W / n;
+      else {
+        var m = Math.floor((l + r) / 2);
+        lay(2 * v, l, m, d + 1); lay(2 * v + 1, m + 1, r, d + 1);
+        TN[v].x = (TN[2 * v].x + TN[2 * v + 1].x) / 2;
+      }
+      TN[v].y = 30 + d * 74;
+    }
+    lay(1, base, base + n - 1, 0);
+    var depth = 0;
+    Object.keys(TN).forEach(function (k) { depth = Math.max(depth, TN[k].d); });
+    var H = 60 + depth * 74;
+    var svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, 'class': 'gsvg' }, root.querySelector('.graph'));
+    var gl = sv('g', {}, svg);
+    Object.keys(TN).forEach(function (k) {
+      var v = Number(k);
+      if (TN[2 * v]) [2 * v, 2 * v + 1].forEach(function (c) {
+        sv('line', { x1: TN[v].x, y1: TN[v].y + 24, x2: TN[c].x, y2: TN[c].y - 24, 'class': 'sl' }, gl);
+      });
+    });
+    Object.keys(TN).forEach(function (k) {
+      var t = TN[k], bw = Math.min(96, W / n - 12);
+      t.g = sv('g', { 'class': 'sn' }, svg);
+      sv('rect', { x: t.x - bw / 2, y: t.y - 24, width: bw, height: 48, rx: 6 }, t.g);
+      sv('text', { x: t.x, y: t.y - 11, 'class': 'rg' }, t.g).textContent = t.l === t.r ? '[' + t.l + ']' : '[' + t.l + ', ' + t.r + ']';
+      t.val = sv('text', { x: t.x, y: t.y + 10, 'class': 'sv' }, t.g);
+    });
+    function drawTree(s) {
+      Object.keys(TN).forEach(function (k) {
+        var c = 'sn';
+        if (s.cls[k]) c += ' ' + s.cls[k];
+        if (Number(k) === s.cur) c += ' cur';
+        setc(TN[k].g, c);
+        TN[k].val.textContent = s.tree[k];
+      });
+    }
+
+    var snaps = [], cls = {}, out = [];
+    function push(v, l1, l2) { snaps.push({ tree: Object.assign({}, tree), cls: Object.assign({}, cls), cur: v, l1: l1, l2: l2 }); }
+    function rg(l, r) { return l === r ? 'hotel ' + l : '[' + l + ', ' + r + ']'; }
+    push(-1, 'Svaki čvor pamti MAKSIMUM slobodnih soba u svom rasponu hotela', 'Ispis: ');
+    function walk(v, tl, tr, r, hd) {
+      if (lt(tree[v], r)) { cls[v] = 'out'; push(v, rg(tl, tr) + ': max = ' + tree[v] + ' manji od ' + r + '  → nema hotela, ispis 0', hd); return 0; }
+      if (tl === tr) { cls[v] = 'full'; push(v, rg(tl, tr) + ': ima ' + tree[v] + ' soba ≥ ' + r + '  → grupa ide u hotel ' + tl, hd); return tl; }
+      cls[v] = 'part';
+      var goLeft = le(r, tree[2 * v]);
+      push(v, rg(tl, tr) + ': lijevo dijete ima max ' + tree[2 * v] + (goLeft ? ' ≥ ' + r + '  → idemo lijevo' : ', manje od ' + r + '  → idemo desno'), hd);
+      var m = Math.floor((tl + tr) / 2);
+      return goLeft ? walk(2 * v, tl, m, r, hd) : walk(2 * v + 1, m + 1, tr, r, hd);
+    }
+    function upd(v, tl, tr, idx) {
+      cls[v] = tl === tr ? 'full' : 'part';
+      if (tl === tr) { tree[v] = arr[idx]; return; }
+      var m = Math.floor((tl + tr) / 2);
+      if (le(idx, m)) upd(2 * v, tl, m, idx); else upd(2 * v + 1, m + 1, tr, idx);
+      tree[v] = Math.max(tree[2 * v], tree[2 * v + 1]);
+    }
+    groups.forEach(function (r, g) {
+      cls = {};
+      var hd = 'Grupa ' + (g + 1) + ' traži ' + r + ' soba.  Ispis: ' + out.join(' ');
+      var h = walk(1, 1, n, r, hd);
+      out.push(h);
+      if (h !== 0) {
+        var old = arr[h];
+        arr[h] -= r;
+        cls = {};
+        upd(1, 1, n, h);
+        push(-1, 'Hotel ' + h + ': ' + old + ' − ' + r + ' = ' + arr[h] + ' soba; ažuriramo maksimume na putu do korijena', 'Ispis: ' + out.join(' '));
+      } else {
+        push(-1, 'Grupa ne dobiva hotel, stablo se ne mijenja', 'Ispis: ' + out.join(' '));
+      }
+    });
+    snaps[snaps.length - 1].l2 += '   ✓';
+    function draw(s) { drawTree(s); }
+
+    var step = 0, timer = null, lastStep = snaps.length - 1;
+    function render() {
+      var s = snaps[step];
+      draw(s);
+      line1.textContent = s.l1;
+      line2.textContent = s.l2;
+    }
+    function stopAuto() { clearInterval(timer); timer = null; }
+    function next() { if (step !== lastStep) { step++; render(); return true; } stopAuto(); return false; }
+    function prev() { if (step !== 0) { step--; render(); return true; } return false; }
+    function reset() { stopAuto(); step = 0; render(); }
+    var actions = {
+      next: next, prev: prev, reset: reset,
+      auto: function () { if (timer) stopAuto(); else timer = setInterval(next, 900); }
+    };
+
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation(); b.blur(); actions[b.dataset.act]();
+      });
+    });
+
+    // Strelice / razmaknica / klikač prvo koračaju kroz animaciju, a tek na kraju mijenjaju slajd
+    window.addEventListener('keydown', function (e) {
+      if (e.shiftKey || !slide || !slide.classList.contains('bespoke-marp-active')) return;
+      var fwd = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1;
+      var back = ['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
+      var moved = false;
+      if (fwd) moved = next();
+      if (back) moved = prev();
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    render();
+  });
+})();
+</script>
 
 ---
 
