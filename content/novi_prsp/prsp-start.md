@@ -11,6 +11,11 @@ has_toc: false
 
 # Programiranje za rješavanje složenih problema
 
+> **📝 Priprema za 1. kolokvij**  
+> Zadaci za vježbu s CSES-a, Codeforcesa i Project Eulera: potpuna pretraga, pohlepni algoritmi, osnove DP-a i putovanje kroz graf.
+>
+> [Zadaci za pripremu](kz1-priprema.html){: .btn .btn-primary }
+
 | # | Tema lekcije | Materijali za učenje |
 | :-: | :--- | :--- |
 | 1. | **Uvod i osnove** | [Prezentacija](../html/01-Intro-and-Cpp-Essentials.html) |

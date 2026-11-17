@@ -18,6 +18,7 @@ Do sada smo svaki pogled pisali kao funkciju. Popisi objekata i stranice s detal
 > Ciljevi poglavlja
 >
 > Nakon ovog poglavlja moći ćete:
+
 > - objasniti kada i zašto generički pogled zamjenjuje pogled napisan kao funkcija,
 > - prikazati popis i detalje objekata pogledima `ListView` i `DetailView`,
 > - podijeliti dugačak popis na stranice (straničenje),
