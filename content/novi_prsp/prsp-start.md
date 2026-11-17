@@ -14,7 +14,7 @@ has_toc: false
 > **📝 Priprema za 1. kolokvij**  
 > Zadaci za vježbu s CSES-a, Codeforcesa i Project Eulera: potpuna pretraga, pohlepni algoritmi, osnove DP-a i putovanje kroz graf.
 >
-> [Zadaci za pripremu](kz1-priprema.md){: .btn .btn-primary }
+> [Zadaci za pripremu](../pres/kz1-priprema.md){: .btn .btn-primary }
 
 | # | Tema lekcije | Materijali za učenje |
 | :-: | :--- | :--- |
